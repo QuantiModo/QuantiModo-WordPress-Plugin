@@ -6,7 +6,7 @@ This is a mobile-friendly WordPress plugin that enables users of any WordPress t
 
 Note: Javascript is required for this plugin's functionality.
 
-# Add QuantiModo Connect Button
+## Add QuantiModo Connect Button
 1. Download and install the QuantiModo-WordPress-Plugin.
 2. Email api@quantimo.do to get an API client id and secret.
 3. Setup your QM API key/secret in the WordPress backend under Settings > QM-OAuth.
@@ -31,11 +31,11 @@ logging_out_title - sets the text to display above the custom login form when th
 style - sets the custom css style to apply to the custom login form. Possible values: any text
 class - sets the custom css class to apply to the custom login form. Possible values: any text
 
-# Timeline Graph
+## Timeline Graph
 Shortcode - [qm_timeline]
 Demo: https://quantimo.do/analyze
 
-# Correlation Charts
+## Correlation Charts
 Shortcode - [qm_correlations]
 Demo: https://quantimo.do/correlate
 
@@ -45,19 +45,23 @@ examined_variable - Sets the default examined variable. Possible values: any var
 secondary_variable - Sets the default secondary variable to be selected on the bar graph. Possible values: any variable name
 examined_is_cause - Sets the examined variable to be considered the cause in the relationship.  Possible values: true or false. Default: false
 
-# Connectors to Data Sources
+## Connectors to Data Sources
 Shortcode - [qm_connectors]
 Demo: https://quantimo.do/connect
 
-# Add a Measurement Button
+## Add a Measurement Button
 Shortcode - [qm_add_measurement]
 Demo: Go to https://quantimo.do/correlate and press the + button or try https://chrome.google.com/webstore/detail/quantimodo-universal-trac/jioloifallegdkgjklafkkbniianjbgi?hl=en-US
 
-# Correlation Search Box
+## Correlation Search Box
 Shortcode - [qm_correlation_search]
 Demo: https://quantimo.do/qm-search
 
-# Mood Tracker
+*Possible shortcode attributes for correlation search:*
+searched-cause-variable - Instead of a search box, only a list of the effects of this variable are displayed
+searched-effect-variable - Instead of a search box, only a list of the causes of this variable are displayed
+
+## Mood Tracker
 Shortcode - [qm_track_mood]
 Demo: https://chrome.google.com/webstore/detail/moodimodo-beta/lncgjbhijecjdbdgeigfodmiimpmlelg?hl=en-US
 
