@@ -1,0 +1,499 @@
+@charset "utf-8";
+
+#content{
+	background: #f2f2f2;
+	padding: 0px 12px 12px 12px;
+	overflow:hidden;
+	width: 100%;
+}
+#section-configure{
+	float: left;
+	width: 320px;
+}
+#section-analyze{
+	overflow: hidden;
+	padding-left: 12px;
+}
+
+#section-analyze-top{
+    overflow: hidden;
+}
+
+.card-header{
+	width: 100%;
+	height: 42px;
+	display: block;
+	font-size: 1.2em;
+	text-indent: 14px;
+	cursor: pointer;
+	margin-top: 12px;
+	/* don't allow selecting header content */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/***********/
+/* Dialogs */
+/***********/
+.dialog{
+	overflow: hidden;
+	padding: 20px;
+	background: #fbfbfb;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	z-index: 1000001;
+	position:absolute;
+	width: 340px;
+	top: 30%;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+}
+.dialog-background{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #000;
+	opacity: .5;
+	z-index: 1000000;
+}
+#login-dialog table{
+	border: none;
+	margin:0px;
+	border-collapse:collapse;
+}
+#login-dialog td{
+	border: none;
+	vertical-align:middle;
+}
+
+#share-dialog-background{
+	display: none;
+	opacity: 0;
+}
+#share-dialog-background.active{
+	display:block;
+	opacity: 0.5;
+}
+#share-dialog{
+	display: none;
+	opacity: 0;
+}
+#share-dialog.active{
+	display:block;
+	opacity: 1;
+}
+
+#share-resultcontainer input[type="text"]:focus { 
+	-webkit-box-shadow: inset 0 1px 2px rgba(255, 0, 0, 0.5);
+	-moz-box-shadow: inset 0 1px 2px rgba(255, 0, 0, 0.5);
+	box-shadow: inset 0 1px 2px rgba(255, 0, 0, 0.5);
+}
+
+/**************************/
+/* Loading overlay config */
+/**************************/
+.loading-overlay-content,
+.loading-overlay{
+	display: none;
+	opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+	background-image: url('/wp-content/themes/metrolium-qm/plugins/login-with-ajax/loading.gif');
+	background-position: center center;
+	background-repeat: no-repeat;
+	transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+}
+
+/***************************************/
+/* Analyze section 					    */
+/***************************************/
+.gear-icon{
+	cursor: pointer;
+	margin-top: 7px;
+	margin-right: 7px;
+	width: 28px;
+	height:28px;
+	float: right;
+	background:url('https://i.imgur.com/dw7YcYP.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.gear-icon:hover{
+	background-image: url('https://i.imgur.com/WDuw5IF.png');
+}
+
+.graph-header{
+	color: #fff;
+	background: #29bdca;
+	border-bottom: solid 3px #229DA5;
+}
+.graph-content{
+	width:100%; 
+	background:#FFFFFF;
+	border-bottom: solid 3px #DDDDDD;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	overflow: hidden;
+}
+
+/***************************************/
+/* Left menubar					       */
+/***************************************/
+#section-configure-input{
+	overflow: hidden;
+	position: relative;
+}
+#section-configure-settings{
+	overflow: hidden;
+	max-height: 0px;
+	position: relative;
+}
+.accordion-header{
+	color: #29bdca;
+}
+.accordion-content{
+	max-height: 0px;
+	overflow:hidden;
+	width: 100%;
+	box-sizing:border-box;
+	background-color: #FFFFFF;
+	padding-left: 5%;
+	padding-right: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: solid 3px #DDDDDD;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+.accordion-content .inner{
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+/**************/
+/*Var Settings*/
+/**************/
+#accordion-settings-header{
+	background: #fff;
+	border-bottom: solid 3px #229DA5;
+	cursor: auto;
+}
+.buttonrow-2{
+	margin: auto;
+	width: 49%;
+}
+#accordion-settings-content b{
+	font-size: 1.05em;
+	display:block;
+	color: #29bdca;
+}
+#accordion-settings-content table{
+	border: none;
+	margin:0px;
+	border-collapse:collapse;
+}
+#accordion-settings-content td{
+	padding-bottom:4px;
+	padding-top: 4px;
+	border: none;
+	vertical-align:middle;
+}
+#accordion-settings-content td:first-child{
+    padding-left:8px;
+}
+#accordion-settings-content td:last-child{
+	float:right;
+	height: 40px;
+	line-height:20px;
+	width: 150px;
+}
+#accordion-settings-content div{
+	padding-left: 8px;
+	padding-bottom:4px;
+	padding-top: 4px;
+	border: none;
+	vertical-align:middle;
+}
+#accordion-settings-content .ui-sortable{
+	list-style: none;
+}
+#accordion-settings-content .ui-sortable li {
+	height:30px;
+	background:none;
+	border: none;
+}
+#accordion-settings-content .ui-sortable li label {
+	line-height:28px;
+	vertical-align:middle;
+	font-weight: normal;
+	color: gray;
+}
+#accordion-settings-content .ui-sortable li span{
+	display:inline-block;
+	vertical-align:middle;
+}
+#accordion-settings-content input[type="radio"]{
+	vertical-align:middle;
+}
+#accordion-settings-content input[type="radio"] + label{
+	vertical-align: middle;
+	padding-left: 8px;
+}
+#accordion-settings-content td:first-child{
+	white-space: nowrap;
+}
+
+#joinedVariablePicker{
+	opacity: 0;
+	width: 0px;
+	height: 30px;
+	margin-top: 3px;
+	padding-top:4px;
+	transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+}
+#joinedVariablePicker.active {
+    opacity: 1;
+    width :230px;
+}
+#addJoinedVariableButton{
+	display: inline;
+	width: 36px;
+	height: 36px;
+	margin-left:-24px;
+	background-color: #cccccc;
+	border: none;
+	background: url('https://i.imgur.com/jf3AOBR.png');
+	background-size: 28px 28px;
+	background-repeat: no-repeat;
+	background-position: center;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+
+}
+#addJoinedVariableButton.active {
+    margin-left: 0px;
+    background: url('https://i.imgur.com/BHtx79d.png');
+    background-size: 28px 28px;
+	background-repeat: no-repeat;
+	background-position: center;
+	-webkit-box-shadow: none;
+}
+#addJoinedVariableButton:hover{
+	-webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.3));
+	filter: url(https://i.imgur.com/BewrlqD.png#drop-shadow);
+	background: url('https://i.imgur.com/BewrlqD.png');
+	background-size: 28px 28px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#addJoinedVariableButton.active:hover{
+	-webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.3));
+	filter: url(https://i.imgur.com/enilel9.png#drop-shadow);
+	background: url('https://i.imgur.com/enilel9.png');
+	background-size: 28px 28px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#joinedVariablesList{
+	margin-bottom: 0;
+	list-style: none;
+}
+#joinedVariablesList div{
+	cursor: pointer;
+	float: right;
+	width: 14px;
+	height: 14px;
+	opacity: 0;
+	background-image: url('https://i.imgur.com/38DdMfw.png');
+	background-size: 18px 18px;
+	background-position: center;
+	background-repeat:no-repeat;
+	border: none;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+#joinedVariablesList div:hover{
+	background: url('https://i.imgur.com/TGEwylD.png');
+	background-size: 18px 18px;
+	background-position: center;
+	background-repeat:no-repeat;
+}
+#joinedVariablesList li:hover{
+	color: #29bdca;
+}
+#joinedVariablesList li:hover div {
+    opacity: 1;
+}
+/**************/
+/* Date Range */
+/**************/
+#ui-datepicker-div {
+	width: 263px;
+	z-index: 9999 !important;
+}
+#accordion-date-header{
+	background: #fff;
+	border-bottom: solid 3px #e5394a;
+}
+#accordion-date-content input[type=text]{
+	display: block;
+	background-color: #F6F6F6;
+	color: #555555;
+	height: 35px;
+	border: solid 1px #ddd;
+	border-radius: 4px;
+	margin-bottom: 12px;
+	text-align: center; 
+	width: 100%;
+}
+
+#accordion-content-rangepickers{
+	margin-left: auto;
+	margin-right: auto;
+}
+#accordion-content-rangepickers .ui-button-text{
+	padding: .4em 0em;
+}
+
+#accordion-content-rangepickers .ui-button
+{
+	font-size: 1em;
+	width: 33.33%;
+}
+
+/******************/
+/* Input variable */
+/******************/
+#accordion-input-header{
+	background: #fff;
+	border-bottom: solid 3px #65af5d;
+}
+#accordion-input-content{
+	line-height: 2em;
+	color: #555555;
+}
+#accordion-input-content select{
+	background-color: #F6F6F6;
+	margin-bottom: 12px;
+	height: 35px;
+	width: 100%;
+	border-radius: 4px;
+	border: solid 1px #ddd;
+}
+#button-input-varsettings{
+	width: 100%;
+}
+/******************/
+/* Output variable*/
+/******************/
+#accordion-output-header{
+	background: #fff;
+	border-bottom: solid 3px #409caf;
+}
+#accordion-output-content{
+	line-height: 2em;
+	color: #555555;
+}
+#accordion-output-content select{
+	background-color: #F6F6F6;
+	margin-bottom: 12px;
+	height: 35px;
+	width: 100%;
+	border-radius: 4px;
+	border: solid 1px #ddd;
+}
+#button-output-varsettings{
+	width: 100%;
+}
+
+/*******************/
+/* Correlation card*/
+/*******************/
+#correlation-gauge{
+	font-size: 1.15em;
+	width: 400px;
+	float: left;
+}
+#correlation-gauge .graph-content{
+	height: 350px;
+}
+#correlation-gauge td{
+	vertical-align: middle;
+	border: none;
+}
+#correlation-gauge tr:nth-child(even) {
+    background-color: #F5FBFB;
+}
+
+/*******************/
+/* Scatterplot card*/
+/*******************/
+#scatterplot-graph{
+	padding-left: 12px;
+	overflow: hidden;
+}
+#scatterplot-graph .graph-content{
+	height: 350px;
+}
+/****************/
+/* Timeline card*/
+/****************/
+#timeline-graph{
+	overflow: hidden;
+}
+#timeline-graph .graph-content{
+	height: 350px;
+}
+/* Helper class for show/hide element transitions */
+.transitions {
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+
+/* Responsive stuffs */
+@media only screen and (max-width: 1480px) {
+
+}
+@media only screen and (max-width: 1100px) {
+	#correlation-gauge{
+		width: 100%;
+	}
+	#scatterplot-graph{
+		width: 100%;
+		padding-left: 0;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#section-configure{
+		width: 100%;
+	}
+	#section-analyze{
+	overflow: visible;
+		padding: 0;
+	}
+}
+

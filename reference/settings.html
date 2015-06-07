@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="tizen-web-ui-fw/latest/js/jquery.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw-libs.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-viewport-scale=“true” data-framework-theme="tizen-white"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+<script>
+
+</script>
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+	<!-- Start of fourth page: #settings -->
+	<div data-role="page" id="settings" data-add-back-btn="footer" data-footer-exist="true">
+		<div data-role="header" data-position="fixed">
+			<h1>MoodiModo</h1>
+			
+		</div>
+		<!-- /header -->
+
+		<div data-role="content">
+			<h2>Settings</h2>
+
+		<ul id="mainList" data-role="listview">
+			<li id="0" class="ui-li-has-multiline">
+				<a id="askOption" data-transition="slide" href="settings_moodNotification.html"> 
+					Ask for your mood
+					
+					<span id="interval" class="ui-li-text-sub"></span>
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" href="settings_moodNotification.html"></div>
+					<script>
+					insertText();
+					</script>
+					<!-- 
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" style="vertical-align: bottom; float: right;"></div>
+					
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" onclick="location.href='settings_moodNotification.html'"></div>
+					-->
+				</a>
+				<!-- 
+				<a data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" href="settings_moodNotification.html"></a>
+				-->
+				
+			</li>
+			<li id="1" class="ui-li-has-multiline">
+				<a id="askOption" data-transition="slide" href="settings_QMLogin.html"> 
+					Sync with QuantiModo
+					
+					<span id="QMSyncEnabled" class="ui-li-text-sub"></span>
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" href="settings_QMLogin.html"></div>
+					<script>
+					insertQMSupportText();
+					</script>
+					<!-- 
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" style="vertical-align: bottom; float: right;"></div>
+					
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" onclick="location.href='settings_moodNotification.html'"></div>
+					-->
+				</a>
+				<!-- 
+				<a data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" href="settings_moodNotification.html"></a>
+				-->
+				
+			</li>
+		</ul>
+		
+		
+	</div>
+	<div data-role="footer" data-position="fixed">
+	</div>
+	<!-- /footer -->
+	</div>
+	<!-- /page #settings -->
+	
+</body>
+</html>

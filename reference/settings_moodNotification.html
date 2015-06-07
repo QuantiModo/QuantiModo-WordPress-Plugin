@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="tizen-web-ui-fw/latest/js/jquery.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw-libs.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-viewport-scale=“true” data-framework-theme="tizen-white"></script>
+
+<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="./js/alarms.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+	<!-- Start of fourth page: #settings_moodNotification -->
+	<div data-role="page" id="settings_moodNotification" data-add-back-btn="footer" data-footer-exist="true">
+		<div data-role="header" data-position="fixed">
+			<h1>MoodiModo</h1>
+			
+		</div>
+		<!-- /header -->
+
+		<div data-role="content">
+			<h2>Ask for your mood</h2>
+			
+			<div id="listContent" data-role="fieldcontain">
+	    		<nav id="secondNav" class="listItems">
+	    			<form name="notificationOptionsForm" method="get" action onsubmit="return false;">
+						<ul id="secondList" data-role="listview">
+			    			<li class="text">
+				         		<input type="radio" data-inline="true" name="notificationOption" id="radio-0" value="0" onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '0')">
+				         		<a onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '0')">Never</a>
+				      		</li>
+					      	<li class="text">
+					         	<input type="radio" data-inline="true" name="notificationOption" id="radio-1" value="1" onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '1')">	
+					         	<a onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '1')">Hourly</a>
+					         </li>
+				      		<li class="text">
+				         		<input type="radio" data-inline="true" name="notificationOption" id="radio-2" value="2" onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '2')">
+				      			<a onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '2')">Every three hours</a>
+				         	</li>
+				      		<li class="text">
+				         		<input type="radio" data-inline="true" name="notificationOption" id="radio-3" value="3" onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '3')">
+				      			<a onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '3')">Twice daily</a>
+				      		</li>
+				      		<li class="text">
+				         		<input type="radio" data-inline="true" name="notificationOption" id="radio-4" value="4" onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '4')">
+				      			<a onclick="setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], '4')">Daily</a>
+				     		</li>
+						</ul>
+					</form>
+	    		</nav>
+			</div>
+		</div> <!-- /content -->
+		
+		<div data-role="footer" data-position="fixed">
+		</div>
+		<!-- /footer -->
+	</div>
+	<!-- /page #settings_moodNotification -->
+
+</body>
+</html>

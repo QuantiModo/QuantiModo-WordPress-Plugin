@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="menuitem_height">48dp</dimen>
+    <dimen name="menuitem_textsize">16sp</dimen>
+    <dimen name="moodpopup_width">310dp</dimen>
+    <dimen name="default_padding">12dp</dimen>
+    <dimen name="default_text_size">16sp</dimen>
+</resources>

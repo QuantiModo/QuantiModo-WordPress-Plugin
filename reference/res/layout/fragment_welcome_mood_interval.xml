@@ -1,0 +1,102 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/rlCardReportInterval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvReportIntervalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="8dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/welcome_interval_title"
+            android:textSize="28sp"
+            android:textColor="@color/actionbar_background"
+            />
+
+        <TextView
+            android:layout_below="@id/tvReportIntervalTitle"
+            android:id="@+id/tvReportIntervalDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/welcome_interval_description"
+            android:textSize="14sp"
+            android:textColor="@color/text_card_light"/>
+
+        <Spinner
+            android:layout_below="@id/tvReportIntervalDescription"
+            android:id="@+id/spInterval"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"/>
+
+        <LinearLayout
+            android:id="@+id/lnShowNotification"
+            android:layout_below="@id/spInterval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <CheckBox
+                android:id="@+id/cbNotificationEnabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show notification"
+                android:checked="true"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnShowPopup"
+            android:layout_below="@id/lnShowNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingBottom="8dp">
+
+            <CheckBox
+                android:id="@+id/cbPopupEnabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show popup"
+                android:checked="true"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_below="@id/lnShowPopup"
+            android:id="@+id/vwButtonSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/separator_card"/>
+
+        <Button
+            android:id="@+id/btReportIntervalDone"
+            android:layout_below="@id/vwButtonSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingLeft="16dp"
+            android:text="Done"
+            android:background="@drawable/selector"
+            android:textColor="@color/actionbar_background"
+            android:gravity="center_vertical|left"/>
+
+        <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="@drawable/card_bottom" />
+    </RelativeLayout>
+</merge>

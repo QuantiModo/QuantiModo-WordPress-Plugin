@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lnMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal">
+
+    <!-- Measurement/variable input. Offsetted -2dp so that the overscroll fade starts right under the edittext -->
+    <com.quantimodo.android.views.ScrollViewExt
+        android:id="@+id/svCardsContainer"
+        android:fillViewport="true"
+        android:layout_below="@+id/etVariableName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-2dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay">
+
+        <LinearLayout
+            android:id="@+id/lnCardsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/f_tracking_variablecard"/>
+            <include layout="@layout/f_tracking_buttonscard"/>
+        </LinearLayout>
+
+    </com.quantimodo.android.views.ScrollViewExt>
+
+    <!-- Shadow below variable input field -->
+    <View
+        android:id="@+id/vwVariableNameShadow"
+        android:layout_width="match_parent"
+        android:layout_marginTop="68dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_height="16dp"
+        android:alpha="0"
+        android:background="@drawable/shadow_horizontal" />
+
+    <!-- Variable name input --><EditText
+    android:id="@id/etVariableName"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingEnd="6dp"
+    android:hint="What do you want to track?"
+    android:textColorHint="#B2B2B2"
+    android:textColor="#777777"
+    android:textSize="16sp"
+    android:background="@drawable/card_complete"
+    android:imeOptions="actionDone"
+    android:inputType="textNoSuggestions" />
+
+    <ProgressBar
+        android:id="@+id/pbAutoCompleteLoading"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="12dp"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_alignRight="@id/etVariableName"
+        android:layout_alignTop="@id/etVariableName"
+        android:layout_alignBottom="@id/etVariableName"
+        android:visibility="gone" />
+
+    <!-- Autocomplete listview -->
+    <ListView
+        android:id="@+id/lvVariableSuggestions"
+        android:layout_below="@id/etVariableName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:background="@drawable/card_complete"
+        android:scrollbarStyle="outsideOverlay"
+        android:clipToPadding="false"
+        android:visibility="gone" />
+</RelativeLayout>

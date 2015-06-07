@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/leftDrawer"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#F3F3F3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:minHeight="@dimen/abc_action_bar_default_height_material">
+
+        <!-- Menu item TRACKING -->
+        <LinearLayout
+            android:id="@+id/lnMenuButtonTracking"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_track" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_item_tracking"
+                android:textSize="@dimen/menuitem_textsize" />
+        </LinearLayout>
+
+        <!-- Menu item Import Data -->
+        <LinearLayout
+            android:id="@+id/lnMenuButtonImport"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/menuitem_height"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="12dp"
+                android:src="@drawable/ic_appsanddevices" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_item_import_data"
+                android:textSize="@dimen/menuitem_textsize" />
+        </LinearLayout>
+
+       <!-- Menu item Positive Factors -->
+        <LinearLayout
+            android:id="@+id/lnMenuButtonPositiveFactors"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_positive" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_item_positive_factors"
+                android:textSize="@dimen/menuitem_textsize" />
+        </LinearLayout>
+
+        <!-- Menu item Negative Factors -->
+        <LinearLayout
+            android:id="@+id/lnMenuButtonNegativeFactors"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_negative" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_item_negative_factors"
+                android:textSize="@dimen/menuitem_textsize" />
+        </LinearLayout>
+
+
+        <!-- Menu item Track Factors -->
+        <LinearLayout
+            android:id="@+id/lnMenuButtonTrackFactors"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_tracking" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_items_track_factors"
+                android:textSize="@dimen/menuitem_textsize" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD" />
+
+        <!-- Menu item Settings -->
+        <LinearLayout
+            android:id="@+id/lnMenuButtonSettings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="12dp"
+                android:src="@drawable/ic_gears" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_item_settings"
+                android:textSize="@dimen/menuitem_textsize" />
+        </LinearLayout>
+
+        
+        <LinearLayout
+            android:id="@+id/lnMenuHelp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:padding="12dp"
+                android:src="@drawable/ic_megaphone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_item_help"
+                android:textSize="@dimen/menuitem_textsize" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

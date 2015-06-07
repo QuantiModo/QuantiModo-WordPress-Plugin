@@ -1,0 +1,204 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/lnStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card">
+
+        <RelativeLayout
+            android:id="@+id/lnAverageMood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/imAverageMood"
+                android:layout_width="80dp"
+                android:layout_height="88dp"
+                android:padding="8dp"/>
+
+            <TextView
+                android:id="@+id/tvAverageMood"
+                android:layout_toRightOf="@id/imAverageMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingTop="12dp"
+                android:paddingRight="12dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/text_card"/>
+
+            <TextView
+                android:id="@+id/tvAverageMoodResponse"
+                android:layout_toRightOf="@id/imAverageMood"
+                android:layout_below="@id/tvAverageMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingTop="2dp"
+                android:paddingRight="12dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="14sp"
+                android:textColor="@color/text_card_light"
+                android:text="We hope you feel great!" />
+
+            <TextView
+                android:id="@+id/tvCurrentMoodQestion"
+                android:layout_toRightOf="@id/imAverageMood"
+                android:layout_below="@id/tvAverageMoodResponse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="12dp"
+                android:paddingRight="12dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/mood_question"
+                android:textSize="14sp"
+                android:textColor="@color/text_card_light" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/vwMoodSeparator"
+            android:layout_below="@id/lnAverageMood"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/separator_card" />
+
+        <ViewFlipper
+            android:id="@+id/vfMoodInput"
+            android:layout_below="@id/vwMoodSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/card">
+            <LinearLayout
+                android:id="@+id/lnMoodInput"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+                <ImageButton
+                    android:id="@+id/btDepressed"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_mood_depressed"
+                    android:background="@drawable/selector" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/separator_card" />
+
+                <ImageButton
+                    android:id="@+id/btSad"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_mood_sad"
+                    android:background="@drawable/selector" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/separator_card" />
+
+                <ImageButton
+                    android:id="@+id/btOk"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_mood_ok"
+                    android:background="@drawable/selector" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/separator_card" />
+
+                <ImageButton
+                    android:id="@+id/btHappy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_mood_happy"
+                    android:background="@drawable/selector" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/separator_card" />
+
+                <ImageButton
+                    android:id="@+id/btEcstatic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_mood_ecstatic"
+                    android:background="@drawable/selector"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="55dp">
+
+                <TextView
+                    android:id="@+id/tvMoodTimeRemaining"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/text_card_light"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_toLeftOf="@+id/tvUndoLastMood"
+                    android:layout_width="1dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:background="@color/separator_card" />
+
+                <TextView
+                    android:id="@+id/tvUndoLastMood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="12dp"
+                    android:paddingLeft="12dp"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:clickable="true"
+                    android:background="@drawable/selector"
+                    android:text="UNDO"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_card_light"/>
+            </RelativeLayout>
+        </ViewFlipper>
+    </RelativeLayout>
+
+    <View
+    android:layout_below="@+id/lnStats"
+    android:layout_width="wrap_content"
+    android:layout_height="2dp"
+    android:background="@drawable/card_bottom" />
+</merge>
