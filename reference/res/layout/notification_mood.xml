@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_notification"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/notification_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:id="@+id/imNotification"
+            android:layout_alignParentLeft="true"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_action_appicon"
+            android:background="@color/notification_icon_background" />
+
+        <RelativeLayout
+            android:layout_toRightOf="@+id/imNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvNotifTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="@string/notif_mood_title"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/notification_separator"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btDepressed"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_notif_mood_depressed"
+            android:background="@drawable/selector" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/notification_separator" />
+        <ImageButton
+            android:id="@+id/btSad"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_notif_mood_sad"
+            android:background="@drawable/selector" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/notification_separator" />
+        <ImageButton
+            android:id="@+id/btOk"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_notif_mood_ok"
+            android:background="@drawable/selector" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/notification_separator" />
+        <ImageButton
+            android:id="@+id/btHappy"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_notif_mood_happy"
+            android:background="@drawable/selector" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/notification_separator" />
+        <ImageButton
+            android:id="@+id/btEcstatic"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_notif_mood_ecstatic"
+            android:background="@drawable/selector" />
+    </LinearLayout>
+
+</LinearLayout>

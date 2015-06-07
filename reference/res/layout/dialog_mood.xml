@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlMoodDialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_moodpopup">
+
+    <LinearLayout
+        android:id="@+id/lnCurrentQuestion"
+        android:layout_width="@dimen/moodpopup_width"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@drawable/card"
+        android:orientation="vertical"
+        android:layout_marginBottom="-6dp">
+
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12sp"
+            android:paddingRight="12dp"
+            android:paddingTop="12dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="14sp"
+            android:textColor="@color/text_title"/>
+
+        <TextView
+            android:id="@+id/tvQuestionDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="12dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="14sp"
+            android:textColor="@color/text_card_light"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/separator_card"/>
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lnButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btDepressed"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mood_depressed"
+            android:background="@drawable/selector_card_left" />
+
+        <ImageButton
+            android:id="@+id/btSad"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mood_sad"
+            android:background="@drawable/selector_card_middle" />
+
+        <ImageButton
+            android:id="@+id/btOk"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mood_ok"
+            android:background="@drawable/selector_card_middle" />
+
+        <ImageButton
+            android:id="@+id/btHappy"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mood_happy"
+            android:background="@drawable/selector_card_middle" />
+
+        <ImageButton
+            android:id="@+id/btEcstatic"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mood_ecstatic"
+            android:background="@drawable/selector_card_right" />
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lnAskMoreQuestions"
+        android:layout_width="@dimen/moodpopup_width"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="-6dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/separator_card"/>
+
+        <LinearLayout
+            android:id="@+id/btAskMoreQuestions"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/selector_card_bottom"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:clickable="true">
+            <TextView
+                android:id="@+id/tvAskMoreQuestions"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:paddingLeft="12dp"
+                android:text="More questions"
+                android:textColor="@color/text_card_button"
+                android:gravity="left|center_vertical"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="30dp"
+                android:background="@color/separator_card"/>
+
+            <ImageButton
+                android:id="@+id/imAskMoreQuestions"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:clickable="false"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

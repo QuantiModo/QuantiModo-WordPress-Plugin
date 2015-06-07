@@ -1,0 +1,44 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/lnBarChart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        android:background="@drawable/card"
+        android:paddingBottom="12dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="24sp"
+                android:textColor="@color/text_title"
+                android:text="Mood distribution" />
+
+            <ImageButton
+                android:id="@+id/btDistributionOptions"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:padding="10dp"
+                android:alpha="0.7"
+                android:background="@drawable/selector"
+                android:src="@drawable/abs__ic_menu_moreoverflow_normal_holo_light"
+                android:scaleType="centerCrop"
+                android:cropToPadding="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="@drawable/card_bottom"/>
+</merge>

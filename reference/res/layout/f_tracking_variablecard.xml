@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lnAddVariableContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingBottom="12dp"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/card_complete"
+    android:visibility="gone">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="@string/tracking_variable"
+        android:textSize="24sp"
+        android:textColor="@color/card_title"
+        android:fontFamily="sans-serif-light" />
+
+    <EditText
+        android:id="@+id/etVariableNameNew"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/tracking_variablename"
+        android:textColorHint="#CCCCCC"
+        android:imeOptions="actionNext"
+        android:inputType="textCapWords" />
+
+    <Spinner
+        android:id="@+id/spVariableCategory"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textColorHint="#CCCCCC"
+        android:inputType="none" />
+
+    <RadioGroup
+        android:id="@+id/rgVariableCombinationOperation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbVariableCombinationOperationSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tracking_combination_sum"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/rbVariableCombinationOperationAverage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tracking_combination_average" />
+    </RadioGroup>
+</LinearLayout>

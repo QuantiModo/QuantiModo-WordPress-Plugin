@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+#section-analyze{
+	width: 100%;
+}
+
+@media only screen and (max-width: 1100px) {
+	#correlation-gauge{
+		font-size: 1.15em;
+		width: 400px;
+		float: left;
+	}
+	#scatterplot-graph{
+		padding-left: 12px;
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#correlation-gauge{
+		width: 100%;
+	}
+	#scatterplot-graph{
+		width: 100%;
+		padding-left: 0;
+	}
+}

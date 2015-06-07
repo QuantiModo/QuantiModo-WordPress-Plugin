@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:hint="Username/Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:layout_below="@id/etUsername"
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:inputType="textPassword"
+        android:hint="Password" />
+
+
+    <TextView
+        android:id="@+id/tvRestorePassword"
+        android:layout_below="@id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/qm_auth_restore_password"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"
+        />
+
+    <View
+        android:layout_below="@id/tvRestorePassword"
+        android:id="@+id/vwButtonSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/separator_popup" />
+
+
+    <LinearLayout
+        android:layout_below="@id/vwButtonSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@android:string/cancel"
+            android:background="@drawable/selector" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/separator_popup" />
+
+        <Button
+            android:id="@+id/btSignIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/authentication_signin"
+            android:background="@drawable/selector" />
+
+    </LinearLayout>
+</RelativeLayout>

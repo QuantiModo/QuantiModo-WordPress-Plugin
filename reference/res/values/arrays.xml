@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="empty">
+    </string-array>
+
+    <string-array name="questions">
+        <item>@string/question_mood</item>
+        <item>@string/question_guilty</item>
+        <item>@string/question_alert</item>
+        <item>@string/question_afraid</item>
+        <item>@string/question_excited</item>
+        <item>@string/question_irritable</item>
+        <item>@string/question_ashamed</item>
+        <item>@string/question_attentive</item>
+        <item>@string/question_hostile</item>
+        <item>@string/question_active</item>
+        <item>@string/question_nervous</item>
+        <item>@string/question_interested</item>
+        <item>@string/question_enthusiastic</item>
+        <item>@string/question_jittery</item>
+        <item>@string/question_strong</item>
+        <item>@string/question_distressed</item>
+        <item>@string/question_determined</item>
+        <item>@string/question_upset</item>
+        <item>@string/question_proud</item>
+        <item>@string/question_scared</item>
+        <item>@string/question_inspired</item>
+    </string-array>
+    <string-array name="questions_description">
+        <item>@string/question_description_mood</item>
+        <item>@string/question_description_guilty</item>
+        <item>@string/question_description_alert</item>
+        <item>@string/question_description_afraid</item>
+        <item>@string/question_description_excited</item>
+        <item>@string/question_description_irritable</item>
+        <item>@string/question_description_ashamed</item>
+        <item>@string/question_description_attentive</item>
+        <item>@string/question_description_hostile</item>
+        <item>@string/question_description_active</item>
+        <item>@string/question_description_nervous</item>
+        <item>@string/question_description_interested</item>
+        <item>@string/question_description_enthusiastic</item>
+        <item>@string/question_description_jittery</item>
+        <item>@string/question_description_strong</item>
+        <item>@string/question_description_distressed</item>
+        <item>@string/question_description_determined</item>
+        <item>@string/question_description_upset</item>
+        <item>@string/question_description_proud</item>
+        <item>@string/question_description_scared</item>
+        <item>@string/question_description_inspired</item>
+    </string-array>
+
+    <string-array name="moods">
+        <item>@string/mood_depressed</item>
+        <item>@string/mood_sad</item>
+        <item>@string/mood_ok</item>
+        <item>@string/mood_happy</item>
+        <item>@string/mood_ecstatic</item>
+    </string-array>
+
+    <string-array name="mood_interval_entryValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="mood_interval_entries">
+        <item>@string/interval_never</item>
+        <item>@string/interval_hourly</item>
+        <item>@string/interval_everythreehours</item>
+        <item>@string/interval_twicedaily</item>
+        <item>@string/interval_daily</item>
+    </string-array>
+
+    <string-array name="rating_notifications_entryValues">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="rating_notifications_entries">
+        <item>@string/pref_rating_notifications_statusbar</item>
+        <item>@string/pref_rating_notifications_popup</item>
+    </string-array>
+</resources>
