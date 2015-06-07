@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="tizen-web-ui-fw/latest/js/jquery.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw-libs.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-viewport-scale=“true” data-framework-theme="tizen-white"></script>
+<script type="text/javascript" src="./js/reportMood.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="./js/alarms.js"></script>
+<script type="text/javascript" src="./js/idbstore.js"></script>
+<script type="text/javascript" src="./js/MoodiModoStore.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+	<!-- Start of first page: #home -->
+	<div data-role="page" id="mood_details" data-add-back-btn="true" data-footer-exist="true">
+		<div data-role="header" data-id="headerNav" data-position="fixed">
+			<h1>MoodiModo</h1>
+			
+		</div>
+		<!-- header -->
+		
+		<!--Context pop-up-->
+		<div id="menuPopupHome" class="menuPopup" data-role="popup">
+		   <ul data-role="listview">
+		      <li class="text">
+		         <a href="settings.html" data-transition="pop">Settings</a>
+		      </li>
+		   </ul>
+		</div>
+			
+		<div data-role="content">
+			<h2 id="pageHeader">Mood details</h2>
+			
+			
+			<div id="listContent" data-role="fieldcontain">
+    		<nav id="secondNav" class="listItems">
+				<ul id="moodDetails" data-role="listview">
+				</ul>
+    		</nav>
+			</div>
+			<!--  
+			<div id="moodDetails">
+			
+			
+			</div>
+			<h4 id="mood">Mood over time</h4>
+			<div id="LineContainer"></div>
+
+			<h4 id="graphHeader">Mood Distribution</h4>
+			<div id="BarContainer"></div>
+			-->
+
+		</div>
+		<!-- /content -->
+		
+		<div data-id="footerNav" data-role="footer" data-position="fixed">
+		</div> 
+	</div>
+	<!-- /page #home -->
+
+
+</body>
+</html>

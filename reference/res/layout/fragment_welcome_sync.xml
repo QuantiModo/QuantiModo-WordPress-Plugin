@@ -1,0 +1,121 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/rlSync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card"
+        android:layout_marginBottom="12dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imQMLogo"
+            android:layout_width="104dp"
+            android:layout_height="150dp"
+            android:src="@drawable/bg_card_quantimodo"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/lnButtons"/>
+
+        <TextView
+            android:id="@+id/tvSyncTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="8dp"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/text_card"/>
+
+        <TableLayout
+            android:id="@+id/tlSyncFeatures"
+            android:layout_below="@id/tvSyncTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="90dp"
+            android:paddingBottom="8dp"
+            android:shrinkColumns="1">
+
+            <TableRow>
+                <TextView
+                    android:textSize="14sp"
+                    android:paddingRight="4dp"
+                    android:fontFamily="sans-seriflight"
+                    android:textColor="@color/text_card_light"
+                    android:text="-" />
+
+                <TextView
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/text_card_light"
+                    android:text="@string/welcome_sync_feature_1"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/text_card_light"
+                    android:text="-" />
+
+                <TextView
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/text_card_light"
+                    android:text="@string/welcome_sync_feature_2" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/text_card_light"
+                    android:text="-" />
+
+                <TextView
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/text_card_light"
+                    android:text="@string/welcome_sync_feature_3" />
+            </TableRow>
+
+        </TableLayout>
+
+        <View
+            android:layout_below="@id/tlSyncFeatures"
+            android:id="@+id/vwButtonSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/separator_card"/>
+
+        <LinearLayout
+            android:id="@id/lnButtons"
+            android:layout_below="@id/vwButtonSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btSyncEnable"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:paddingLeft="16dp"
+                android:text="@string/button_welcome_sing_in"
+                android:background="@drawable/selector"
+                android:textColor="@color/actionbar_background"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="@drawable/card_bottom"
+            android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+
+</merge>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoodiModo</string>
+
+    <string name="title_history">History</string>
+    <string name="title_preferences">Settings</string>
+
+    <string name="drawer_open">Drawer Opened</string>
+    <string name="drawer_close">Drawer Closed</string>
+
+    <string name="authentication_gettingInfo">Getting account information</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_timerange_today">Today</string>
+    <string name="action_timerange_now">Now</string>
+    <string name="action_share">Share charts</string>
+    <string name="action_history">History</string>
+    <string name="action_history_sync">Sync entire history</string>
+
+    <string name="welcome_moodimodo"><![CDATA[Welcome to <font color=\"#48BDD1\">MoodiModo</font>!]]></string>
+    <string name="welcome_report_first_mood">Let\'s start off by reporting your first mood on the card below. </string>
+    <string name="welcome_interval_title">Report Interval</string>
+    <string name="welcome_interval_description">A subtle notification and easy-to-use popup complement eachother perfectly, ensuring you\'ll never forget to report your mood.</string>
+    <string name="welcome_questions">20 Questions</string>
+    <string name="welcome_questions_description">Explain about the 20 questions here.</string>
+    <string name="welcome_sync_title"><![CDATA[<font color=\"#48BDD1\">QuantiModo</font> Sync]]></string>
+    <string name="welcome_sync_description">Enable sync to QuantiModo to:</string>
+    <string name="welcome_sync_feature_1">Analyze on quantimo.do</string>
+    <string name="welcome_sync_feature_2">Find out what affects your mood, such as medication or your sleep pattern</string>
+    <string name="welcome_sync_feature_3">Opt-in to help crowdsource research on mental illness</string>
+    <string name="welcome_sync_disable">No thanks</string>
+    <string name="welcome_sync_install">Install app</string>
+    <string name="welcome_sync_signin">Sign in</string>
+    <string name="welcome_sync_enable">Enable sync</string>
+
+    <string name="notif_mood_title">How are you?</string>
+    <string name="notif_mood_subtitle">Tap to report your mood.</string>
+
+    <string name="pref_header_rating">Rating</string>
+    <string name="pref_header_quantimodo">QuantiModo</string>
+    <string name="pref_header_data">Data</string>
+    <string name="pref_rating_schedule">Ask for a rating</string>
+    <string name="pref_rating_notifications">Notification types</string>
+    <string name="pref_rating_notifications_statusbar">Notification drawer</string>
+    <string name="pref_rating_notifications_popup">Popup</string>
+    <string name="pref_rating_required">Additional required ratings</string>
+    <string name="pref_rating_required_none">No additional ratings are required</string>
+    <string name="pref_quantimodo_account_notinstalled">QuantiModo app not installed</string>
+    <string name="pref_quantimodo_syncmoods">Sync moods</string>
+    <string name="pref_quantimodo_syncmoods_enabled">Last synced %1$s</string>
+    <string name="pref_quantimodo_syncmoods_disabled">Moods won\'t be synced</string>
+    <string name="pref_quantimodo_syncmoods_neversynced">Never synced</string>
+    <string name="pref_data_import">Import</string>
+    <string name="pref_data_export">Export</string>
+    <string name="pref_data_exporting">Exporting...</string>
+    <string name="pref_data_importing">Importing...</string>
+    <string name="pref_user_voice_help">Help</string>
+    <string name="pref_user_voice_feedback">Feedback</string>
+    <string name="pref_user_voice_contact">Contact Us</string>
+    <string name="pref_user_voice_idea">Post an Idea</string>
+    <string name="pref_header_feedback">Feedback</string>
+
+    <string name="interval_never">Never</string>
+    <string name="interval_hourly">Hourly</string>
+    <string name="interval_everythreehours">Every three hours</string>
+    <string name="interval_twicedaily">Twice daily</string>
+    <string name="interval_daily">Daily</string>
+
+    <string name="mood_depressed">Depressed</string>
+    <string name="mood_sad">Sad</string>
+    <string name="mood_ok">OK</string>
+    <string name="mood_happy">Happy</string>
+    <string name="mood_ecstatic">Ecstatic</string>
+
+    <string name="popup_askmorequestions_cancel">Close this popup</string>
+
+    <string name="share_overtime">Mood over time</string>
+    <string name="share_distribution">Mood distribution</string>
+
+
+    <string name="mood_average"><![CDATA[Your average mood is <b>_MOOD_</b>.]]></string>
+    <string name="mood_question">How are you feeling right now?</string>
+
+    <string name="question_mood">[]How is your {Mood}?</string>
+    <string name="question_guilty">[neg]How {Guilty} do you feel?</string>
+    <string name="question_alert">[pos]How {Alert} are you?</string>
+    <string name="question_afraid">[neg]How {Afraid} are you?</string>
+    <string name="question_excited">[pos]How {Excited} are you?</string>
+    <string name="question_irritable">[neg]How {Irritable} do you feel?</string>
+    <string name="question_ashamed">[neg]How {Ashamed} do you feel?</string>
+    <string name="question_attentive">[pos]How {Attentive} are you?</string>
+    <string name="question_hostile">[neg]How {Hostile} are you?</string>
+    <string name="question_active">[pos]How {Active} do you feel?</string>
+    <string name="question_nervous">[neg]How {Nervous} are you?</string>
+    <string name="question_interested">[pos]How {Interested} are you?</string>
+    <string name="question_enthusiastic">[pos]How {Enthusiastic} are you?</string>
+    <string name="question_jittery">[neg]How {Jittery} do you feel?</string>
+    <string name="question_strong">[pos]How {Strong} do you feel?</string>
+    <string name="question_distressed">[neg]How {Distressed} are you?</string>
+    <string name="question_determined">[pos]How {Determined} do you feel?</string>
+    <string name="question_upset">[neg]How {Upset} are you?</string>
+    <string name="question_proud">[pos]How {Proud} do you feel?</string>
+    <string name="question_scared">[neg]How {Scared} are you?</string>
+    <string name="question_inspired">[pos]How {Inspired} do you feel?</string>
+
+    <string name="question_description_mood">How are you feeling?</string>
+    <string name="question_description_guilty">Feeling regret for doing something wrong</string>
+    <string name="question_description_alert">Being quick to notice and act</string>
+    <string name="question_description_afraid">Feeling frightened about something</string>
+    <string name="question_description_excited">Looking forward to things</string>
+    <string name="question_description_irritable">Feeling easily annoyed</string>
+    <string name="question_description_ashamed">Feeling shame for doing something wrong or foolish</string>
+    <string name="question_description_attentive">Paying close attention</string>
+    <string name="question_description_hostile">Feeling unfriendly towards others</string>
+    <string name="question_description_active">Feeling full of energy</string>
+    <string name="question_description_nervous">Feeling worried that something unpleasant will happen</string>
+    <string name="question_description_interested">Wanting to be involved in something</string>
+    <string name="question_description_enthusiastic">Showing eagerness</string>
+    <string name="question_description_jittery">Feeling agitated and edgy</string>
+    <string name="question_description_strong">Feeling able to cope with difficulties</string>
+    <string name="question_description_distressed">Feeling extremely anxious</string>
+    <string name="question_description_determined">Being resolute, showing determination</string>
+    <string name="question_description_upset">Feeling sad and troubled about things</string>
+    <string name="question_description_proud">Feeling sense of achievement</string>
+    <string name="question_description_scared">Feeling alarmed about something</string>
+    <string name="question_description_inspired">Feeling the desire to do something</string>
+    <string name="sdk_unknown_error">Unknown error</string>
+    <string name="auth_logout">Log out?</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="dialog_canel">Cancel</string>
+    <string name="drawer_item_positive_factors">Positive Factors</string>
+    <string name="drawer_item_negative_factors">Negative Factors</string>
+    <string name="tab_import_data">Import data</string>
+    <string name="tab_positive_factors">Positive Factors</string>
+    <string name="tab_negative_factors">Negative Factors</string>
+    <string name="button_welcome_sing_in">Sign in</string>
+
+</resources>
