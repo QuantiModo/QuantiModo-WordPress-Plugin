@@ -65,6 +65,14 @@ searched-effect-variable - Instead of a search box, only a list of the causes of
 Shortcode - [qm_track_mood]
 Demo: https://chrome.google.com/webstore/detail/moodimodo-beta/lncgjbhijecjdbdgeigfodmiimpmlelg?hl=en-US
 
+We want to be able to embed those faces anywhere.
+
+Here's the code: https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/master/reference/symptom-rating-page
+
+![moodimodo chrome screenshot](https://cloud.githubusercontent.com/assets/2808553/8116915/6fe35728-104a-11e5-9c13-050d370a1332.jpg)
+
+# Options for Adding Shortcode
+
 Shortcode can be added to a post through "Add Media" by installing [ShortCake](https://github.com/fusioneng/Shortcake).
 
 Our API documentation can be found at https://quantimo.do/api/docs/index.html
