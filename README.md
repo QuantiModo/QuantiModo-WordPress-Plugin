@@ -80,9 +80,16 @@ https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference
 - examined_is_cause - Sets the examined variable to be considered the cause in the relationship.  Possible values: true or false. Default: false
 
 ## Connectors to Data Sources
-Shortcode - [qm_connectors]
+Shortcode - [qm_import_data]
 
-Demo: https://quantimo.do/connect
+To see how it works:
+- Create an account at https://quantimo.do
+- Connect the Weather connector at https://quantimo.do/connect (using "62034" as your zip code if you're not on Earth and you don't have a location to enter.)
+
+![quantimodo manage connected accounts - google chrome 10152014 63216 pm](https://cloud.githubusercontent.com/assets/2808553/8172734/39b6f640-1389-11e5-9d1c-332d4e5a7c54.jpg)
+
+The code for this page is located here:
+https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/connect-page
 
 ## Add a Measurement Button
 Shortcode - [qm_add_measurement]
