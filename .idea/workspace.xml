@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c4e255a-cd21-4f6f-a301-6b90394d8f48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/QuantiModo-WordPress-Plugin.iml" afterPath="$PROJECT_DIR$/.idea/QuantiModo-WordPress-Plugin.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login-quantimodo.php" afterPath="$PROJECT_DIR$/login-quantimodo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qm-oauth-settings.php" afterPath="$PROJECT_DIR$/qm-oauth-settings.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qm-oauth.php" afterPath="$PROJECT_DIR$/qm-oauth.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="1c4e255a-cd21-4f6f-a301-6b90394d8f48" name="Default" comment="" />
     <ignored path="QuantiModo-WordPress-Plugin.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -39,8 +31,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-26.633333" vertical-offset="0" max-vertical-offset="1734">
-              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state vertical-scroll-proportion="-26.633333" vertical-offset="170" max-vertical-offset="1904">
+              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -183,7 +175,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="698" extended-state="7" />
+    <frame x="-8" y="-8" width="1296" height="698" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -279,8 +271,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.633333" vertical-offset="0" max-vertical-offset="1734">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state vertical-scroll-proportion="-26.633333" vertical-offset="170" max-vertical-offset="1904">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding />
         </state>
       </provider>
