@@ -46,7 +46,17 @@ For example:
 ## Timeline Graph
 Shortcode - [qm_timeline]
 
-Demo: https://quantimo.do/analyze
+To see how it works:
+- Create an account at https://quantimo.do
+- Connect the Weather connector at https://quantimo.do/connect/ (using "62034" as your zip code if you're not on Earth and you don't have a location to enter.)
+- Go to https://quantimo.do/analyze and select a variable to chart on the left. 
+
+If you have any problems with this process, please submit a help request by clicking the "Feedback" tab on the right. 
+
+The code to be used for this shortcode is here: 
+https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/timeline-page
+
+![](https://i.imgur.com/AwhxdGP.png)
 
 ## Correlation Charts
 Shortcode - [qm_correlations]
