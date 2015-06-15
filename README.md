@@ -19,10 +19,10 @@ It is in this way that the user may authorize the QM API to obtain their data fr
 Once a user has authorized QuantiModo to obtain their data, the WordPress site can use the OAuth2 access token to also make API requests to the QM API in order to store new user supplied data or visualize their data on various graphs produced by the Timeline and Correlations shortcode. 
 
 SETUP:
-1. Download and install the QuantiModo-WordPress-Plugin.
-2. Email api@quantimo.do to get an API client id and secret.
-3. Setup your QM API key/secret in the WordPress backend under Settings > QM-OAuth.
-4. Add the QM Login button anywhere to your site with the [qmoa_login_form] shortcode.
+- Download and install the QuantiModo-WordPress-Plugin.
+- Email api@quantimo.do to get an API client id and secret.
+- Setup your QM API key/secret in the WordPress backend under Settings > QM-OAuth.
+- Add the QM Login button anywhere to your site with the [qmoa_login_form] shortcode.
 
 Once a user authorizes you to access their measurements, their OAuth access tokens will be stored and refreshed automatically. They will be able to continue to access their data through your site until they revoke access. 
 
@@ -59,15 +59,25 @@ https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference
 ![](https://i.imgur.com/AwhxdGP.png)
 
 ## Correlation Charts
-Shortcode - [qm_correlations]
+Shortcode - [qm_correlation_charts]
 
-Demo: https://quantimo.do/correlate
+To see how it works:
+- Create an account at https://quantimo.do
+- Connect the Weather connector at https://quantimo.do/connect/ (using "62034" as your zip code if you're not on Earth and you don't have a location to enter.)
+- Go to https://quantimo.do/correlate and select a variable to chart on the left. 
+
+If you have any problems with this process, please submit a help request by clicking the "Feedback" tab on the right. 
+
+The code to be used for this shortcode is here: 
+https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/correlation_charts
+
+![](https://quantimo.do/wp-content/uploads/2013/08/Correlations-Page-Demo-Sleep-Mood-1024x648.png)
 
 *Possible shortcode attributes for correlation charts:*
 
-examined_variable - Sets the default examined variable. Possible values: any variable name
-secondary_variable - Sets the default secondary variable to be selected on the bar graph. Possible values: any variable name
-examined_is_cause - Sets the examined variable to be considered the cause in the relationship.  Possible values: true or false. Default: false
+- examined_variable - Sets the default examined variable. Possible values: any variable name
+- secondary_variable - Sets the default secondary variable to be selected on the bar graph. Possible values: any variable name
+- examined_is_cause - Sets the examined variable to be considered the cause in the relationship.  Possible values: true or false. Default: false
 
 ## Connectors to Data Sources
 Shortcode - [qm_connectors]
