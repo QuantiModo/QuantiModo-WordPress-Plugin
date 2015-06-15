@@ -1,7 +1,7 @@
 QuantiModo-WordPress-Plugin
 =======================================
 
-# NOTE: This plugin is in an extremely early stage of development and is not yet function. The roadmap for the development of the plugin is below. We'd be very grateful for any pull requests. Thanks!
+### NOTE: This plugin is in an extremely early stage of development and is not yet function. The roadmap for the development of the plugin is below. We'd be very grateful for any pull requests. Thanks!
 
 Help ignite a revolution of citizen science to find new solutions to chronic illnesses.  Install the Quantimodo Wordpress plugin!
 
