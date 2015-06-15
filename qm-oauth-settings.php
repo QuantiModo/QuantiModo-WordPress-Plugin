@@ -233,7 +233,7 @@
 						<option value='240' <?php selected(get_option('qmoa_logout_inactive_users'), '240'); ?>>After 4 hours</option>
 					</select>
 					<p class="tip-message">Specifies whether to log out users automatically after a period of inactivity.</p>
-					<p class="tip-message tip-warning"><strong>Warning:</strong> When a user logs out of WordPress, they will remain logged into their third-party provider until they close their browser. Logging out of WordPress DOES NOT log you out of Google, Facebook, LinkedIn, etc...</p>
+					<p class="tip-message tip-warning"><strong>Warning:</strong> When a user logs out of WordPress, they will remain logged into their third-party provider until they close their browser. Logging out of WordPress DOES NOT log you out of QuantiModo...</p>
 				</td>
 				</tr>
 			</table> <!-- .form-table -->

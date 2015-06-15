@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: QM-OAuth
-Plugin URI: http://github.com/perrybutler/qm-oauth
-Description: A WordPress plugin that allows users to login or register by authenticating with an existing Google, Facebook, LinkedIn, Github, Reddit or Windows Live account via OAuth 2.0. Easily drops into new or existing sites, integrates with existing users.
-Version: 0.4
-Author: Perry Butler
-Author URI: http://glassocean.net
+Plugin URI: http://github.com/QuantiModo/qm-oauth
+Description: A WordPress plugin that allows users to login or register by authenticating with an existing Quantimodo account via OAuth 2.0. Easily drops into new or existing sites, integrates with existing users.
+Version: 0.1
+Author: QuantiModo
+Author URI: http://quantimo.do
 License: GPL2
 */
 

@@ -10,6 +10,15 @@ This is a mobile-friendly WordPress plugin that enables users of any WordPress t
 Note: This JavaScript library (https://github.com/QuantiModo/QuantiModo-SDK-JavaScript/blob/master/quantimodo-api.js) is required for this plugin's functionality.
 
 ## Add QuantiModo Connect Button
+
+PURPOSE: 
+The purpose of allowing users to log in via the QuantiModo API's OAuth2 endpoint is so that the WordPress site can obtain an OAuth2 access token which will be included in the Authorization header of all API requests to QuantiModo as a Bearer token. 
+
+It is in this way that the user may authorize the QM API to obtain their data from other API's such as Fitbit, MyFitnessPal, Withings, etc. This is done using the Connect shortcode.
+
+Once a user has authorized QuantiModo to obtain their data, the WordPress site can use the OAuth2 access token to also make API requests to the QM API in order to store new user supplied data or visualize their data on various graphs produced by the Timeline and Correlations shortcode. 
+
+SETUP:
 1. Download and install the QuantiModo-WordPress-Plugin.
 2. Email api@quantimo.do to get an API client id and secret.
 3. Setup your QM API key/secret in the WordPress backend under Settings > QM-OAuth.
@@ -36,10 +45,12 @@ For example:
 
 ## Timeline Graph
 Shortcode - [qm_timeline]
+
 Demo: https://quantimo.do/analyze
 
 ## Correlation Charts
 Shortcode - [qm_correlations]
+
 Demo: https://quantimo.do/correlate
 
 *Possible shortcode attributes for correlation charts:*
@@ -50,14 +61,17 @@ examined_is_cause - Sets the examined variable to be considered the cause in the
 
 ## Connectors to Data Sources
 Shortcode - [qm_connectors]
+
 Demo: https://quantimo.do/connect
 
 ## Add a Measurement Button
 Shortcode - [qm_add_measurement]
+
 Demo: Go to https://quantimo.do/correlate and press the + button or try https://chrome.google.com/webstore/detail/quantimodo-universal-trac/jioloifallegdkgjklafkkbniianjbgi?hl=en-US
 
 ## Correlation Search Box
 Shortcode - [qm_correlation_search]
+
 Demo: https://quantimo.do/qm-search
 
 *Possible shortcode attributes for correlation search:*
@@ -66,6 +80,7 @@ searched-effect-variable - Instead of a search box, only a list of the causes of
 
 ## Mood Tracker
 Shortcode - [qm_track_mood]
+
 Demo: https://chrome.google.com/webstore/detail/moodimodo-beta/lncgjbhijecjdbdgeigfodmiimpmlelg?hl=en-US
 
 We want to be able to embed those faces anywhere.

@@ -10,7 +10,7 @@ define('CLIENT_ENABLED', get_option('qmoa_quantimodo_api_enabled'));
 define('CLIENT_ID', get_option('qmoa_quantimodo_api_id'));
 define('CLIENT_SECRET', get_option('qmoa_quantimodo_api_secret'));
 define('REDIRECT_URI', rtrim(site_url(), '/') . '/');
-define('SCOPE', 'writemeasurements'); // PROVIDER SPECIFIC: 'profile' is the minimum scope required to get the user's id from Google
+define('SCOPE', 'writemeasurements'); // PROVIDER SPECIFIC: 'profile' is the minimum scope required to get the user's id from QuantiModo
 define('URL_AUTH', "https://quantimo.do/api/oauth2/authorize?");
 define('URL_TOKEN', "https://quantimo.do/api/oauth2/token?");
 define('URL_USER', "https://quantimo.do/api/user/me?");
@@ -127,9 +127,9 @@ function get_oauth_token($qmoa) {
 			break;
 	}
 	// parse the result:
-	$result_obj = json_decode($result, true); // PROVIDER SPECIFIC: Google encodes the access token result as json by default
-	$access_token = $result_obj['access_token']; // PROVIDER SPECIFIC: this is how Google returns the access token KEEP THIS PROTECTED!
-	$expires_in = $result_obj['expires_in']; // PROVIDER SPECIFIC: this is how Google returns the access token's expiration
+	$result_obj = json_decode($result, true); // PROVIDER SPECIFIC: QuantiModo encodes the access token result as json by default
+	$access_token = $result_obj['access_token']; // PROVIDER SPECIFIC: this is how QuantiModo returns the access token KEEP THIS PROTECTED!
+	$expires_in = $result_obj['expires_in']; // PROVIDER SPECIFIC: this is how QuantiModo returns the access token's expiration
 	$expires_at = time() + $expires_in;
 	// handle the result:
 	if (!$access_token || !$expires_in) {
@@ -148,7 +148,7 @@ function get_oauth_identity($qmoa) {
 	// here we exchange the access token for the user info...
 	// set the access token param:
 	$params = array(
-		'access_token' => $_SESSION['WPOA']['ACCESS_TOKEN'], // PROVIDER SPECIFIC: the access_token is passed to Google via POST param
+		'access_token' => $_SESSION['WPOA']['ACCESS_TOKEN'], // PROVIDER SPECIFIC: the access_token is passed to QuantiModo via POST param
 	);
 	$url_params = http_build_query($params);
 	// perform the http request:
@@ -183,8 +183,8 @@ function get_oauth_identity($qmoa) {
 	// parse and return the user's oauth identity:
 	$oauth_identity = array();
 	$oauth_identity['provider'] = $_SESSION['WPOA']['PROVIDER'];
-	$oauth_identity['id'] = $result_obj['id']; // PROVIDER SPECIFIC: Google returns the user's OAuth identity as id
-	//$oauth_identity['email'] = $result_obj['emails'][0]['value']; // PROVIDER SPECIFIC: Google returns an array of email addresses. To respect privacy we currently don't collect the user's email address.
+	$oauth_identity['id'] = $result_obj['id']; // PROVIDER SPECIFIC: QuantiModo returns the user's OAuth identity as id
+	//$oauth_identity['email'] = $result_obj['emails'][0]['value']; // PROVIDER SPECIFIC: QuantiModo returns an array of email addresses. To respect privacy we currently don't collect the user's email address.
 	if (!$oauth_identity['id']) {
 		$qmoa->qmoa_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.");
 	}
