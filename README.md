@@ -7,7 +7,7 @@ Help ignite a revolution of citizen science to find new solutions to chronic ill
 
 This is a mobile-friendly WordPress plugin that enables users of any WordPress to authenticate and share their data from QuantiModo.com. It also allows you to embed dynamic graphs containing your users' Quantified Self data agggregated at QuantiModo.com. These graphs may be included in any page or post using shortcode.
 
-Note: Javascript is required for this plugin's functionality.
+Note: This JavaScript library (https://github.com/QuantiModo/QuantiModo-SDK-JavaScript/blob/master/quantimodo-api.js) is required for this plugin's functionality.
 
 ## Add QuantiModo Connect Button
 1. Download and install the QuantiModo-WordPress-Plugin.
@@ -23,16 +23,16 @@ For example:
 
 *Possible shortcode attributes:*
 
-layout - determines whether to display the login buttons as links or buttons, stacked vertically or lined up horizontally. Possible values: links-row, links-column, buttons-row, buttons-column
-align - sets the horizontal alignment of the custom form elements. Possible values: left, middle, right
-show_login - determines when the login buttons will be shown. Possible values: never, conditional, always
-show_logout - determines when the logout button will be shown. Possible values: never, conditional, always
-logged_out_title - sets the text to display above the custom login form when the user is logged out. Possible values: any text
-logged_in_title - sets the text to display above the custom login form when the user is logged in. Possible values: any text
-logging_in_title - sets the text to display above the custom login form when the user is logging ing. Possible values: any text
-logging_out_title - sets the text to display above the custom login form when the user is logging out. Possible values: any text
-style - sets the custom css style to apply to the custom login form. Possible values: any text
-class - sets the custom css class to apply to the custom login form. Possible values: any text
+- layout - determines whether to display the login buttons as links or buttons, stacked vertically or lined up horizontally. Possible values: links-row, links-column, buttons-row, buttons-column
+- align - sets the horizontal alignment of the custom form elements. Possible values: left, middle, right
+- show_login - determines when the login buttons will be shown. Possible values: never, conditional, always
+- show_logout - determines when the logout button will be shown. Possible values: never, conditional, always
+- logged_out_title - sets the text to display above the custom login form when the user is logged out. Possible values: any text
+- logged_in_title - sets the text to display above the custom login form when the user is logged in. Possible values: any text
+- logging_in_title - sets the text to display above the custom login form when the user is logging ing. Possible values: any text
+- logging_out_title - sets the text to display above the custom login form when the user is logging out. Possible values: any text
+- style - sets the custom css style to apply to the custom login form. Possible values: any text
+- class - sets the custom css class to apply to the custom login form. Possible values: any text
 
 ## Timeline Graph
 Shortcode - [qm_timeline]
