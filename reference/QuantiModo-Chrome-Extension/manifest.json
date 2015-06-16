@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "QuantiModo Universal Tracker",
+  "description": "Track anything in seconds by just clicking the QuantiModo button in your browser!",
+  "version": "1.3.3",
+  "options_page": "options/options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {"16"	: "images/QM-LOGO-ICON-Chrome-128-128.png",
+			"48"	: "images/QM-LOGO-ICON-Chrome-128-128.png",
+            "128"	: "images/QM-LOGO-ICON-Chrome-128-128.png" },
+  "permissions": [
+	"alarms",
+	"notifications",
+	"storage",
+	"cookies",
+	"tabs",
+    "https://app.quantimo.do/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/QM-LOGO-ICON-Chrome-128-128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": false
+  }
+}
