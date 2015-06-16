@@ -94,7 +94,9 @@ https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference
 ## Add a Measurement Button
 Shortcode - [qm_add_measurement]
 
-Demo: Go to https://quantimo.do/correlate and press the + button or try https://chrome.google.com/webstore/detail/quantimodo-universal-trac/jioloifallegdkgjklafkkbniianjbgi?hl=en-US
+Demo: Try https://chrome.google.com/webstore/detail/quantimodo-universal-trac/jioloifallegdkgjklafkkbniianjbgi?hl=en-US
+
+The relevant code and more information on the functionality can be found at https://github.com/Abolitionist-Project/QuantiModo-Chrome-Extension
 
 ## Correlation Search Box
 Shortcode - [qm_correlation_search]
@@ -102,17 +104,23 @@ Shortcode - [qm_correlation_search]
 Demo: https://quantimo.do/qm-search
 
 *Possible shortcode attributes for correlation search:*
-searched-cause-variable - Instead of a search box, only a list of the effects of this variable are displayed
-searched-effect-variable - Instead of a search box, only a list of the causes of this variable are displayed
+- searched-cause-variable - Instead of a search box, only a list of the effects of this variable are displayed
+- searched-effect-variable - Instead of a search box, only a list of the causes of this variable are displayed
+
+![what-affects-qm-search-box-screenshot-2014-06-29-20 14_picmonkeyed](https://cloud.githubusercontent.com/assets/2808553/8192570/adcca18c-1434-11e5-8ba4-1c415f363394.png)
+
+![search-results-page-mockup png](https://cloud.githubusercontent.com/assets/2808553/8192587/d66be102-1434-11e5-9082-fa47a69a108b.jpg)
+
+The code and more information can be found at https://github.com/Abolitionist-Project/QM-Search-Plugin. Please email m@thinkbynumbers.org if you need access to this repository. 
 
 ## Mood Tracker
 Shortcode - [qm_track_mood]
 
 Demo: https://chrome.google.com/webstore/detail/moodimodo-beta/lncgjbhijecjdbdgeigfodmiimpmlelg?hl=en-US
 
-We want to be able to embed those faces anywhere.
+We want to be able to embed those faces in any WP page or post.
 
-Here's the code: https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/master/reference/symptom-rating-page
+Here's the code: https://github.com/Abolitionist-Project/MoodiModo-Chrome
 
 ![moodimodo chrome screenshot](https://cloud.githubusercontent.com/assets/2808553/8116915/6fe35728-104a-11e5-9c13-050d370a1332.jpg)
 
