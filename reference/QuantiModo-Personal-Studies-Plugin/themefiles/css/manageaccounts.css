@@ -1,0 +1,525 @@
+@charset "utf-8";
+
+#content {
+	background: #f2f2f2;
+	padding: 0px 12px 12px 12px;
+}
+
+#connectorInfoTable {
+	width: 70%;
+	height: auto;
+	margin: auto;
+	text-align: center;
+	padding-top: 2%;
+	margin: auto;
+}
+
+@media only screen and (max-width: 1100px) {
+	#connectorInfoTable {
+		width: 90%;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#connectorInfoTable {
+		width: 100%;
+	}
+	.connectorName {
+		display: none;
+	}
+	.connectorLogo {
+		width: 100%;
+		height: auto;
+	}
+}
+
+.connectorBlock {
+	border-radius: 15px;
+	display: inline-block;
+	margin: 0.5%;
+	width: 16%;
+	height: auto;
+	vertical-align: top;
+}
+
+.connectorBlock:HOVER {
+	cursor: hand;
+}
+
+.connectorName {
+	font-size: 1vw;
+	margin: 1vw 1vh;
+}
+
+.connectorLogo {
+	width: 80%;
+	height: auto;
+}
+
+.connectorSucessLogo {
+	width: 25px;
+	height: 25px;
+	margin-bottom: -6px;
+}
+
+.grayout {
+	filter:
+		url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+}
+/***********/
+/* Dialogs */
+/***********/
+.dialog {
+	overflow: hidden;
+	padding: 20px;
+	background: #fbfbfb;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	z-index: 1000001;
+	position: absolute;
+	max-width: 340px;
+	max-height: 400px;
+	top: 30%;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.remove-button:HOVER {
+	cursor: hand;
+}
+
+.dialog-background {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #000;
+	opacity: .5;
+	z-index: 1000000;
+	display: none;
+}
+
+.connectordialog {
+	overflow: hidden;
+	padding: 20px;
+	z-index: 1000001;
+	position: absolute;
+	max-width: 550px;
+	top: 30%;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #ffffff;
+	border: 1px solid #999;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+	outline: none;
+}
+
+.remove-button:HOVER {
+	cursor: hand;
+}
+
+.connectordialog-background {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #000;
+	opacity: .5;
+	z-index: 1000000;
+	display: none;
+}
+
+.updatedialog {
+	padding: 20px;
+	background: #ffffff;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	z-index: 1000003;
+	position: absolute;
+	max-width: 650px;
+	max-height: 300px;
+	height: 300px;
+	top: 30%;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	border: thin 2px;
+	display: none;
+	opacity: 0;
+	overflow-y: scroll;
+}
+
+.updatedialog-background {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #000;
+	opacity: .5;
+	z-index: 1000002;
+	display: none;
+}
+
+#login-dialog table {
+	border: none;
+	margin: 0px;
+	border-collapse: collapse;
+}
+
+#login-dialog td {
+	border: none;
+	vertical-align: middle;
+}
+
+#share-dialog-background {
+	display: none;
+	opacity: 0;
+}
+
+#share-dialog {
+	display: none;
+	opacity: 0;
+}
+
+/**************************/
+/* Loading overlay config */
+/**************************/
+.loading-overlay-content,.loading-overlay {
+	display: none;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image:
+		url('/wp-content/themes/metrolium-qm/plugins/login-with-ajax/loading.gif');
+	background-position: center center;
+	background-repeat: no-repeat;
+	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+}
+
+/* Helper class for show/hide element transitions */
+.transitions {
+	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+}
+
+.connectorDialog-desc {
+	float: right;
+	width: 75%;
+}
+
+.noTitleStuff .ui-dialog-titlebar {
+	background-color: black;
+	color: white;
+	height: 50px;
+	padding: 10px;
+	font-size: 20px;
+}
+
+.ui-dialog {
+	left: 0;
+	outline: 0 none;
+	padding: 0em !important;
+}
+
+.imgClass {
+	background-color: transparent;
+	background-image: url("http://i.imgur.com/rbUDVrJ.png");
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	background-size: 38px auto;
+	height: 37px;
+	margin-right: 35px;
+	margin-top: -5px;
+	padding: 6px 21px;
+	width: 23px;
+	background-image: url("http://i.imgur.com/rbUDVrJ.png");
+}
+
+.connectorInfoTable {
+	border-bottom: 2px solid;
+	margin-top: 2%;
+	width: 90%;
+	font-size: 13px;
+	background-color: #F9F9F9;
+}
+
+.dialogconnectorName{
+	color: #3cf;
+	font-size: 18px;
+}
+
+.tabletr {
+	border-top: 2px solid;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.closebutton {
+	float: right;
+	margin-right: -1.3vw;
+	margin-top: -1.3vw;
+	width: 1vw;
+}
+
+.auth {
+	margin-top: 10%;
+	width: 70%;
+	margin-left: 15%;
+}
+
+td.syncStatus span {
+	display: block;
+	width: 20px;
+	height: 20px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px solid #b3b3b3;
+	margin: 0 auto;
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), inset 0 1px 1px
+		rgba(255, 255, 255, 0.7);
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), inset 0 1px 1px
+		rgba(255, 255, 255, 0.7);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), inset 0 1px 2px
+		rgba(255, 255, 255, 0.7);
+}
+
+td.syncStatus .syncLED-yes {
+	background: #76d323;
+}
+
+td.syncStatus .syncLED-no {
+	background: #ff3030;
+}
+
+td.syncStatus .syncLED-waiting {
+	border: 0;
+	width: 35px;
+	height: 35px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.syncStatus.small span {
+	width: 15px;
+	height: 15px;
+}
+
+div.syncStatus span {
+	display: block;
+	width: 20px;
+	height: 20px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px solid #b3b3b3;
+	margin: 0 auto;
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), inset 0 1px 1px
+		rgba(255, 255, 255, 0.7);
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), inset 0 1px 1px
+		rgba(255, 255, 255, 0.7);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), inset 0 1px 2px
+		rgba(255, 255, 255, 0.7);
+}
+
+div.syncStatus .syncLED-yes {
+	background: #76d323;
+}
+
+div.syncStatus .syncLED-no {
+	background: #ff3030;
+}
+
+div.syncStatus .syncLED-waiting {
+	border: 0;
+	width: 35px;
+	height: 35px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+table .syncStatus,table .remove,table .renew,table .connectors {
+	text-align: center;
+}
+
+td.syncStatus {
+	vertical-align: middle;
+}
+
+.synchAll {
+	width: 100%;
+	background: #eeeee9;
+	overflow: hidden;
+	height: 100%;
+}
+
+.synchAll span {
+	display: block;
+	padding: 10px;
+	float: right;
+}
+
+.renew span {
+	margin-top: 18px;
+}
+
+table {
+	max-width: 100%;
+	background-color: transparent;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.table th,.table td {
+	padding: 8px;
+	line-height: 20px;
+	text-align: left;
+	vertical-align: top;
+	border-top: 1px solid #dddddd;
+}
+
+.table th {
+	font-weight: bold;
+}
+
+.table thead th {
+	vertical-align: bottom;
+}
+
+.table caption+thead tr:first-child th,.table caption+thead tr:first-child td,.table colgroup+thead tr:first-child th,.table colgroup+thead tr:first-child td,.table thead:first-child tr:first-child th,.table thead:first-child tr:first-child td
+	{
+	border-top: 0;
+}
+
+.table tbody+tbody {
+	border-top: 2px solid #dddddd;
+}
+
+.table .table {
+	background-color: #ffffff;
+}
+
+.table-condensed th,.table-condensed td {
+	padding: 4px 5px;
+}
+
+.table-bordered {
+	border: 1px solid #dddddd;
+	border-collapse: separate;
+	*border-collapse: collapse;
+	border-left: 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.table-bordered th,.table-bordered td {
+	border-left: 1px solid #dddddd;
+}
+
+.table-bordered caption+thead tr:first-child th,.table-bordered caption+tbody tr:first-child th,.table-bordered caption+tbody tr:first-child td,.table-bordered colgroup+thead tr:first-child th,.table-bordered colgroup+tbody tr:first-child th,.table-bordered colgroup+tbody tr:first-child td,.table-bordered thead:first-child tr:first-child th,.table-bordered tbody:first-child tr:first-child th,.table-bordered tbody:first-child tr:first-child td
+	{
+	border-top: 0;
+}
+
+.table-bordered thead:first-child tr:first-child>th:first-child,.table-bordered tbody:first-child tr:first-child>td:first-child,.table-bordered tbody:first-child tr:first-child>th:first-child
+	{
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-radius-topleft: 4px;
+	border-top-left-radius: 4px;
+}
+
+.table-bordered thead:first-child tr:first-child>th:last-child,.table-bordered tbody:first-child tr:first-child>td:last-child,.table-bordered tbody:first-child tr:first-child>th:last-child
+	{
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-right-radius: 4px;
+}
+
+.table-bordered thead:last-child tr:last-child>th:first-child,.table-bordered tbody:last-child tr:last-child>td:first-child,.table-bordered tbody:last-child tr:last-child>th:first-child,.table-bordered tfoot:last-child tr:last-child>td:first-child,.table-bordered tfoot:last-child tr:last-child>th:first-child
+	{
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.table-bordered thead:last-child tr:last-child>th:last-child,.table-bordered tbody:last-child tr:last-child>td:last-child,.table-bordered tbody:last-child tr:last-child>th:last-child,.table-bordered tfoot:last-child tr:last-child>td:last-child,.table-bordered tfoot:last-child tr:last-child>th:last-child
+	{
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-radius-bottomright: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.table-bordered tfoot+tbody:last-child tr:last-child td:first-child {
+	-webkit-border-bottom-left-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	border-bottom-left-radius: 0;
+}
+
+.table-bordered tfoot+tbody:last-child tr:last-child td:last-child {
+	-webkit-border-bottom-right-radius: 0;
+	-moz-border-radius-bottomright: 0;
+	border-bottom-right-radius: 0;
+}
+
+.table-bordered caption+thead tr:first-child th:first-child,.table-bordered caption+tbody tr:first-child td:first-child,.table-bordered colgroup+thead tr:first-child th:first-child,.table-bordered colgroup+tbody tr:first-child td:first-child
+	{
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-radius-topleft: 4px;
+	border-top-left-radius: 4px;
+}
+
+.table-bordered caption+thead tr:first-child th:last-child,.table-bordered caption+tbody tr:first-child td:last-child,.table-bordered colgroup+thead tr:first-child th:last-child,.table-bordered colgroup+tbody tr:first-child td:last-child
+	{
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-right-radius: 4px;
+}
+
+.table-striped tbody>tr:nth-child(odd)>td,.table-striped tbody>tr:nth-child(odd)>th
+	{
+	background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover>td,.table-hover tbody tr:hover>th {
+	background-color: #f5f5f5;
+}
+
+table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span"],.row-fluid table th[class*="span"]
+	{
+	display: table-cell;
+	float: none;
+	margin-left: 0;
+}

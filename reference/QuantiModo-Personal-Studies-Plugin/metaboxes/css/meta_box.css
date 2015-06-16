@@ -1,0 +1,729 @@
+/* 
+ * Meta box styles
+ */
+.form-table.meta_box th label {
+	font-weight:bold;
+}
+
+.form-table.meta_box .description {
+	font-size:11px;
+	color:#777;
+	font-style:italic;
+        clear:both;
+        float:left;
+}
+.small_link{font-size:11px;text-decoration:none;font-weight:600;padding-left:30px;}
+#featured-media th{
+    width:10%;
+}
+#instructor_payments li{
+    padding:6px 0;
+    border-bottom:1px solid #EFEFEF;
+    font-size:12px;
+}
+#instructor_payments li:first-child{
+    background:#EFEFEF;
+    text-transform: uppercase;
+    font-weight:600;
+    color:#bbb;
+}
+#instructor_payments li strong{
+    width:170px;
+    display: inline-block;
+    padding-left:10px;
+}
+
+#instructor_payments li span{
+    width:160px;
+    display: inline-block;
+    text-align: center;
+}
+
+.meta_box_add_section,
+.meta_box_add_posttype1,
+.meta_box_add_posttype2{
+    text-transform: uppercase;
+    font-size:11px !important;
+}
+span.count{
+    padding: 3px 9px;
+    margin: 0 4px;
+    background: #F6f6f6;
+    border: 1px solid #EFEFEF;
+    border-radius: 2px;
+}
+
+input[type="text"].small.postid{
+    display:none;
+}
+
+#total_quiz_marks{
+    margin-left:30px;
+    font-size:20px;
+}
+
+input[type="text"].small.postid + span{
+    margin-left: 5px;
+width: 265px;
+display: inline-block;
+}
+
+.meta_box_repeatable > li.hide{
+    display: none;
+}
+/*=== Testimonial Box ====*/
+#inpage-info .postbox,
+#subheader-info .postbox,
+#customcss-info .postbox,
+#testimonial-info .postbox,
+#featured-media .postbox,
+#post-info .postbox,
+#modal-info .postbox,
+#featured-info .postbox,
+#qm-editor .postbox{
+    background:#F2F2F2;
+     color:#777;
+}
+
+#featured-media input[type="checkbox"],
+#subheader-info input[type="checkbox"],
+#customcss-info input[type="checkbox"],
+#testimonial-info input[type="checkbox"],
+#post-info input[type="checkbox"],
+#featured-info input[type="checkbox"]{
+    float:left;
+}
+#inpage-info .handlediv,
+#featured-media .handlediv,
+#subheader-info .handlediv,
+#customcss-info .handlediv,
+#testimonial-info .handlediv,
+#post-info .handlediv,
+#modal-info .handlediv,
+#featured-info .handlediv,
+#qm-editor .handlediv{
+    margin:8px;
+}
+#inpage-info  h3.hndle,
+#featured-media h3.hndle,
+#subheader-info h3.hndle,
+#customcss-info h3.hndle,
+#testimonial-info h3.hndle,
+#post-info h3.hndle,
+#modal-info h3.hndle,
+#featured-info h3.hndle,
+#qm-editor h3.hndle{
+    padding:15px;
+    background:#f0f0f0 url('../images/bg.png');
+    color: #777;
+    font-size: 14px;
+    font-family: 'arial';
+    font-weight:100;
+}
+#inpage-info .inside,  
+#featured-media .inside,
+#testimonial-info .inside,
+#subheader-info .inside,
+#customcss-info .inside,
+#post-info .inside,
+#modal-info .inside,
+#featured-info .inside,
+#qm-editor .inside{
+    padding:10px;
+}
+#inpage-info label,
+#featured-media label,
+#testimonial-info label,
+#subheader-info label,
+#customcss-info label,
+#post-info label,
+#modal-info label,
+#featured-info label{
+font-size: 13px;
+font-weight: normal;
+color:#777;
+}
+
+.meta_label{
+    width:200px;
+    float:left;
+    display:block;
+    color:#777;
+    font-size:12px;
+    padding:5px;
+}
+#featured-media input[type="text"],
+#subheader-info input[type="text"],
+#customcss-info input[type="text"],
+#testimonial-info input[type="text"],
+#post-info input[type="text"],
+#modal-info input[type="text"]{
+    padding:5px 10px;
+    font-size:12px;
+}
+
+.radio-image-wrapper{
+    float:left;
+    margin:10px;
+}
+
+.radio-image-wrapper label{
+    position:relative;
+}
+.radio_img{
+    display:none;
+}
+
+.meta_box_preview_image{
+    max-width:400px;
+}
+.radio-image-wrapper div.select{
+    position:absolute;
+    bottom:8px;
+    right:8px;
+}
+.radio-image-wrapper .selected{
+    width:16px;
+    height:16px;
+    background:url(../images/tick.png) no-repeat;
+    display:block;
+}
+
+
+li.slide{
+    position:relative;
+    clear:both;
+    background:#F1F1F1;
+    padding:25px;
+    border: 1px solid #EFEFEF;
+}
+
+.slide .sort.handle{
+    background:url(../images/arrow_move.png) no-repeat;
+    position:absolute;
+    top:5px;
+    left:5px;
+    width:16px;
+    height:16px;
+    display:block;
+    text-indent: -9999px;
+}
+
+.slide .meta_box_sliders_remove{
+    background:url(../images/cross.png) no-repeat;
+    position:absolute;
+    top:5px;
+    right:5px;
+    width:16px;
+    height:16px;
+    display:block;
+    text-indent: -9999px;
+}
+.slide img{
+    border: 1px solid #BBB;
+}
+
+.slide_caption{
+    float:right;
+    max-width:210px;
+}
+
+.slide_caption label{
+    clear:both;
+    margin: 5px 0 5px;
+    float:left;
+}
+
+.slide_caption input,
+.slide_caption textarea{
+    width:90%;
+}
+.slide_image,
+.slide_image img{
+    width:100%;
+    float:left;
+    position:relative;
+}
+#qm_featuredother,
+#qm_featured_audio,
+#qm_featuredvideo,
+#qm_featurediframevideo{
+    width: 100%;
+}
+
+.slide_image .meta_box_clear_slider_image_button{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:16px;
+    height:16px;
+    display:block;
+    text-indent: -9999px;
+    background:url(../images/remove.png) no-repeat;
+}
+
+input[type="button"].qm-btn{
+    display: block;
+padding: 6px 10px;
+background: white;
+border: 1px solid #E8E8E8;
+color: #888;
+font-size: 12px;
+text-decoration: none;
+font-weight: 500;
+border-radius: 3px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+-moz-box-shadow: 0 2px 0 0 #e8e8e8;
+-webkit-box-shadow: 0 2px 0 0 #E8E8E8;
+box-shadow: 0 2px 0 0 #E8E8E8;
+margin-top:10px;
+float:left;
+}
+
+input[type="button"].green {
+color: white;
+background: #5EA028;
+border: none;
+-moz-box-shadow: 0 2px 0 0 #467f18;
+-webkit-box-shadow: 0 2px 0 0 #467F18;
+box-shadow: 0 2px 0 0 #467F18;
+}
+
+.qm-save{
+    font-weight: bold;
+		cursor: pointer;
+		margin: 20px 0;
+		padding: 5px 15px;		
+		-moz-box-shadow: 1px 1px 3px #ddd;
+		-webkit-box-shadow: 1px 1px 3px #ddd;
+		box-shadow: 1px 1px 3px #ddd; 
+	           -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border: 1px solid #DE9D2A;
+	background: #FEDA71;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEDA71), color-stop(100%,#FEBA48));
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feda71', endColorstr='#feba48',GradientType=0 );
+	font-weight: bold;
+	font-size: 11px;
+	color: #7F5429;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.06);
+	text-decoration: none;
+}
+
+.qmcom_fields input
+{
+margin: 5px 0 0 10px;
+width: 30%;    
+}
+.qmcom_fields select{margin: 5px 0 0 10px;}
+.step_more,
+.plus_more{
+    background: url(../images/plus.png) no-repeat;
+    width:16px;
+    height:16px;
+    display:block;
+    margin: 6px 0 0 0;
+    float: right;
+    cursor:pointer;
+}
+
+h4.slider_settings{
+    float:left;
+    width:200px;
+    margin-left:10px;
+}
+.more_settings{
+    background: url(../images/plus.png) no-repeat;
+    width:16px;
+    height:16px;
+    display:inline-block;
+    margin: 5px 0 0 10px;
+    cursor:pointer;
+}
+.step_more{display:block;float:left;}
+.qmcom_fields,
+.step_fields{
+    background: #DEDEDE;
+    padding: 10px;
+    display:none;
+}
+
+.meta_box_sliders_add{
+    float:right;
+    cursor: pointer;
+    margin:10px 0;
+}
+
+.stepinfo{
+    clear:both;
+    margin: 20px 0px 0;
+padding: 10px;line-height:30px;
+}
+
+.stepinfo h4{
+    margin: 1px 10px 0 0;
+float: left;
+}
+
+.step_fields{clear:both;display:none;}
+.step_fields input{
+    width:120px;
+    float:right;
+}
+
+div.slider_settings{
+    background:#EEE;
+    padding:10px;
+    width:200px;
+    height:130px;
+    display:none;
+}
+
+.slider_settings label{
+    float:left;
+    margin-top:5px;
+}
+
+.slider_settings input,
+.slider_settings select{
+    float:right;
+    width:80px;
+}
+
+#qm_featured{
+    width:100px;
+}
+
+.clearfix{
+    clear:both;
+}
+.select_button{
+    background:url('../images/hide.png');
+    width:77px;
+    height:25px;
+    display:block;
+}
+.select_button.yesno{
+    width:65px;
+    height:25px;
+    background:url('../images/off.png');
+}
+
+.select_button.enable{
+    background:url('../images/show.png');
+}
+.select_button.yesno.enable{
+    background:url('../images/on.png');
+}
+
+.checkbox_button{
+    background:url('../images/off.png');
+    width:65px;
+    height:25px;
+    display:block;
+}
+.checkbox_button.enable{
+    background:url('../images/on.png');
+}
+.select_val,
+.checkbox_val{
+    display:none;
+}
+
+/*=== Media Meta Box ====*/
+.qm_gallery .slider_image,
+.qm_audio .audio_file,
+.qm_media .slider_image{
+    float:left;
+    margin:2px;
+    position:relative;
+}
+.qm_gallery .slider_image img,
+.qm_media .slider_image img{
+    width:80px;
+    max-height:60px;
+    border:2px solid #D6D6D6;
+    background:#FFF;
+}
+.qm_gallery .actions .delete,
+.qm_audio .actions .delete,
+.qm_media .actions .delete{
+    position:absolute;
+    top:-2px;
+    right:-2px;
+    width:16px;
+    height:16px;
+    text-indent: -9999px;
+    display:block;
+    background: url(../images/remove.png) no-repeat;
+}
+.qm_media .slider_image{
+    width:80px;
+    height:60px;
+    display:block;
+    border:2px solid #D6D6D6;
+    background: url(../images/video.png) no-repeat;
+}
+.audio_file{
+    width:80px;
+    height:60px;
+    display:block;
+    border:2px solid #D6D6D6;
+    background: url(../images/audio.png) no-repeat;
+}
+
+/*=== GMAP ===*/
+#mapCanvas {
+    width: 500px;
+    height: 400px;
+    float: left;
+  }
+  #infoPanel {
+    float: left;
+    margin-left: 10px;
+  }
+  #infoPanel div {
+    margin-bottom: 5px;
+  }
+
+.qm-reports-wrap .qm-reports-left {
+width: 49.5%;
+float: left;
+}
+.qm-reports-wrap .qm-reports-right {
+width: 49.5%;
+float: right;
+}
+  /*==== Datepicker ===*/
+
+  /* DatePicker Container */
+.ui-datepicker {
+    width: 245px;
+    height: auto;
+    margin: 5px auto 0;
+    font: 9pt Arial, sans-serif;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+}
+.ui-datepicker a {
+    text-decoration: none;
+}
+
+.course_info label{
+    width:240px;
+    display: inline-block;
+}
+.instructor_info label{
+    width:200px;
+    display: inline-block;
+}
+.course_info span{
+    width:100px;
+    display: inline-block;
+}
+
+.instructor_info span{
+    width:240px;
+    display: inline-block;
+}
+
+.course_info li{
+    padding:8px 0;
+    border-bottom:1px solid #EFEFEF;
+    display: block;
+    clear:both;
+}
+.course_info h3 span,
+.course_info li span{
+    float:right;
+    text-align:center;
+}
+.instructor_info h3{
+    text-transform: uppercase;
+    font-size:13px;
+}
+.instructor_info label{
+    padding-left:30px;
+    text-transform: uppercase;
+}
+.instructor_info h3 span,
+.instructor_info li span{
+    text-align: center;
+}
+.subsubsub.stats{
+    width: 100%;
+    display: block;
+    text-align: right;
+}
+/* DatePicker Table */
+.ui-datepicker table {
+    width: 100%;
+}
+.ui-datepicker-header {
+    background: #444;
+    color: #e0e0e0;
+    font-weight: bold;
+    -webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+    -moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+    box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+    text-shadow: 1px -1px 0px #000;
+    filter: dropshadow(color=#000, offx=1, offy=-1);
+    line-height: 30px;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: #111;
+}
+.ui-datepicker-title {
+    text-align: center;
+}
+.ui-datepicker-prev, .ui-datepicker-next {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    line-height: 600%;
+    overflow: hidden;
+    font-family:'dashicons';
+    position: relative;
+}
+.ui-datepicker-prev {
+    float: left;
+    background-position: center -30px;
+}
+.ui-datepicker-prev:before{
+    content: "\f341";
+    color: #FFF;
+    font-size: 20px;
+    position: absolute;
+    margin-top: -20px;
+    left: 0;
+}
+.ui-datepicker-next {
+    float: right;
+    background-position: center 0px;
+}
+.ui-datepicker-next:before{
+    content: "\f345";
+    color: #FFF;
+    font-size: 20px;
+    position: absolute;
+    margin-top: -20px;
+    right: 0;
+}
+.ui-datepicker thead {
+    background-color: #f7f7f7;
+    background-image: -moz-linear-gradient(top,  #f7f7f7 0%, #f1f1f1 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f1f1f1));
+    background-image: -webkit-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    background-image: -o-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    background-image: -ms-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    background-image: linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
+    border-bottom: 1px solid #bbb;
+}
+.ui-datepicker th {
+    text-transform: uppercase;
+    font-size: 6pt;
+    padding: 5px 0;
+    color: #666666;
+    text-shadow: 1px 0px 0px #fff;
+    filter: dropshadow(color=#fff, offx=1, offy=0);
+}
+.ui-datepicker tbody td {
+    padding: 0;
+}
+.ui-datepicker tbody td:last-child {
+    border-right: 0px;
+}
+.ui-datepicker tbody tr {
+    border-bottom: 1px solid #bbb;
+}
+.ui-datepicker tbody tr:last-child {
+    border-bottom: 0px;
+}
+.ui-datepicker td span, .ui-datepicker td a {
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    color: #666666;
+    text-shadow: 1px 1px 0px #fff;
+    filter: dropshadow(color=#fff, offx=1, offy=1);
+}
+.ui-datepicker-calendar .ui-state-default {
+    background: #ededed;
+    background: -moz-linear-gradient(top,  #ededed 0%, #dedede 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede));
+    background: -webkit-linear-gradient(top,  #ededed 0%,#dedede 100%);
+    background: -o-linear-gradient(top,  #ededed 0%,#dedede 100%);
+    background: -ms-linear-gradient(top,  #ededed 0%,#dedede 100%);
+    background: linear-gradient(top,  #ededed 0%,#dedede 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 );
+    -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+    -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+    box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+}
+.ui-datepicker-calendar .ui-state-hover {
+    background: #f7f7f7;
+}
+.ui-datepicker-calendar .ui-state-active {
+    background: #6eafbf;
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+    color: #e0e0e0;
+    text-shadow: 0px 1px 0px #4d7a85;
+    filter: dropshadow(color=#4d7a85, offx=0, offy=1);
+    border: 1px solid #55838f;
+    position: relative;
+    margin: -1px;
+}
+.ui-datepicker-unselectable .ui-state-default {
+    background: #f4f4f4;
+    color: #b4b3b3;
+}
+.ui-datepicker-calendar td:first-child .ui-state-active {
+    width: 29px;
+    margin-left: 0;
+}
+.ui-datepicker-calendar td:last-child .ui-state-active {
+    width: 29px;
+    margin-right: 0;
+}
+.ui-datepicker-calendar tr:last-child .ui-state-active {
+    height: 29px;
+    margin-bottom: 0;
+}
+
+.ultable{
+    margin:30px 0 0;
+    padding:0;
+    border-top:1px solid #DDD;
+}
+.ultable li{
+    padding:10px 0;
+    border-bottom:1px solid #DDD;
+    clear:both;
+    width:100%;
+    display: inline-block;
+}
+.ultable li:first-child{
+    background:#EFEFEF;
+}
+.ultable strong,
+.ultable span{
+    display: inline-block;
+    min-width:120px;
+    width:20%;
+}
+
+.ultable strong{float:left;}
+.ultable span{float:right;}
