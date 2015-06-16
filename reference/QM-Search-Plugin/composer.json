@@ -1,0 +1,8 @@
+{
+    "name": "abolitionist-project/qm-search-plugin",
+    "description": "WordPress plugins for the effect and cause search page.",
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
