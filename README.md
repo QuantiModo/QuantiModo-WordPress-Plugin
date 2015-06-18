@@ -157,8 +157,7 @@ We want to be able to embed those faces in any WP page or post.
 
 Here's the code for the Chrome extension to use as a resource: https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/MoodiModo-Chrome
 
-![mood-rating-wordpress-shortcode](https://cloud.githubusercontent.com/assets/2808553/8238794/81a37420-15bd-11e5-94ea-4573d05f0ce9.png)
-
+![mood-rating-wordpress-shortcode](https://cloud.githubusercontent.com/assets/2808553/8238887/10787330-15be-11e5-853c-93f00d8e45cd.png)
 
 # Options for Adding Shortcode
 
