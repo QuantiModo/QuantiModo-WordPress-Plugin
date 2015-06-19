@@ -517,19 +517,6 @@ var AnalyzePage = function() {
 		jQuery("#share-dialog")             .css( {'display':'block', 'opacity':1} );
 	};
 
-	var share = function(onDoneListener)
-	{
-		var shareObject = {"type":"analyze",
-						"causeMeasurements":causeMeasurements,
-						"effectMeasurements":effectMeasurements,
-						"inputVariable":lastInputVariable,
-						"outputVariable":lastOutputVariable};
-		Quantimodo.postAnalyzeShare(shareObject, function(response)
-		{
-			onDoneListener(response['id']);
-		});
-	};
-
 	return {
 		quantimodoUnits: quantimodoUnits,
 		quantimodoVariables: quantimodoVariables,

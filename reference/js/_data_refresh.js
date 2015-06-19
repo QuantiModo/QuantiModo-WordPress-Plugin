@@ -42,19 +42,19 @@ var refreshVariables = function(variables, callback)
 {
 	Quantimodo.getVariables({}, function(variables)
 	{
-		var storedLastInputVariableName = window.localStorage['lastInputVariableName'],
-			storedLastOutputVariableName = window.localStorage['lastOutputVariableName'];
+		var storedLastExaminedVariableName = window.localStorage['lastExaminedVariableName'],
+			storedLastSecondaryVariableName = window.localStorage['lastSecondaryVariableName'];
 
 		AnalyzePage.quantimodoVariables = {};
 		jQuery.each(variables, function(_, variable)
 		{
-			if(variable.originalName == storedLastInputVariableName)
+			if(variable.originalName == storedLastExaminedVariableName)
 			{
-				AnalyzePage.lastInputVariable = variable;
+				AnalyzePage.lastExaminedVariable = variable;
 			}
-			else if(variable.originalName == storedLastOutputVariableName)
+			else if(variable.originalName == storedLastSecondaryVariableName)
 			{
-				AnalyzePage.lastOutputVariable = variable;
+				AnalyzePage.lastSecondaryVariable = variable;
 			}
 
 			var category = AnalyzePage.quantimodoVariables[variable.category];
@@ -84,7 +84,7 @@ var refreshVariables = function(variables, callback)
 
 var refreshInputData = function()
 {
-	var variable = AnalyzePage.getInputVariable();
+	var variable = AnalyzePage.getExaminedVariable();
 	if (variable == null)
 	{
 		return;
@@ -103,7 +103,7 @@ var refreshInputData = function()
 
 var refreshOutputData = function()
 {
-	var variable = AnalyzePage.getOutputVariable();
+	var variable = AnalyzePage.getSecondaryVariable();
 	Quantimodo.getMeasurements({
 		'variableName': variable.originalName,
 		'startTime': AnalyzePage.getStartTime(),

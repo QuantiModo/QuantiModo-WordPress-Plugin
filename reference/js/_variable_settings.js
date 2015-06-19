@@ -10,7 +10,7 @@ var variableSettings = {
 			jQuery.extend(variableSettings.params, options);
 		}
 
-		// Activate cancel/save buttons on varsettings
+		// Activate cancel/save buttons on variable-settings
 		jQuery(document).on('click', '#accordion-settings-content .inner .button-save', function() {
 			variableSettings.hide(true);
 		});

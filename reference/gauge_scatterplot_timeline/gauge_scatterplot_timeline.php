@@ -71,40 +71,40 @@
 					</div>
 				</div>
 				
-				<div class="accordion-header" id="accordion-input-header">
+				<div class="accordion-header" id="accordion-examined-variable-header">
 					<div style="float: left; line-height: 42px;">
 						Input Behaviour
 					</div>
 				</div>
-				<div class="accordion-content closed" id="accordion-input-content">
+				<div class="accordion-content closed" id="accordion-examined-variable-content">
 					<div class="inner">
 						Category<br>
 						<select id="selectInputCategory">
 						</select>
 						
 						<br>Variable<br>
-						<select id="selectInputVariable">
+						<select id="selectExaminedVariable">
 						</select>
 						
-						<button id="button-input-varsettings">Settings</button>
+						<button id="button-examined-variable-variable-settings">Settings</button>
 					</div>
 				</div>
 				
-				<div class="accordion-header" id="accordion-output-header">
+				<div class="accordion-header" id="accordion-secondary-variable-header">
 					<div style="float: left; line-height: 42px;">
 						Output State
 					</div>
 				</div>
-				<div class="accordion-content closed" id="accordion-output-content">
+				<div class="accordion-content closed" id="accordion-secondary-variable-content">
 					<div class="inner">
 						Category<br>
 						<select id="selectOutputCategory">
 						</select>
 						
 						<br>Variable<br>
-						<select id="selectOutputVariable">
+						<select id="selectSecondaryVariable">
 						</select>
-						<button id="button-output-varsettings">Settings</button>
+						<button id="button-secondary-variable-variable-settings">Settings</button>
 					</div>
 				</div>		
 			</div>
