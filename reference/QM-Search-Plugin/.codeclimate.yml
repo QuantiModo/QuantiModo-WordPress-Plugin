@@ -17,3 +17,6 @@ languages:
 #
 exclude_paths:
  - "*/lib"
+ - "*/libs"
+ - "*/lib/*"
+ - "*/libs/*"
