@@ -43,6 +43,10 @@ For example:
 - style - sets the custom css style to apply to the custom login form. Possible values: any text
 - class - sets the custom css class to apply to the custom login form. Possible values: any text
 
+### What still needs to be done for the Login Button to be complete
+- OAuth access tokens need to be stored in the database (`wp_usermeta` table?) for each user.
+- Refresh tokens should be obtained and stored when necessary
+
 ## Timeline Graph
 Shortcode - [qm_timeline]
 
