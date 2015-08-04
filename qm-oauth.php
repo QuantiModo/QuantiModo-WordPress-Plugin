@@ -11,7 +11,7 @@ License: GPL2
 */
 
 // start the user session for persisting user/login state during ajax, header redirect, and cross domain calls:
-session_start();
+@session_start();
 
 // plugin class:
 Class WPOA {
@@ -204,6 +204,7 @@ Class WPOA {
 
 	// initialize the plugin's functionality by hooking into wordpress:
 	function init() {
+		add_shortcode('qm_track_mood', array($this, 'qmoa_mood_tracker'));
 		// restore default settings if necessary; this might get toggled by the admin or forced by a new version of the plugin:
 		if (get_option("qmoa_restore_default_settings")) {$this->qmoa_restore_default_settings();}
 		// hook the query_vars and template_redirect so we can stay within the wordpress context no matter what (avoids having to use wp-load.php)
@@ -408,6 +409,7 @@ Class WPOA {
 			wp_set_auth_cookie( $user_id );
 			do_action( 'wp_login', $user_login, $matched_user );
 			// after login, redirect to the user's last location
+			update_user_meta($user_id, 'quantimodo_access_token', $_SESSION['WPOA']['ACCESS_TOKEN']);
 			$this->qmoa_end_login("Logged in successfully!");
 		}
 		// handle the already logged in user if there is one:
@@ -458,7 +460,7 @@ Class WPOA {
 				break;
 		}
 		//header("Location: " . $redirect_url);
-		wp_safe_redirect($redirect_url);
+		wp_safe_redirect($last_url);
 		die();
 	}
 	
@@ -517,6 +519,7 @@ Class WPOA {
 	function qmoa_link_account($user_id) {
 		if ($_SESSION['WPOA']['USER_ID'] != '') {
 			add_user_meta( $user_id, 'qmoa_identity', $_SESSION['WPOA']['PROVIDER'] . '|' . $_SESSION['WPOA']['USER_ID'] . '|' . time());
+			add_user_meta($user_id, 'quantimodo_access_token', $_SESSION['WPOA']['ACCESS_TOKEN']);
 		}
 	}
 
@@ -580,11 +583,231 @@ Class WPOA {
 		}
 		echo $html;
 	}
-
+	function access_codee(){		
+		global $current_user;
+		$user_id = get_current_user_id();
+		$accessToken = get_user_meta($user_id, 'quantimodo_access_token', true);		
+		return $accessToken; 
+	}
 	// ===================================
 	// DEFAULT COMMENT FORM CUSTOMIZATIONS
 	// ===================================
+	 function qmoa_mood_tracker($attr){
+	 $access_code = $this->access_codee();	
+	 $moodurl =  plugin_basename( __FILE__ ); 
+	 $namef = explode('/',$moodurl);	 
+	 $moodurl = plugins_url().'/'.$namef[0];
+	 $html = '
+	 <style type="text/css">
+	 #sectionRateMood{
+		opacity: 1;
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
 	
+	#sectionRateMood img
+	{
+		height: 100%;
+		display: inline-block;
+		background-color: #FFFFFF;
+		transition: all 200ms linear;
+		width:100%;
+	}
+	#sectionRateMood img:hover
+	{
+		-webkit-filter: blur(1px) brightness(110%) saturate(150%);
+		cursor:pointer;
+	}
+	#sectionRateMood div
+	{
+		width: 1px;
+		position: relative;
+		display: inline-block;
+		background: lightgray;
+		bottom: 32%;
+	}
+	
+	#sectionSendingMood{
+		display: block;		
+		clear: both;
+		width: auto;
+		height: 50px;
+		transition: opacity 400ms linear;
+
+		font-family: news-gothic-std, sans-serif;
+		font-size: 40px;
+		font-weight: 800;
+		top: 2px;
+		text-align: center;
+		font-style: italic;
+		color: #bc2e1e;
+		text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
+	}
+
+	.invisible {
+		-webkit-animation-name: fadeOut;
+		-webkit-animation-duration:0.4s;
+		-webkit-animation-iteration-count: 1;
+		-webkit-animation-timing-function: ease;
+		-webkit-animation-fill-mode: forwards;
+	}
+	
+	#sectionRateMood ul{
+		margin:0;
+		padding:0;
+	}
+	
+	#sectionRateMood li{
+		display: inline-block;
+		float: left;
+		padding: 0 7px;
+		width: 53px;
+	}
+	
+	
+	@-webkit-keyframes fadeOut {
+		from {
+			-webkit-transform: rotate(0deg) scale(1) skew(0deg);
+			opacity: 1;
+		}
+		to {
+			-webkit-transform: rotate(0deg) scale(0.98) skew(0deg);
+			opacity: 0;
+		}
+	}
+
+	.visible {
+		-webkit-animation-name: fadeIn;
+		-webkit-animation-duration:0.3s;
+		-webkit-animation-iteration-count: 1;
+		-webkit-animation-timing-function: ease;
+		-webkit-animation-fill-mode: forwards;
+	}
+	@-webkit-keyframes fadeIn {
+		from {
+			-webkit-transform: rotate(0deg) scale(1.02) skew(0deg);
+			opacity: 0;		
+		}
+		to {
+			-webkit-transform: rotate(0deg) scale(1) skew(0deg);
+			opacity: 1;
+		}
+	}
+	
+	@media (max-width: 767px) {
+		
+	}
+	 </style>
+	 <section id="sectionRateMood">
+	 <ul>
+		<li><img src="'.$moodurl.'/images/ic_mood_depressed.png" id="buttonMoodDepressed">
+		</img></li>
+		
+		<li><img src="'.$moodurl.'/images/ic_mood_sad.png" id="buttonMoodSad">
+		</img></li>
+		
+		<li><img src="'.$moodurl.'/images/ic_mood_ok.png" id="buttonMoodOk">
+		</img></li>
+		
+		<li><img src="'.$moodurl.'/images/ic_mood_happy.png" id="buttonMoodHappy">
+		</img></li>
+		
+		<li><img src="'.$moodurl.'/images/ic_mood_ecstatic.png" id="buttonMoodEcstatic">
+		</img></li>
+	</ul>	
+	</section>
+	<section id="sectionSendingMood">
+	</section>
+	<script type="text/javascript">
+	
+	function setMoodButtonListeners()
+	{
+		document.getElementById("buttonMoodDepressed").onclick=onMoodButtonClicked;
+		document.getElementById("buttonMoodSad").onclick=onMoodButtonClicked;
+		document.getElementById("buttonMoodOk").onclick=onMoodButtonClicked;
+		document.getElementById("buttonMoodHappy").onclick=onMoodButtonClicked;
+		document.getElementById("buttonMoodEcstatic").onclick=onMoodButtonClicked;
+	}
+	var onMoodButtonClicked = function()
+	{
+		// Figure out what rating was selected
+		var buttonId = this.id;
+		if(buttonId == "buttonMoodDepressed")
+		{
+			var moodValue = 1;			
+		}
+		else if(buttonId == "buttonMoodSad")
+		{
+			var moodValue = 2;
+		}
+		else if(buttonId == "buttonMoodOk")
+		{
+			var moodValue = 3;
+		}
+		else if(buttonId == "buttonMoodHappy")
+		{
+			var moodValue = 4;
+		}
+		else if(buttonId == "buttonMoodEcstatic")
+		{
+			var moodValue = 5;
+		}
+		else
+		{
+			console.log("How did I get here...");
+			return;
+		}
+		jQuery("#sectionSendingMood").html("");
+		var datet = Math.floor(Date.now() / 1000);
+		var access_token = "'.$access_code.'"; //3e5ec3f29b1bfd7ed36c6762d1f0c50f207c4181
+		
+		var measurements = 	[
+							{
+								timestamp: datet, 
+								value: moodValue
+							}
+						]
+		var mooddata = [{measurements: measurements, name: "Overall Mood", source: "MoodiModo", category: "Mood", combinationOperation: "MEAN", unit: "/5"}]
+		if(access_token == ""){
+		
+		window.location.href="?connect=quantimodo";
+		} else {
+		jQuery.ajax({
+			type: "POST",
+			data :JSON.stringify(mooddata),
+			url: "https://staging.quantimo.do/api/measurements/v2",
+			contentType: "application/json",
+			 headers: {
+				"Authorization": "Bearer " + access_token
+			  },
+			success: function(dataString) {				
+				jQuery("#sectionSendingMood").html("Your Request has been sent!");
+				console.log("**mentor_list div updated via ajax.**");
+			},
+			error: function(dataString) {				
+				jQuery("#sectionSendingMood").html("Not Authenticated");
+				console.log("**mentor_list div updated via ajax.**");
+			}
+		});
+		}
+		/*jQuery.ajax({				
+			type: "POST",
+			url: "'.$moodurl.'/QuantiModo-WordPress-Plugin-develop/mood_request.php",
+			data: {"measurements": moodValue},
+			success: function(dataString) {
+				
+				jQuery("#sectionSendingMood").html(dataString);
+				console.log("**mentor_list div updated via ajax.**");
+			}
+		});*/
+	}
+		jQuery(document).ready(function(){	
+		setMoodButtonListeners();
+		
+		});		
+	</script>';
+	return $html;
+ }
 	// show a custom login form at the top of the default comment form:
 	function qmoa_customize_comment_form_fields($fields) {
 		$html = "";
@@ -872,6 +1095,7 @@ Class WPOA {
 	}
 } // END OF WPOA CLASS
 
+$GLOBALS['QM-OAuth'] = new WPOA();
 // instantiate the plugin class ONCE and maintain a single instance (singleton):
 WPOA::get_instance();
 ?>
