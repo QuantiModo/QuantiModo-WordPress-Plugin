@@ -11,9 +11,9 @@ define('CLIENT_ID', get_option('qmoa_quantimodo_api_id'));
 define('CLIENT_SECRET', get_option('qmoa_quantimodo_api_secret'));
 define('REDIRECT_URI', rtrim(site_url(), '/') . '/');
 define('SCOPE', 'writemeasurements'); // PROVIDER SPECIFIC: 'profile' is the minimum scope required to get the user's id from QuantiModo
-define('URL_AUTH', "https://quantimo.do/api/oauth2/authorize?");
-define('URL_TOKEN', "https://quantimo.do/api/oauth2/token?");
-define('URL_USER', "https://quantimo.do/api/user/me?");
+define('URL_AUTH', "https://staging.quantimo.do:443/api/oauth2/authorize?");
+define('URL_TOKEN', "https://staging.quantimo.do:443/api/oauth2/token?");
+define('URL_USER', "https://staging.quantimo.do:443/api/user/me?");
 # END OF DEFINE THE OAUTH PROVIDER AND SETTINGS TO USE #
 
 // remember the user's last url so we can redirect them back to there after the login ends:
