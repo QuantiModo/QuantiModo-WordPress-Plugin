@@ -382,7 +382,7 @@ Class WPOA {
 			$user_login = $matched_user->user_login;
 			wp_set_current_user( $user_id, $user_login );
 			wp_set_auth_cookie( $user_id );
-			do_action( 'wp_login', $user_login, $matched_user );
+			do_action( 'wp_signon', $user_login, $matched_user );
 			// after login, redirect to the user's last location
 			update_user_meta($user_id, 'quantimodo_access_token', $_SESSION['WPOA']['ACCESS_TOKEN']);
 			$this->qmoa_end_login("Logged in successfully!");
