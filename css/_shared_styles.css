@@ -6,7 +6,7 @@
     z-index: 1100000 !important;
 }
 
-#accordion-date-content input[type=text]{
+#accordion-date-content input[type=text] {
     display: block;
     background-color: #F6F6F6;
     color: #555555;
@@ -14,118 +14,133 @@
     border: solid 1px #ddd;
     border-radius: 4px;
     margin-bottom: 12px;
-    text-align: center; 
+    text-align: center;
     width: 100%;
 }
 
-#accordion-content-rangepickers{
+#accordion-content-rangepickers {
     margin-left: auto;
     margin-right: auto;
 }
-#accordion-content-rangepickers .ui-button-text{
+
+#accordion-content-rangepickers .ui-button-text {
     padding: .4em 0em;
 }
 
-#accordion-content-rangepickers .ui-button
-{
+#accordion-content-rangepickers .ui-button {
     font-size: 1em;
     width: 25%;
 }
 
-
 /**************/
 /*Var Settings*/
 /**************/
-#accordion-settings-header{
+#accordion-settings-header {
     color: #29bdca;
     background: #fff;
     border-bottom: solid 3px #229DA5;
     cursor: auto;
 }
-.buttonrow-2{
+
+.buttonrow-2 {
     margin: auto;
     width: 49%;
 }
-#accordion-settings-content b{
+
+#accordion-settings-content b {
     font-size: 1.05em;
-    display:block;
+    display: block;
     color: #29bdca;
 }
-#accordion-settings-content table{
+
+#accordion-settings-content table {
     border: none;
-    margin:0px;
-    border-collapse:collapse;
+    margin: 0px;
+    border-collapse: collapse;
 }
-#accordion-settings-content td{
-    padding-bottom:4px;
+
+#accordion-settings-content td {
+    padding-bottom: 4px;
     padding-top: 4px;
     border: none;
-    vertical-align:middle;
+    vertical-align: middle;
 }
-#accordion-settings-content td:first-child{
-    padding-left:8px;
+
+#accordion-settings-content td:first-child {
+    padding-left: 8px;
 }
-#accordion-settings-content td:last-child{
-    float:right;
+
+#accordion-settings-content td:last-child {
+    float: right;
     height: 40px;
-    line-height:20px;
+    line-height: 20px;
     width: 150px;
 }
-#accordion-settings-content div{
+
+#accordion-settings-content div {
     padding-left: 8px;
-    padding-bottom:4px;
+    padding-bottom: 4px;
     padding-top: 4px;
     border: none;
-    vertical-align:middle;
+    vertical-align: middle;
 }
-#accordion-settings-content .ui-sortable{
+
+#accordion-settings-content .ui-sortable {
     list-style: none;
 }
+
 #accordion-settings-content .ui-sortable li {
-    height:30px;
-    background:none;
+    height: 30px;
+    background: none;
     border: none;
 }
+
 #accordion-settings-content .ui-sortable li label {
-    line-height:28px;
-    vertical-align:middle;
+    line-height: 28px;
+    vertical-align: middle;
     font-weight: normal;
     color: gray;
 }
-#accordion-settings-content .ui-sortable li span{
-    display:inline-block;
-    vertical-align:middle;
+
+#accordion-settings-content .ui-sortable li span {
+    display: inline-block;
+    vertical-align: middle;
 }
-#accordion-settings-content input[type="radio"]{
-    vertical-align:middle;
+
+#accordion-settings-content input[type="radio"] {
+    vertical-align: middle;
 }
-#accordion-settings-content input[type="radio"] + label{
+
+#accordion-settings-content input[type="radio"] + label {
     vertical-align: middle;
     padding-left: 8px;
 }
-#accordion-settings-content td:first-child{
+
+#accordion-settings-content td:first-child {
     white-space: nowrap;
 }
 
-#joinedVariablePicker{
+#joinedVariablePicker {
     opacity: 0;
     width: 0px;
     height: 30px;
     margin-top: 3px;
-    padding-top:4px;
+    padding-top: 4px;
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
 }
+
 #joinedVariablePicker.active {
     opacity: 1;
-    width :230px;
+    width: 230px;
 }
-#addJoinedVariableButton{
+
+#addJoinedVariableButton {
     display: inline;
     width: 36px;
     height: 36px;
-    margin-left:-24px;
+    margin-left: -24px;
     background-color: #cccccc;
     border: none;
     background: url('https://i.imgur.com/jf3AOBR.png');
@@ -140,6 +155,7 @@
     -o-transition: all 0.4s ease-in-out;
 
 }
+
 #addJoinedVariableButton.active {
     margin-left: 0px;
     background: url('https://i.imgur.com/BHtx79d.png');
@@ -148,16 +164,18 @@
     background-position: center;
     -webkit-box-shadow: none;
 }
-#addJoinedVariableButton:hover{
-    -webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.3));
+
+#addJoinedVariableButton:hover {
+    -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3));
     filter: url(https://i.imgur.com/BewrlqD.png#drop-shadow);
     background: url('https://i.imgur.com/BewrlqD.png');
     background-size: 28px 28px;
     background-repeat: no-repeat;
     background-position: center;
 }
-#addJoinedVariableButton.active:hover{
-    -webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.3));
+
+#addJoinedVariableButton.active:hover {
+    -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3));
     filter: url(https://i.imgur.com/enilel9.png#drop-shadow);
     background: url('https://i.imgur.com/enilel9.png');
     background-size: 28px 28px;
@@ -165,11 +183,12 @@
     background-position: center;
 }
 
-#joinedVariablesList{
+#joinedVariablesList {
     margin-bottom: 0;
     list-style: none;
 }
-#joinedVariablesList div{
+
+#joinedVariablesList div {
     cursor: pointer;
     float: right;
     width: 14px;
@@ -178,42 +197,44 @@
     background-image: url('https://i.imgur.com/38DdMfw.png');
     background-size: 18px 18px;
     background-position: center;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     border: none;
     transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
 }
-#joinedVariablesList div:hover{
+
+#joinedVariablesList div:hover {
     background: url('https://i.imgur.com/TGEwylD.png');
     background-size: 18px 18px;
     background-position: center;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
 }
-#joinedVariablesList li:hover{
+
+#joinedVariablesList li:hover {
     color: #29bdca;
 }
+
 #joinedVariablesList li:hover div {
     opacity: 1;
 }
 
-
 /***********************/
 /* Delete measurements */
 /***********************/
-#deletemeasurement-dialog-background{
+#deletemeasurement-dialog-background {
     display: none;
     opacity: 0;
 }
 
-#deletemeasurement-dialog{
+#deletemeasurement-dialog {
     display: none;
     max-width: 500px;
     opacity: 0;
 }
 
-.deletemeasurement-dialog{
+.deletemeasurement-dialog {
     overflow: hidden;
     padding: 10px;
     background: #fbfbfb;
@@ -221,14 +242,14 @@
     border-radius: 3px;
     z-index: 1000001;
     position: fixed;
-    width: 430px;    
+    width: 430px;
     top: 30%;
-    left:50%;
-    margin-left:-215px;
-    margin-right:0px;
+    left: 50%;
+    margin-left: -215px;
+    margin-right: 0px;
 }
 
-#deletemeasurement-dialog-header{
+#deletemeasurement-dialog-header {
     color: #fff;
     background: #29bdca;
     border-bottom: solid 3px #229DA5;
@@ -247,19 +268,18 @@
 }
 
 #deletemeasurement-dialog-content table {
-     margin-top: 5px;
+    margin-top: 5px;
 }
 
-#deletemeasurement-dialog-content table tr td {    
-    border:none;
+#deletemeasurement-dialog-content table tr td {
+    border: none;
 }
-
 
 /**************************/
 /* Loading overlay config */
 /**************************/
 .loading-overlay-content,
-.loading-overlay{
+.loading-overlay {
     display: none;
     opacity: 0;
     width: 100%;
@@ -275,24 +295,24 @@
     -moz-transition: all 0.5s ease-in-out;
 }
 
-
 /********************/
 /* Add measurements */
 /********************/
-#addmeasurement-dialog-background{
+#addmeasurement-dialog-background {
     display: none;
     opacity: 0;
 }
-#addmeasurement-dialog{
+
+#addmeasurement-dialog {
     display: none;
     max-width: 500px;
     opacity: 0;
 }
 
-#addmeasurement-dialog-content{
-    overflow:hidden;
+#addmeasurement-dialog-content {
+    overflow: hidden;
     width: 100%;
-    box-sizing:border-box;
+    box-sizing: border-box;
     background-color: #FFFFFF;
     padding-left: 5%;
     padding-right: 5%;
@@ -303,8 +323,7 @@
     border-bottom-right-radius: 3px;
 }
 
-
-.addmeasurement-header{
+.addmeasurement-header {
     width: 100%;
     height: 42px;
     color: #fff;
@@ -314,10 +333,11 @@
     cursor: pointer;
     margin-top: 12px;
 }
-.addmeasurement-content{
-    overflow:hidden;
+
+.addmeasurement-content {
+    overflow: hidden;
     width: 100%;
-    box-sizing:border-box;
+    box-sizing: border-box;
     background-color: #FFFFFF;
     padding-left: 5%;
     padding-right: 5%;
@@ -327,65 +347,67 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.addmeasurement-content .inner{
+
+.addmeasurement-content .inner {
     padding-top: 12px;
     padding-bottom: 12px;
 }
 
-
-
-
-
-#addmeasurement-dialog-header{
+#addmeasurement-dialog-header {
     color: #fff;
     background: #29bdca;
     border-bottom: solid 3px #229DA5;
     cursor: auto;
 }
 
-#addmeasurement-dialog-content b{
+#addmeasurement-dialog-content b {
     font-size: 1.05em;
-    display:block;
+    display: block;
     color: #29bdca;
 }
-#addmeasurement-dialog-content table{
+
+#addmeasurement-dialog-content table {
     border: none;
-    margin:0px;
+    margin: 0px;
     margin-bottom: 10px;
-    border-collapse:collapse;
-}
-#addmeasurement-dialog-content td{
-    padding-bottom:4px;
-    padding-top: 4px;
-    border: none;
-    vertical-align:middle;
-}
-#addmeasurement-dialog-content td:first-child{
-    padding-left:8px;
-}
-#addmeasurement-dialog-content td:last-child{
-    float:right;
-    height: 40px;
-    line-height:20px;
-    width: 140px;
-}
-#addmeasurement-dialog-content div{
-    padding-left: 8px;
-    padding-bottom:4px;
-    padding-top: 4px;
-    border: none;
-    vertical-align:middle;
+    border-collapse: collapse;
 }
 
-#addmeasurement-dialog-content td:first-child{
+#addmeasurement-dialog-content td {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    border: none;
+    vertical-align: middle;
+}
+
+#addmeasurement-dialog-content td:first-child {
+    padding-left: 8px;
+}
+
+#addmeasurement-dialog-content td:last-child {
+    float: right;
+    height: 40px;
+    line-height: 20px;
+    width: 140px;
+}
+
+#addmeasurement-dialog-content div {
+    padding-left: 8px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    border: none;
+    vertical-align: middle;
+}
+
+#addmeasurement-dialog-content td:first-child {
     white-space: nowrap;
 }
 
-.ui-autocomplete { 
-    position: absolute; 
+.ui-autocomplete {
+    position: absolute;
     cursor: default;
-    z-index:1200000 !important;
-} 
+    z-index: 1200000 !important;
+}
 
 .ui-autocomplete-category {
     font-weight: bold;
@@ -395,14 +417,13 @@
 }
 
 .xdsoft_datetimepicker {
-    z-index:1200000 !important;
+    z-index: 1200000 !important;
 }
-
 
 /***************************************/
 /* Left menubar                        */
 /***************************************/
-.accordion-header{
+.accordion-header {
     width: 100%;
     height: 42px;
     display: block;
@@ -410,10 +431,11 @@
     text-indent: 14px;
     margin-top: 12px;
 }
-.accordion-content{
-    overflow:hidden;
+
+.accordion-content {
+    overflow: hidden;
     width: 100%;
-    box-sizing:border-box;
+    box-sizing: border-box;
     background-color: #FFFFFF;
     padding-left: 5%;
     padding-right: 5%;
@@ -423,12 +445,13 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.accordion-content .inner{
+
+.accordion-content .inner {
     padding-top: 12px;
     padding-bottom: 12px;
 }
 
-.accordion-content .inner .unitlabel{
+.accordion-content .inner .unitlabel {
     width: 40%;
     vertical-align: middle;
     line-height: 160%;
@@ -449,35 +472,34 @@
     -o-transition: all 0.5s ease-in-out;
 }
 
-
 /*************/
 /* gear icon */
 /*************/
-.gear-icon{
+.gear-icon {
     cursor: pointer;
     margin-top: 7px;
     margin-right: 7px;
     width: 28px;
-    height:28px;
+    height: 28px;
     float: right;
-    background:url('https://i.imgur.com/dw7YcYP.png');
+    background: url('https://i.imgur.com/dw7YcYP.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
-.gear-icon:hover{
+
+.gear-icon:hover {
     background-image: url('https://i.imgur.com/WDuw5IF.png');
 }
-
 
 /***********/
 /* Dialogs */
 /***********/
 .dialog-header {
-    float: left; 
+    float: left;
     line-height: 42px;
 }
 
-.dialog{
+.dialog {
     overflow: hidden;
     padding: 10px;
     background: #fbfbfb;
@@ -494,13 +516,13 @@
     margin-right: auto;
 }
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
     .dialog {
         top: 100px;
     }
 }
 
-.dialog-background{
+.dialog-background {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -510,21 +532,24 @@
     opacity: .5;
     z-index: 1000000;
 }
-#login-dialog table{
+
+#login-dialog table {
     border: none;
-    margin:0px;
-    border-collapse:collapse;
-}
-#login-dialog td{
-    border: none;
-    vertical-align:middle;
+    margin: 0px;
+    border-collapse: collapse;
 }
 
-#share-dialog-background{
+#login-dialog td {
+    border: none;
+    vertical-align: middle;
+}
+
+#share-dialog-background {
     display: none;
     opacity: 0;
 }
-#share-dialog{
+
+#share-dialog {
     display: none;
     max-width: 500px;
     opacity: 0;

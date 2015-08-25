@@ -957,7 +957,7 @@
 						left = offset.left-datetimepicker[0].offsetWidth+datetimepicker.data('input')[0].offsetWidth;
 					datetimepicker.css({
 						left:left,
-						top:"-10px"
+						top:top
 					});
 				};
 				datetimepicker

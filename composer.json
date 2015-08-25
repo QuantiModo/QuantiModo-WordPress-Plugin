@@ -1,48 +1,40 @@
 {
-    "name": "phpunit/phpunit-selenium",
-    "description": "Selenium Server integration for PHPUnit",
-    "type": "library",
-    "keywords": [
-        "xunit",
-        "testing",
-        "selenium"
-    ],
-    "homepage": "http://www.phpunit.de/",
-    "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Sebastian Bergmann",
-            "email": "sb@sebastian-bergmann.de",
-            "role": "lead"
-        },
-        {
-            "name": "Giorgio Sironi",
-            "email": "info@giorgiosironi.com",
-            "role": "developer"
-        },
-        {
-            "name": "Ivan Kurnosov",
-            "email": "zerkms@zerkms.com",
-            "role": "developer"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/sebastianbergmann/phpunit-selenium/issues",
-        "irc": "irc://irc.freenode.net/phpunit"
-    },
-    "require": {
-        "php": ">=5.3.3",
-        "phpunit/phpunit": "~3.7|~4.0",
-        "sebastian/comparator": "~1.0",
-        "ext-curl": "*",
-        "ext-dom": "*"
-    },
-    "autoload": {
-        "classmap": [
-            "PHPUnit/"
-        ]
-    },
-    "include-path": [
-        ""
-    ]
+  "name": "ptahdunbar/wp-skeleton-plugin",
+  "homepage": "https://github.com/ptahdunbar/wp-skeleton-plugin",
+  "description": "A walking skeleton WordPress plugin. -_O",
+  "license": "GPL-2.0+",
+  "type": "wordpress-plugin",
+  "keywords": [
+    "WordPress",
+    "plugins",
+    "themes",
+    "php",
+    "skeleton"
+  ],
+  "authors": [
+    {
+      "name": "Ptah Dunbar",
+      "email": "yarr@piratedunbar.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "phing/phing": "dev-master",
+    "phpunit/phpunit": "3.7.*",
+    "phpunit/dbunit": "1.2.*@dev",
+    "phpunit/phpunit-selenium": "*",
+    "whatthejeff/nyancat-phpunit-resultprinter": "~1.1",
+    "whatthejeff/fab-phpunit-resultprinter": "~1.1",
+    "behat/behat": "2.4.*",
+    "behat/mink": "1.4.*",
+    "behat/mink-extension": "*",
+    "behat/mink-goutte-driver": "*",
+    "behat/mink-selenium2-driver": "*",
+    "behat/mink-zombie-driver": "*",
+    "facebook/webdriver": "*",
+    "respect/validation": "dev-master",
+    "satooshi/php-coveralls": "dev-master"
+  }
 }
