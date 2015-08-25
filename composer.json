@@ -1,7 +1,7 @@
 {
-  "name": "ptahdunbar/wp-skeleton-plugin",
-  "homepage": "https://github.com/ptahdunbar/wp-skeleton-plugin",
-  "description": "A walking skeleton WordPress plugin. -_O",
+  "name": "quantimodo/quantimodo-wordpress-plugin",
+  "homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin",
+  "description": "Shortcodes to embed graphs and connectors on any WP page.",
   "license": "GPL-2.0+",
   "type": "wordpress-plugin",
   "keywords": [
@@ -13,8 +13,8 @@
   ],
   "authors": [
     {
-      "name": "Ptah Dunbar",
-      "email": "yarr@piratedunbar.com"
+      "name": "QuantiModo",
+      "email": "mike@quantimo.do"
     }
   ],
   "require": {
