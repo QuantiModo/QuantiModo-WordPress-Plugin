@@ -1,6 +1,0 @@
-<sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
-    android:contentAuthority="com.moodimodo.content-mood"
-    android:accountType="com.moodimodo"
-    android:userVisible="false"
-    android:supportsUploading="true"
-    android:isAlwaysSyncable="false"/>
