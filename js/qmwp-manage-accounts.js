@@ -174,6 +174,8 @@ ManageAccountsPage = function () {
             initLoginDialog();
             if (access_token) {
                 reloadConnectorData();
+            } else {
+                window.location.href = "?connect=quantimodo";
             }
         },
     };

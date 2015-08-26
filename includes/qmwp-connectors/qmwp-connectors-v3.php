@@ -10,8 +10,6 @@ wp_enqueue_script("jquery-ui-core");
 wp_enqueue_script("jquery-ui-dialog");
 wp_enqueue_script("jquery-dropdown", plugins_url('../../', __FILE__) . "js/libs/jquery.dropdown.min.js", "jquery");
 wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustache.js");
-wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
-wp_enqueue_script("manageaccounts", plugins_url('../../', __FILE__) . "js/qmwp-manage-accounts.js", "qm-sdk", false, true);
 
 ?>
 
@@ -31,7 +29,7 @@ wp_enqueue_script("manageaccounts", plugins_url('../../', __FILE__) . "js/qmwp-m
             var loadHandler = function () {
                 console.debug('Connect JS loaded');
                 if (!executed) {
-                    console.debug('Calling function from connect.js');
+                    console.debug('Calling "qmSetupOnPage" function from connect.js');
                     qmSetupOnPage('.my-location');
                     executed = true;
                 }
@@ -40,7 +38,7 @@ wp_enqueue_script("manageaccounts", plugins_url('../../', __FILE__) . "js/qmwp-m
             var content = document.getElementById('content');
             var connectJs = document.createElement('script');
             connectJs.type = 'text/javascript';
-            connectJs.src = 'https://app.quantimo.do/api/v1/connect.js?t=' + access_token;
+            connectJs.src = 'https://app.quantimo.do/api/v1/connect.js?access_token=' + access_token;
 
             connectJs.onreadystatechange = loadHandler;
             connectJs.onload = loadHandler;
