@@ -2,6 +2,8 @@
 
 class QMWPAuth
 {
+    const API_HOST = 'https://app.quantimo.do:443';
+
     public $httpUtil;
     public $clientEnabled;
     public $clientId;
@@ -21,9 +23,9 @@ class QMWPAuth
         $this->redirectUri = rtrim(site_url(), '/') . '/';
         $this->scope = 'writemeasurements readmeasurements';
 
-        $this->urlAuth = 'https://app.quantimo.do:443/api/oauth2/authorize?';
-        $this->urlToken = 'https://app.quantimo.do:443/api/oauth2/token?';
-        $this->urlUser = 'https://app.quantimo.do:443/api/user/me?';
+        $this->urlAuth = QMWPAuth::API_HOST . '/api/oauth2/authorize?';
+        $this->urlToken = QMWPAuth::API_HOST . '/api/oauth2/token?';
+        $this->urlUser = QMWPAuth::API_HOST . '/api/user/me?';
 
     }
 
