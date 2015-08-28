@@ -623,7 +623,9 @@ function getSettingsForm(variableName) {
 
 function setInputVariable(variableName) {
     var variable = AnalyzePage.getVariableFromOriginalName(unescape(variableName));
-    AnalyzePage.setInputVariable(variable.originalName);
+    if (variable) {
+        AnalyzePage.setInputVariable(variable.originalName);
+    }
 }
 
 
