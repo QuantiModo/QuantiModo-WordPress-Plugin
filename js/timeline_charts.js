@@ -94,7 +94,7 @@ AnalyzeChart = function () {
     };
 
     var addGraph = function (variable, timeSeries) {
-        var title = variable.name + ' (' + variable.unit + ')';
+        var title = variable.name + ' (' + variable.abbreviatedUnitName + ')';
         if (variable.source != null && variable.source.length > 0) {
             title += ' from ' + variable.source;
         }
