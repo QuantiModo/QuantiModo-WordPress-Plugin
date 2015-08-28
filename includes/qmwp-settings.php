@@ -241,13 +241,13 @@ $cc_ux = qmwp_cc_ux();
                     <h3>Plugin Short Codes</h3>
 
                     <div class='form-padding'>
-                        <p>QuantiModo WordPress plugin gives capability to render widgets at the posts and pages.</p>
+                        <p>QuantiModo WordPress plugin gives capability to render shortcodes at the posts and pages.</p>
 
-                        <p>Currently plugin supports following widgets:</p>
+                        <p>Currently plugin supports following shortcodes:</p>
                         <ul>
                             <li>
-                                <strong>[qmwp_mood_tracker]</strong> - widget with a mood rating faces (same
-                                to the
+                                <strong>[qmwp_mood_tracker]</strong> - shortcode with a mood rating faces (like
+                                 the
                                 <a target="_blank"
                                    href="https://chrome.google.com/webstore/detail/moodimodo-beta/lncgjbhijecjdbdgeigfodmiimpmlelg">
                                     MoodiModo Chrome extension
@@ -258,19 +258,19 @@ $cc_ux = qmwp_cc_ux();
                                 <strong>[qmwp_timeline]</strong> - renders
                                 <a href="https://app.quantimo.do/analyze/" target="_blank">
                                     QuantiModo analyze screen
-                                </a> with all it's functional capabilities
+                                </a> 
                             </li>
                             <li><strong>[qmwp_connectors]</strong> - renders
                                 <a href="https://app.quantimo.do/connectv3/" target="_blank">
                                     QuantiModo connectors screen
-                                </a> with all it's functional capabilities
+                                </a>
                             </li>
                             <li><strong>[qmwp_manage_accounts]</strong> - renders
                                 <a href="https://app.quantimo.do/dashboard/accounts/" target="_blank">
                                     QuantiModo accounts management screen
                                 </a> with all it's functional capabilities
                             </li>
-                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - renders widget with a timeline
+                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - renders a timeline
                                 chart which gives
                                 capability to visualize correlations
                             </li>
