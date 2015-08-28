@@ -255,7 +255,7 @@ Preliminary Mockup for front end of Study custom post type:
 
 ## PHPUnit tests
 
-We recommend the use of a pre-configured virtualized environment, like Varying Vagrant Vagrants (VVV), as it provides a consistent environment for developing, testing, troubleshooting and debugging your code. VVV includes WP-CLI and PHPUnit which make unit testing that much easier.
+We recommend the use of a pre-configured virtualized environment, like [Varying Vagrant Vagrants](https://github.com/Varying-Vagrant-Vagrants/VVV) (VVV), as it provides a consistent environment for developing, testing, troubleshooting and debugging your code. VVV includes WP-CLI and PHPUnit which make unit testing that much easier.
 
 If you're using VVV you can skip step 1.
 
