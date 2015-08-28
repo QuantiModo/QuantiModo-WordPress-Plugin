@@ -49,7 +49,7 @@ var onMoodButtonClicked = function () {
         jQuery.ajax({
             type: "POST",
             data: JSON.stringify(mooddata),
-            url: "https://app.quantimo.do/api/measurements/v2",
+            url: api_host + "/api/measurements/v2",
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + access_token

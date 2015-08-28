@@ -1,8 +1,7 @@
 // Quantimodo.com API. Requires JQuery.
 Quantimodo = function () {
 
-    //var url = document.location.origin + "/api/";
-    var hostUrl = "https://app.quantimo.do/api/";
+    var hostUrl = api_host + "/api/";
 
     var GET = function (baseURL, allowedParams, params, successHandler) {
         if (access_token) {
@@ -252,7 +251,7 @@ Quantimodo = function () {
                 this.sendRequest('connectors/list', {}, f);
             };
             this.sendRequest = function (url, params, f) {
-                console.debug('API Call via sendRequest ');
+                console.debug('API Call via QM JS SDK ');
                 if (access_token) {
                     var that = this;
                     jQuery.ajax(this.params.baseURL + url, {

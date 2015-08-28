@@ -4,7 +4,7 @@
  * Plugin Name: QuantiModo
  * Plugin URI: https://app.quantimod.do
  * Description: A WordPress plugin that allows users to login or register by authenticating with an existing Quantimodo account via OAuth 2.0. Easily drops into new or existing sites, integrates with existing users.
- * Version: 0.2
+ * Version: 0.4
  * Author: QuantiModo
  * Author URI: https://app.quantimod.do
  * License: GPL2
@@ -21,6 +21,8 @@ if (file_exists($composer)) {
 if (!defined('WPINC')) {
     die;
 }
+
+require_once('includes/QMWPAuth.php');
 
 @session_start();
 
@@ -618,7 +620,6 @@ Class QMWP
             return get_user_meta($user_id, 'qmwp_access_token', true);
         } elseif ($tokenValidityTime != "" && time() >= $tokenValidityTime) {
             $refreshToken = get_user_meta($user_id, 'qmwp_refresh_token', true);
-            require_once('includes/QMWPAuth.php');
             $authenticator = new QMWPAuth();
             $authenticator->refresh_oauth_token($this, $refreshToken);
             $this->update_user_tokens($user_id);
@@ -1058,24 +1059,33 @@ Class QMWP
     // ====================
 
     /**
-     * Add a script HTML tag to page
-     * Sets up variable with API access token
+     * Adds script tag to an html string with variables definition
+     * variables should be passed as an associative array
+     * Example:
+     * set_js_variables('<div></div>', array(foo => 'bar'));
+     * will return:
+     * <div><script> var foo = 'bar'; <script></div>
      *
      * @param $templateContent
-     * @param $access_token
+     * @param $variables
      * @return string
      */
-    private function set_token_for_js($templateContent, $access_token)
+    private function set_js_variables($templateContent, $variables)
     {
-        $access_token_script = '<script type="application/javascript">';
-        if (!is_null($access_token)) {
-            $access_token_script .= "var access_token = '$access_token';";
-        } else {
-            $access_token_script .= "var access_token = null;";
-        }
-        $access_token_script .= '</script>';
+        if (count($variables) > 0) {
+            $scriptHtmlString = '<script id="qmwp-service-variables" type="application/javascript">';
+            foreach ($variables as $variableName => $variableValue) {
+                if (!is_null($variableValue)) {
+                    $scriptHtmlString .= "var $variableName = '" . $variableValue . "';";
+                } else {
+                    $scriptHtmlString .= "var $variableName = null;";
+                }
+                $scriptHtmlString .= "\n";
+            }
+            $scriptHtmlString .= '</script>';
 
-        return $access_token_script . $templateContent;
+            return $scriptHtmlString . $templateContent;
+        }
     }
 
     /**
@@ -1113,7 +1123,10 @@ Class QMWP
 
         $access_token = $this->access_token();
 
-        $template_content = $this->set_token_for_js($pluginContentHTML, $access_token);
+        $template_content = $this->set_js_variables($pluginContentHTML, array(
+            'access_token' => $access_token,
+            'api_host' => QMWPAuth::API_HOST,
+        ));
 
         return $template_content;
     }
@@ -1134,7 +1147,10 @@ Class QMWP
 
         $access_token = $this->access_token();
 
-        $template_content = $this->set_token_for_js($pluginContentHTML, $access_token);
+        $template_content = $this->set_js_variables($pluginContentHTML, array(
+            'access_token' => $access_token,
+            'api_host' => QMWPAuth::API_HOST,
+        ));
 
         return $template_content;
 
@@ -1155,7 +1171,10 @@ Class QMWP
 
         $access_token = $this->access_token();
 
-        $template_content = $this->set_token_for_js($pluginContentHTML, $access_token);
+        $template_content = $this->set_js_variables($pluginContentHTML, array(
+            'access_token' => $access_token,
+            'api_host' => QMWPAuth::API_HOST,
+        ));
 
         return $template_content;
     }
@@ -1175,7 +1194,10 @@ Class QMWP
 
         $access_token = $this->access_token();
 
-        $template_content = $this->set_token_for_js($pluginContentHTML, $access_token);
+        $template_content = $this->set_js_variables($pluginContentHTML, array(
+            'access_token' => $access_token,
+            'api_host' => QMWPAuth::API_HOST,
+        ));
 
         return $template_content;
 
@@ -1196,7 +1218,10 @@ Class QMWP
 
         $access_token = $this->access_token();
 
-        $template_content = $this->set_token_for_js($pluginContentHTML, $access_token);
+        $template_content = $this->set_js_variables($pluginContentHTML, array(
+            'access_token' => $access_token,
+            'api_host' => QMWPAuth::API_HOST,
+        ));
 
         return $template_content;
 

@@ -1,4 +1,7 @@
 <?php
+
+require_once('QMWPAuth.php');
+
 // config check security
 function qmwp_cc_security()
 {
@@ -81,9 +84,10 @@ $cc_ux = qmwp_cc_ux();
 
                 <div class='form-padding'>
                     <div id="qmwp-logo" style="width:64px; height:64px; float:right; background-size:100% 100%;"></div>
-                    <p><span
-                            style="font-size:1.1em;"><strong>QuantiModo <?php echo QMWP::PLUGIN_VERSION; ?></strong></span><br/>by
-                        <a href="https://app.quantimo.do" target="_blank"><strong>QuantiModo</strong></a></p>
+                    <p>
+                        <span style="font-size:1.1em;"><strong>QuantiModo <?php echo QMWP::PLUGIN_VERSION; ?></strong></span><br/>by
+                        <a href="https://app.quantimo.do" target="_blank"><strong>QuantiModo</strong></a>
+                    </p>
 
                     <p>Rate it 5 stars: <a id="qmwp-rate-5stars"
                                            href="https://wordpress.org/support/view/plugin-reviews/qm-oauth?rate=5"
@@ -177,6 +181,10 @@ $cc_ux = qmwp_cc_ux();
                             </p>
                         </div>
                     </div>
+
+                    <p>
+                        Current API Host: <?php echo QMWPAuth::API_HOST; ?>
+                    </p>
                 </div>
             </div>
             <div id="qmwp-settings-section-donate" class="qmwp-settings-section">

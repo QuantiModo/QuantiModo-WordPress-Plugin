@@ -623,7 +623,9 @@ function getSettingsForm(variableName) {
 
 function setInputVariable(variableName) {
     var variable = AnalyzePage.getVariableFromOriginalName(unescape(variableName));
-    AnalyzePage.setInputVariable(variable.originalName);
+    if (variable) {
+        AnalyzePage.setInputVariable(variable.originalName);
+    }
 }
 
 
@@ -926,7 +928,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                 formatter: function () {
                     return '<div class="variableInBarGraph" data-row="' + escape(this.value.originalName) + '">' +
                         '<div class="variableRowInBarGraph" onclick="highlightBargraphRow(); setInputVariable(\'' + escape(this.value.originalName) + '\');">' +
-                        '<div class="variableName">' + this.value.name + ' </div>' +
+                        '<div class="variableName">' + this.value.originalName + ' </div>' +
                         '<div class="setButton icon-cog icon-large gear" onclick="event.stopPropagation(); getSettingsForm(\'' + escape(this.value.originalName) + '\');"></div>' +
                         '<div class="setButton icon-plus icon-large plus" onclick="event.stopPropagation(); AnalyzePage.showAddMeasurementDialog(\'' + escape(this.value.originalName) + '\');"></div>' +
                         '</div>' +

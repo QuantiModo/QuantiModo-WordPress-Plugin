@@ -3,7 +3,7 @@
  *    Template Name: Analyze Page (v2, no correlations)
  *    Description: Page based on original PHP website
  */
-wp_enqueue_style("analyze", plugins_url('../../', __FILE__) . "css/qmwp-analyze.css");
+wp_enqueue_style("timeline", plugins_url('../../', __FILE__) . "css/qmwp-timeline.css");
 wp_enqueue_style("shared-styles", plugins_url('../../', __FILE__) . "/css/_shared_styles.css");
 wp_enqueue_style("jquery-ui-flick", plugins_url('../../', __FILE__) . "/css/jquery-ui-flick.css");
 wp_enqueue_style("jquery-dropdown", plugins_url('../../', __FILE__) . "/css/jquery.dropdown.css");
@@ -23,14 +23,14 @@ wp_enqueue_script("timezone", plugins_url('../../', __FILE__) . "js/jstz.min.js"
 wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
 wp_enqueue_script("highcharts", plugins_url('../../', __FILE__) . "js/libs/highstock.js", "jquery", false, true);
 wp_enqueue_script("highcharts-more", plugins_url('../../', __FILE__) . "js/libs/highcharts-more.js", "highcharts", false, true);
-wp_enqueue_script("analyze-charts", plugins_url('../../', __FILE__) . "js/analyze_charts.js", array("highcharts-more", "qm-sdk", "qm-math"), false, true);
+wp_enqueue_script("timeline-charts", plugins_url('../../', __FILE__) . "js/timeline_charts.js", array("highcharts-more", "qm-sdk", "qm-math"), false, true);
 wp_enqueue_script("other-shared", plugins_url('../../', __FILE__) . "js/_other_shared.js", array("jquery"), false, true);
 wp_enqueue_script("variable-settings", plugins_url('../../', __FILE__) . "js/_variable_settings.js", array("jquery"), false, true);
 wp_enqueue_script("refresh-shared", plugins_url('../../', __FILE__) . "js/_data_refresh.js", array("jquery"), false, true);
 
-wp_enqueue_script("analyze", plugins_url('../../', __FILE__) . "js/qmwp-analyze.js",
+wp_enqueue_script("timeline", plugins_url('../../', __FILE__) . "js/qmwp-timeline.js",
     array(
-        "analyze-charts",
+        "timeline-charts",
         "jquery-ui-datepicker",
         "jquery-ui-button",
         "jquery-ui-autocomplete"
