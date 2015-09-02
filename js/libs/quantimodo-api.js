@@ -125,6 +125,9 @@ Quantimodo = function () {
         getMeasurements: function (params, f) {
             GET('measurements', ['variableName', 'startTime', 'endTime', 'groupingWidth', 'groupingTimezone', 'source'], params, f);
         },
+        getDailyMeasurements: function (params, f) {
+            GET('v1/measurements/daily', ['variableName', 'startTime', 'endTime', 'groupingWidth', 'groupingTimezone'], params, f);
+        },
         postMeasurements: function (measurements, f) {
             POST('measurements', ['source', 'variable', 'combinationOperation', 'timestamp', 'value', 'unit'], measurements, f);
         },
