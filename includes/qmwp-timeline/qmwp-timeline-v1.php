@@ -20,7 +20,7 @@ wp_enqueue_script("jquery-dropdown", plugins_url('../../', __FILE__) . "js/libs/
 wp_enqueue_script("jquery-touch", plugins_url('../../', __FILE__) . "js/libs/jquery.ui.touch-punch.min.js", "jquery");
 wp_enqueue_script("qm-math", plugins_url('../../', __FILE__) . "js/math.js", "jquery", false, true);
 wp_enqueue_script("timezone", plugins_url('../../', __FILE__) . "js/jstz.min.js", "jquery", false, true);
-wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
+wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "vendor/quantimodo/quantimodo-sdk-javascript/quantimodo-api.js", "jquery", false, true);
 wp_enqueue_script("highcharts", plugins_url('../../', __FILE__) . "js/libs/highstock.js", "jquery", false, true);
 wp_enqueue_script("highcharts-more", plugins_url('../../', __FILE__) . "js/libs/highcharts-more.js", "highcharts", false, true);
 wp_enqueue_script("timeline-charts", plugins_url('../../', __FILE__) . "js/timeline_charts.js", array("highcharts-more", "qm-sdk", "qm-math"), false, true);
