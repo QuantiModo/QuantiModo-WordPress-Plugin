@@ -20,3 +20,4 @@ vendor
 
 # Project files
 tests/wp-tests-config.php
+js/libs/quantimodo-api.js
