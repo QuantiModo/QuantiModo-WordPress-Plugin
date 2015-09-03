@@ -257,7 +257,7 @@ var AnalyzePage = function () {
             if (variable)
                 jQuery("#addmeasurement-variable-original-name").val(variable.originalName);
         }
-        Quantimodo.getMeasurements(
+        Quantimodo.getDailyMeasurements(
             {
                 'variableName': variableName,
                 'startTime': AnalyzePage.getStartTime(),

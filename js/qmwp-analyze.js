@@ -169,14 +169,16 @@ var AnalyzePage = function () {
             //'groupingWidth': AnalyzePage.getPeriod(),
             'groupingTimezone': AnalyzePage.getTimezone()
         }
+        /*
         if (variable.source != null && variable.source.length != 0) {
             filters.source = variable.source;
         }
+        */
         if (variable.color == null) {
             variable.color = getRandomColor();
         }
 
-        Quantimodo.getMeasurements(filters, function (measurements) {
+        Quantimodo.getDailyMeasurements(filters, function (measurements) {
             AnalyzeChart.addData(variable, measurements);
 
             //var source = variable.source == null ? '' : source;

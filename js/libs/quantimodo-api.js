@@ -1,7 +1,7 @@
 // Quantimodo.com API. Requires JQuery.
 Quantimodo = function () {
 
-    var hostUrl = api_host + "/api/";
+    var hostUrl = api_host + '/api/';
 
     var GET = function (baseURL, allowedParams, params, successHandler) {
         if (access_token) {
@@ -18,7 +18,7 @@ Quantimodo = function () {
             fetchAPI(0);
 
         } else {
-            window.location.href = "?connect=quantimodo";
+            window.location.href = '?connect=quantimodo';
         }
 
         function fetchAPI(offset) {
@@ -26,9 +26,9 @@ Quantimodo = function () {
             var url = hostUrl;
 
             if (urlParams.length == 0) {
-                url += baseURL + "?offset=" + offset + "&limit=200";
+                url += baseURL + '?offset=' + offset + '&limit=200';
             } else {
-                url += baseURL + '?' + urlParams.join('&') + "&offset=" + offset + "&limit=200";
+                url += baseURL + '?' + urlParams.join('&') + '&offset=' + offset + '&limit=200';
             }
             console.debug('Fecthing: ' + url);
             jQuery.ajax({
@@ -37,7 +37,7 @@ Quantimodo = function () {
                 dataType: 'json',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                 },
                 success: function (data, status, xhr) {
 
@@ -73,14 +73,14 @@ Quantimodo = function () {
                 url: hostUrl + baseURL,
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                 },
                 data: JSON.stringify(items),
                 dataType: 'json',
                 success: successHandler
             });
         } else {
-            window.location.href = "?connect=quantimodo";
+            window.location.href = '?connect=quantimodo';
         }
     };
 
@@ -123,16 +123,44 @@ Quantimodo = function () {
 
     return {
         getMeasurements: function (params, f) {
-            GET('measurements', ['variableName', 'startTime', 'endTime', 'groupingWidth', 'groupingTimezone', 'source'], params, f);
+            GET('measurements', [
+                'variableName',
+                'startTime',
+                'endTime',
+                'groupingWidth',
+                'groupingTimezone',
+                'source'], params, f);
+        },
+        getDailyMeasurements: function (params, f) {
+            GET('v1/measurements/daily', [
+                'variableName',
+                'startTime',
+                'endTime',
+                'groupingWidth',
+                'groupingTimezone'], params, f);
         },
         postMeasurements: function (measurements, f) {
-            POST('measurements', ['source', 'variable', 'combinationOperation', 'timestamp', 'value', 'unit'], measurements, f);
+            POST('measurements', [
+                'source',
+                'variable',
+                'combinationOperation',
+                'timestamp',
+                'value',
+                'unit'], measurements, f);
         },
         postMeasurementsV2: function (measurementset, f) {
-            POST('measurements/v2', ['measurements', 'name', 'source', 'category', 'combinationOperation', 'unit'], measurementset, f);
+            POST('measurements/v2', [
+                'measurements',
+                'name',
+                'source',
+                'category',
+                'combinationOperation',
+                'unit'], measurementset, f);
         },
         deleteVariableMeasurements: function (variables, f) {
-            POST('measurements/delete', ['variableId', 'variableName'], variables, f);
+            POST('measurements/delete', [
+                'variableId',
+                'variableName'], variables, f);
         },
 
         getMeasurementsRange: function (params, f) {
@@ -147,13 +175,24 @@ Quantimodo = function () {
         },
 
         getUnits: function (params, f) {
-            GET('units', ['unitName', 'abbreviatedUnitName', 'categoryName'], params, f);
+            GET('units', [
+                'unitName',
+                'abbreviatedUnitName',
+                'categoryName'], params, f);
         },
         getUnitsForVariable: function (params, f) {
-            GET('unitsVariable', ['variable', 'unitName', 'abbreviatedUnitName', 'categoryName'], params, f);
+            GET('unitsVariable', [
+                'variable',
+                'unitName',
+                'abbreviatedUnitName',
+                'categoryName'], params, f);
         },
         postUnits: function (measurements, f) {
-            POST('units', ['name', 'abbreviatedName', 'category', 'conversionSteps'], measurements, f);
+            POST('units', [
+                'name',
+                'abbreviatedName',
+                'category',
+                'conversionSteps'], measurements, f);
         },
 
         getUnitCategories: function (params, f) {
@@ -191,7 +230,17 @@ Quantimodo = function () {
         },
 
         getPairs: function (params, f) {
-            GET('pairs', ["cause", "effect", "duration", "delay", "startTime", "endTime", "causeSource", "effectSource", "causeUnit", "effectUnit"], params, f);
+            GET('pairs', [
+                'cause',
+                'effect',
+                'duration',
+                'delay',
+                'startTime',
+                'endTime',
+                'causeSource',
+                'effectSource',
+                'causeUnit',
+                'effectUnit'], params, f);
         },
 
         getUserVariables: function (params, f) {
@@ -256,7 +305,7 @@ Quantimodo = function () {
                     var that = this;
                     jQuery.ajax(this.params.baseURL + url, {
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                         },
                         data: params,
                         dataType: 'json'
