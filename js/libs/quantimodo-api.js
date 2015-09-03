@@ -123,19 +123,44 @@ Quantimodo = function () {
 
     return {
         getMeasurements: function (params, f) {
-            GET('measurements', ['variableName', 'startTime', 'endTime', 'groupingWidth', 'groupingTimezone', 'source'], params, f);
+            GET('measurements', [
+                'variableName',
+                'startTime',
+                'endTime',
+                'groupingWidth',
+                'groupingTimezone',
+                'source'], params, f);
         },
         getDailyMeasurements: function (params, f) {
-            GET('v1/measurements/daily', ['variableName', 'startTime', 'endTime', 'groupingWidth', 'groupingTimezone'], params, f);
+            GET('v1/measurements/daily', [
+                'variableName',
+                'startTime',
+                'endTime',
+                'groupingWidth',
+                'groupingTimezone'], params, f);
         },
         postMeasurements: function (measurements, f) {
-            POST('measurements', ['source', 'variable', 'combinationOperation', 'timestamp', 'value', 'unit'], measurements, f);
+            POST('measurements', [
+                'source',
+                'variable',
+                'combinationOperation',
+                'timestamp',
+                'value',
+                'unit'], measurements, f);
         },
         postMeasurementsV2: function (measurementset, f) {
-            POST('measurements/v2', ['measurements', 'name', 'source', 'category', 'combinationOperation', 'unit'], measurementset, f);
+            POST('measurements/v2', [
+                'measurements',
+                'name',
+                'source',
+                'category',
+                'combinationOperation',
+                'unit'], measurementset, f);
         },
         deleteVariableMeasurements: function (variables, f) {
-            POST('measurements/delete', ['variableId', 'variableName'], variables, f);
+            POST('measurements/delete', [
+                'variableId',
+                'variableName'], variables, f);
         },
 
         getMeasurementsRange: function (params, f) {
@@ -150,13 +175,24 @@ Quantimodo = function () {
         },
 
         getUnits: function (params, f) {
-            GET('units', ['unitName', 'abbreviatedUnitName', 'categoryName'], params, f);
+            GET('units', [
+                'unitName',
+                'abbreviatedUnitName',
+                'categoryName'], params, f);
         },
         getUnitsForVariable: function (params, f) {
-            GET('unitsVariable', ['variable', 'unitName', 'abbreviatedUnitName', 'categoryName'], params, f);
+            GET('unitsVariable', [
+                'variable',
+                'unitName',
+                'abbreviatedUnitName',
+                'categoryName'], params, f);
         },
         postUnits: function (measurements, f) {
-            POST('units', ['name', 'abbreviatedName', 'category', 'conversionSteps'], measurements, f);
+            POST('units', [
+                'name',
+                'abbreviatedName',
+                'category',
+                'conversionSteps'], measurements, f);
         },
 
         getUnitCategories: function (params, f) {
@@ -194,7 +230,17 @@ Quantimodo = function () {
         },
 
         getPairs: function (params, f) {
-            GET('pairs', ["cause", "effect", "duration", "delay", "startTime", "endTime", "causeSource", "effectSource", "causeUnit", "effectUnit"], params, f);
+            GET('pairs', [
+                'cause',
+                'effect',
+                'duration',
+                'delay', 
+                'startTime',
+                'endTime',
+                'causeSource',
+                'effectSource',
+                'causeUnit',
+                'effectUnit'], params, f);
         },
 
         getUserVariables: function (params, f) {
