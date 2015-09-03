@@ -69,7 +69,7 @@ var refreshInputData = function () {
     if (variable == null) {
         return;
     }
-    Quantimodo.getMeasurements({
+    Quantimodo.getDailyMeasurements({
         'variableName': variable.originalName,
         'startTime': AnalyzePage.getStartTime(),
         'endTime': AnalyzePage.getEndTime(),
@@ -83,7 +83,7 @@ var refreshInputData = function () {
 
 var refreshOutputData = function () {
     var variable = AnalyzePage.getOutputVariable();
-    Quantimodo.getMeasurements({
+    Quantimodo.getDailyMeasurements({
         'variableName': variable.originalName,
         'startTime': AnalyzePage.getStartTime(),
         'endTime': AnalyzePage.getEndTime(),
@@ -111,7 +111,7 @@ var refreshData = function () {
         if (variable.color == null) {
             variable.color = AnalyzePage.getRandomColor();
         }
-        Quantimodo.getMeasurements(filters,
+        Quantimodo.getDailyMeasurements(filters,
             function (vari) {
                 return function (measurements) {
                     AnalyzeChart.addData(vari, measurements);

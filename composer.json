@@ -18,7 +18,8 @@
     }
   ],
   "require": {
-    "php": ">=5.4"
+    "php": ">=5.4",
+    "quantimodo/quantimodo-sdk-javascript": "dev-master"
   },
   "require-dev": {
     "phing/phing": "dev-master",
@@ -36,5 +37,11 @@
     "facebook/webdriver": "*",
     "respect/validation": "dev-master",
     "satooshi/php-coveralls": "dev-master"
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/QuantiModo/QuantiModo-SDK-JavaScript.git"
+    }
+  ]
 }
