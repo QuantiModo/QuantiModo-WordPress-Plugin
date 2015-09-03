@@ -45,7 +45,7 @@ Class QMWP
     }
 
     // set a version that we can use for performing plugin updates, this should always match the plugin version:
-    const PLUGIN_VERSION = "0.4";
+    const PLUGIN_VERSION = "0.2.3";
 
     // define the settings used by this plugin; this array will be used for registering settings, applying default values, and deleting them during uninstall:
     private $settings = array(
