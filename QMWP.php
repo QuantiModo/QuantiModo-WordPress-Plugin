@@ -4,7 +4,7 @@
  * Plugin Name: QuantiModo
  * Plugin URI: https://app.quantimod.do
  * Description: A WordPress plugin that allows users to login or register by authenticating with an existing Quantimodo account via OAuth 2.0. Easily drops into new or existing sites, integrates with existing users.
- * Version: 0.4
+ * Version: 0.2.4
  * Author: QuantiModo
  * Author URI: https://app.quantimod.do
  * License: GPL2

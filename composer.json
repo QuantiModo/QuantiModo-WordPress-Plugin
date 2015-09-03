@@ -43,5 +43,13 @@
       "type": "vcs",
       "url": "https://github.com/QuantiModo/QuantiModo-SDK-JavaScript.git"
     }
-  ]
+  ],
+  "scripts": {
+    "post-install-cmd": [
+      "mv vendor/quantimodo/quantimodo-sdk-javascript/quantimodo-api.js js/libs/"
+    ],
+    "post-update-cmd": [
+      "mv vendor/quantimodo/quantimodo-sdk-javascript/quantimodo-api.js js/libs/"
+    ]
+  }
 }
