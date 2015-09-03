@@ -1,7 +1,7 @@
 // Quantimodo.com API. Requires JQuery.
 Quantimodo = function () {
 
-    var hostUrl = api_host + "/api/";
+    var hostUrl = api_host + '/api/';
 
     var GET = function (baseURL, allowedParams, params, successHandler) {
         if (access_token) {
@@ -18,7 +18,7 @@ Quantimodo = function () {
             fetchAPI(0);
 
         } else {
-            window.location.href = "?connect=quantimodo";
+            window.location.href = '?connect=quantimodo';
         }
 
         function fetchAPI(offset) {
@@ -26,9 +26,9 @@ Quantimodo = function () {
             var url = hostUrl;
 
             if (urlParams.length == 0) {
-                url += baseURL + "?offset=" + offset + "&limit=200";
+                url += baseURL + '?offset=' + offset + '&limit=200';
             } else {
-                url += baseURL + '?' + urlParams.join('&') + "&offset=" + offset + "&limit=200";
+                url += baseURL + '?' + urlParams.join('&') + '&offset=' + offset + '&limit=200';
             }
             console.debug('Fecthing: ' + url);
             jQuery.ajax({
@@ -37,7 +37,7 @@ Quantimodo = function () {
                 dataType: 'json',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                 },
                 success: function (data, status, xhr) {
 
@@ -73,14 +73,14 @@ Quantimodo = function () {
                 url: hostUrl + baseURL,
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                 },
                 data: JSON.stringify(items),
                 dataType: 'json',
                 success: successHandler
             });
         } else {
-            window.location.href = "?connect=quantimodo";
+            window.location.href = '?connect=quantimodo';
         }
     };
 
@@ -234,7 +234,7 @@ Quantimodo = function () {
                 'cause',
                 'effect',
                 'duration',
-                'delay', 
+                'delay',
                 'startTime',
                 'endTime',
                 'causeSource',
@@ -305,7 +305,7 @@ Quantimodo = function () {
                     var that = this;
                     jQuery.ajax(this.params.baseURL + url, {
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                         },
                         data: params,
                         dataType: 'json'
