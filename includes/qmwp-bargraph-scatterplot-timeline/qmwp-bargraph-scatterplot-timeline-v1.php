@@ -24,6 +24,7 @@ wp_enqueue_script("jquery-datetimepicker", plugins_url('../../', __FILE__) . "js
 wp_enqueue_script("jquery-touch", plugins_url('../../', __FILE__) . "js/libs/jquery.ui.touch-punch.min.js", "jquery");
 wp_enqueue_script("qm-math", plugins_url('../../', __FILE__) . "js/math.js", "jquery", false, true);
 wp_enqueue_script("timezone", plugins_url('../../', __FILE__) . "js/jstz.min.js", "jquery", false, true);
+wp_enqueue_script("moment", plugins_url('../../', __FILE__) . "js/libs/moment.min.js", "jquery", false, true);
 wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
 wp_enqueue_script("jquery-simpletip", plugins_url('../../', __FILE__) . "js/libs/jquery.simpletip-1.3.1.js", "jquery", false, true);
 wp_enqueue_script("highcharts", plugins_url('../../', __FILE__) . "js/libs/highstock.js", "jquery", false, true);
