@@ -217,7 +217,7 @@ AnalyzeChart = function () {
 
         var dataLength = data.length;
         for (var i = 0; i < dataLength; i++) {
-            var date = data[i].timestamp * 1000
+            var date = moment(data[i].startTime).format("X") * 1000;
             var value = data[i].value;
 
             timeSeries.push([date, value]);

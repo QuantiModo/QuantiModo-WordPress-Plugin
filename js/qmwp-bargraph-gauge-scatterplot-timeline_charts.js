@@ -222,7 +222,7 @@ AnalyzeChart = function() {
                                                     y: measurements[i].effectMeasurement
 						};
 
-						dot.time = measurements[i].timestamp * 1000;
+						dot.time = moment(measurements[i].timestamp).format("X") * 1000;
 
 						scatterplotDots.push(dot);
 
@@ -450,8 +450,8 @@ AnalyzeChart = function() {
 		if (maximum == Infinity) { maximum = null; }
 
 		for (var i = 0; i < data.length; i++)
-		{                        
-			var date = data[i].timestamp * 1000
+		{
+			var date = moment(data[i].startTime).format("X") * 1000;
 			var value = data[i].value;
 						
 			dates.push(date);
