@@ -1,4 +1,4 @@
 vendor
 /*
  */
-js/libs
+js/libs/*
