@@ -168,7 +168,9 @@ var variableSettings = {
             },
             keys: {
                 close: null
-            }
+            },
+            maxWidth: 640,
+            margin: 50
         });
 
     },

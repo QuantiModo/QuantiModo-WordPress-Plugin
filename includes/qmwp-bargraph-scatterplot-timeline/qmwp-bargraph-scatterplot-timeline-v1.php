@@ -10,6 +10,7 @@ wp_enqueue_style("jquery-ui-flick", plugins_url('../../', __FILE__) . "css/jquer
 wp_enqueue_style("jquery-dropdown", plugins_url('../../', __FILE__) . "css/jquery.dropdown.css");
 wp_enqueue_style("jquery-tip", plugins_url('../../', __FILE__) . "css/simpletip.css");
 wp_enqueue_style("jquery-datetimepicker", plugins_url('../../', __FILE__) . "css/jquery.datetimepicker.css");
+wp_enqueue_style("jquery-fancybox", plugins_url('../../', __FILE__) . "js/libs/fancybox/jquery.fancybox.css");
 
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("jquery-ui-core");
@@ -22,6 +23,8 @@ wp_enqueue_script("jquery-ui-tooltip");
 wp_enqueue_script("jquery-dropdown", plugins_url('../../', __FILE__) . "js/libs/jquery.dropdown.min.js", "jquery");
 wp_enqueue_script("jquery-datetimepicker", plugins_url('../../', __FILE__) . "js/libs/jquery.datetimepicker.js", "jquery");
 wp_enqueue_script("jquery-touch", plugins_url('../../', __FILE__) . "js/libs/jquery.ui.touch-punch.min.js", "jquery");
+wp_enqueue_script("jquery-fancybox", plugins_url('../../', __FILE__) . "js/libs/fancybox/jquery.fancybox.pack.js", "jquery");
+
 wp_enqueue_script("qm-math", plugins_url('../../', __FILE__) . "js/math.js", "jquery", false, true);
 wp_enqueue_script("timezone", plugins_url('../../', __FILE__) . "js/jstz.min.js", "jquery", false, true);
 wp_enqueue_script("moment", plugins_url('../../', __FILE__) . "js/libs/moment.min.js", "jquery", false, true);
