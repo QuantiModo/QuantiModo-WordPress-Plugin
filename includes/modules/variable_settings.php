@@ -6,7 +6,7 @@
             </div>
             <div style="float: right; margin-top:3px; margin-right:10px;">
                 <img id="deleteVariableMeasurements" style="cursor:pointer;"
-                     src=" <?php echo get_template_directory_uri(); ?>-qm/css/images/trash.png"
+                     src=" <?php echo plugins_url('quantimodo'); ?>/images/trash.png"
                      title="Delete the Measurements for this variable">
                 <input id="input-variable-id" type="hidden">
             </div>
