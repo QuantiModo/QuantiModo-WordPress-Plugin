@@ -808,13 +808,13 @@ function getBargraph(bUseCache) {
         }
     }
 
-/*    jQuery.get(url, jsonParam).done(function (data) {
-        if (valAs == 'cause')
-            bargraphDataAsCause = data;
-        else
-            bargraphDataAsEffect = data;
-        jsonCallback(data);
-    })*/
+    /*    jQuery.get(url, jsonParam).done(function (data) {
+     if (valAs == 'cause')
+     bargraphDataAsCause = data;
+     else
+     bargraphDataAsEffect = data;
+     jsonCallback(data);
+     })*/
     console.debug('getBargraph API call')
     jQuery.ajax({
         data: jsonParam,
