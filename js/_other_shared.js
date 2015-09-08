@@ -35,7 +35,8 @@ function toggleElement(element) {
         setTimeout(function () {
             content.addClass('transitions').css(
                 {
-                    'max-height': 0
+                    'max-height': 0,
+                    'display': 'none'
                 });
         }, 10);
     }
@@ -43,7 +44,8 @@ function toggleElement(element) {
         content.contentHeight += content.inner.outerHeight();
         content.addClass('transitions').css(
             {
-                'max-height': content.contentHeight
+                'max-height': content.contentHeight,
+                'display': 'block'
             });
     }
 }

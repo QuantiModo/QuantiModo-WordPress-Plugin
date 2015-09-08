@@ -473,7 +473,7 @@ AnalyzeChart = function() {
 		}
 				
 		return {
-			source: data[0].source.valueOf(),
+			//source: data[0].source.valueOf(),	//TODO Why source of this array is always null?
 			originalName: variable.originalName,
 			variableName: variable.name.valueOf(),
 			unit: noData ? 'unknown' : data[0].unit.valueOf(),                        
