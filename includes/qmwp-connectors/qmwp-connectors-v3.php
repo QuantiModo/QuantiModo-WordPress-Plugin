@@ -13,14 +13,6 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
 
 ?>
 
-<?php if (!is_user_logged_in()): ?>
-    <div
-        class="dialog-background" id="login-dialog-background"></div>
-    <div class="dialog" id="login-dialog">
-        <?php login_with_ajax(); ?>
-    </div>
-<?php endif; ?>
-
 <div id="content" style="margin: 0; padding: 0;">
     <div class="my-location" style="width: 800px; padding: 15px; background-color: #fff; margin: 0 auto;"></div>
     <script>
