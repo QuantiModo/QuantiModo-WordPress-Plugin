@@ -824,6 +824,9 @@ function getBargraph(bUseCache) {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+            if (mashape_key) {
+                xhr.setRequestHeader('X-Mashape-Key', mashape_key);
+            }
         }
     }).done(function (data) {
         if (valAs == 'cause')

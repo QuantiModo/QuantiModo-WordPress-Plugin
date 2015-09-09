@@ -30,7 +30,8 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
             var content = document.getElementById('content');
             var connectJs = document.createElement('script');
             connectJs.type = 'text/javascript';
-            connectJs.src = api_host + '/api/v1/connect.js?access_token=' + access_token;
+            //connectJs.src = api_host + '/api/v1/connect.js?access_token=' + access_token;
+            connectJs.src = 'https://app.quantimo.do:443/api/v1/connect.js?access_token=' + access_token;
 
             connectJs.onreadystatechange = loadHandler;
             connectJs.onload = loadHandler;

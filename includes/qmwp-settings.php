@@ -810,6 +810,15 @@ $cc_ux = qmwp_cc_ux();
                                            value='<?php echo get_option('qmwp_quantimodo_api_secret'); ?>'/>
                                 </td>
                             </tr>
+
+                            <tr valign='top'>
+                                <th scope='row'>X-Mashape-Key:</th>
+                                <td>
+                                    <input type='text' name='qmwp_x_mashape_key'
+                                           value='<?php echo get_option('qmwp_x_mashape_key'); ?>'/>
+                                </td>
+                            </tr>
+
                         </table>
                         <!-- .form-table -->
                         <p>
