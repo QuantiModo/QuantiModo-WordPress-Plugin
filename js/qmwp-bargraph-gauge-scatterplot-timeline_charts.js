@@ -31,19 +31,19 @@ AnalyzeChart = function () {
 
     var retrieveSettings = function () {
         if (typeof(Storage) !== 'undefined') {
-            tlEnableMarkers = (localStorage['tlEnableMarkers'] || 'true') == 'true' ? true : false;					// On by default
-            tlSmoothGraph = (localStorage['tlSmoothGraph'] || 'true') == 'true' ? true : false;						// On by default
-            tlEnableHorizontalGuides = (localStorage['tlEnableHorizontalGuides'] || 'false') == 'true' ? true : false;			// Off by default
-            spShowLinearRegression = (localStorage['spShowLinearRegression'] || 'true') == 'true' ? true : false;			// On by default
+            tlEnableMarkers = (localStorage.tlEnableMarkers || 'true') == 'true' ? true : false; // On by default
+            tlSmoothGraph = (localStorage.tlSmoothGraph || 'true') == 'true' ? true : false; // On by default
+            tlEnableHorizontalGuides = (localStorage.tlEnableHorizontalGuides || 'false') == 'true' ? true : false;			// Off by default
+            spShowLinearRegression = (localStorage.spShowLinearRegression || 'true') == 'true' ? true : false;			// On by default
 
-            tlGraphType = tlSmoothGraph == true ? 'spline' : 'line'; // spline if smoothGraph = true
+            tlGraphType = tlSmoothGraph === true ? 'spline' : 'line'; // spline if smoothGraph = true
         }
     }
 
     var setSettings = function (newSettings) {
-        if (typeof newSettings['tlSmoothGraph'] != 'undefined') {
-            tlSmoothGraph = newSettings['tlSmoothGraph'];
-            tlGraphType = tlSmoothGraph == true ? 'spline' : 'line';
+        if (typeof newSettings.tlSmoothGraph != 'undefined') {
+            tlSmoothGraph = newSettings.tlSmoothGraph;
+            tlGraphType = tlSmoothGraph === true ? 'spline' : 'line';
             timelineChart.series[0].update({
                 type: tlGraphType
             }, false);
@@ -53,8 +53,8 @@ AnalyzeChart = function () {
             saveSetting('tlSmoothGraph', tlSmoothGraph);
         }
 
-        if (typeof newSettings['tlEnableMarkers'] != 'undefined') {
-            tlEnableMarkers = newSettings['tlEnableMarkers'];
+        if (typeof newSettings.tlEnableMarkers != 'undefined') {
+            tlEnableMarkers = newSettings.tlEnableMarkers;
             timelineChart.series[0].update({
                 marker: {
                     enabled: tlEnableMarkers
@@ -68,7 +68,7 @@ AnalyzeChart = function () {
             saveSetting('tlEnableMarkers', tlEnableMarkers);
         }
 
-        if (typeof newSettings['tlEnableHorizontalGuides'] != 'undefined') {
+        if (typeof newSettings.tlEnableHorizontalGuides != 'undefined') {
             tlEnableHorizontalGuides = newSettings['tlEnableHorizontalGuides'];
             timelineChart.yAxis[0].update({
                 gridLineWidth: tlEnableHorizontalGuides
@@ -79,7 +79,7 @@ AnalyzeChart = function () {
             saveSetting('tlEnableHorizontalGuides', tlEnableHorizontalGuides);
         }
 
-        if (typeof newSettings['spShowLinearRegression'] != 'undefined') {
+        if (typeof newSettings.spShowLinearRegression != 'undefined') {
             spShowLinearRegression = newSettings['spShowLinearRegression'];
             scatterplotChart.series[0].update({
                 visible: spShowLinearRegression
