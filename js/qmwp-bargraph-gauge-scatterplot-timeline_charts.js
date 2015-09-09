@@ -407,7 +407,7 @@ AnalyzeChart = function () {
 
     var prepDataForGraphing = function (variable, data) {
         data.sort(function (a, b) {
-            return a.timestamp < b.timestamp ? -1 : 1;
+            return new Date(a.startTime) < new Date(b.startTime) ? -1 : 1;
         });
         var dates = [], values = [], timeSeries = [];
 
