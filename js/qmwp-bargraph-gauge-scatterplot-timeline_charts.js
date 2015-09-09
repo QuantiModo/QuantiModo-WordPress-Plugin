@@ -27,34 +27,34 @@ AnalyzeChart = function () {
     var tlEnableHorizontalGuides;
 
     // Scatterplot settings
-    var spShowLinearRegression
+    var spShowLinearRegression;
 
     var retrieveSettings = function () {
-        if (typeof(Storage) !== "undefined") {
-            tlEnableMarkers = (localStorage["tlEnableMarkers"] || "true") == "true" ? true : false;					// On by default
-            tlSmoothGraph = (localStorage["tlSmoothGraph"] || "true") == "true" ? true : false;						// On by default
-            tlEnableHorizontalGuides = (localStorage["tlEnableHorizontalGuides"] || "false") == "true" ? true : false;			// Off by default
-            spShowLinearRegression = (localStorage["spShowLinearRegression"] || "true") == "true" ? true : false;			// On by default
+        if (typeof(Storage) !== 'undefined') {
+            tlEnableMarkers = (localStorage.tlEnableMarkers || 'true') == 'true' ? true : false; // On by default
+            tlSmoothGraph = (localStorage.tlSmoothGraph || 'true') == 'true' ? true : false; // On by default
+            tlEnableHorizontalGuides = (localStorage.tlEnableHorizontalGuides || 'false') == 'true' ? true : false;			// Off by default
+            spShowLinearRegression = (localStorage.spShowLinearRegression || 'true') == 'true' ? true : false;			// On by default
 
-            tlGraphType = tlSmoothGraph == true ? "spline" : "line"; // spline if smoothGraph = true
+            tlGraphType = tlSmoothGraph === true ? 'spline' : 'line'; // spline if smoothGraph = true
         }
     }
 
     var setSettings = function (newSettings) {
-        if (typeof newSettings["tlSmoothGraph"] != "undefined") {
-            tlSmoothGraph = newSettings["tlSmoothGraph"];
-            tlGraphType = tlSmoothGraph == true ? "spline" : "line";
+        if (typeof newSettings.tlSmoothGraph != 'undefined') {
+            tlSmoothGraph = newSettings.tlSmoothGraph;
+            tlGraphType = tlSmoothGraph === true ? 'spline' : 'line';
             timelineChart.series[0].update({
                 type: tlGraphType
             }, false);
             timelineChart.series[1].update({
                 type: tlGraphType
             }, false);
-            saveSetting("tlSmoothGraph", tlSmoothGraph);
+            saveSetting('tlSmoothGraph', tlSmoothGraph);
         }
 
-        if (typeof newSettings["tlEnableMarkers"] != "undefined") {
-            tlEnableMarkers = newSettings["tlEnableMarkers"];
+        if (typeof newSettings.tlEnableMarkers != 'undefined') {
+            tlEnableMarkers = newSettings.tlEnableMarkers;
             timelineChart.series[0].update({
                 marker: {
                     enabled: tlEnableMarkers
@@ -65,26 +65,26 @@ AnalyzeChart = function () {
                     enabled: tlEnableMarkers
                 }
             }, false);
-            saveSetting("tlEnableMarkers", tlEnableMarkers);
+            saveSetting('tlEnableMarkers', tlEnableMarkers);
         }
 
-        if (typeof newSettings["tlEnableHorizontalGuides"] != "undefined") {
-            tlEnableHorizontalGuides = newSettings["tlEnableHorizontalGuides"];
+        if (typeof newSettings.tlEnableHorizontalGuides != 'undefined') {
+            tlEnableHorizontalGuides = newSettings['tlEnableHorizontalGuides'];
             timelineChart.yAxis[0].update({
                 gridLineWidth: tlEnableHorizontalGuides
-            }, false)
+            }, false);
             timelineChart.yAxis[1].update({
                 gridLineWidth: tlEnableHorizontalGuides
-            }, false)
-            saveSetting("tlEnableHorizontalGuides", tlEnableHorizontalGuides);
+            }, false);
+            saveSetting('tlEnableHorizontalGuides', tlEnableHorizontalGuides);
         }
 
-        if (typeof newSettings["spShowLinearRegression"] != "undefined") {
-            spShowLinearRegression = newSettings["spShowLinearRegression"];
+        if (typeof newSettings.spShowLinearRegression != 'undefined') {
+            spShowLinearRegression = newSettings['spShowLinearRegression'];
             scatterplotChart.series[0].update({
                 visible: spShowLinearRegression
             }, false);
-            saveSetting("spShowLinearRegression", spShowLinearRegression);
+            saveSetting('spShowLinearRegression', spShowLinearRegression);
         }
 
         timelineChart.redraw();
@@ -92,16 +92,16 @@ AnalyzeChart = function () {
     };
 
     var saveSetting = function (setting, value) {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== 'undefined') {
             localStorage[setting] = value;
         }
-    }
+    };
 
     var initChartSettings = function () {
         jQuery('input[name=tl-enable-markers]').attr('checked', tlEnableMarkers);
         jQuery('input[name=tl-enable-markers]').change(function () {
             var settings = {
-                tlEnableMarkers: jQuery(this).is(":checked")
+                tlEnableMarkers: jQuery(this).is(':checked')
             };
             setSettings(settings);
         });
@@ -109,7 +109,7 @@ AnalyzeChart = function () {
         jQuery('input[name=tl-smooth-graph]').attr('checked', tlSmoothGraph);
         jQuery('input[name=tl-smooth-graph]').change(function () {
             var settings = {
-                tlSmoothGraph: jQuery(this).is(":checked")
+                tlSmoothGraph: jQuery(this).is(':checked')
             };
             setSettings(settings);
 
@@ -118,7 +118,7 @@ AnalyzeChart = function () {
         jQuery('input[name=tl-enable-horizontal-guides]').attr('checked', tlEnableHorizontalGuides);
         jQuery('input[name=tl-enable-horizontal-guides]').change(function () {
             var settings = {
-                tlEnableHorizontalGuides: jQuery(this).is(":checked")
+                tlEnableHorizontalGuides: jQuery(this).is(':checked')
             };
             setSettings(settings);
         });
@@ -126,11 +126,11 @@ AnalyzeChart = function () {
         jQuery('input[name=sp-show-linear-regression]').attr('checked', spShowLinearRegression);
         jQuery('input[name=sp-show-linear-regression]').change(function () {
             var settings = {
-                spShowLinearRegression: jQuery(this).is(":checked")
+                spShowLinearRegression: jQuery(this).is(':checked')
             };
             setSettings(settings);
         });
-    }
+    };
 
     var updateGraphs = function ()	//TODO split graphs, update series separately
     {
@@ -209,7 +209,7 @@ AnalyzeChart = function () {
                                 y: measurements[i].effectMeasurement
                             };
 
-                            dot.time = moment(measurements[i].timestamp).format("X") * 1000;
+                            dot.time = moment(measurements[i].timestamp).format('X') * 1000;
 
                             scatterplotDots.push(dot);
 
@@ -257,44 +257,44 @@ AnalyzeChart = function () {
 
     function setAngularChartText(correlation, numOfPoints) {
         var effectSizeText;
-        var statisticalRelationshipText = "Not enough samples";
+        var statisticalRelationshipText = 'Not enough samples';
         if (correlation > 0.5) {
-            effectSizeText = "Strong Positive";
+            effectSizeText = 'Strong Positive';
             if (numOfPoints > 17) {
-                statisticalRelationshipText = "Significant";
+                statisticalRelationshipText = 'Significant';
             }
         }
         else if (correlation > 0.3) {
-            effectSizeText = "Medium Positive";
+            effectSizeText = 'Medium Positive';
             if (numOfPoints > 45) {
-                statisticalRelationshipText = "Significant";
+                statisticalRelationshipText = 'Significant';
             }
         }
         else if (correlation > 0.1) {
-            effectSizeText = "Weak Positive";
+            effectSizeText = 'Weak Positive';
             if (numOfPoints > 400) {
-                statisticalRelationshipText = "Significant";
+                statisticalRelationshipText = 'Significant';
             }
         }
         else if (correlation > -0.1) {
-            effectSizeText = "None";
+            effectSizeText = 'None';
         }
         else if (correlation > -0.3) {
-            effectSizeText = "Weak Negative";
+            effectSizeText = 'Weak Negative';
             if (numOfPoints > 400) {
-                statisticalRelationshipText = "Significant";
+                statisticalRelationshipText = 'Significant';
             }
         }
         else if (correlation > -0.5) {
-            effectSizeText = "Medium Negative";
+            effectSizeText = 'Medium Negative';
             if (numOfPoints > 45) {
-                statisticalRelationshipText = "Significant";
+                statisticalRelationshipText = 'Significant';
             }
         }
         else {
-            effectSizeText = "Strong Negative";
+            effectSizeText = 'Strong Negative';
             if (numOfPoints > 17) {
-                statisticalRelationshipText = "Significant";
+                statisticalRelationshipText = 'Significant';
             }
         }
 
@@ -304,64 +304,66 @@ AnalyzeChart = function () {
 
     function initDatePickerForHighChartsRangeSelecter(minimum, maximum) {
         if (timelineChart != null) {
-            if (!jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).hasClass('hasDatepicker')) {
-                jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker({
-                    dateFormat: "'From' MM d',' yy",
+            if (!jQuery('input.highcharts-range-selector[name="min"]',
+                    jQuery('#' + timelineChart.options.chart.renderTo)).hasClass('hasDatepicker')
+            ) {
+                jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker({
+                    dateFormat: '"From" MM d"," yy',
                     defaultDate: new Date(minimum),
                     minDate: new Date(minimum),
                     maxDate: new Date(maximum),
                     changeMonth: true,
                     changeYear: true,
                     onSelect: function (dateText) {
-                        var currentMin = jQuery(this).datepicker("getDate");
-                        var currentMax = new Date(jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).val());
+                        var currentMin = jQuery(this).datepicker('getDate');
+                        var currentMax = new Date(jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).val());
                         if (currentMax.getTime() - currentMin.getTime() < ((5 * 24 * 60 * 60 * 1000))) {
                             currentMin.setTime(currentMax.getTime() - ((5 * 24 * 60 * 60 * 1000)));
                         }
                         else {
                             currentMin.setTime(currentMin.getTime());
                         }
-                        jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "defaultDate", currentMin);
-                        jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).val(jQuery.datepicker.formatDate("'To' MM d',' yy", new Date(currentMin.getTime() + (24 * 60 * 60 * 1000))));
+                        jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'defaultDate', currentMin);
+                        jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).val(jQuery.datepicker.formatDate('"To" MM d"," yy', new Date(currentMin.getTime() + (24 * 60 * 60 * 1000))));
                         this.onchange();
                         this.onblur();
                     }
                 });
             }
             else {
-                jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "defaultDate", new Date(minimum));
-                jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "minDate", new Date(minimum));
-                jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "maxDate", new Date(maximum));
+                jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'defaultDate', new Date(minimum));
+                jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'minDate', new Date(minimum));
+                jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'maxDate', new Date(maximum));
             }
 
-            if (!jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).hasClass('hasDatepicker')) {
-                jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker({
-                    dateFormat: "'From' MM d',' yy",
+            if (!jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).hasClass('hasDatepicker')) {
+                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker({
+                    dateFormat: '"From" MM d"," yy',
                     defaultDate: new Date(maximum),
                     minDate: new Date(minimum),
                     maxDate: new Date(maximum),
                     changeMonth: true,
                     changeYear: true,
                     onSelect: function (dateText) {
-                        var currentMax = jQuery(this).datepicker("getDate");
-                        var currentMin = new Date(jQuery("input.highcharts-range-selector[name='min']", jQuery('#' + timelineChart.options.chart.renderTo)).val());
+                        var currentMax = jQuery(this).datepicker('getDate');
+                        var currentMin = new Date(jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).val());
                         if (currentMax.getTime() - currentMin.getTime() < ((5 * 24 * 60 * 60 * 1000))) {
                             currentMax.setTime(currentMin.getTime() + ((5 * 24 * 60 * 60 * 1000)));
                         }
                         else {
                             currentMax.setTime(currentMax.getTime());
                         }
-                        jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "defaultDate", currentMax);
-                        jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).val(jQuery.datepicker.formatDate("'To' MM d',' yy", new Date(currentMax.getTime() + (24 * 60 * 60 * 1000))));
+                        jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'defaultDate', currentMax);
+                        jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).val(jQuery.datepicker.formatDate('"To" MM d"," yy', new Date(currentMax.getTime() + (24 * 60 * 60 * 1000))));
                         this.onchange();
                         this.onblur();
                     }
                 });
             }
             else {
-                jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "defaultDate", new Date(maximum));
-                jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "minDate", new Date(minimum));
-                jQuery("input.highcharts-range-selector[name='max']", jQuery('#' + timelineChart.options.chart.renderTo)).datepicker("option", "maxDate", new Date(maximum));
+                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'defaultDate', new Date(maximum));
+                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'minDate', new Date(minimum));
+                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'maxDate', new Date(maximum));
             }
         }
     }
@@ -422,7 +424,7 @@ AnalyzeChart = function () {
         }
 
         for (var i = 0; i < data.length; i++) {
-            var date = moment(data[i].startTime).format("X") * 1000;
+            var date = moment(data[i].startTime).format('X') * 1000;
             var value = data[i].value;
 
             dates.push(date);
@@ -725,7 +727,7 @@ AnalyzeChart = function () {
                 enabled: false
             }
         });
-    }
+    };
 
     return {
         init: function () {
@@ -737,7 +739,7 @@ AnalyzeChart = function () {
             initCorrelationGauge();
         },
         setInputData: setInputData,
-        setOutputData: setOutputData,
+        setOutputData: setOutputData
     };
 }();
 
