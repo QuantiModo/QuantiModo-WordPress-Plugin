@@ -304,7 +304,9 @@ AnalyzeChart = function () {
 
     function initDatePickerForHighChartsRangeSelecter(minimum, maximum) {
         if (timelineChart != null) {
-            if (!jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).hasClass('hasDatepicker')) {
+            if (!jQuery('input.highcharts-range-selector[name="min"]',
+                    jQuery('#' + timelineChart.options.chart.renderTo)).hasClass('hasDatepicker')
+            ) {
                 jQuery('input.highcharts-range-selector[name="min"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker({
                     dateFormat: '"From" MM d"," yy',
                     defaultDate: new Date(minimum),
