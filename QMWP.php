@@ -1127,9 +1127,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key')    //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key')    //from settings
         ));
 
         return $template_content;
@@ -1152,9 +1152,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;
@@ -1177,9 +1177,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;
@@ -1201,9 +1201,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;
@@ -1226,9 +1226,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;

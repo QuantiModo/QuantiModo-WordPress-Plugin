@@ -43,17 +43,17 @@ var onMoodButtonClicked = function () {
         combinationOperation: "MEAN",
         unit: "/5"
     }]
-    if (!access_token) {
+    if (typeof accessToken == "undefined" || !accessToken) {
         window.location.href = "?connect=quantimodo";
     } else {
         jQuery.ajax({
             type: "POST",
             data: JSON.stringify(mooddata),
-            url: api_host + "/api/measurements/v2",
+            url: (typeof apiHost !== "undefined") ? apiHost + "/api/measurements/v2" : "/api/measurements/v2",
             contentType: "application/json",
             headers: {
-                "Authorization": "Bearer " + access_token,
-                "X-Mashape-Key": mashape_key
+                "Authorization": "Bearer " + accessToken,
+                "X-Mashape-Key": (typeof mashapeKey !== "undefined") ? mashapeKey : null
             },
             success: function (dataString) {
                 jQuery("#sectionSendingMood").html("Your Request has been sent!");
