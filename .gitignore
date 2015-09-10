@@ -17,6 +17,7 @@ varrgrant.json
 
 # Composer
 vendor
+composer.lock
 
 # Project files
 tests/wp-tests-config.php
