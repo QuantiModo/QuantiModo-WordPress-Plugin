@@ -192,6 +192,7 @@ AnalyzeChart = function () {
             AnalyzePage.hideCorrelationGauge();
         }
         else {
+            AnalyzePage.showScatterplot();
             Quantimodo.getPairs({
                     'effect': effect.originalName,
                     'cause': cause.originalName,
