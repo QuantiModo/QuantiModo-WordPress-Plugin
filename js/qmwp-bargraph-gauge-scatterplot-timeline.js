@@ -494,7 +494,7 @@ var AnalyzePage = function () {
 
         init: function () {
             retrieveSettings();
-            if (access_token) {
+            if (accessToken) {
                 refreshMeasurementsRange(function () {
                     refreshVariables([], function () {
                         categoryListUpdated();
@@ -823,9 +823,9 @@ function getBargraph(bUseCache) {
         dataType: 'json',
         contentType: 'application/json',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + access_token);
-            if (mashape_key) {
-                xhr.setRequestHeader('X-Mashape-Key', mashape_key);
+            xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+            if (mashapeKey) {
+                xhr.setRequestHeader('X-Mashape-Key', mashapeKey);
             }
         }
     }).done(function (data) {

@@ -16,7 +16,7 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
 <div id="content" style="margin: 0; padding: 0;">
     <div class="my-location" style="width: 800px; padding: 15px; background-color: #fff; margin: 0 auto;"></div>
     <script>
-        if (access_token) {
+        if (accessToken) {
 
             var loadHandler = function () {
                 console.debug('Connect JS loaded');
@@ -31,7 +31,7 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
             var connectJs = document.createElement('script');
             connectJs.type = 'text/javascript';
             //connectJs.src = api_host + '/api/v1/connect.js?access_token=' + access_token;
-            connectJs.src = 'https://app.quantimo.do:443/api/v1/connect.js?access_token=' + access_token;
+            connectJs.src = 'https://app.quantimo.do:443/api/v1/connect.js?access_token=' + accessToken;
 
             connectJs.onreadystatechange = loadHandler;
             connectJs.onload = loadHandler;
