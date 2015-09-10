@@ -39,13 +39,6 @@ wp_enqueue_script("timeline", plugins_url('../../', __FILE__) . "js/qmwp-timelin
 
 ?>
 
-<?php if (!is_user_logged_in()): ?>
-    <div class="dialog-background" id="login-dialog-background"></div>
-    <div class="dialog" id="login-dialog">
-        <?php login_with_ajax(); ?>
-    </div>
-<?php endif; ?>
-
 <?php require plugin_dir_path(__FILE__) . "../modules/dialog_delete_measurements.php"; ?>
 <?php require plugin_dir_path(__FILE__) . "../modules/dialog_share.php"; ?>
 <?php require plugin_dir_path(__FILE__) . "../modules/variable_settings.php"; ?>

@@ -182,6 +182,12 @@ class QMWPAuth
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+                $mashapeKey = get_option('qmwp_x_mashape_key');
+                if (!empty($mashapeKey)) {
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, array("X-Mashape-Key: $mashapeKey"));
+                }
+
                 $result = curl_exec($curl);
                 $result_obj = json_decode($result, true);
                 break;
@@ -224,10 +230,10 @@ class QMWPAuth
     {
         // parse the result:
         $result_obj = json_decode($values, true); // PROVIDER SPECIFIC: QuantiModo encodes the access token result as json by default
-        $access_token = $result_obj['access_token']; // PROVIDER SPECIFIC: this is how QuantiModo returns the access token KEEP THIS PROTECTED!
-        $expires_in = $result_obj['expires_in']; // PROVIDER SPECIFIC: this is how QuantiModo returns the access token's expiration
+        $access_token = isset($result_obj['access_token']) ? $result_obj['access_token'] : null; // PROVIDER SPECIFIC: this is how QuantiModo returns the access token KEEP THIS PROTECTED!
+        $expires_in = isset($result_obj['access_token']) ? $result_obj['expires_in'] : 0; // PROVIDER SPECIFIC: this is how QuantiModo returns the access token's expiration
         $expires_at = time() + $expires_in;
-        $refresh_token = $result_obj['refresh_token'];
+        $refresh_token = isset($result_obj['refresh_token']) ? $result_obj['refresh_token'] : null;
         // handle the result:
         if (!$access_token || !$expires_in) {
             return false;

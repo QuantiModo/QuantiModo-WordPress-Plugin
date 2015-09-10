@@ -5,13 +5,15 @@ require_once(plugin_dir_path(__FILE__) . '../QMWPAuth.php');
 $authenticator = new QMWPAuth();
 
 // start the user session for maintaining individual user states during the multi-stage authentication flow:
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 # DEFINE THE OAUTH PROVIDER TO USE #
 $_SESSION['QMWP']['PROVIDER'] = 'QuantiModo';
 
 // remember the user's last url so we can redirect them back to there after the login ends:
-if (!$_SESSION['QMWP']['LAST_URL']) {
+if (!isset($_SESSION['QMWP']['LAST_URL']) || !$_SESSION['QMWP']['LAST_URL']) {
     // try to obtain the redirect_url from the default login page:
     $redirect_url = esc_url($_GET['redirect_to']);
     // if no redirect_url was found, set it to the user's last page:
