@@ -44,7 +44,6 @@ var onMoodButtonClicked = function () {
         unit: "/5"
     }]
     if (!access_token) {
-        console.debug('No access token');
         window.location.href = "?connect=quantimodo";
     } else {
         jQuery.ajax({
