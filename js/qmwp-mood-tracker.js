@@ -49,7 +49,7 @@ var onMoodButtonClicked = function () {
         jQuery.ajax({
             type: "POST",
             data: JSON.stringify(mooddata),
-            url: (typeof apiHost !== 'undefined') ? apiHost + "/api/measurements/v2" : "/api/measurements/v2",
+            url: (typeof apiHost !== "undefined") ? apiHost + "/api/measurements/v2" : "/api/measurements/v2",
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + accessToken,
