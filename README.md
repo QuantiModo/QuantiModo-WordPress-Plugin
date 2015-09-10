@@ -46,10 +46,6 @@ For example:
 - style - sets the custom css style to apply to the custom login form. Possible values: any text
 - class - sets the custom css class to apply to the custom login form. Possible values: any text
 
-### What still needs to be done for the Login Button to be complete
-- OAuth access tokens need to be stored in the database (`wp_usermeta` table?) for each user.
-- Refresh tokens should be obtained and stored when necessary
-
 ## Timeline Graph
 Shortcode - [qmwp_timeline]
 
@@ -64,11 +60,6 @@ The code to be used for this shortcode is here:
 https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/timeline-page
 
 ![](https://i.imgur.com/AwhxdGP.png)
-
-### What still needs to be done for the Timeline Graph to be complete
-- API requests should include Bearer access tokens from `wp_usermeta` table in the Authorization header of all API requests. - If user receives a "Not Authenticated" response from the API, the QuantiModo OAuth login dialog should popup or user should be redirected there and redirect back after logging in and authorizing access. 
-- Refresh tokens should be obtained and stored when necessary
-- Code from WP custom template needs to be available for embed as a shortcode
 
 ## Correlation Charts
 Shortcode - [qm_correlation_charts]
@@ -93,11 +84,6 @@ https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference
 - secondary_variable - Sets the default secondary variable to be selected on the bar graph. Possible values: any variable name
 - examined_is_cause - Sets the examined variable to be considered the cause in the relationship.  Possible values: true or false. Default: false
 
-### What still needs to be done for the Correlation Charts to be complete
-- API requests should include Bearer access tokens from `wp_usermeta` table in the Authorization header of all API requests. - If user receives a "Not Authenticated" response from the API, the QuantiModo OAuth login dialog should popup or user should be redirected there and redirect back after logging in and authorizing access. 
-- Refresh tokens should be obtained and stored when necessary
-- Code from WP custom template needs to be available for embed as a shortcode with options specified above
-
 ## Import Data
 Shortcode - [qmwp_manage_accounts]
 
@@ -109,11 +95,6 @@ To see how it works:
 
 The code for this page is located here:
 https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/connect-page
-
-### What still needs to be done for the Import Data shortcode to be complete
-- API requests should include Bearer access tokens from `wp_usermeta` table in the Authorization header of all API requests. - If user receives a "Not Authenticated" response from the API, the QuantiModo OAuth login dialog should popup or user should be redirected there and redirect back after logging in and authorizing access. 
-- Refresh tokens should be obtained and stored when necessary
-- Code from WP custom template needs to be available for embed as a shortcode with options specified above
 
 ## Add a Measurement Button
 Shortcode - [qm_add_measurement]
@@ -132,8 +113,6 @@ Demo: Try https://chrome.google.com/webstore/detail/quantimodo-universal-trac/ji
 The relevant code and more information on the functionality can be found at https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/QM-Search-Plugin
 
 ### What still needs to be done for the "Add a Measurment" button shortcode to be complete
-- API requests should include Bearer access tokens from `wp_usermeta` table in the Authorization header of all API requests. - If user receives a "Not Authenticated" response from the API, the QuantiModo OAuth login dialog should popup or user should be redirected there and redirect back after logging in and authorizing access. 
-- Refresh tokens should be obtained and stored when necessary
 - Code from Chrome extension needs to be re-formatted and made available for embed as a shortcode
 
 ## Correlation Search Box
@@ -189,11 +168,6 @@ We want to be able to embed those faces in any WP page or post.
 Here's the code for the Chrome extension to use as a resource: https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/MoodiModo-Chrome
 
 ![mood-rating-wordpress-shortcode](https://cloud.githubusercontent.com/assets/2808553/8238887/10787330-15be-11e5-853c-93f00d8e45cd.png)
-
-### What still needs to be done for the "Mood Tracker" shortcode to be complete
-- API requests should include Bearer access tokens from `wp_usermeta` table in the Authorization header of all API requests. - If user receives a "Not Authenticated" response from the API, the QuantiModo OAuth login dialog should popup or user should be redirected there and redirect back after logging in and authorizing access. 
-- Refresh tokens should be obtained and stored when necessary
-- Code from Chrome extension needs to be re-formatted and made available for embed as a shortcode
 
 # Options for Adding Shortcode
 
