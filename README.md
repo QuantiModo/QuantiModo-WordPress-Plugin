@@ -4,7 +4,7 @@ QuantiModo-WordPress-Plugin
 [![Codacy Badge](https://api.codacy.com/project/badge/9267e17136a34184905cec32f8867d32)](https://www.codacy.com/app/m_3/QuantiModo-WordPress-Plugin)
 [![Code Climate](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-WordPress-Plugin/badges/gpa.svg)](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-WordPress-Plugin)
 
-*NOTE: This plugin is in an extremely early stage of development and is not yet function. The roadmap for the development of the plugin is below. We'd be very grateful for any pull requests. Thanks!*
+*This plugin is in an extremely early stage of development. The roadmap for the development of the plugin is below. We'd be very grateful for any pull requests. Thanks!*
 
 Help ignite a revolution of citizen science to find new solutions to chronic illnesses.  Install the Quantimodo Wordpress plugin!
 
