@@ -1044,7 +1044,7 @@ Class QMWP
             wp_die(__('You do not have sufficient permissions to access this page.'));
         }
         $blog_url = rtrim(site_url(), "/") . "/";
-        include 'includes/qmwp-settings.php';
+        include_once 'includes/qmwp-settings.php';
     }
 
     /**

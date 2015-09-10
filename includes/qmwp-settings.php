@@ -117,9 +117,9 @@ $cc_ux = qmwp_cc_ux();
                         $rss_items = $rss->get_items(0, $maxitems);
                     }
                     ?>
-                    <?php if ($maxitems == 0) : ?>
+                    <?php if (isset($maxitems) && $maxitems == 0) : ?>
                         <p><?php _e("Sorry, news was inaccessible or does not exist.", 'my-text-domain'); ?></p>
-                    <?php else : ?>
+                    <?php elseif (isset($rss_items) && count($rss_items) > 0) : ?>
                         <ul>
                             <?php foreach ($rss_items as $item) : ?>
                                 <li>
