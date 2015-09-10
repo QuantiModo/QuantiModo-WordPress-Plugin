@@ -52,7 +52,8 @@ var onMoodButtonClicked = function () {
             url: api_host + "/api/measurements/v2",
             contentType: "application/json",
             headers: {
-                "Authorization": "Bearer " + access_token
+                "Authorization": "Bearer " + access_token,
+                "X-Mashape-Key": mashape_key
             },
             success: function (dataString) {
                 jQuery("#sectionSendingMood").html("Your Request has been sent!");

@@ -13,14 +13,6 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
 
 ?>
 
-<?php if (!is_user_logged_in()): ?>
-    <div
-        class="dialog-background" id="login-dialog-background"></div>
-    <div class="dialog" id="login-dialog">
-        <?php login_with_ajax(); ?>
-    </div>
-<?php endif; ?>
-
 <div id="content" style="margin: 0; padding: 0;">
     <div class="my-location" style="width: 800px; padding: 15px; background-color: #fff; margin: 0 auto;"></div>
     <script>
@@ -38,7 +30,8 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
             var content = document.getElementById('content');
             var connectJs = document.createElement('script');
             connectJs.type = 'text/javascript';
-            connectJs.src = api_host + '/api/v1/connect.js?access_token=' + access_token;
+            //connectJs.src = api_host + '/api/v1/connect.js?access_token=' + access_token;
+            connectJs.src = 'https://app.quantimo.do:443/api/v1/connect.js?access_token=' + access_token;
 
             connectJs.onreadystatechange = loadHandler;
             connectJs.onload = loadHandler;

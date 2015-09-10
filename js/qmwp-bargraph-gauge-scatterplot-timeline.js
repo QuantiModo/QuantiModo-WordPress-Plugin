@@ -808,13 +808,13 @@ function getBargraph(bUseCache) {
         }
     }
 
-/*    jQuery.get(url, jsonParam).done(function (data) {
-        if (valAs == 'cause')
-            bargraphDataAsCause = data;
-        else
-            bargraphDataAsEffect = data;
-        jsonCallback(data);
-    })*/
+    /*    jQuery.get(url, jsonParam).done(function (data) {
+     if (valAs == 'cause')
+     bargraphDataAsCause = data;
+     else
+     bargraphDataAsEffect = data;
+     jsonCallback(data);
+     })*/
     console.debug('getBargraph API call')
     jQuery.ajax({
         data: jsonParam,
@@ -824,6 +824,9 @@ function getBargraph(bUseCache) {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+            if (mashape_key) {
+                xhr.setRequestHeader('X-Mashape-Key', mashape_key);
+            }
         }
     }).done(function (data) {
         if (valAs == 'cause')
