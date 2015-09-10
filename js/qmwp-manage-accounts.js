@@ -172,7 +172,7 @@ ManageAccountsPage = function () {
         api: api,
         init: function () {
             initLoginDialog();
-            if (access_token) {
+            if (accessToken) {
                 reloadConnectorData();
             } else {
                 window.location.href = "?connect=quantimodo";

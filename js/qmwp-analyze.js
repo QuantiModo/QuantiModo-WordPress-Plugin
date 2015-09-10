@@ -487,7 +487,7 @@ var AnalyzePage = function () {
             }
         },
         init: function () {
-            if (access_token) {
+            if (accessToken) {
 
                 refreshMeasurementsRange(function () {
 

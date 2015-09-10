@@ -4,7 +4,7 @@
  * Plugin Name: QuantiModo
  * Plugin URI: https://app.quantimod.do
  * Description: A WordPress plugin that allows users to login or register by authenticating with an existing Quantimodo account via OAuth 2.0. Easily drops into new or existing sites, integrates with existing users.
- * Version: 0.2.6
+ * Version: 0.2.7
  * Author: QuantiModo
  * Author URI: https://app.quantimod.do
  * License: GPL2
@@ -1127,9 +1127,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key')    //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key')    //from settings
         ));
 
         return $template_content;
@@ -1152,9 +1152,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;
@@ -1177,9 +1177,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;
@@ -1201,9 +1201,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;
@@ -1226,9 +1226,9 @@ Class QMWP
         $access_token = $this->access_token();
 
         $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'access_token' => $access_token,
-            'api_host' => QMWPAuth::API_HOST,
-            'mashape_key'   =>  get_option('qmwp_x_mashape_key'),   //from settings
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
         ));
 
         return $template_content;
