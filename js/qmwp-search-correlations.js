@@ -20,7 +20,7 @@ quantimodoSearch.config(function ($httpProvider) {
     }
 
     if (typeof accessToken !== 'undefined' && accessToken) {
-        $httpProvider.defaults.headers.common['Authorization'] = "Bearer " + accessToken;
+        $httpProvider.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
     }
 
     // for CORS requests but we are going to use JSONP so no need to do these lines
