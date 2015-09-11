@@ -11,15 +11,15 @@
     color:#FFF  !important;      
     border-bottom-right-radius:2px  !important;
     border-top-right-radius:2px  !important;
-    border-bottom-left-radius:0px  !important;
-    border-top-left-radius:0px  !important;
+    border-bottom-left-radius:0  !important;
+    border-top-left-radius:0  !important;
     font-size:14px  !important;
     height: 34px  !important;
     border: 1px solid #EFEFEF  !important;    
     border-left:none !important;
     vertical-align: bottom  !important;
     margin-bottom: 10px;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
 
 .searchsubmit:active {
@@ -34,7 +34,7 @@
     height: 34px;
     vertical-align: bottom;
     margin-bottom: 10px;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
 
 .selectOutputAsType:focus {
@@ -52,7 +52,7 @@
     height: 34px;
     vertical-align: bottom;
     margin-bottom: 10px;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
@@ -104,15 +104,15 @@
 	list-style: none;
 	width: auto;
 	text-align: left;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 }
 
 #searchResultList ul li{
 	border-bottom: 1px solid #ddd;
-	padding: 10px 0px;
+	padding: 10px 0;
 	overflow: hidden;
-        padding-left: 0px;
+        padding-left: 0;
 }
 
 #searchResultList ul li img{
@@ -160,7 +160,7 @@
 }
 
 #paginationSearchResultList {
-    font-size: 0px;
+    font-size: 0;
     width:100%;
 }
 
