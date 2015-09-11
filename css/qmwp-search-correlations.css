@@ -75,12 +75,12 @@
         width: 90%;
     }
 
-    a.result-title {
+    .result-title {
         display: block;
         width: 92%;
     }
 
-    a.shop-cart {
+    .shop-cart {
         position: absolute;
         top: 0;
         right: 0;
