@@ -42,11 +42,13 @@ function toggleElement(element) {
     }
     else if (content.hasClass('open')) {
         content.contentHeight += content.inner.outerHeight();
-        content.addClass('transitions').css(
-            {
-                'max-height': content.contentHeight,
-                'display': 'block'
-            });
+        setTimeout(function() {
+            content.addClass('transitions').css(
+                {
+                    'max-height': content.contentHeight,
+                    'display': 'block'
+                });
+        },10);
     }
 }
 

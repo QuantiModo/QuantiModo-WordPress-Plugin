@@ -85,7 +85,8 @@ $cc_ux = qmwp_cc_ux();
                 <div class='form-padding'>
                     <div id="qmwp-logo" style="width:64px; height:64px; float:right; background-size:100% 100%;"></div>
                     <p>
-                        <span style="font-size:1.1em;"><strong>QuantiModo <?php echo QMWP::PLUGIN_VERSION; ?></strong></span><br/>by
+                        <span
+                            style="font-size:1.1em;"><strong>QuantiModo <?php echo QMWP::PLUGIN_VERSION; ?></strong></span><br/>by
                         <a href="https://app.quantimo.do" target="_blank"><strong>QuantiModo</strong></a>
                     </p>
 
@@ -246,33 +247,24 @@ $cc_ux = qmwp_cc_ux();
                         <p>Currently plugin supports following shortcodes:</p>
                         <ul>
                             <li>
-                                <strong>[qmwp_mood_tracker]</strong> - shortcode with a mood rating faces (like
-                                 the
-                                <a target="_blank"
-                                   href="https://chrome.google.com/webstore/detail/moodimodo-beta/lncgjbhijecjdbdgeigfodmiimpmlelg">
-                                    MoodiModo Chrome extension
-                                </a>) Gives
-                                capability to post mood rating [1..5]
+                                <strong>[qmwp_mood_tracker]</strong> - gives capability to post mood measurement
+                                <a target="_blank" href="/qmwp-mood-tracker">Take a look</a>)
                             </li>
                             <li>
-                                <strong>[qmwp_timeline]</strong> - renders
-                                <a href="https://app.quantimo.do/analyze/" target="_blank">
-                                    QuantiModo analyze screen
-                                </a> 
+                                <strong>[qmwp_timeline]</strong> - renders timeline shortcode
+                                <a href="/qmwp-timeline" target="_blank">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_connectors]</strong> - renders
-                                <a href="https://app.quantimo.do/connectv3/" target="_blank">
-                                    QuantiModo connectors screen
-                                </a>
+                            <li><strong>[qmwp_connectors]</strong> - renders connectors shortcode
+                                <a href="/qmwp-connectors" target="_blank">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_manage_accounts]</strong> - renders
-                                <a href="https://app.quantimo.do/dashboard/accounts/" target="_blank">
-                                    QuantiModo accounts management screen
-                                </a> with all it's functional capabilities
+                            <li><strong>[qmwp_manage_accounts]</strong> - renders accounts management shortcode
+                                <a href="/qmwp-manage-accounts" target="_blank">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - renders a timeline
-                                chart which gives
-                                capability to visualize correlations
+                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - renders a timeline shortcode
+                                <a href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
+                            </li>
+                            <li><strong>[qmwp_search_correlations]</strong> - renders correlations search shortcode
+                                <a href="/qmwp-search-correlations">Take a look</a>
                             </li>
                         </ul>
 

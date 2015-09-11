@@ -104,11 +104,19 @@ Class QMWP
         'qmwp_quantimodo_api_enabled' => 0,                                    // 0, 1
         'qmwp_quantimodo_api_id' => '',                                        // any string
         'qmwp_quantimodo_api_secret' => '',                                    // any string
-        'qmwp_x_mashape_key'    =>  '',                                     //any string
+        'qmwp_x_mashape_key' => '',                                     //any string
         'qmwp_http_util' => 'curl',                                        // curl, stream-context
         'qmwp_http_util_verify_ssl' => 1,                                // 0, 1
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
+        'qmwp_plugin_pages' => array(
+            'QMWP Search Correlations' => '[qmwp_search_correlations]',
+            'QMWP Mood Tracker' => '[qmwp_mood_tracker]',
+            'QMWP Connectors' => '[qmwp_connectors]',
+            'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
+            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline]',
+            'QMWP Timeline' => '[qmwp_timeline]',
+        )
     );
 
     /**
@@ -135,6 +143,7 @@ Class QMWP
         add_shortcode('qmwp_manage_accounts', array($this, 'qmwp_manage_accounts'));
         add_shortcode('qmwp_bargraph_scatterplot_timeline', array($this, 'qmwp_bargraph_scatterplot_timeline'));
         add_shortcode('qmwp_timeline', array($this, 'qmwp_timeline'));
+        add_shortcode('qmwp_search_correlations', array($this, 'qmwp_search_correlations'));
 
         // restore default settings if necessary; this might get toggled by the admin or forced by a new version of the plugin:
         if (get_option("qmwp_restore_default_settings")) {
@@ -181,6 +190,7 @@ Class QMWP
      */
     function qmwp_activate()
     {
+        $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
     }
 
     /**
@@ -188,6 +198,9 @@ Class QMWP
      */
     function qmwp_deactivate()
     {
+
+        $this->delete_plugin_pages($this->settings['qmwp_plugin_pages']);
+
     }
 
     /**
@@ -481,7 +494,7 @@ Class QMWP
      */
     function qmwp_end_login($msg)
     {
-        $last_url = $_SESSION["QMWP"]["LAST_URL"];
+        $last_url = isset($_SESSION["QMWP"]["LAST_URL"]) ? $_SESSION["QMWP"]["LAST_URL"] : null;
         unset($_SESSION["QMWP"]["LAST_URL"]);
         $_SESSION["QMWP"]["RESULT"] = $msg;
         $this->qmwp_clear_login_state();
@@ -508,7 +521,9 @@ Class QMWP
                 break;
         }
         //header("Location: " . $redirect_url);
-        wp_safe_redirect($last_url);
+        if (!empty($redirect_url)) {
+            wp_safe_redirect($redirect_url);
+        }
         die();
     }
 
@@ -1107,6 +1122,109 @@ Class QMWP
         return $templateContent;
     }
 
+    /**
+     * Will add script with JS alert if variable is null or undefined
+     *
+     * call: add_null_variable_alert(array(false => 'Ops!'), '<div></div>');
+     * will return: <div><script>alert("Ops!");</script></div>
+     */
+    private function add_null_global_variable_alerts($variables, $templateContent)
+    {
+        $alertsHtmlString = "<script id='null-global-vars-alerts'>\n";
+        foreach ($variables as $value => $message) {
+
+            if (empty($value)) {
+                $alertsHtmlString .= "alert('" . $message . "');\n";
+            }
+
+        }
+        $alertsHtmlString .= "</script>\n";
+
+        return $alertsHtmlString .= $templateContent;
+
+    }
+
+    /**
+     * Do some decoration of a template before returning HTML
+     * Currently it sets global JS variables anb adds an alerts
+     *
+     * @param $template
+     * @return string
+     */
+    private function process_template($template)
+    {
+
+        $access_token = $this->access_token();
+
+        $template_content = $this->set_js_variables($template, array(
+            'accessToken' => $access_token,
+            'apiHost' => QMWPAuth::API_HOST,
+            'mashapeKey' => get_option('qmwp_x_mashape_key')    //from settings
+        ));
+
+        $template_content = $this->add_null_global_variable_alerts(array(
+            get_option('qmwp_x_mashape_key') =>
+                'Please go to:\nhttps://market.mashape.com/quantimodo/quantimodo\n' .
+                'and sign up to get an X-Mashape-Key.\nThen enter it in:\n' .
+                $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] .
+                '/wp-admin/options-general.php?page=QuantiModo'
+        ), $template_content);
+
+        return $template_content;
+
+    }
+
+    /**
+     * Adds page for current WP instance with given title and content string
+     * @param $pageTitle
+     * @param $pageContent
+     */
+    private function create_page($pageTitle, $pageContent)
+    {
+        $page = array(
+            'post_title' => $pageTitle,
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_type' => 'page',
+            'post_name' => $pageTitle,
+            'post_content' => $pageContent
+        );
+
+        // Insert the post into the database
+        wp_insert_post($page);
+    }
+
+    /**
+     * Creates plugin related posts and pages
+     * @param $pages array
+     */
+    private function create_plugin_pages($pages)
+    {
+
+        foreach ($pages as $pageTitle => $pageContent) {
+            if (is_null(get_page_by_title($pageTitle))) {
+                $this->create_page($pageTitle, $pageContent);
+            }
+        }
+
+    }
+
+    /**
+     * Deletes plugin related posts or pages
+     * @param $pages array
+     */
+    private function delete_plugin_pages($pages)
+    {
+
+        foreach ($pages as $pageTitle => $pageContent) {
+            $page = get_page_by_title($pageTitle);
+            if (!is_null($page)) {
+                wp_delete_post($page->ID, true);
+            }
+        }
+
+    }
+
     // ====================
     // PLUGIN SHORT CODES
     // ====================
@@ -1124,13 +1242,7 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-mood-tracker', $version);
 
-        $access_token = $this->access_token();
-
-        $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'accessToken' => $access_token,
-            'apiHost' => QMWPAuth::API_HOST,
-            'mashapeKey'   =>  get_option('qmwp_x_mashape_key')    //from settings
-        ));
+        $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
     }
@@ -1149,13 +1261,7 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-connectors', $version);
 
-        $access_token = $this->access_token();
-
-        $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'accessToken' => $access_token,
-            'apiHost' => QMWPAuth::API_HOST,
-            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
-        ));
+        $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
 
@@ -1174,13 +1280,7 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-manage-accounts', $version);
 
-        $access_token = $this->access_token();
-
-        $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'accessToken' => $access_token,
-            'apiHost' => QMWPAuth::API_HOST,
-            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
-        ));
+        $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
     }
@@ -1198,13 +1298,7 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-bargraph-scatterplot-timeline', $version);
 
-        $access_token = $this->access_token();
-
-        $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'accessToken' => $access_token,
-            'apiHost' => QMWPAuth::API_HOST,
-            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
-        ));
+        $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
 
@@ -1223,16 +1317,28 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
 
-        $access_token = $this->access_token();
-
-        $template_content = $this->set_js_variables($pluginContentHTML, array(
-            'accessToken' => $access_token,
-            'apiHost' => QMWPAuth::API_HOST,
-            'mashapeKey'   =>  get_option('qmwp_x_mashape_key'),   //from settings
-        ));
+        $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
 
+    }
+
+    /**
+     * Return rendered html string with plugin content
+     * @param $attributes
+     * @return string
+     */
+    function qmwp_search_correlations($attributes)
+    {
+        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_search_correlations');
+
+        $version = $attributes['version'];
+
+        $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
+
+        $template_content = $this->process_template($pluginContentHTML);
+
+        return $template_content;
     }
 
 }

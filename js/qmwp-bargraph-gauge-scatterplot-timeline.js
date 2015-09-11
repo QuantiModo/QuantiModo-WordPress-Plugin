@@ -494,7 +494,9 @@ var AnalyzePage = function () {
 
         init: function () {
             retrieveSettings();
-            if (accessToken) {
+            if (typeof accessToken == "undefined" || !accessToken) {
+                window.location.href = "?connect=quantimodo";
+            } else {
                 refreshMeasurementsRange(function () {
                     refreshVariables([], function () {
                         categoryListUpdated();
