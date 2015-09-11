@@ -99,7 +99,8 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                 if ($scope.selectOutputAsType === "effect") {
                     $scope.resultTitle = "Strongest predictors of " + variable;
                 }
-                $scope.countAndTime = $scope.totalCorrelations.length + " results  (" + (((new Date()).getTime() - timeToSearch) / 1000) + " seconds)";
+                $scope.countAndTime = $scope.totalCorrelations.length +
+                    " results  (" + (((new Date()).getTime() - timeToSearch) / 1000) + " seconds)";
                 if ($scope.totalCorrelations.length === 0) {
                     $scope.resultTitle = "Your search for variable " + variable + " does not have any results";
                 }
@@ -122,44 +123,45 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
 
 
 // The autocomplete directive
-quantimodoSearch.directive('autoComplete', ['QuantimodoSearchService', function (QuantimodoSearchService) {
-    return {
-        link: function (scope, element) {
+quantimodoSearch.directive('autoComplete', ['QuantimodoSearchService',
+    function (QuantimodoSearchService) {
+        return {
+            link: function (scope, element) {
 
-            // init jqueryUi autocomplete
-            element.autocomplete({
-                source: function (request, response) {
-                    var searchURL = QuantimodoSearchConstants.sourceURL +
-                        QuantimodoSearchConstants.vURL + request.term;
-                    QuantimodoSearchService.getData(searchURL, {},
-                        function (variables) {
-                            response(jQuery.map(variables,
-                                function (item) {
-                                    return {
-                                        label: item.name,
-                                        value: item.name
-                                    };
-                                }
-                            ));
+                // init jqueryUi autocomplete
+                element.autocomplete({
+                    source: function (request, response) {
+                        var searchURL = QuantimodoSearchConstants.sourceURL +
+                            QuantimodoSearchConstants.vURL + request.term;
+                        QuantimodoSearchService.getData(searchURL, {},
+                            function (variables) {
+                                response(jQuery.map(variables,
+                                    function (item) {
+                                        return {
+                                            label: item.name,
+                                            value: item.name
+                                        };
+                                    }
+                                ));
+                            }
+                        );
+                    },
+                    select: function (event, ui) {
+                        scope.searchVariable = ui.item.value;
+                        if (scope.autoLoad) {
+                            scope.showCorrelations(ui.item.value);
                         }
-                    );
-                },
-                select: function (event, ui) {
-                    scope.searchVariable = ui.item.value;
-                    if (scope.autoLoad) {
-                        scope.showCorrelations(ui.item.value);
+                    },
+                    focus: function (event, ui) {
+                        scope.searchVariable = ui.item.value;
+                        if (scope.autoLoad) {
+                            scope.showCorrelations(ui.item.value);
+                        }
                     }
-                },
-                focus: function (event, ui) {
-                    scope.searchVariable = ui.item.value;
-                    if (scope.autoLoad) {
-                        scope.showCorrelations(ui.item.value);
-                    }
-                }
-            });
-        }
-    };
-}]);
+                });
+            }
+        };
+    }]);
 
 
 
