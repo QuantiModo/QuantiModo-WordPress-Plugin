@@ -19,97 +19,100 @@ quantimodoSearch.config(function ($httpProvider) {
 });
 
 // The controller
-quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'QuantimodoSearchService', function ($scope, QuantimodoSearchService) {
-    $scope.correlations = [];
-    $scope.totalCorrelations = [];
-    $scope.maxSize = 10;
-    $scope.itemsPerPage = 10;
-    $scope.autoLoad = false;
-    $scope.homeShown = true;
-    $scope.selectOutputAsType = 0;
-    $scope.searchVariable = '';
-    $scope.resultTitle = '';
-    $scope.countAndTime = '';
+quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'QuantimodoSearchService',
+    function ($scope, QuantimodoSearchService) {
+        $scope.correlations = [];
+        $scope.totalCorrelations = [];
+        $scope.maxSize = 10;
+        $scope.itemsPerPage = 10;
+        $scope.autoLoad = false;
+        $scope.homeShown = true;
+        $scope.selectOutputAsType = 0;
+        $scope.searchVariable = '';
+        $scope.resultTitle = '';
+        $scope.countAndTime = '';
 
-    $scope.loadCurrentPageData = function () {
-        $scope.correlations = $scope.totalCorrelations.slice(($scope.bigCurrentPage - 1) * $scope.itemsPerPage, $scope.itemsPerPage * $scope.bigCurrentPage);
-    };
+        $scope.loadCurrentPageData = function () {
+            $scope.correlations =
+                $scope.totalCorrelations.slice(($scope.bigCurrentPage - 1) *
+                    $scope.itemsPerPage, $scope.itemsPerPage * $scope.bigCurrentPage);
+        };
 
-    $scope.loadData = function () {
-        $scope.bigTotalItems = $scope.totalCorrelations.length;
-        $scope.bigCurrentPage = 1;
-        $scope.loadCurrentPageData();
-    };
+        $scope.loadData = function () {
+            $scope.bigTotalItems = $scope.totalCorrelations.length;
+            $scope.bigCurrentPage = 1;
+            $scope.loadCurrentPageData();
+        };
 
-    $scope.setPage = function (pageNo) {
-        $scope.currentPage = pageNo;
-    };
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
 
-    $scope.pageChanged = function () {
-        $scope.loadCurrentPageData();
-    };
+        $scope.pageChanged = function () {
+            $scope.loadCurrentPageData();
+        };
 
-    $scope.hasMoreThanTen = function () {
-        return $scope.totalCorrelations.length > 10;
-    };
+        $scope.hasMoreThanTen = function () {
+            return $scope.totalCorrelations.length > 10;
+        };
 
-    $scope.isNotEmpty = function () {
-        return $scope.totalCorrelations.length > 0;
-    };
+        $scope.isNotEmpty = function () {
+            return $scope.totalCorrelations.length > 0;
+        };
 
-    $scope.showCorrelations = function (variable) {
-        var timeToSearch = (new Date()).getTime();
-        var correlationURL = '';
-        $scope.homeShown = false;
-        $scope.autoLoad = true;
+        $scope.showCorrelations = function (variable) {
+            var timeToSearch = (new Date()).getTime();
+            var correlationURL = '';
+            $scope.homeShown = false;
+            $scope.autoLoad = true;
 
-        var queryVariable = variable.replace(/ /g, '+');
+            var queryVariable = variable.replace(/ /g, '+');
 
 
-        /*if ($scope.selectOutputAsType === 'effect') {
-         correlationURL = QuantimodoSearchConstants.predOfURL;
-         } else {
-         correlationURL = QuantimodoSearchConstants.predByURL;
-         } */
-        correlationURL = QuantimodoSearchConstants.sourceURL + QuantimodoSearchConstants.cURL + variable;
+            /*if ($scope.selectOutputAsType === 'effect') {
+             correlationURL = QuantimodoSearchConstants.predOfURL;
+             } else {
+             correlationURL = QuantimodoSearchConstants.predByURL;
+             } */
+            correlationURL = QuantimodoSearchConstants.sourceURL + QuantimodoSearchConstants.cURL + variable;
 
-        correlationURL = correlationURL.replace('_VARIABLE_', queryVariable);
+            correlationURL = correlationURL.replace('_VARIABLE_', queryVariable);
 
-        QuantimodoSearchService.getData(correlationURL, {'effectOrCause': $scope.selectOutputAsType},
-            function (correlations) {
-                $scope.totalCorrelations = [];
-                if (jQuery.isArray(correlations)) {
-                    jQuery.each(correlations, function (_, correlation) {
-                        if ($scope.selectOutputAsType === 'effect') {
-                            $scope.totalCorrelations.push({
-                                correlation: correlation.correlationCoefficient,
-                                variable: correlation.cause,
-                                category: correlation.causeCategory
-                            });
-                        } else {
-                            $scope.totalCorrelations.push({
-                                correlation: correlation.correlationCoefficient,
-                                variable: correlation.effect,
-                                category: correlation.effectCategory
-                            });
-                        }
-                    });
+            QuantimodoSearchService.getData(correlationURL, {'effectOrCause': $scope.selectOutputAsType},
+                function (correlations) {
+                    $scope.totalCorrelations = [];
+                    if (jQuery.isArray(correlations)) {
+                        jQuery.each(correlations, function (_, correlation) {
+                            if ($scope.selectOutputAsType === 'effect') {
+                                $scope.totalCorrelations.push({
+                                    correlation: correlation.correlationCoefficient,
+                                    variable: correlation.cause,
+                                    category: correlation.causeCategory
+                                });
+                            } else {
+                                $scope.totalCorrelations.push({
+                                    correlation: correlation.correlationCoefficient,
+                                    variable: correlation.effect,
+                                    category: correlation.effectCategory
+                                });
+                            }
+                        });
+                    }
+                    $scope.resultTitle = 'Strongly predicted by ' + variable;
+                    if ($scope.selectOutputAsType === 'effect') {
+                        $scope.resultTitle = 'Strongest predictors of ' + variable;
+                    }
+                    $scope.countAndTime = $scope.totalCorrelations.length +
+                        ' results  (' + (((new Date()).getTime() - timeToSearch) / 1000) + ' seconds)';
+                    if ($scope.totalCorrelations.length === 0) {
+                        $scope.resultTitle = 'Your search for variable ' + variable + ' does not have any results';
+                    }
+                    $scope.loadData();
                 }
-                $scope.resultTitle = 'Strongly predicted by ' + variable;
-                if ($scope.selectOutputAsType === 'effect') {
-                    $scope.resultTitle = 'Strongest predictors of ' + variable;
-                }
-                $scope.countAndTime = $scope.totalCorrelations.length +
-                    ' results  (' + (((new Date()).getTime() - timeToSearch) / 1000) + ' seconds)';
-                if ($scope.totalCorrelations.length === 0) {
-                    $scope.resultTitle = 'Your search for variable ' + variable + ' does not have any results';
-                }
-                $scope.loadData();
-            }
-        );
+            );
 
-    };
-}]);
+        };
+    }]);
 
 
 // The service
