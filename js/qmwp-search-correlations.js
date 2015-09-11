@@ -1,10 +1,10 @@
 var QuantimodoSearchConstants = {
-    sourceURL: 'https://quantimo.do/api/',
+    sourceURL: apiHost + '/api/',
     // sourceURL: 'https://dilshod-dev-wplms.quantimo.do/api/',
     vURL: 'public/variables/search/',
     cURL: 'public/correlations/search/',
-    predOfURL: 'https://quantimo.do/api/v1/variables/_VARIABLE_/public/causes',
-    predByURL: 'https://quantimo.do/api/v1/variables/_VARIABLE_/public/effects',
+    predOfURL: apiHost + '/api/v1/variables/_VARIABLE_/public/causes',
+    predByURL: apiHost + '/api/v1/variables/_VARIABLE_/public/effects',
     method: 'JSONP'
 };
 
@@ -13,6 +13,15 @@ var quantimodoSearch = angular.module('quantimodoSearch', ['ui.bootstrap']);
 
 // Define config
 quantimodoSearch.config(function ($httpProvider) {
+
+    if (typeof mashapeKey !== 'undefined' && mashapeKey) {
+        $httpProvider.defaults.headers.common['X-Mashape-Key'] = mashapeKey;
+    }
+
+    if (typeof accessToken !== 'undefined' && accessToken) {
+        $httpProvider.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+    }
+
     // for CORS requests but we are going to use JSONP so no need to do these lines
     // $httpProvider.defaults.useXDomain = true;
     //  delete $httpProvider.defaults.headers.common['X-Requested-With'];
