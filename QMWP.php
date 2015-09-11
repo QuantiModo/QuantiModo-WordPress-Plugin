@@ -109,6 +109,14 @@ Class QMWP
         'qmwp_http_util_verify_ssl' => 1,                                // 0, 1
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
+        'qmwp_plugin_pages' => array(
+            'QMWP Search Correlations' => '[qmwp_search_correlations]',
+            'QMWP Mood Tracker' => '[qmwp_mood_tracker]',
+            'QMWP Connectors' => '[qmwp_connectors]',
+            'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
+            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline]',
+            'QMWP Timeline' => '[qmwp_timeline]',
+        )
     );
 
     /**
@@ -135,6 +143,7 @@ Class QMWP
         add_shortcode('qmwp_manage_accounts', array($this, 'qmwp_manage_accounts'));
         add_shortcode('qmwp_bargraph_scatterplot_timeline', array($this, 'qmwp_bargraph_scatterplot_timeline'));
         add_shortcode('qmwp_timeline', array($this, 'qmwp_timeline'));
+        add_shortcode('qmwp_search_correlations', array($this, 'qmwp_search_correlations'));
 
         // restore default settings if necessary; this might get toggled by the admin or forced by a new version of the plugin:
         if (get_option("qmwp_restore_default_settings")) {
@@ -181,6 +190,7 @@ Class QMWP
      */
     function qmwp_activate()
     {
+        $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
     }
 
     /**
@@ -188,6 +198,9 @@ Class QMWP
      */
     function qmwp_deactivate()
     {
+
+        $this->delete_plugin_pages($this->settings['qmwp_plugin_pages']);
+
     }
 
     /**
@@ -1161,6 +1174,57 @@ Class QMWP
 
     }
 
+    /**
+     * Adds page for current WP instance with given title and content string
+     * @param $pageTitle
+     * @param $pageContent
+     */
+    private function create_page($pageTitle, $pageContent)
+    {
+        $page = array(
+            'post_title' => $pageTitle,
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_type' => 'page',
+            'post_name' => $pageTitle,
+            'post_content' => $pageContent
+        );
+
+        // Insert the post into the database
+        wp_insert_post($page);
+    }
+
+    /**
+     * Creates plugin related posts and pages
+     * @param $pages array
+     */
+    private function create_plugin_pages($pages)
+    {
+
+        foreach ($pages as $pageTitle => $pageContent) {
+            if (is_null(get_page_by_title($pageTitle))) {
+                $this->create_page($pageTitle, $pageContent);
+            }
+        }
+
+    }
+
+    /**
+     * Deletes plugin related posts or pages
+     * @param $pages array
+     */
+    private function delete_plugin_pages($pages)
+    {
+
+        foreach ($pages as $pageTitle => $pageContent) {
+            $page = get_page_by_title($pageTitle);
+            if (!is_null($page)) {
+                wp_delete_post($page->ID, true);
+            }
+        }
+
+    }
+
     // ====================
     // PLUGIN SHORT CODES
     // ====================
@@ -1257,6 +1321,24 @@ Class QMWP
 
         return $template_content;
 
+    }
+
+    /**
+     * Return rendered html string with plugin content
+     * @param $attributes
+     * @return string
+     */
+    function qmwp_search_correlations($attributes)
+    {
+        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_search_correlations');
+
+        $version = $attributes['version'];
+
+        $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
+
+        $template_content = $this->process_template($pluginContentHTML);
+
+        return $template_content;
     }
 
 }
