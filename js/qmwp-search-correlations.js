@@ -9,7 +9,7 @@ var QuantimodoSearchConstants = {
 };
 
 // Define a new module for our search page app
-var quantimodoSearch = angular.module("quantimodoSearch", ['ui.bootstrap']);
+var quantimodoSearch = angular.module('quantimodoSearch', ['ui.bootstrap']);
 
 // Define config
 quantimodoSearch.config(function ($httpProvider) {
@@ -63,10 +63,10 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
         $scope.homeShown = false;
         $scope.autoLoad = true;
 
-        var queryVariable = variable.replace(/ /g, "+");
+        var queryVariable = variable.replace(/ /g, '+');
 
 
-        /*if ($scope.selectOutputAsType === "effect") {
+        /*if ($scope.selectOutputAsType === 'effect') {
          correlationURL = QuantimodoSearchConstants.predOfURL;
          } else {
          correlationURL = QuantimodoSearchConstants.predByURL;
@@ -80,7 +80,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                 $scope.totalCorrelations = [];
                 if (jQuery.isArray(correlations)) {
                     jQuery.each(correlations, function (_, correlation) {
-                        if ($scope.selectOutputAsType === "effect") {
+                        if ($scope.selectOutputAsType === 'effect') {
                             $scope.totalCorrelations.push({
                                 correlation: correlation.correlationCoefficient,
                                 variable: correlation.cause,
@@ -95,14 +95,14 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                         }
                     });
                 }
-                $scope.resultTitle = "Strongly predicted by " + variable;
-                if ($scope.selectOutputAsType === "effect") {
-                    $scope.resultTitle = "Strongest predictors of " + variable;
+                $scope.resultTitle = 'Strongly predicted by ' + variable;
+                if ($scope.selectOutputAsType === 'effect') {
+                    $scope.resultTitle = 'Strongest predictors of ' + variable;
                 }
                 $scope.countAndTime = $scope.totalCorrelations.length +
-                    " results  (" + (((new Date()).getTime() - timeToSearch) / 1000) + " seconds)";
+                    ' results  (' + (((new Date()).getTime() - timeToSearch) / 1000) + ' seconds)';
                 if ($scope.totalCorrelations.length === 0) {
-                    $scope.resultTitle = "Your search for variable " + variable + " does not have any results";
+                    $scope.resultTitle = 'Your search for variable ' + variable + ' does not have any results';
                 }
                 $scope.loadData();
             }
