@@ -1,36 +1,36 @@
 .fieldsContainer {
-    font-size:0;
+    font-size: 0;
     max-width: 100%;
     position: relative;
 }
 
-.searchsubmit{
-    padding:6px 20px !important;	
-    text-transform: uppercase  !important;
-    background-color:#F16645  !important;
-    color:#FFF  !important;      
-    border-bottom-right-radius:2px  !important;
-    border-top-right-radius:2px  !important;
-    border-bottom-left-radius:0  !important;
-    border-top-left-radius:0  !important;
-    font-size:14px  !important;
-    height: 34px  !important;
-    border: 1px solid #EFEFEF  !important;    
-    border-left:none !important;
-    vertical-align: bottom  !important;
+.searchsubmit {
+    padding: 6px 20px !important;
+    text-transform: uppercase !important;
+    background-color: #F16645 !important;
+    color: #FFF !important;
+    border-bottom-right-radius: 2px !important;
+    border-top-right-radius: 2px !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    font-size: 14px !important;
+    height: 34px !important;
+    border: 1px solid #EFEFEF !important;
+    border-left: none !important;
+    vertical-align: bottom !important;
     margin-bottom: 10px;
     margin-top: 0 !important;
 }
 
 .searchsubmit:active {
-    background-color:#d65a3d  !important;
+    background-color: #d65a3d !important;
 }
 
-.selectOutputAsType{
-    border:1px solid #EFEFEF;
-    padding: 6px 10px;  
+.selectOutputAsType {
+    border: 1px solid #EFEFEF;
+    padding: 6px 10px;
     color: #888;
-    font-size:14px;
+    font-size: 14px;
     height: 34px;
     vertical-align: bottom;
     margin-bottom: 10px;
@@ -41,14 +41,14 @@
     outline: none;
 }
 
-.searchVariable{
-    border:1px solid #EFEFEF;	
-    width:100%;
+.searchVariable {
+    border: 1px solid #EFEFEF;
+    width: 100%;
     max-width: 400px;
-    padding: 6px 20px;       
+    padding: 6px 20px;
     border-left: 1px solid #EFEFEF;
     color: #888;
-    font-size:14px;
+    font-size: 14px;
     height: 34px;
     vertical-align: bottom;
     margin-bottom: 10px;
@@ -59,109 +59,109 @@
     display: none;
 }
 
-#searchResultRegion {     
-    margin-left:100px;
+#searchResultRegion {
+    margin-left: 100px;
     margin-top: 10px;
 }
 
 /* Responsive stuffs */
 @media only screen and (max-width: 768px) {
-    #searchResultRegion {     
-		margin: 15px !important;
-		overflow: hidden;
+    #searchResultRegion {
+        margin: 15px !important;
+        overflow: hidden;
     }
-	
-	.searchVariable {
-		width: 90%;
-	}
-	
-	a.result-title {
-		display: block;
-		width: 92%;
-	}
-	
-	a.shop-cart {
-		position: absolute;
-		top: 0;
-		right: 0;
-	}
+
+    .searchVariable {
+        width: 90%;
+    }
+
+    a.result-title {
+        display: block;
+        width: 92%;
+    }
+
+    a.shop-cart {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }
 
 #searchResultRegion a, a:visited {
-	outline:none;
-	color:#389dc1;
+    outline: none;
+    color: #389dc1;
 }
 
-#searchResultRegion a:hover{
-	text-decoration:none;
+#searchResultRegion a:hover {
+    text-decoration: none;
 }
 
-#searchResultRegion section, footer, header, aside, nav{
-	display: block;
+#searchResultRegion section, footer, header, aside, nav {
+    display: block;
 }
 
-#searchResultList ul{
-	list-style: none;
-	width: auto;
-	text-align: left;
-	padding: 0;
-	margin: 0;
+#searchResultList ul {
+    list-style: none;
+    width: auto;
+    text-align: left;
+    padding: 0;
+    margin: 0;
 }
 
-#searchResultList ul li{
-	border-bottom: 1px solid #ddd;
-	padding: 10px 0;
-	overflow: hidden;
-        padding-left: 0;
+#searchResultList ul li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    overflow: hidden;
+    padding-left: 0;
 }
 
-#searchResultList ul li img{
-	width: 20px;
-	border:none;
+#searchResultList ul li img {
+    width: 20px;
+    border: none;
 }
 
-#searchResultList ul li p{
-	margin-left: 75px;
-	font-weight: bold;
-	padding-top: 12px;
-	color:#6e7a7f;
+#searchResultList ul li p {
+    margin-left: 75px;
+    font-weight: bold;
+    padding-top: 12px;
+    color: #6e7a7f;
 }
 
 .resultVariableName {
     font-size: 18px;
     font-weight: bold;
-    color:#1a0dab;
-	position: relative;
+    color: #1a0dab;
+    position: relative;
 }
 
 .resultCategoryName {
     font-size: 12px;
     font-weight: bold;
-    color:#777;
+    color: #777;
 }
 
 .correlationValue {
-    margin-left:20px;
+    margin-left: 20px;
     font-size: 12px;
     font-weight: bold;
-    color:#777;
+    color: #777;
 }
 
 .predictor {
     font-weight: bold;
     font-size: 20px;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .searchFormByDefault {
-    width:100%;
-    text-align: center;    
-    margin-top:30px;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
 }
 
 #paginationSearchResultList {
     font-size: 0;
-    width:100%;
+    width: 100%;
 }
 
 #paginationSearchResultList .pagination {
@@ -266,11 +266,10 @@
     border-top-right-radius: 3px;
 }
 
-
 .qmSearchLogo {
     background: url(images/quantimodo.png) center center no-repeat;
     background-size: 100% auto;
-	height: 150px;
+    height: 150px;
     margin: auto;
     max-width: 500px;
     min-width: 200px;
@@ -278,7 +277,7 @@
 }
 
 .qmSearchMiniLogo {
-    width:123px;
+    width: 123px;
     height: 26px;
     background: url(images/quantimodo.png) left top no-repeat;
     background-size: 100% auto;
