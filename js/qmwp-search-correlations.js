@@ -13,7 +13,6 @@ var quantimodoSearch = angular.module('quantimodoSearch', ['ui.bootstrap']);
 
 // Define config
 quantimodoSearch.config(function ($httpProvider) {
-    console.log($httpProvider.defaults.headers.common);
 
     if (typeof mashapeKey !== 'undefined' && mashapeKey) {
         $httpProvider.defaults.headers.common['X-Mashape-Key'] = mashapeKey;
