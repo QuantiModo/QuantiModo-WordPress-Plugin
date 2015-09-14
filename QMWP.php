@@ -846,7 +846,7 @@ Class QMWP
     {
         // generate the atts once (cache them), so we can use it for all buttons without computing them each time:
         $site_url = get_bloginfo('url');
-        $redirect_to = urlencode($_GET['redirect_to']);
+        $redirect_to = isset($_GET['redirect_to']) ? urlencode($_GET['redirect_to']) : null;
         if ($redirect_to) {
             $redirect_to = "&redirect_to=" . $redirect_to;
         }
@@ -982,50 +982,7 @@ Class QMWP
      */
     function qmwp_linked_accounts()
     {
-        // get the current user:
-        global $current_user;
-        get_currentuserinfo();
-        $user_id = $current_user->ID;
-        // get the qm_identity records:
-        global $wpdb;
-        $usermeta_table = $wpdb->usermeta;
-        $query_string = "SELECT * FROM $usermeta_table WHERE $user_id = $usermeta_table.user_id AND $usermeta_table.meta_key = 'qm_identity'";
-        $query_result = $wpdb->get_results($query_string);
-        // list the qm_identity records:
-        echo "<div id='qmwp-linked-accounts'>";
-        echo "<h3>Linked Accounts</h3>";
-        echo "<p>Manage the linked accounts which you have previously authorized to be used for logging into this website.</p>";
-        echo "<table class='form-table'>";
-        echo "<tr valign='top'>";
-        echo "<th scope='row'>Your Linked Providers</th>";
-        echo "<td>";
-        if (count($query_result) == 0) {
-            echo "<p>You currently don't have any accounts linked.</p>";
-        }
-        echo "<div class='qmwp-linked-accounts'>";
-        foreach ($query_result as $qmwp_row) {
-            $qm_identity_parts = explode('|', $qmwp_row->meta_value);
-            $oauth_provider = $qm_identity_parts[0];
-            $oauth_id = $qm_identity_parts[1]; // keep this private, don't send to client
-            $time_linked = $qm_identity_parts[2];
-            $local_time = strtotime("-" . $_COOKIE['gmtoffset'] . ' hours', $time_linked);
-            echo "<div>" . $oauth_provider . " on " . date('F d, Y h:i A', $local_time) . " <a class='qmwp-unlink-account' data-qmwp-identity-row='" . $qmwp_row->umeta_id . "' href='#'>Unlink</a></div>";
-        }
-        echo "</div>";
-        echo "</td>";
-        echo "</tr>";
-        echo "<tr valign='top'>";
-        echo "<th scope='row'>Link Another Provider</th>";
-        echo "<td>";
-        $design = get_option('qmwp_login_form_show_profile_page');
-        if ($design != "None") {
-            // TODO: we need to use $settings defaults here, not hard-coded defaults...
-            echo $this->qmwp_login_form_content($design, 'none', 'buttons-row', 'Link', 'left', 'always', 'never', 'Select a provider:', 'Select a provider:', 'Authenticating...', '');
-        }
-        echo "</div>";
-        echo "</td>";
-        echo "</td>";
-        echo "</table>";
+        include_once('includes/modules/linked-accounts.php');
     }
 
     // ====================
