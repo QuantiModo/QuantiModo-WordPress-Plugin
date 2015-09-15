@@ -192,7 +192,6 @@ AnalyzeChart = function () {
             AnalyzePage.hideCorrelationGauge();
         }
         else {
-            AnalyzePage.showScatterplot();
             Quantimodo.getPairs({
                     'effect': effect.originalName,
                     'cause': cause.originalName,
@@ -250,6 +249,8 @@ AnalyzeChart = function () {
                         correlationGauge.series[0].points[0].update(correlation);
 
                         setAngularChartText(correlation, scatterplotDots.length);
+
+                        AnalyzePage.showScatterplot();
                     }
                 });
         }
