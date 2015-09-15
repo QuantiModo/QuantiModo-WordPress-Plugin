@@ -194,7 +194,7 @@ AnalyzeChart = function () {
         else {
             //use effect and cause to create pairs
 
-            function getValueForDate(measurements, date) {
+            var getValueForDate = function (measurements, date) {
                 var measurementValue = null;
                 for (var j = 0; j < measurements.length; j++) {
                     if (measurements[j][0] == date) {
@@ -243,10 +243,18 @@ AnalyzeChart = function () {
 
                     scatterDots.push(dot);
 
-                    if (xMax < dot.x) xMax = dot.x;
-                    if (yMax < dot.y) yMax = dot.y;
-                    if (xMin > dot.x) xMin = dot.x;
-                    if (yMin > dot.y) yMin = dot.y;
+                    if (xMax < dot.x) {
+                        xMax = dot.x;
+                    }
+                    if (yMax < dot.y) {
+                        yMax = dot.y;
+                    }
+                    if (xMin > dot.x) {
+                        xMin = dot.x;
+                    }
+                    if (yMin > dot.y) {
+                        yMin = dot.y;
+                    }
 
                 }
 
