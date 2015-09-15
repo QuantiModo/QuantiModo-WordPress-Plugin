@@ -204,12 +204,6 @@ AnalyzeChart = function () {
                 return measurementValue;
             }
 
-            console.debug('Effect:');
-            console.debug(effect);
-            console.debug('Cause:');
-            console.debug(cause);
-
-
             /* Local pairs creation */
 
             var inputDates = jQuery.map(cause.timeSeries, function (value) {
