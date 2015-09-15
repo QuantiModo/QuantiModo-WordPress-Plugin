@@ -202,7 +202,7 @@ AnalyzeChart = function () {
                     }
                 }
                 return measurementValue;
-            }
+            };
 
             /* Local pairs creation */
 
