@@ -831,11 +831,12 @@ function getBargraph(bUseCache) {
             }
         }
     }).done(function (data) {
-        if (valAs == 'cause')
+        if (valAs == 'cause') {
             bargraphDataAsCause = data;
-        else
+        } else {
             bargraphDataAsEffect = data;
-        jsonCallback(data);
+            jsonCallback(data);
+        }
     })
 }
 function resetBarGraph() {

@@ -192,66 +192,165 @@ AnalyzeChart = function () {
             AnalyzePage.hideCorrelationGauge();
         }
         else {
-            AnalyzePage.showScatterplot();
-            Quantimodo.getPairs({
-                    'effect': effect.originalName,
-                    'cause': cause.originalName,
-                    'startTime': AnalyzePage.getStartTime(),
-                    'endTime': AnalyzePage.getEndTime()
-                },
-                function (measurements) {
-                    if (measurements.length) {
-                        var scatterplotDots = [];
-                        var xMax = -Infinity, yMax = -Infinity, xMin = +Infinity, yMin = +Infinity;
+            //use effect and cause to create pairs
 
-                        for (var i in measurements) {
-                            var dot = {
-                                x: measurements[i].causeMeasurement,
-                                y: measurements[i].effectMeasurement
-                            };
-
-                            dot.time = moment(measurements[i].timestamp).format('X') * 1000;
-
-                            scatterplotDots.push(dot);
-
-                            if (xMax < dot.x) xMax = dot.x;
-                            if (yMax < dot.y) yMax = dot.y;
-                            if (xMin > dot.x) xMin = dot.x;
-                            if (yMin > dot.y) yMin = dot.y;
-                        }
-
-                        yMax = yMax * 1.1;
-                        xMax = xMax * 1.1;
-
-                        scatterplotChart.setTitle({text: versus});
-                        scatterplotChart.yAxis[0].update({
-                            min: yMin,
-                            max: yMax,
-                            title: {text: effect.variableName + ' (' + effect.unit + ')'}
-                        }, false);
-                        scatterplotChart.xAxis[0].update({
-                            min: xMin,
-                            max: xMax,
-                            title: {text: cause.variableName + ' (' + cause.unit + ')'}
-                        }, false);
-                        scatterplotChart.tooltip.options.formatter = function () {
-                            return '<b>' + Highcharts.dateFormat('%Y %b %d', this.point.time) + '</b><br>' +
-                                '<span style="color: ' + effectColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + effect.unit + ' (' + effect.source + ')</span> with ' +
-                                '<span style="color: ' + causeColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + cause.unit + ' (' + cause.source + ')</span>';
-                        };
-
-                        scatterplotChart.series[0].setData(QuantimodoMath.linearRegressionEndpoints(scatterplotDots, cause.minimum, cause.maximum), false);
-                        scatterplotChart.series[1].update({name: versus}, false);
-                        scatterplotChart.series[1].setData(scatterplotDots, false);
-
-                        scatterplotChart.redraw();
-
-                        var correlation = Math.min(1, Math.max(-1, QuantimodoMath.correlationCoefficient(scatterplotDots)));
-                        correlationGauge.series[0].points[0].update(correlation);
-
-                        setAngularChartText(correlation, scatterplotDots.length);
+            var getValueForDate = function (measurements, date) {
+                var measurementValue = null;
+                for (var j = 0; j < measurements.length; j++) {
+                    if (measurements[j][0] == date) {
+                        measurementValue = measurements[j][1];
                     }
-                });
+                }
+                return measurementValue;
+            };
+
+            /* Local pairs creation */
+
+            var inputDates = jQuery.map(cause.timeSeries, function (value) {
+                return value[0];
+            });
+
+            var outputDates = jQuery.map(effect.timeSeries, function (value) {
+                return value[0];
+            });
+
+            var mergedDates = inputDates;
+
+            jQuery.each(outputDates, function (idx, date) {
+                if (jQuery.inArray(date, inputDates) < 0) {
+                    mergedDates.push(date);
+                }
+            });
+
+            inputDates.sort();
+
+            var xMax = -Infinity, yMax = -Infinity, xMin = +Infinity, yMin = +Infinity;
+            var scatterDots = [];
+
+            jQuery.each(mergedDates, function (idx, date) {
+
+                var addToXy = true;
+                var inputVar = getValueForDate(cause.timeSeries, date);
+                var outputVar = getValueForDate(effect.timeSeries, date);
+
+                if (inputVar && outputVar) {
+
+                    var dot = {
+                        time: date,
+                        x: inputVar,
+                        y: outputVar
+                    };
+
+                    scatterDots.push(dot);
+
+                    if (xMax < dot.x) {
+                        xMax = dot.x;
+                    }
+                    if (yMax < dot.y) {
+                        yMax = dot.y;
+                    }
+                    if (xMin > dot.x) {
+                        xMin = dot.x;
+                    }
+                    if (yMin > dot.y) {
+                        yMin = dot.y;
+                    }
+
+                }
+
+            });
+
+            yMax = yMax * 1.1;
+            xMax = xMax * 1.1;
+
+            scatterplotChart.setTitle({text: versus});
+            scatterplotChart.yAxis[0].update({
+                min: yMin,
+                max: yMax,
+                title: {text: effect.variableName + ' (' + effect.unit + ')'}
+            }, false);
+            scatterplotChart.xAxis[0].update({
+                min: xMin,
+                max: xMax,
+                title: {text: cause.variableName + ' (' + cause.unit + ')'}
+            }, false);
+            scatterplotChart.tooltip.options.formatter = function () {
+                return '<b>' + Highcharts.dateFormat('%Y %b %d', this.point.time) + '</b><br>' +
+                    '<span style="color: ' + effectColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + effect.unit + ' (' + effect.source + ')</span> with ' +
+                    '<span style="color: ' + causeColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + cause.unit + ' (' + cause.source + ')</span>';
+            };
+
+            scatterplotChart.series[0].setData(QuantimodoMath.linearRegressionEndpoints(scatterDots, cause.minimum, cause.maximum), false);
+            scatterplotChart.series[1].update({name: versus}, false);
+            scatterplotChart.series[1].setData(scatterDots, false);
+
+            scatterplotChart.redraw();
+
+            AnalyzePage.showScatterplot();
+
+            /*End of local pairs creation*/
+
+            /*Quantimodo.getPairs({
+             'effect': effect.originalName,
+             'cause': cause.originalName,
+             'startTime': AnalyzePage.getStartTime(),
+             'endTime': AnalyzePage.getEndTime()
+             },
+             function (measurements) {
+             if (measurements.length) {
+             var scatterplotDots = [];
+             var xMax = -Infinity, yMax = -Infinity, xMin = +Infinity, yMin = +Infinity;
+
+             for (var i in measurements) {
+             var dot = {
+             x: measurements[i].causeMeasurement,
+             y: measurements[i].effectMeasurement
+             };
+
+             dot.time = moment(measurements[i].timestamp).format('X') * 1000;
+
+             scatterplotDots.push(dot);
+
+             if (xMax < dot.x) xMax = dot.x;
+             if (yMax < dot.y) yMax = dot.y;
+             if (xMin > dot.x) xMin = dot.x;
+             if (yMin > dot.y) yMin = dot.y;
+             }
+
+             yMax = yMax * 1.1;
+             xMax = xMax * 1.1;
+
+             scatterplotChart.setTitle({text: versus});
+             scatterplotChart.yAxis[0].update({
+             min: yMin,
+             max: yMax,
+             title: {text: effect.variableName + ' (' + effect.unit + ')'}
+             }, false);
+             scatterplotChart.xAxis[0].update({
+             min: xMin,
+             max: xMax,
+             title: {text: cause.variableName + ' (' + cause.unit + ')'}
+             }, false);
+             scatterplotChart.tooltip.options.formatter = function () {
+             return '<b>' + Highcharts.dateFormat('%Y %b %d', this.point.time) + '</b><br>' +
+             '<span style="color: ' + effectColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + effect.unit + ' (' + effect.source + ')</span> with ' +
+             '<span style="color: ' + causeColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + cause.unit + ' (' + cause.source + ')</span>';
+             };
+
+             scatterplotChart.series[0].setData(QuantimodoMath.linearRegressionEndpoints(scatterplotDots, cause.minimum, cause.maximum), false);
+             scatterplotChart.series[1].update({name: versus}, false);
+             scatterplotChart.series[1].setData(scatterplotDots, false);
+
+             scatterplotChart.redraw();
+
+             var correlation = Math.min(1, Math.max(-1, QuantimodoMath.correlationCoefficient(scatterplotDots)));
+             correlationGauge.series[0].points[0].update(correlation);
+
+             setAngularChartText(correlation, scatterplotDots.length);
+
+             AnalyzePage.showScatterplot();
+             }
+             });*/
         }
 
     };

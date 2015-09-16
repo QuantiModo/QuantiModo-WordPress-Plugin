@@ -23,7 +23,7 @@ function toggleElement(element) {
 
     content.on('transitionEnd webkitTransitionEnd transitionend oTransitionEnd msTransitionEnd', function (e) {
         if (content.hasClass('open')) {
-            content.css('max-height', 9999);
+            //content.css('max-height', 9999);
         }
     });
 
@@ -35,20 +35,20 @@ function toggleElement(element) {
         setTimeout(function () {
             content.addClass('transitions').css(
                 {
-                    'max-height': 0,
+                    //'max-height': 0,
                     'display': 'none'
                 });
-        }, 10);
+        }, 77);
     }
     else if (content.hasClass('open')) {
         content.contentHeight += content.inner.outerHeight();
         setTimeout(function() {
             content.addClass('transitions').css(
                 {
-                    'max-height': content.contentHeight,
+                    //'max-height': content.contentHeight,
                     'display': 'block'
                 });
-        },10);
+        },77);
     }
 }
 
