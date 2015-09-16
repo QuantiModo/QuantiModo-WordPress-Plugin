@@ -1,7 +1,7 @@
 var variables = [];
 var units = [];
 
-function setBlockHideShow() {
+var setBlockHideShow = function () {
 
     jQuery('#pickDate').click(function () {
         jQuery('#addmeasurement-variable-date').datetimepicker('show'); //support hide,show and destroy command
@@ -26,7 +26,7 @@ function setBlockHideShow() {
 
 }
 
-function setButtonListeners() {
+var setButtonListeners = function () {
 
     document.getElementById('button-record-a-measurement').onclick = onQmRcdMstButtonClicked;
 
@@ -41,7 +41,7 @@ function setButtonListeners() {
 var onQmRcdMstButtonClicked = function () {
     var name = jQuery('#addmeasurement-variable-name').val();
 
-    if (name == '') {
+    if (name === '') {
 
         jQuery('.validation-holder span').text('Please enter the variable name');
         jQuery('#addmeasurement-variable-name').addClass('error');
@@ -110,7 +110,7 @@ var onEdtButtonClicked = function () {
      datetime.setSeconds(0);
      */
 
-    if (name == '') {
+    if (name === '') {
         alert('Please enter the variable name.');
         return;
     }
@@ -146,7 +146,7 @@ var onEdtButtonClicked = function () {
     Quantimodo.postMeasurementsV2(request.payload, function (responseText) {
         var response = responseText;
         //alert (response) ;
-        if (response.success == true) {
+        if (response.success === true) {
             //save measurement to pre-populate this values next time
             localCache.setSubmittedMeasurement(name, value, unit);
             jQuery('#addmeasurement-variable-name').val('');
@@ -160,7 +160,6 @@ var onEdtButtonClicked = function () {
     });
 
 };
-
 
 var onAddButtonClicked = function () {
     // Create an array of measurements
@@ -189,7 +188,7 @@ var onAddButtonClicked = function () {
      datetime.setSeconds(0);
      */
 
-    if (name == '') {
+    if (name === '') {
         alert('Please enter the variable name.');
         return;
     }
@@ -223,7 +222,7 @@ var onAddButtonClicked = function () {
     Quantimodo.postMeasurementsV2(request.payload, function (responseText) {
         var response = responseText;
         //alert (response) ;
-        if (response.success == true) {
+        if (response.success === true) {
             //save measurement to pre-populate this values next time
             localCache.setSubmittedMeasurement(name, value, unit);
             jQuery('#addmeasurement-variable-name').val('');
@@ -381,20 +380,20 @@ var loadDateTime = function () {
 
     var currentTime = new Date();
 
-    var j_years = currentTime.getFullYear();
-    var j_months = currentTime.getMonth();
-    var j_date = currentTime.getDate();
+    var jYears = currentTime.getFullYear();
+    var jMonths = currentTime.getMonth();
+    var jDate = currentTime.getDate();
 
-    var j_hours = addZero(currentTime.getHours());
-    var j_minutes = addZero(currentTime.getMinutes());
+    var jHours = addZero(currentTime.getHours());
+    var jMinutes = addZero(currentTime.getMinutes());
 
-    var jjj_minutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
+    var jJjMinutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
 
-    var c_date = j_months + '/' + j_date + '/' + j_years;
+    var cDate = jMonths + '/' + jDate + '/' + jYears;
 
-    var c_date_time = jjj_minutes + ' ' + c_date;
+    var cDateTime = jJjMinutes + " " + cDate;
 
-    jQuery('#addmeasurement-variable-date').datetimepicker({value: c_date_time, step: 10});
+    jQuery('#addmeasurement-variable-date').datetimepicker({value: cDateTime, step: 10});
 
 };
 
@@ -411,20 +410,20 @@ var loadAddDateTime = function () {
 
     var currentTime = new Date();
 
-    var j_years = currentTime.getFullYear();
-    var j_months = currentTime.getMonth();
-    var j_date = currentTime.getDate();
+    var jYears = currentTime.getFullYear();
+    var jMonths = currentTime.getMonth();
+    var jDate = currentTime.getDate();
 
-    var j_hours = addZero(currentTime.getHours());
-    var j_minutes = addZero(currentTime.getMinutes());
+    var jHours = addZero(currentTime.getHours());
+    var jMinutes = addZero(currentTime.getMinutes());
 
-    var c_date = j_months + '/' + j_date + '/' + j_years;
+    var cDate = jMonths + '/' + jDate + '/' + jYears;
 
-    var jjj_minutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
+    var jJjMinutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
 
-    var c_date_time = jjj_minutes + ' ' + c_date;
+    var cDateTime = jJjMinutes + ' ' + cDate;
 
-    jQuery('#add-addmeasurement-variable-date').datetimepicker({value: c_date_time, step: 10});
+    jQuery('#add-addmeasurement-variable-date').datetimepicker({value: cDateTime, step: 10});
 
 };
 
