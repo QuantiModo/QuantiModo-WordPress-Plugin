@@ -116,6 +116,7 @@ Class QMWP
             'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline]',
             'QMWP Timeline' => '[qmwp_timeline]',
+            'QMWP Add Measurement'  =>  '[qmwp_add_measurement]'
         )
     );
 
@@ -144,6 +145,7 @@ Class QMWP
         add_shortcode('qmwp_bargraph_scatterplot_timeline', array($this, 'qmwp_bargraph_scatterplot_timeline'));
         add_shortcode('qmwp_timeline', array($this, 'qmwp_timeline'));
         add_shortcode('qmwp_search_correlations', array($this, 'qmwp_search_correlations'));
+        add_shortcode('qmwp_add_measurement', array($this, 'qmwp_add_measurement'));
 
         // restore default settings if necessary; this might get toggled by the admin or forced by a new version of the plugin:
         if (get_option("qmwp_restore_default_settings")) {
@@ -1292,6 +1294,24 @@ Class QMWP
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
+
+        $template_content = $this->process_template($pluginContentHTML);
+
+        return $template_content;
+    }
+
+    /**
+     * Return rendered html string with plugin content
+     * @param $attributes
+     * @return string
+     */
+    function qmwp_add_measurement($attributes)
+    {
+        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_add_measurement');
+
+        $version = $attributes['version'];
+
+        $pluginContentHTML = $this->get_plugin_template_html('qmwp-add-measurement', $version);
 
         $template_content = $this->process_template($pluginContentHTML);
 
