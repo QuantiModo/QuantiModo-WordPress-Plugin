@@ -1,6 +1,60 @@
 var variables = [];
 var units = [];
 
+var localCache = {
+
+    setSubmittedMeasurement: function (name, value, unit) {
+
+        var storageEntry = {
+            variable: name,
+            value: value,
+            unit: unit
+        };
+
+        var lastSubmittedMeasurements = localStorage.getItem('lastSubmittedMeasurements');
+
+        if (!lastSubmittedMeasurements) {
+            lastSubmittedMeasurements = [];
+            lastSubmittedMeasurements.push(storageEntry);
+        } else {
+            lastSubmittedMeasurements = JSON.parse(lastSubmittedMeasurements);
+
+            for (var i = 0; i < lastSubmittedMeasurements.length; i++) {
+                if (lastSubmittedMeasurements[i].variable == name) {
+                    lastSubmittedMeasurements[i].value = value;
+                    lastSubmittedMeasurements[i].unit = unit;
+                    break;
+                }
+                if (i == lastSubmittedMeasurements.length - 1) {
+                    lastSubmittedMeasurements.push(storageEntry);
+                }
+            }
+        }
+
+        localStorage.setItem('lastSubmittedMeasurements', JSON.stringify(lastSubmittedMeasurements));
+
+    },
+
+    getSubmittedMeasurement: function (name) {
+
+        var lastSubmittedMeasurements = localStorage.getItem('lastSubmittedMeasurements');
+
+        if (!lastSubmittedMeasurements) {
+            return null;
+        } else {
+            lastSubmittedMeasurements = JSON.parse(lastSubmittedMeasurements);
+
+            for (var i = 0; i < lastSubmittedMeasurements.length; i++) {
+                if (lastSubmittedMeasurements[i].variable == name) {
+                    return lastSubmittedMeasurements[i];
+                }
+            }
+        }
+
+    }
+
+};
+
 var setBlockHideShow = function () {
 
     jQuery('#pickDate').click(function () {
@@ -56,7 +110,7 @@ var onQmRcdMstButtonClicked = function () {
 
     var n_value = getVariableWithName(name);
 
-    if (n_value == null) {
+    if (n_value === null) {
         jQuery('#record_a_measurement_block').hide();
         jQuery('#add_record_a_measurement_block').show();
         jQuery('#add-addmeasurement-variable-name').val(name);
@@ -263,8 +317,11 @@ var getUnitWithAbbriatedName = function (unitAbbr) {
         return unit.abbreviatedName == unitAbbr;
     });
 
-    if (filteredUnits.length > 0) return filteredUnits[0];
-    return null;
+    if (filteredUnits.length > 0) {
+        return filteredUnits[0];
+    } else {
+        return null;
+    }
 };
 
 var loadVariableCategories = function () {
@@ -450,60 +507,6 @@ var handleResponse = function (response, callback) {
 
 };
 
-var localCache = {
-
-    setSubmittedMeasurement: function (name, value, unit) {
-
-        var storageEntry = {
-            variable: name,
-            value: value,
-            unit: unit
-        };
-
-        var lastSubmittedMeasurements = localStorage.getItem('lastSubmittedMeasurements');
-
-        if (!lastSubmittedMeasurements) {
-            lastSubmittedMeasurements = [];
-            lastSubmittedMeasurements.push(storageEntry);
-        } else {
-            lastSubmittedMeasurements = JSON.parse(lastSubmittedMeasurements);
-
-            for (var i = 0; i < lastSubmittedMeasurements.length; i++) {
-                if (lastSubmittedMeasurements[i].variable == name) {
-                    lastSubmittedMeasurements[i].value = value;
-                    lastSubmittedMeasurements[i].unit = unit;
-                    break;
-                }
-                if (i == lastSubmittedMeasurements.length - 1) {
-                    lastSubmittedMeasurements.push(storageEntry);
-                }
-            }
-        }
-
-        localStorage.setItem('lastSubmittedMeasurements', JSON.stringify(lastSubmittedMeasurements));
-
-    },
-
-    getSubmittedMeasurement: function (name) {
-
-        var lastSubmittedMeasurements = localStorage.getItem('lastSubmittedMeasurements');
-
-        if (!lastSubmittedMeasurements) {
-            return null;
-        } else {
-            lastSubmittedMeasurements = JSON.parse(lastSubmittedMeasurements);
-
-            for (var i = 0; i < lastSubmittedMeasurements.length; i++) {
-                if (lastSubmittedMeasurements[i].variable == name) {
-                    return lastSubmittedMeasurements[i];
-                }
-            }
-        }
-
-    }
-
-};
-
 jQuery(document).ready(function () {
 
     setBlockHideShow();
@@ -553,7 +556,9 @@ jQuery(document).ready(function () {
             //var variable = getVariableWithName(ui.item.label);
             var variable = ui.item.variable;
             jQuery('input[name="combineOperation"][value="' + variable.combinationOperation + '"]').prop('checked', true);
-            if (variable == null) return;
+            if (variable === null) {
+                return;
+            }
             jQuery('#addmeasurement-variable-category').val(variable.category);
 
             var variableUnit = null;
@@ -579,7 +584,9 @@ jQuery(document).ready(function () {
 
             }
 
-            if (variableUnit == null) return;
+            if (variableUnit === null) {
+                return;
+            }
             jQuery('#addmeasurement-variable-unitCategory').val(variableUnit.category).trigger('change');
             jQuery('#addmeasurement-variable-unit').val(variableUnit.abbreviatedName);
             jQuery('#addmeasurement-variable-value').val(variableValue);
