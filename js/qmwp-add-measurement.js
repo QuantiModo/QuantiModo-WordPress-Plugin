@@ -251,8 +251,11 @@ var getVariableWithName = function (variableName) {
     var filteredVars = jQuery.grep(variables, function (variable, i) {
         return variable.name == variableName;
     });
-    if (filteredVars.length > 0) return filteredVars[0];
-    return null;
+    if (filteredVars.length > 0) {
+        return filteredVars[0];
+    } else {
+        return null;
+    }
 };
 
 var getUnitWithAbbriatedName = function (unitAbbr) {
@@ -283,10 +286,12 @@ var loadVariableCategories = function () {
 
         if (categories.length) {
             categories.sort();
-            for (var i = 0; i < categories.length; i++)
-                variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+            for (var i = 0; i < categories.length; i++) {
+                variableCategorySelect.options[variableCategorySelect.options.length] =
+                    new Option(categories[i], categories[i]);
+            }
         }
-    })
+    });
 };
 
 var loadVariables = function () {
