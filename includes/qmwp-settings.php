@@ -266,6 +266,10 @@ $cc_ux = qmwp_cc_ux();
                             <li><strong>[qmwp_search_correlations]</strong> - renders correlations search shortcode
                                 <a href="/qmwp-search-correlations">Take a look</a>
                             </li>
+                            <li><strong>[qmwp_add_measurement]</strong> - renders controls to post any variable
+                                measurements
+                                <a href="/qmwp-add-measurement">Take a look</a>
+                            </li>
                         </ul>
 
                     </div>
