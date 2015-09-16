@@ -453,7 +453,7 @@ var loadDateTime = function () {
 
     var cDate = jMonths + '/' + jDate + '/' + jYears;
 
-    var cDateTime = jJjMinutes + " " + cDate;
+    var cDateTime = jJjMinutes + ' ' + cDate;
 
     jQuery('#addmeasurement-variable-date').datetimepicker({value: cDateTime, step: 10});
 
@@ -594,5 +594,5 @@ jQuery(document).ready(function () {
         }
     });
 
-})
+});
 
