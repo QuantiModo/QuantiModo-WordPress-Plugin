@@ -39,7 +39,7 @@ function setButtonListeners() {
  * Record a measurement is clicked
  */
 var onQmRcdMstButtonClicked = function () {
-    var name = jQuery("#addmeasurement-variable-name").val();
+    var name = jQuery('#addmeasurement-variable-name').val();
 
     if (name == '') {
 
@@ -57,15 +57,15 @@ var onQmRcdMstButtonClicked = function () {
     var n_value = getVariableWithName(name);
 
     if (n_value == null) {
-        jQuery("#record_a_measurement_block").hide();
-        jQuery("#add_record_a_measurement_block").show();
-        jQuery("#add-addmeasurement-variable-name").val(name);
+        jQuery('#record_a_measurement_block').hide();
+        jQuery('#add_record_a_measurement_block').show();
+        jQuery('#add-addmeasurement-variable-name').val(name);
 
     }
     else {
-        jQuery("#record_a_measurement_block").hide();
-        jQuery("#edt_record_a_measurement_block").show();
-        jQuery("#edt-addmeasurement-variable-name").val(name);
+        jQuery('#record_a_measurement_block').hide();
+        jQuery('#edt_record_a_measurement_block').show();
+        jQuery('#edt-addmeasurement-variable-name').val(name);
 
     }
 
@@ -73,7 +73,7 @@ var onQmRcdMstButtonClicked = function () {
 
 // Simple Sign In button clicked
 var onQmSignButtonClicked = function () {
-    window.location.href = "?connect=quantimodo";
+    window.location.href = '?connect=quantimodo';
 };
 
 var onCloseButtonClicked = function () {
@@ -87,15 +87,15 @@ var onCloseButtonClicked = function () {
 
 var onEdtButtonClicked = function () {
     // Create an array of measurements
-    var name = jQuery("#edt-addmeasurement-variable-name").val();
-    var unit = jQuery("#addmeasurement-variable-unit").val();
-    var value = jQuery("#addmeasurement-variable-value").val();
-    var valueCategory = jQuery("#addmeasurement-variable-category").val();
-    var combineOp = jQuery("#combineOperation").val();
-    var datetimeString = jQuery("#addmeasurement-variable-date").val();
+    var name = jQuery('#edt-addmeasurement-variable-name').val();
+    var unit = jQuery('#addmeasurement-variable-unit').val();
+    var value = jQuery('#addmeasurement-variable-value').val();
+    var valueCategory = jQuery('#addmeasurement-variable-category').val();
+    var combineOp = jQuery('#combineOperation').val();
+    var datetimeString = jQuery('#addmeasurement-variable-date').val();
 
-    datetimeString = datetimeString.replace("AM", "");
-    datetimeString = datetimeString.replace("PM", "");
+    datetimeString = datetimeString.replace('AM', '');
+    datetimeString = datetimeString.replace('PM', '');
 
     var hour = jQuery('#addmeasurement-variable-timeh').val();
     var min = jQuery('#addmeasurement-variable-timem').val();
@@ -111,11 +111,11 @@ var onEdtButtonClicked = function () {
      */
 
     if (name == '') {
-        alert("Please enter the variable name.");
+        alert('Please enter the variable name.');
         return;
     }
     if (value == '') {
-        alert("Please enter the value.");
+        alert('Please enter the value.');
         return;
     }
 
@@ -129,12 +129,12 @@ var onEdtButtonClicked = function () {
     //alert ( measurements ) ;
     // Add it to a request, payload is what we'll send to QuantiModo
     var request = {
-        message: "uploadMeasurements",
+        message: 'uploadMeasurements',
         payload: [
             {
                 measurements: measurements,
                 name: name,
-                source: "QuantiModo",
+                source: 'QuantiModo',
                 category: valueCategory,
                 combinationOperation: combineOp,
                 unit: unit
@@ -154,7 +154,7 @@ var onEdtButtonClicked = function () {
             alert('Measurement have been posted successfully');
         }
         else {
-            alert("Adding a measurement failed.");
+            alert('Adding a measurement failed.');
             console.log(responseText);
         }
     });
@@ -164,16 +164,16 @@ var onEdtButtonClicked = function () {
 
 var onAddButtonClicked = function () {
     // Create an array of measurements
-    var name = jQuery("#add-addmeasurement-variable-name").val();
-    var unit = jQuery("#add-addmeasurement-variable-unit").val();
-    var value = jQuery("#add-addmeasurement-variable-value").val();
-    var valueCategory = jQuery("#addmeasurement-variable-category").val();
-    var combineOp = jQuery("#combineOperation").val();
-    var datetimeString = jQuery("#add-addmeasurement-variable-date").val();
+    var name = jQuery('#add-addmeasurement-variable-name').val();
+    var unit = jQuery('#add-addmeasurement-variable-unit').val();
+    var value = jQuery('#add-addmeasurement-variable-value').val();
+    var valueCategory = jQuery('#addmeasurement-variable-category').val();
+    var combineOp = jQuery('#combineOperation').val();
+    var datetimeString = jQuery('#add-addmeasurement-variable-date').val();
 
     //alert (Date.parse(datetimeString)) ;
-    datetimeString = datetimeString.replace("AM", "");
-    datetimeString = datetimeString.replace("PM", "");
+    datetimeString = datetimeString.replace('AM', '');
+    datetimeString = datetimeString.replace('PM', '');
     //
 
 
@@ -190,11 +190,11 @@ var onAddButtonClicked = function () {
      */
 
     if (name == '') {
-        alert("Please enter the variable name.");
+        alert('Please enter the variable name.');
         return;
     }
     if (value == '') {
-        alert("Please enter the value.");
+        alert('Please enter the value.');
         return;
     }
     //var variable = getVariableWithName(name);
@@ -206,12 +206,12 @@ var onAddButtonClicked = function () {
     ];
     // Add it to a request, payload is what we'll send to QuantiModo
     var request = {
-        message: "uploadMeasurements",
+        message: 'uploadMeasurements',
         payload: [
             {
                 measurements: measurements,
                 name: name,
-                source: "QuantiModo",
+                source: 'QuantiModo',
                 category: valueCategory,
                 combinationOperation: combineOp,
                 unit: unit
@@ -231,7 +231,7 @@ var onAddButtonClicked = function () {
             alert('Measurement have been posted successfully');
         }
         else {
-            alert("Adding a measurement failed.");
+            alert('Adding a measurement failed.');
             console.log(responseText);
         }
     });
@@ -239,13 +239,13 @@ var onAddButtonClicked = function () {
 };
 
 var onVariableNameInputFocussed = function () {
-    jQuery("#snd_gap").height('100px');
-    //document.getElementById('sectionMeasurementInput').style.opacity="0.2";
+    jQuery('#snd_gap').height('100px');
+    //document.getElementById('sectionMeasurementInput').style.opacity='0.2';
 };
 
 var onVariableNameInputUnfocussed = function () {
-    //jQuery("#snd_gap").height('10px');
-    //document.getElementById('sectionMeasurementInput').style.opacity="1";
+    //jQuery('#snd_gap').height('10px');
+    //document.getElementById('sectionMeasurementInput').style.opacity='1';
 };
 
 var getVariableWithName = function (variableName) {
@@ -291,13 +291,13 @@ var loadVariableCategories = function () {
 };
 
 var loadVariables = function () {
-    jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
+    jQuery.widget('custom.catcomplete', jQuery.ui.autocomplete, {
         _renderMenu: function (ul, items) {
             var that = this,
-                currentCategory = "";
+                currentCategory = '';
             jQuery.each(items, function (index, item) {
                 if (item.category != currentCategory) {
-                    ul.append("<li class='ui-autocomplete-category'>" + item.category + "</li>");
+                    ul.append('<li class="ui-autocomplete-category">' + item.category + '</li>');
                     currentCategory = item.category;
                 }
                 that._renderItemData(ul, item);
@@ -306,7 +306,7 @@ var loadVariables = function () {
         }
     });
 
-    var request = {message: "getVariables", params: {}};
+    var request = {message: 'getVariables', params: {}};
 
     Quantimodo.getVariables(null, function (vars) {
 
@@ -364,7 +364,7 @@ var loadAddVariableUnits = function () {
 
 function addZero(i) {
     if (i < 10) {
-        i = "0" + i;
+        i = '0' + i;
     }
     return i;
 }
@@ -390,9 +390,9 @@ var loadDateTime = function () {
 
     var jjj_minutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
 
-    var c_date = j_months + "/" + j_date + "/" + j_years;
+    var c_date = j_months + '/' + j_date + '/' + j_years;
 
-    var c_date_time = jjj_minutes + " " + c_date;
+    var c_date_time = jjj_minutes + ' ' + c_date;
 
     jQuery('#addmeasurement-variable-date').datetimepicker({value: c_date_time, step: 10});
 
@@ -418,11 +418,11 @@ var loadAddDateTime = function () {
     var j_hours = addZero(currentTime.getHours());
     var j_minutes = addZero(currentTime.getMinutes());
 
-    var c_date = j_months + "/" + j_date + "/" + j_years;
+    var c_date = j_months + '/' + j_date + '/' + j_years;
 
     var jjj_minutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
 
-    var c_date_time = jjj_minutes + " " + c_date;
+    var c_date_time = jjj_minutes + ' ' + c_date;
 
     jQuery('#add-addmeasurement-variable-date').datetimepicker({value: c_date_time, step: 10});
 
@@ -437,7 +437,7 @@ var handleResponse = function (response, callback) {
         jQuery('#edt_record_a_measurement_block').hide();
         jQuery('#add_record_a_measurement_block').hide();
 
-        jQuery("#signup_block").show();
+        jQuery('#signup_block').show();
 
     } else {
         var parsedResponse = JSON.parse(response.responseText);
@@ -511,7 +511,7 @@ jQuery(document).ready(function () {
     loadAddDateTime();
     loadDateTime();
 
-    var inputField = document.getElementById("addmeasurement-variable-name");
+    var inputField = document.getElementById('addmeasurement-variable-name');
     inputField.onfocus = onVariableNameInputFocussed;
     inputField.onblur = onVariableNameInputUnfocussed;
 
@@ -526,10 +526,10 @@ jQuery(document).ready(function () {
         }
     });
 
-    jQuery("#addmeasurement-variable-name").autocomplete({
+    jQuery('#addmeasurement-variable-name').autocomplete({
         source: function (req, resp) {
 
-            Quantimodo.searchVariables(jQuery("#addmeasurement-variable-name").val(), function (data) {
+            Quantimodo.searchVariables(jQuery('#addmeasurement-variable-name').val(), function (data) {
 
                 variables = data;
                 resp(jQuery.map(data, function (variable) {
@@ -545,13 +545,12 @@ jQuery(document).ready(function () {
         minLength: 2,
         select: function (event, ui) {
 
-            document.getElementById("addmeasurement-variable-value").focus();
+            document.getElementById('addmeasurement-variable-value').focus();
             //var variable = getVariableWithName(ui.item.label);
             var variable = ui.item.variable;
-            jQuery("input[name='combineOperation'][value='" + variable.combinationOperation +
-                "']").prop('checked', true);
+            jQuery('input[name="combineOperation"][value="' + variable.combinationOperation + '"]').prop('checked', true);
             if (variable == null) return;
-            jQuery("#addmeasurement-variable-category").val(variable.category);
+            jQuery('#addmeasurement-variable-category').val(variable.category);
 
             var variableUnit = null;
             var variableValue = '';
@@ -577,9 +576,9 @@ jQuery(document).ready(function () {
             }
 
             if (variableUnit == null) return;
-            jQuery("#addmeasurement-variable-unitCategory").val(variableUnit.category).trigger('change');
-            jQuery("#addmeasurement-variable-unit").val(variableUnit.abbreviatedName);
-            jQuery("#addmeasurement-variable-value").val(variableValue);
+            jQuery('#addmeasurement-variable-unitCategory').val(variableUnit.category).trigger('change');
+            jQuery('#addmeasurement-variable-unit').val(variableUnit.abbreviatedName);
+            jQuery('#addmeasurement-variable-value').val(variableValue);
 
         }
     });
