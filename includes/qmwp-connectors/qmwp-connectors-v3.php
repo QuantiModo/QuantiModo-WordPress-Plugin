@@ -20,7 +20,7 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
 
             var loadHandler = function () {
                 console.debug('Connect JS loaded');
-                if (!executed) {
+                if (!executed && typeof qmSetupOnPage === 'function') {
                     console.debug('Calling "qmSetupOnPage" function from connect.js');
                     qmSetupOnPage('.my-location');
                     executed = true;
