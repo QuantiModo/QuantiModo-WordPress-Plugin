@@ -345,7 +345,12 @@ var AnalyzePage = function () {
 
                 // "All sources" entry
                 jQuery('#addVariableMenuCategories .sourceContainer').last().append(jQuery('<li category="' + variable.category + '" variable="' + variable.originalName + '" source=""><a>All sources</a>'));
-                var sources = variable.sources.split(',');
+
+                var sources = [];
+                if (variable.sources) {
+                    sources = variable.sources.split(',');
+                }
+
                 for (var i = 0; i < sources.length; i++) {
                     jQuery('#addVariableMenuCategories .sourceContainer').last().append(jQuery('<li category="' + variable.category + '" variable="' + variable.originalName + '" source="' + sources[i] + '"><a>' + sources[i] + '</a>'));
                 }
