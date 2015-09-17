@@ -1320,9 +1320,9 @@ Class QMWP
 
 }
 
-$GLOBALS['QuantiModo'] = new QMWP();
+$GLOBALS['QuantiModo'] = QMWP::get_instance();
 
-QMWP::get_instance();
+
 
 
 
