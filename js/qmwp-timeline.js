@@ -170,10 +170,10 @@ var AnalyzePage = function () {
             'groupingTimezone': AnalyzePage.getTimezone()
         }
         /*
-        if (variable.source != null && variable.source.length != 0) {
-            filters.source = variable.source;
-        }
-        */
+         if (variable.source != null && variable.source.length != 0) {
+         filters.source = variable.source;
+         }
+         */
         if (variable.color == null) {
             variable.color = getRandomColor();
         }
@@ -384,7 +384,11 @@ var AnalyzePage = function () {
 
     var restoreChart = function () {
         if (typeof(Storage) !== "undefined") {
-            var storedVariables = JSON.parse(localStorage["selectedVariables"]);
+
+            var storedVariables = [];
+            if (localStorage.getItem("selectedVariables")) {
+                storedVariables = JSON.parse(localStorage["selectedVariables"]);
+            }
             jQuery('#selectedVariables').empty();
             for (i = 0; i < storedVariables.length; i++) {
                 var storedVariable = storedVariables[i];
