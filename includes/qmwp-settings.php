@@ -90,16 +90,16 @@ $cc_ux = qmwp_cc_ux();
                         <a href="https://app.quantimo.do" target="_blank"><strong>QuantiModo</strong></a>
                     </p>
 
-                    <p>Rate it 5 stars: <a id="qmwp-rate-5stars"
-                                           href="https://wordpress.org/support/view/plugin-reviews/qm-oauth?rate=5"
+                    <!-- <p>Rate it 5 stars: <a id="qmwp-rate-5stars"
+                                           href="https://wordpress.org/support/view/plugin-reviews/quantimodo?rate=5"
                                            target="_blank"><img src="//ps.w.org/qm-oauth/assets/5stars.png"
-                                                                style="vertical-align:text-top;"></a></p>
+                                                                style="vertical-align:text-top;"></a></p> -->
                     <nav>
                         <ul>
-                            <li><a href="https://wordpress.org/plugins/qm-oauth/" target="_blank">QuantiModo at
+                            <!-- <li><a href="https://wordpress.org/plugins/qm-oauth/" target="_blank">QuantiModo at
                                     WordPress.org</a></li>
                             <li><a href="https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin"
-                                   target="_blank">QuantiModo at GitHub.com</a></li>
+                                   target="_blank">QuantiModo at GitHub.com</a></li> -->
                             <li><a href="https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin"
                                    target="_blank">QuantiModo at Github</a></li>
                         </ul>
@@ -107,7 +107,7 @@ $cc_ux = qmwp_cc_ux();
                 </div>
             </div>
 
-            <div id="qmwp-settings-section-news" class="qmwp-settings-section">
+            <!-- <div id="qmwp-settings-section-news" class="qmwp-settings-section">
                 <h3>News</h3>
 
                 <div class='form-padding'>
@@ -134,7 +134,7 @@ $cc_ux = qmwp_cc_ux();
                         </ul>
                     <?php endif; ?>
                 </div>
-            </div>
+            </div> -->
             <div id="qmwp-settings-section-config-check" class="qmwp-settings-section">
                 <h3>Config Check</h3>
 
@@ -225,8 +225,8 @@ $cc_ux = qmwp_cc_ux();
                 <h3 id="bookmark-login-page-form-customization">Support</h3>
 
                 <div class='form-padding'>
-                    <p>Your general questions can be asked in the plugin <a
-                            href="https://wordpress.org/support/plugin/qm-oauth" target="_blank">support forum</a>.</p>
+                    <p>Your general questions can be asked in the <a
+                            href="http://help.quantimo.do" target="_blank">support forum</a>.</p>
                 </div>
             </div>
         </div>
@@ -247,26 +247,26 @@ $cc_ux = qmwp_cc_ux();
                         <p>Currently plugin supports following shortcodes:</p>
                         <ul>
                             <li>
-                                <strong>[qmwp_mood_tracker]</strong> - gives capability to post mood measurement
+                                <strong>[qmwp_mood_tracker]</strong> - Allow users to rate their moods
                                 <a target="_blank" href="/qmwp-mood-tracker">Take a look</a>)
                             </li>
                             <li>
-                                <strong>[qmwp_timeline]</strong> - renders timeline shortcode
+                                <strong>[qmwp_timeline]</strong> - Graph any variable over time
                                 <a href="/qmwp-timeline" target="_blank">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_connectors]</strong> - renders connectors shortcode
+                            <li><strong>[qmwp_connectors]</strong> - Allow users to import their data from 3rd party sources
                                 <a href="/qmwp-connectors" target="_blank">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_manage_accounts]</strong> - renders accounts management shortcode
+                            <!-- <li><strong>[qmwp_manage_accounts]</strong> - renders accounts management shortcode
                                 <a href="/qmwp-manage-accounts" target="_blank">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - renders a timeline shortcode
+                            </li> -->
+                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - Find out the top predictors for mood
                                 <a href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_search_correlations]</strong> - renders correlations search shortcode
+                            <li><strong>[qmwp_search_correlations]</strong> - Search for predictors or likely effects of a given variable
                                 <a href="/qmwp-search-correlations">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_add_measurement]</strong> - renders controls to post any variable
+                            <li><strong>[qmwp_add_measurement]</strong> - Track anything!
                                 measurements
                                 <a href="/qmwp-add-measurement">Take a look</a>
                             </li>
@@ -821,10 +821,10 @@ $cc_ux = qmwp_cc_ux();
                             <strong>Instructions:</strong>
                         <ol>
                             <li>Visit the QuantiModo website for developers <a
-                                    href='https://console.developers.quantimodo.com/project' target="_blank">console.developers.quantimodo.com</a>.
+                                    href='https://developer.quantimo.do' target="_blank">developer.quantimo.do</a>.
                             </li>
-                            <li>At QuantiModo, create a new Project and enable the QuantiModo+ API. This will enable
-                                your site to access the QuantiModo+ API.
+                            <li>Create a new app on Mashape and enable the QuantiModo API. This will enable
+                                your site to access the QuantiModo API.
                             </li>
                             <li>At QuantiModo, provide your site's homepage URL (<?php echo $blog_url; ?>) for the new
                                 Project's Redirect URI. Don't forget the trailing slash!
