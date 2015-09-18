@@ -4,7 +4,7 @@
  * Plugin Name: QuantiModo
  * Plugin URI: https://app.quantimod.do
  * Description: A WordPress plugin that allows users to login or register by authenticating with an existing Quantimodo account via OAuth 2.0. Easily drops into new or existing sites, integrates with existing users.
- * Version: 0.2.9
+ * Version: 0.3.0
  * Author: QuantiModo
  * Author URI: https://app.quantimod.do
  * License: GPL2
@@ -115,8 +115,8 @@ Class QMWP
             'QMWP Connectors' => '[qmwp_connectors]',
             'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline]',
-            'QMWP Timeline' => '[qmwp_timeline]',
-            'QMWP Add Measurement'  =>  '[qmwp_add_measurement]'
+            'QMWP Timeline' => '[qmwp_timeline variables="overall mood"]',
+            'QMWP Add Measurement' => '[qmwp_add_measurement]'
         )
     );
 
@@ -1270,11 +1270,18 @@ Class QMWP
      */
     function qmwp_timeline($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_timeline');
+        $attributes = shortcode_atts(array('version' => 1, 'variables' => null), $attributes, 'qmwp_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
+
+        $variables = isset($attributes['variables']) ? $attributes['variables'] : null;
+
+        if (!is_null($variables)) {
+            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
+                array('qmwpShortCodeDefinedVariables' => $variables));
+        }
 
         $template_content = $this->process_template($pluginContentHTML);
 
@@ -1307,7 +1314,7 @@ Class QMWP
      */
     function qmwp_add_measurement($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_add_measurement');
+        $attributes = shortcode_atts(array('version' => 1,), $attributes, 'qmwp_add_measurement');
 
         $version = $attributes['version'];
 
@@ -1320,9 +1327,9 @@ Class QMWP
 
 }
 
-$GLOBALS['QuantiModo'] = new QMWP();
+$GLOBALS['QuantiModo'] = QMWP::get_instance();
 
-QMWP::get_instance();
+
 
 
 
