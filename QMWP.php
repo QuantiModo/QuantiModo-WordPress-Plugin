@@ -115,8 +115,8 @@ Class QMWP
             'QMWP Connectors' => '[qmwp_connectors]',
             'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline]',
-            'QMWP Timeline' => '[qmwp_timeline]',
-            'QMWP Add Measurement'  =>  '[qmwp_add_measurement]'
+            'QMWP Timeline' => '[qmwp_timeline variables="overall mood"]',
+            'QMWP Add Measurement' => '[qmwp_add_measurement]'
         )
     );
 
@@ -1270,11 +1270,18 @@ Class QMWP
      */
     function qmwp_timeline($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_timeline');
+        $attributes = shortcode_atts(array('version' => 1, 'variables' => null), $attributes, 'qmwp_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
+
+        $variables = isset($attributes['variables']) ? $attributes['variables'] : null;
+
+        if (!is_null($variables)) {
+            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
+                array('qmwpShortCodeDefinedVariables' => $variables));
+        }
 
         $template_content = $this->process_template($pluginContentHTML);
 
@@ -1307,7 +1314,7 @@ Class QMWP
      */
     function qmwp_add_measurement($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_add_measurement');
+        $attributes = shortcode_atts(array('version' => 1,), $attributes, 'qmwp_add_measurement');
 
         $version = $attributes['version'];
 
