@@ -70,15 +70,15 @@ var AnalyzePage = function () {
             });
 
             if (visible) {
-                clickedVariableElement.find(".colorIndicator").css({opacity: "1"});
+                clickedVariableElement.find('.colorIndicator').css({opacity: '1'});
             }
             else {
-                clickedVariableElement.find(".colorIndicator").css({opacity: "0.2"});
+                clickedVariableElement.find('.colorIndicator').css({opacity: '0.2'});
             }
 
         });
 
-        jQuery("#selectedVariables").on('click', 'li > .settingsButton', function (event) {
+        jQuery('#selectedVariables').on('click', 'li > .settingsButton', function (event) {
             var clickedVariableElement = jQuery(event.target).parent();
 
             var variableId = clickedVariableElement.attr('variable');
@@ -99,8 +99,8 @@ var AnalyzePage = function () {
 
 
     var initDateRangeSelector = function () {
-        jQuery("#accordion-content-rangepickers").buttonset();
-        jQuery("#accordion-content-rangepickers :radio").click(periodUpdated);
+        jQuery('#accordion-content-rangepickers').buttonset();
+        jQuery('#accordion-content-rangepickers :radio').click(periodUpdated);
     };
 
 
@@ -142,7 +142,7 @@ var AnalyzePage = function () {
             var variableIndicator = jQuery("#selectedVariables [variable='" + variable.id + "'][category='" + variable.category + "'] .colorIndicator");
             variableIndicator.css({'background-size': '0 14px'});
             setTimeout(function () {
-                variableIndicator.removeClass("loading");
+                variableIndicator.removeClass('loading');
             }, 220);
         });
     };
@@ -197,9 +197,9 @@ var AnalyzePage = function () {
     };
 
     var storeSelectedVariable = function (variable) {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== 'undefined') {
             try {
-                var storedVariables = JSON.parse(localStorage["selectedVariables"]);
+                var storedVariables = JSON.parse(localStorage['selectedVariables']);
 
                 var contains = false;
                 for (var i = 0; i < storedVariables.length; i++) {
@@ -222,9 +222,9 @@ var AnalyzePage = function () {
     };
 
     var removeSelectedVariable = function (variable) {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== 'undefined') {
             try {
-                var storedVariables = JSON.parse(localStorage["selectedVariables"]);
+                var storedVariables = JSON.parse(localStorage['selectedVariables']);
 
                 for (var i = 0; i < storedVariables.length; i++) {
                     if (storedVariables[i].id == variable.id) {
@@ -254,7 +254,7 @@ var AnalyzePage = function () {
     var unitListUpdated = function () {
         jQuery('#selectVariableUnitSetting').empty();
         jQuery.each(AnalyzePage.quantimodoUnits, function (index, category) {
-            jQuery('#selectVariableUnitSetting').append(jQuery('<option disabled/>').attr("style", "color:#29bdca;font-styl;").text(category[0].category));
+            jQuery('#selectVariableUnitSetting').append(jQuery('<option disabled/>').attr('style', 'color:#29bdca;font-styl;').text(category[0].category));
             jQuery.each(category, function (index, unit) {
                 jQuery('#selectVariableUnitSetting').append(jQuery('<option/>').attr('value', unit.abbreviatedName).text(unit.name));
             });
@@ -262,25 +262,25 @@ var AnalyzePage = function () {
     };
 
     var retrieveSettings = function () {
-        if (typeof(Storage) !== "undefined") {
-            dateSelectorVisible = (localStorage["dateSelectorVisible"] || "true") == "true" ? true : false;
-            inputSelectorVisible = (localStorage["inputSelectorVisible"] || "true") == "true" ? true : false;
-            outputSelectorVisible = (localStorage["outputSelectorVisible"] || "true") == "true" ? true : false;
+        if (typeof(Storage) !== 'undefined') {
+            dateSelectorVisible = (localStorage['dateSelectorVisible'] || 'true') == 'true' ? true : false;
+            inputSelectorVisible = (localStorage['inputSelectorVisible'] || 'true') == 'true' ? true : false;
+            outputSelectorVisible = (localStorage['outputSelectorVisible'] || 'true') == 'true' ? true : false;
         }
     };
 
     var saveSetting = function (setting, value) {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== 'undefined') {
             localStorage[setting] = value;
         }
     };
 
     var restoreChart = function () {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== 'undefined') {
 
             var storedVariables = [];
-            if (localStorage.getItem("selectedVariables")) {
-                storedVariables = JSON.parse(localStorage["selectedVariables"]);
+            if (localStorage.getItem('selectedVariables')) {
+                storedVariables = JSON.parse(localStorage['selectedVariables']);
             }
             jQuery('#selectedVariables').empty();
             for (i = 0; i < storedVariables.length; i++) {
@@ -299,26 +299,26 @@ var AnalyzePage = function () {
     };
 
     var initSharing = function () {
-        jQuery("#share-dialog #button-doshare").click(function () {
-            jQuery("#share-dialog").css({'display': 'block', 'opacity': 0.8});
-            showLoadingOverlay("#share-dialog");
+        jQuery('#share-dialog #button-doshare').click(function () {
+            jQuery('#share-dialog').css({'display': 'block', 'opacity': 0.8});
+            showLoadingOverlay('#share-dialog');
 
             share(function (id) {
-                jQuery("#share-dialog").css({'display': 'block', 'opacity': 1});
-                hideLoadingOverlay("#share-dialog");
+                jQuery('#share-dialog').css({'display': 'block', 'opacity': 1});
+                hideLoadingOverlay('#share-dialog');
 
                 var url = location.href;						// Get current URL
                 if (url.substr(-1) != '/')  url = url + '/';	// Append trailing slash if not exists
-                jQuery("#share-dialog").append(url + 'shared/?data=' + id);	// Return share URL
+                jQuery('#share-dialog').append(url + 'shared/?data=' + id);	// Return share URL
             });
         });
-        jQuery("#share-dialog #button-cancelshare").click(function () {
-            jQuery("#share-dialog-background").css({'opacity': 0});
-            jQuery("#share-dialog").css({'opacity': 0});
+        jQuery('#share-dialog #button-cancelshare').click(function () {
+            jQuery('#share-dialog-background').css({'opacity': 0});
+            jQuery('#share-dialog').css({'opacity': 0});
 
             setTimeout(function () {
-                jQuery("#share-dialog-background").css({'display': 'none'});
-                jQuery("#share-dialog").css({'display': 'none'});
+                jQuery('#share-dialog-background').css({'display': 'none'});
+                jQuery('#share-dialog').css({'display': 'none'});
             }, 500);
         });
 
@@ -328,17 +328,17 @@ var AnalyzePage = function () {
     };
 
     var showShareDialog = function () {
-        jQuery("#share-dialog-background").css({'display': 'block', 'opacity': 0.5});
-        jQuery("#share-dialog").css({'display': 'block', 'opacity': 1});
+        jQuery('#share-dialog-background').css({'display': 'block', 'opacity': 0.5});
+        jQuery('#share-dialog').css({'display': 'block', 'opacity': 1});
     };
 
     var share = function (onDoneListener) {
         var shareObject = {
-            "type": "analyze",
-            "causeMeasurements": causeMeasurements,
-            "effectMeasurements": effectMeasurements,
-            "inputVariable": lastInputVariable,
-            "outputVariable": lastOutputVariable
+            'type': 'analyze',
+            'causeMeasurements': causeMeasurements,
+            'effectMeasurements': effectMeasurements,
+            'inputVariable': lastInputVariable,
+            'outputVariable': lastOutputVariable
         };
         Quantimodo.postAnalyzeShare(shareObject, function (response) {
             onDoneListener(response['id']);
@@ -421,7 +421,7 @@ var AnalyzePage = function () {
 
                         source: function (request, response) {
                             //fetch variables using quantimodo-api
-                            Quantimodo.searchVariables(jQuery("#variable-selector").val(), function (data) {
+                            Quantimodo.searchVariables(jQuery('#variable-selector').val(), function (data) {
 
                                 var results = [];
 
@@ -454,7 +454,7 @@ var AnalyzePage = function () {
                             //pass it for processing
                             newVariableSelected(ui.item.variable);
                             //blank variable searcher
-                            jQuery("#variable-selector").val('');
+                            jQuery('#variable-selector').val('');
                             return false;
                         }
                     });
@@ -485,7 +485,7 @@ var AnalyzePage = function () {
                 initDeleteMeasurements();
 
             } else {
-                window.location.href = "?connect=quantimodo";
+                window.location.href = '?connect=quantimodo';
             }
 
         }
