@@ -139,7 +139,7 @@ var AnalyzePage = function () {
             AnalyzeChart.addData(variable, measurements);
 
             //var source = variable.source == null ? '' : source;
-            var variableIndicator = jQuery("#selectedVariables [variable='" + variable.id + "'][category='" + variable.category + "'] .colorIndicator");
+            var variableIndicator = jQuery('#selectedVariables [variable="' + variable.id + '"][category="' + variable.category + '"] .colorIndicator');
             variableIndicator.css({'background-size': '0 14px'});
             setTimeout(function () {
                 variableIndicator.removeClass('loading');
@@ -438,7 +438,7 @@ var AnalyzePage = function () {
                                             label: data[i].name,
                                             value: data[i].name,
                                             variable: data[i]
-                                        })
+                                        });
                                     }
                                 //passing filtered variables to the autocomplete for displaying
                                 response(results);
