@@ -7,6 +7,8 @@ wp_enqueue_style("timeline", plugins_url('../../', __FILE__) . "css/qmwp-timelin
 wp_enqueue_style("shared-styles", plugins_url('../../', __FILE__) . "/css/_shared_styles.css");
 wp_enqueue_style("jquery-ui-flick", plugins_url('../../', __FILE__) . "/css/jquery-ui-flick.css");
 wp_enqueue_style("jquery-dropdown", plugins_url('../../', __FILE__) . "/css/jquery.dropdown.css");
+wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
+wp_enqueue_style("jquery-fancybox", plugins_url('../../', __FILE__) . "js/libs/fancybox/jquery.fancybox.css");
 
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("jquery-ui-core");
@@ -28,6 +30,7 @@ wp_enqueue_script("timeline-charts", plugins_url('../../', __FILE__) . "js/timel
 wp_enqueue_script("other-shared", plugins_url('../../', __FILE__) . "js/_other_shared.js", array("jquery"), false, true);
 wp_enqueue_script("variable-settings", plugins_url('../../', __FILE__) . "js/_variable_settings.js", array("jquery"), false, true);
 wp_enqueue_script("refresh-shared", plugins_url('../../', __FILE__) . "js/_data_refresh.js", array("jquery"), false, true);
+wp_enqueue_script("jquery-fancybox", plugins_url('../../', __FILE__) . "js/libs/fancybox/jquery.fancybox.pack.js", "jquery");
 
 wp_enqueue_script("timeline", plugins_url('../../', __FILE__) . "js/qmwp-timeline.js",
     array(

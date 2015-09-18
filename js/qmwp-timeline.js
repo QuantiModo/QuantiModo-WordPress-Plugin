@@ -11,135 +11,96 @@ var AnalyzePage = function () {
 
     var selectedVariables = new Array();
 
-    var initLoginDialog = function () {
-        jQuery(document).on('lwa_login', function (event, data, form) {
-            if (data.result === true) {
-                refreshMeasurementsRange(function () {
-                    refreshVariables([], function () {
-                        categoryListUpdated();
-                        restoreChart();
-                    });
-                });
-                refreshUnits(function () {
-                    unitListUpdated();
-                });
-
-                jQuery("#login-dialog-background").addClass('transitions').css({'opacity': 0});
-                jQuery("#login-dialog").addClass('transitions').css({'opacity': 0});
-
-                setTimeout(function () {
-                    jQuery("#login-dialog-background").css({'display': 'none'});
-                    jQuery("#login-dialog").css({'display': 'none'});
-                }, 500);
-            }
-        });
-    };
-
     /* Initialize left menubar */
 
     var initVariableCard = function () {
-        // Create the variable picker menu
-        jQuery("#addVariableMenu").menu({
-            select: function (event, ui) {
-                var originalVariableName = ui.item.attr('variable');
-                if (originalVariableName != null) {
-                    newVariableSelected(originalVariableName, ui.item.attr('category'), ui.item.attr('source'), null, false);
-                    //ui.item.addClass("ui-state-disabled");
-                    var variableSelectElement = jQuery("#addVariableMenu li[variable='" + originalVariableName + "'][category='" + ui.item.attr('category') + "'][source='" + ui.item.attr('source') + "']");
-                    if (!variableSelectElement.hasClass("ui-state-disabled")) {
-                        variableSelectElement.addClass("ui-state-disabled");
-                    }
-                }
-            }
-        });
 
         // Handle clicking the close button
         jQuery('#selectedVariables').on('click', 'li > .closeButton', function (event) {
-            var selectedVariableElement = jQuery(event.target).parent();
-            var selectedCategoryName = selectedVariableElement.attr('category');
-            var selectedOriginalName = selectedVariableElement.attr('variable');
-            //var selectedSource = selectedVariableElement.attr('source');
+            var clickedVariableElement = jQuery(event.target).parent();
+            var variableId = clickedVariableElement.attr('variable');
 
             // Remove it from the selected variables so that we won't get the data when refreshing
             for (var i = 0; i < AnalyzePage.selectedVariables.length; i++) {
-                var selVariable = AnalyzePage.selectedVariables[i];
 
-                if (selVariable.originalName === selectedOriginalName) {
+                if (AnalyzePage.selectedVariables[i].id == variableId) {
+                    var selectedVariable = AnalyzePage.selectedVariables[i];
                     if (oceanFiveInUse.length > 0) {
-                        var index = jQuery.inArray(selVariable.color, oceanFiveInUse);
+                        var index = jQuery.inArray(selectedVariable.color, oceanFiveInUse);
                         if (index > -1) {
                             oceanFiveInUse.splice(index, 1);
                         }
                     }
+                    // Remove from localStorage
+                    removeSelectedVariable(selectedVariable);
+                    // Remove the variable from our graph
+                    AnalyzeChart.removeData({
+                        id: selectedVariable.id,
+                        originalName: selectedVariable.name,
+                        category: selectedVariable.category
+                    });
+
                     break;
                 }
             }
+
             AnalyzePage.selectedVariables.splice(i, 1);
+
             // Remove HTML
-            selectedVariableElement.remove();
-
-            // Reenable this item in the variable picker
-            /*            var variableSelectElement = jQuery("#addVariableMenu li[variable='" + selectedOriginalName + "'][category='" + selectedCategoryName + "'][source='" + selectedSource + "']");
-             if (variableSelectElement.hasClass("ui-state-disabled")) {
-             variableSelectElement.removeClass("ui-state-disabled");
-             }*/
-
-            // Create a fake variable element for the graph handler
-            var fakeVariable = {
-                originalName: selectedOriginalName,
-                category: selectedCategoryName,
-                //source: selectedSource
-            }
-            // Remove the variable from our graph
-            AnalyzeChart.removeData(fakeVariable);
-
-            // Remove from localstorage
-            removeSelectedVariable(selectedOriginalName, selectedCategoryName);
+            clickedVariableElement.remove();
         });
 
         // Handle clicking the visibility toggler
         jQuery('#selectedVariables').on('click', 'li > .eyeballButton', function (event) {
-            var selectedVariableElement = jQuery(event.target).parent();
-            var selectedCategoryName = selectedVariableElement.attr('category');
-            var selectedOriginalName = selectedVariableElement.attr('variable');
-            //var selectedSource = selectedVariableElement.attr('source');
+            var clickedVariableElement = jQuery(event.target).parent();
+            var variableId = clickedVariableElement.attr('variable');
 
-            // Create a fake variable element for the graph handler
-            var fakeVariable = {
-                originalName: selectedOriginalName,
-                category: selectedCategoryName,
-                //source: selectedSource
-            }
-
-            var visible = AnalyzeChart.toggleDataVisibility(fakeVariable);
-            if (visible) {
-                selectedVariableElement.find(".colorIndicator").css({opacity: "1"});
-            }
-            else {
-                selectedVariableElement.find(".colorIndicator").css({opacity: "0.2"});
-            }
-        });
-
-        jQuery("#selectedVariables").on('click', 'li > .settingsButton', function (event) {
-            var selectedVariableElement = jQuery(event.target).parent();
-            var selectedCategoryName = selectedVariableElement.attr('category');
-            var selectedOriginalName = selectedVariableElement.attr('variable');
-
-            currentCategory = AnalyzePage.quantimodoVariables[selectedCategoryName]
-            for (var i = 0; i < currentCategory.length; i++) {
-                var currentVariable = currentCategory[i];
-                if (currentVariable.originalName == selectedOriginalName && currentVariable.category == selectedCategoryName) {
-                    variableSettings.show(currentVariable);
+            var selectedVariable = null;
+            for (var i = 0; i < AnalyzePage.selectedVariables.length; i++) {
+                if (AnalyzePage.selectedVariables[i].id == variableId) {
+                    selectedVariable = AnalyzePage.selectedVariables[i];
                     break;
                 }
             }
+
+            var visible = AnalyzeChart.toggleDataVisibility({
+                id: selectedVariable.id,
+                originalName: selectedVariable.name,
+                category: selectedVariable.category
+            });
+
+            if (visible) {
+                clickedVariableElement.find('.colorIndicator').css({opacity: '1'});
+            }
+            else {
+                clickedVariableElement.find('.colorIndicator').css({opacity: '0.2'});
+            }
+
         });
+
+        jQuery('#selectedVariables').on('click', 'li > .settingsButton', function (event) {
+            var clickedVariableElement = jQuery(event.target).parent();
+
+            var variableId = clickedVariableElement.attr('variable');
+
+            var selectedVariable = null;
+            for (var i = 0; i < AnalyzePage.selectedVariables.length; i++) {
+                if (AnalyzePage.selectedVariables[i].id == variableId) {
+                    selectedVariable = AnalyzePage.selectedVariables[i];
+                    break;
+                }
+            }
+
+            variableSettings.show(selectedVariable);
+
+        });
+
     };
 
 
     var initDateRangeSelector = function () {
-        jQuery("#accordion-content-rangepickers").buttonset();
-        jQuery("#accordion-content-rangepickers :radio").click(periodUpdated);
+        jQuery('#accordion-content-rangepickers').buttonset();
+        jQuery('#accordion-content-rangepickers :radio').click(periodUpdated);
     };
 
 
@@ -168,12 +129,8 @@ var AnalyzePage = function () {
             'endTime': AnalyzePage.dateRangeEnd,
             //'groupingWidth': AnalyzePage.getPeriod(),
             'groupingTimezone': AnalyzePage.getTimezone()
-        }
-        /*
-         if (variable.source != null && variable.source.length != 0) {
-         filters.source = variable.source;
-         }
-         */
+        };
+
         if (variable.color == null) {
             variable.color = getRandomColor();
         }
@@ -182,108 +139,95 @@ var AnalyzePage = function () {
             AnalyzeChart.addData(variable, measurements);
 
             //var source = variable.source == null ? '' : source;
-            var variableIndicator = jQuery("#selectedVariables [variable='" + variable.originalName + "'][category='" + variable.category + "'] .colorIndicator");
+            var variableIndicator = jQuery('#selectedVariables [variable="' + variable.id + '"][category="' + variable.category + '"] .colorIndicator');
             variableIndicator.css({'background-size': '0 14px'});
             setTimeout(function () {
-                variableIndicator.removeClass("loading");
+                variableIndicator.removeClass('loading');
             }, 220);
         });
-
-        return variable.color;
     };
 
-    var newVariableSelected = function (originalVariableName, category, source, color, restoreFromLocalStorage) {
-        var selectedVariable;
+    var newVariableSelected = function (selectedVariable) {
 
-        var categories = Object.keys(AnalyzePage.quantimodoVariables);
-        var currentCategory, currentVariable;
+        if (!isVariableAlreadySelected(selectedVariable.id)) {
+            AnalyzePage.selectedVariables.push(selectedVariable);
+            Quantimodo.getVariableCategories(null, function (variableCategories) {
 
-        currentCategory = AnalyzePage.quantimodoVariables[category];
-        if (currentCategory == null || currentCategory.length == 0) {
-            return;
-        }
-        for (var n = 0; n < currentCategory.length; n++) {
-            currentVariable = currentCategory[n];
-            if (currentVariable.originalName == originalVariableName) {
-                selectedVariable = jQuery.extend({}, currentVariable);	// Create a copy so that modifications won't pollute the original set
-                break;
-            }
-        }
-
-        if (selectedVariable != null) {
-            selectedVariable.source = source;
-            selectedVariable.color = color;
-            var variableColor = addData(selectedVariable);
-
-            var variableEntryString = selectedVariable.name;
-
-            if (source != null && source.length > 0) {
-                variableEntryString += ' (' + source + ')';
-            }
-
-            var variableEntryStringTruncated = variableEntryString;
-            if (variableEntryStringTruncated != null && variableEntryStringTruncated.length > 25) {
-                //the indexOf will return the position of the first space starting from the 10th
-                var tempHeader = variableEntryStringTruncated;
-                for (var i = 23; i >= 10; i--) {
-                    tempHeader = variableEntryStringTruncated.indexOf(' ', i) != -1 ? variableEntryStringTruncated.substring(0, variableEntryStringTruncated.indexOf(' ', i)) + "..." : variableEntryStringTruncated;
-                    if (tempHeader.length < 26) {
+                var currentCategory = null;
+                for (var i = 0; i < variableCategories.length; i++) {
+                    if (variableCategories[i].name == selectedVariable.category) {
+                        currentCategory = variableCategories[i];
                         break;
                     }
                 }
-                variableEntryStringTruncated = tempHeader;
-            }
-            var sourceAttr = source == undefined || source == null || source == '' ? 'source' : 'source="' + source + '"';
-            jQuery('#selectedVariables').append('<li variable="' + selectedVariable.originalName + '" ' + sourceAttr + ' category="' + category + '"><div class="colorIndicator loading" style="background-color: ' + variableColor + '"></div><span title="' + variableEntryString + '">' + variableEntryStringTruncated + '</span><div class="closeButton icon-remove icon-large"></div><div class="eyeballButton icon-eye-open icon-large"></div><div class="settingsButton icon-cog icon-large" category="' + category + '"></div></li>');
+                if (currentCategory) {
 
+                    if (!selectedVariable.color) {
+                        selectedVariable.color = getRandomColor();
+                    }
 
-            AnalyzePage.selectedVariables.push(selectedVariable);
-            // we store only we select new variable from menu, during restoring no sence to store again which is already in local storage.
-            if (!restoreFromLocalStorage) {
-                storeSelectedVariable(selectedVariable, variableColor);
-            }
+                    addData(selectedVariable);
+
+                    var variableEntryString = selectedVariable.name;
+
+                    var variableEntryStringTruncated = variableEntryString;
+
+                    if (variableEntryStringTruncated.length >= 25) {
+                        variableEntryStringTruncated = variableEntryStringTruncated.substr(0, 22) + '...';
+                    }
+
+                    jQuery('#selectedVariables').append(
+                        '<li variable="' + selectedVariable.id + '" category="' + currentCategory.name + '">' +
+                        '<div class="colorIndicator loading" style="background-color: ' + selectedVariable.color + '">' +
+                        '</div>' +
+                        '<span title="' + variableEntryString + '">' + variableEntryStringTruncated + '</span>' +
+                        '<div class="closeButton fa fa-times">' +
+                        '</div>' +
+                        '<div class="eyeballButton fa fa-eye"></div>' +
+                        '<div class="settingsButton fa fa-cog" category="' + currentCategory.name + '">' +
+                        '</div></li>');
+
+                    storeSelectedVariable(selectedVariable);
+
+                }
+
+            });
         }
-    }
 
-    var storeSelectedVariable = function (variable, color) {
-        if (typeof(Storage) !== "undefined") {
-            newStoredVariable = {
-                'name': variable.originalName,
-                'cat': variable.category,
-                'src': variable.source,
-                'color': color
-            }
+    };
 
+    var storeSelectedVariable = function (variable) {
+        if (typeof(Storage) !== 'undefined') {
             try {
-                var storedVariables = JSON.parse(localStorage["selectedVariables"]);
+                var storedVariables = JSON.parse(localStorage.getItem('selectedVariables'));
 
                 var contains = false;
-                for (i = 0; i < storedVariables.length; i++) {
-                    if (storedVariables[i].name == variable.originalName && storedVariables[i].cat == variable.category && storedVariables[i].src == variable.source) {
+                for (var i = 0; i < storedVariables.length; i++) {
+                    if (storedVariables[i].id == variable.id) {
                         contains = true;
                         break;
                     }
                 }
                 if (!contains) {
-                    storedVariables.push(newStoredVariable);
+                    storedVariables.push(variable);
                     saveSetting('selectedVariables', JSON.stringify(storedVariables));
                 }
             }
             catch (e) {
                 console.log(e);
-                var storedVariables = [newStoredVariable];
+                var storedVariables = [variable];
                 saveSetting('selectedVariables', JSON.stringify(storedVariables));
             }
         }
-    }
+    };
 
-    var removeSelectedVariable = function (originalVariableName, category) {
-        if (typeof(Storage) !== "undefined") {
+    var removeSelectedVariable = function (variable) {
+        if (typeof(Storage) !== 'undefined') {
             try {
-                var storedVariables = JSON.parse(localStorage["selectedVariables"]);
+                var storedVariables = JSON.parse(localStorage.getItem('selectedVariables'));
 
-                for (i = 0; i < storedVariables.length; i++) {
-                    if (storedVariables[i].name == originalVariableName && storedVariables[i].cat == category) {
+                for (var i = 0; i < storedVariables.length; i++) {
+                    if (storedVariables[i].id == variable.id) {
                         storedVariables.splice(i, 1);
                         break;
                     }
@@ -296,7 +240,7 @@ var AnalyzePage = function () {
                 localStorage.removeItem('selectedVariables');
             }
         }
-    }
+    };
 
     var lastPeriod = 1;
     var periodUpdated = function () {
@@ -307,61 +251,10 @@ var AnalyzePage = function () {
         }
     };
 
-    var categoryListUpdated = function () {
-        jQuery('#selectInputCategory').empty();
-        jQuery('#selectVariableCategorySetting').empty();
-        jQuery.each(Object.keys(AnalyzePage.quantimodoVariables).sort(function (a, b) {
-            return a.toLowerCase().localeCompare(b.toLowerCase());
-        }), function (index, category) {
-            jQuery('#selectInputCategory').append(jQuery('<option/>').attr('value', category).text(category));
-            jQuery('#selectVariableCategorySetting').append(jQuery('<option/>').attr('value', category).text(category));
-            jQuery('#addVariableMenuCategories').append(jQuery('<li><a>' + category + '</a><ul class="variableContainer">'));
-            jQuery.each(AnalyzePage.quantimodoVariables[category], function (index, variable) {
-                if (variable.parent != null) {
-                    // this variable has parent do not display it on variables list, it will be displayed above sources of its parent
-                    return true;
-                }
-                // Variable entry
-                jQuery('#addVariableMenuCategories .variableContainer').last().append(jQuery('<li category="' + variable.category + '" variable="' + variable.originalName + '" source=""><a>' + variable.name + '</a><ul class="sourceContainer">'));
-
-                // "Sub variables" if we have
-                if (variable.subVariables != null && variable.subVariables.length > 0) {
-                    for (var k = 0; k < variable.subVariables.length; k++) {
-                        var subVariable = variable.subVariables[k];
-                        jQuery('#addVariableMenuCategories .sourceContainer').last().append(jQuery('<li category="' + subVariable.category + '" variable="' + subVariable.originalName + '" source=""><a>' + subVariable.name + '</a><ul class="sourceContainerSubVars">'));
-
-                        // "All sources" entry for subVariable, hope we do not go deep than one level, I do not know use case.
-                        // also hope no deadlocks in the future
-                        jQuery('#addVariableMenuCategories .sourceContainerSubVars').last().append(jQuery('<li category="' + subVariable.category + '" variable="' + subVariable.originalName + '" source=""><a>All sources</a>'));
-                        var sourcesSubVariable = subVariable.sources.split(',');
-                        for (var j = 0; j < sourcesSubVariable.length; j++) {
-                            jQuery('#addVariableMenuCategories .sourceContainerSubVars').last().append(jQuery('<li category="' + subVariable.category + '" variable="' + subVariable.originalName + '" source="' + sourcesSubVariable[j] + '"><a>' + sourcesSubVariable[j] + '</a>'));
-                        }
-
-                        jQuery('#addVariableMenuCategories .sourceContainer').last().append(jQuery('</ul></li>'));
-                    }
-                    jQuery('#addVariableMenuCategories .sourceContainer').last().append('<hr/>');
-                }
-
-                // "All sources" entry
-                jQuery('#addVariableMenuCategories .sourceContainer').last().append(jQuery('<li category="' + variable.category + '" variable="' + variable.originalName + '" source=""><a>All sources</a>'));
-                var sources = variable.sources.split(',');
-                for (var i = 0; i < sources.length; i++) {
-                    jQuery('#addVariableMenuCategories .sourceContainer').last().append(jQuery('<li category="' + variable.category + '" variable="' + variable.originalName + '" source="' + sources[i] + '"><a>' + sources[i] + '</a>'));
-                }
-
-                jQuery('#addVariableMenuCategories .variableContainer').last().append(jQuery('</ul></li>'));
-            });
-            jQuery('#addVariableMenuCategories').append(jQuery('</ul></li>'));
-
-        });
-        jQuery("#addVariableMenu").menu("refresh");
-    };
-
     var unitListUpdated = function () {
         jQuery('#selectVariableUnitSetting').empty();
         jQuery.each(AnalyzePage.quantimodoUnits, function (index, category) {
-            jQuery('#selectVariableUnitSetting').append(jQuery('<option disabled/>').attr("style", "color:#29bdca;font-styl;").text(category[0].category));
+            jQuery('#selectVariableUnitSetting').append(jQuery('<option disabled/>').attr('style', 'color:#29bdca;font-styl;').text(category[0].category));
             jQuery.each(category, function (index, unit) {
                 jQuery('#selectVariableUnitSetting').append(jQuery('<option/>').attr('value', unit.abbreviatedName).text(unit.name));
             });
@@ -369,25 +262,25 @@ var AnalyzePage = function () {
     };
 
     var retrieveSettings = function () {
-        if (typeof(Storage) !== "undefined") {
-            dateSelectorVisible = (localStorage["dateSelectorVisible"] || "true") == "true" ? true : false;
-            inputSelectorVisible = (localStorage["inputSelectorVisible"] || "true") == "true" ? true : false;
-            outputSelectorVisible = (localStorage["outputSelectorVisible"] || "true") == "true" ? true : false;
+        if (typeof(Storage) !== 'undefined') {
+            dateSelectorVisible = (localStorage.getItem('dateSelectorVisible') || 'true') == 'true' ? true : false;
+            inputSelectorVisible = (localStorage.getItem('inputSelectorVisible') || 'true') == 'true' ? true : false;
+            outputSelectorVisible = (localStorage.getItem('outputSelectorVisible') || 'true') == 'true' ? true : false;
         }
     };
 
     var saveSetting = function (setting, value) {
-        if (typeof(Storage) !== "undefined") {
-            localStorage[setting] = value;
+        if (typeof(Storage) !== 'undefined') {
+            localStorage.setItem(setting, value);
         }
     };
 
     var restoreChart = function () {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== 'undefined') {
 
             var storedVariables = [];
-            if (localStorage.getItem("selectedVariables")) {
-                storedVariables = JSON.parse(localStorage["selectedVariables"]);
+            if (localStorage.getItem('selectedVariables')) {
+                storedVariables = JSON.parse(localStorage.getItem('selectedVariables'));
             }
             jQuery('#selectedVariables').empty();
             for (i = 0; i < storedVariables.length; i++) {
@@ -399,39 +292,33 @@ var AnalyzePage = function () {
                 }
 
                 // Add the variable
-                newVariableSelected(storedVariable.name, storedVariable.cat, storedVariable.src, storedVariable.color, true);
+                newVariableSelected(storedVariable);
 
-                // Disable the entry in the variable picker
-                var variableSelectElement = jQuery("#addVariableMenu li[variable='" + storedVariable.name + "'][category='" + storedVariable.cat + "'][source='" + storedVariable.src + "']");
-
-                if (!variableSelectElement.hasClass('ui-state-disabled')) {
-                    variableSelectElement.addClass('ui-state-disabled');
-                }
             }
         }
     };
 
     var initSharing = function () {
-        jQuery("#share-dialog #button-doshare").click(function () {
-            jQuery("#share-dialog").css({'display': 'block', 'opacity': 0.8});
-            showLoadingOverlay("#share-dialog");
+        jQuery('#share-dialog #button-doshare').click(function () {
+            jQuery('#share-dialog').css({'display': 'block', 'opacity': 0.8});
+            showLoadingOverlay('#share-dialog');
 
             share(function (id) {
-                jQuery("#share-dialog").css({'display': 'block', 'opacity': 1});
-                hideLoadingOverlay("#share-dialog");
+                jQuery('#share-dialog').css({'display': 'block', 'opacity': 1});
+                hideLoadingOverlay('#share-dialog');
 
                 var url = location.href;						// Get current URL
                 if (url.substr(-1) != '/')  url = url + '/';	// Append trailing slash if not exists
-                jQuery("#share-dialog").append(url + 'shared/?data=' + id);	// Return share URL
+                jQuery('#share-dialog').append(url + 'shared/?data=' + id);	// Return share URL
             });
         });
-        jQuery("#share-dialog #button-cancelshare").click(function () {
-            jQuery("#share-dialog-background").css({'opacity': 0});
-            jQuery("#share-dialog").css({'opacity': 0});
+        jQuery('#share-dialog #button-cancelshare').click(function () {
+            jQuery('#share-dialog-background').css({'opacity': 0});
+            jQuery('#share-dialog').css({'opacity': 0});
 
             setTimeout(function () {
-                jQuery("#share-dialog-background").css({'display': 'none'});
-                jQuery("#share-dialog").css({'display': 'none'});
+                jQuery('#share-dialog-background').css({'display': 'none'});
+                jQuery('#share-dialog').css({'display': 'none'});
             }, 500);
         });
 
@@ -441,21 +328,54 @@ var AnalyzePage = function () {
     };
 
     var showShareDialog = function () {
-        jQuery("#share-dialog-background").css({'display': 'block', 'opacity': 0.5});
-        jQuery("#share-dialog").css({'display': 'block', 'opacity': 1});
+        jQuery('#share-dialog-background').css({'display': 'block', 'opacity': 0.5});
+        jQuery('#share-dialog').css({'display': 'block', 'opacity': 1});
     };
 
     var share = function (onDoneListener) {
         var shareObject = {
-            "type": "analyze",
-            "causeMeasurements": causeMeasurements,
-            "effectMeasurements": effectMeasurements,
-            "inputVariable": lastInputVariable,
-            "outputVariable": lastOutputVariable
+            'type': 'analyze',
+            'causeMeasurements': causeMeasurements,
+            'effectMeasurements': effectMeasurements,
+            'inputVariable': lastInputVariable,
+            'outputVariable': lastOutputVariable
         };
         Quantimodo.postAnalyzeShare(shareObject, function (response) {
             onDoneListener(response['id']);
         });
+    };
+
+    var initPreselectedVariables = function () {
+
+        if (typeof qmwpShortCodeDefinedVariables !== 'undefined' && qmwpShortCodeDefinedVariables) {
+
+            var variables = qmwpShortCodeDefinedVariables.split(';');
+
+            for (var i = 0; i < variables.length; i++) {
+                if (variables[i]) {
+                    Quantimodo.getVariableByName(variables[i], function (variable) {
+                        if (typeof variable.id !== 'undefined') {
+                            newVariableSelected(variable);
+                        }
+                    });
+                }
+            }
+        }
+
+    };
+
+    var isVariableAlreadySelected = function (variableId) {
+
+        var isSelected = false;
+
+        for (var i = 0; i < AnalyzePage.selectedVariables.length; i++) {
+            if (AnalyzePage.selectedVariables[i].id == variableId) {
+                isSelected = true;
+                break;
+            }
+        }
+
+        return isSelected;
     };
 
     return {
@@ -495,70 +415,55 @@ var AnalyzePage = function () {
 
                 refreshMeasurementsRange(function () {
 
-                    //get variable input
+                    //setup autocomplete functionality
                     var variableInput = jQuery('#variable-selector');
-                    //set it disabled while variables are not loaded
-                    variableInput.prop('disabled', true);
-                    variableInput.val('Loading. Please wait...');
+                    variableInput.autocomplete({
 
-                    refreshVariables([], function () {
+                        source: function (request, response) {
+                            //fetch variables using quantimodo-api
+                            Quantimodo.searchVariables(jQuery('#variable-selector').val(), function (data) {
 
-                        //once variables are ready - enable variable searcher
-                        variableInput.val('');
-                        variableInput.prop('disabled', false);
-                        //setup autocomplete functionality
-                        variableInput.autocomplete({
+                                var results = [];
 
-                            source: function (request, response) {
-                                //fetch variables using quantimodo-api
-                                Quantimodo.searchVariables(jQuery("#variable-selector").val(), function (data) {
-
-                                    var results = [];
-
-                                    filterFoundVariables:
-                                        for (var i = 0; i < data.length; i++) {
-                                            for (var j = 0; j < AnalyzePage.selectedVariables.length; j++) {
-                                                if (data[i].id == AnalyzePage.selectedVariables[j].id) {
-                                                    //if variable with such ID is already selected
-                                                    //we are skipping it
-                                                    continue filterFoundVariables;
-                                                }
+                                filterFoundVariables:
+                                    for (var i = 0; i < data.length; i++) {
+                                        for (var j = 0; j < AnalyzePage.selectedVariables.length; j++) {
+                                            if (data[i].id == AnalyzePage.selectedVariables[j].id) {
+                                                //if variable with such ID is already selected
+                                                //we are skipping it
+                                                continue filterFoundVariables;
                                             }
-                                            results.push({
-                                                label: data[i].name,
-                                                value: data[i].name,
-                                                variable: data[i]
-                                            })
                                         }
-                                    //passing filtered variables to the autocomplete for displaying
-                                    response(results);
+                                        results.push({
+                                            label: data[i].name,
+                                            value: data[i].name,
+                                            variable: data[i]
+                                        });
+                                    }
+                                //passing filtered variables to the autocomplete for displaying
+                                response(results);
 
-                                });
-                            },
-                            minLength: 2,
-                            select: function (event, ui) {
-                                //get selected item
-                                var selectedVariable = ui.item.variable;
-                                console.debug('Variable Selected:');
-                                console.debug(selectedVariable);
-                                //pass it for processing
-                                newVariableSelected(
-                                    selectedVariable.originalName,
-                                    selectedVariable.category,
-                                    null,   //TODO source
-                                    null, false
-                                );
-                                //blank variable searcher
-                                jQuery("#variable-selector").val('');
-                                return false;
-                            }
-                        });
-
-                        categoryListUpdated();
-                        restoreChart();
-
+                            });
+                        },
+                        minLength: 2,
+                        select: function (event, ui) {
+                            //get selected item
+                            var selectedVariable = ui.item.variable;
+                            console.debug('Variable Selected:');
+                            console.debug(selectedVariable);
+                            //pass it for processing
+                            newVariableSelected(ui.item.variable);
+                            //blank variable searcher
+                            jQuery('#variable-selector').val('');
+                            return false;
+                        }
                     });
+
+                    initPreselectedVariables();
+                    restoreChart();
+
                 });
+
                 refreshUnits(function () {
                     unitListUpdated();
                 });
@@ -569,19 +474,18 @@ var AnalyzePage = function () {
                 variableSettings.init({
                     saveCallback: function () {
                         refreshVariables([], function () {
-                            categoryListUpdated();
+                            /*categoryListUpdated();*/
                             restoreChart();
                         });	//TODO replace this with something that updates the variables locally, since this triggers
                     }
                 });
 
                 initDateRangeSelector();
-                initLoginDialog();
                 initSharing();
                 initDeleteMeasurements();
 
             } else {
-                window.location.href = "?connect=quantimodo";
+                window.location.href = '?connect=quantimodo';
             }
 
         }

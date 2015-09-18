@@ -69,6 +69,7 @@ var variableSettings = {
         var currentCategory, currentUnit;
         var foundUnit = false;
         var count = categories.length, innerCount;
+
         for (var i = 0; i < count; i++) {
             currentCategory = AnalyzePage.quantimodoUnits[categories[i]];
             innerCount = currentCategory.length;
@@ -78,7 +79,7 @@ var variableSettings = {
                 {
                     jQuery('#selectVariableUnitSetting').append(jQuery('<option/>').attr('value', currentUnit.abbreviatedName).text(currentUnit.name));
                 }
-                else if (currentUnit.abbreviatedName == variableSettings.current.unit) {
+                else if (currentUnit.abbreviatedName == variableSettings.current.abbreviatedUnitName) {
                     foundUnit = true;
                     n = -1;	// Reset the position in this category and continue, values will be added next loop;
                 }
@@ -91,7 +92,7 @@ var variableSettings = {
         // Fill variable selector, TODO: Suggestions at the top?
         jQuery('#joinedVariablePicker').empty();
         var currentVariable;
-        var variablesCount = AnalyzePage.quantimodoVariables[variableSettings.current.category].length;
+
         if ('joinedVariables' in variableSettings.current) {
             var joinedVariablesCount = variableSettings.current['joinedVariables'].length;
         }
@@ -99,23 +100,23 @@ var variableSettings = {
             var joinedVariablesCount = 0;
         }
         var foundVariable = false;
-        for (var n = 0; n < variablesCount; n++) {
-            currentVariable = AnalyzePage.quantimodoVariables[variableSettings.current.category][n];
-            if (currentVariable.id == variableSettings.current.id)	// If this is the current variable skip it
-            {
-                continue;
-            }
-            var isJoinedVariable = false;
-            for (var i = 0; i < joinedVariablesCount; i++) {
-                if (currentVariable.id == variableSettings.current['joinedVariables'][i].id) {
-                    isJoinedVariable = true;
-                }
-            }
-            if (!isJoinedVariable)	// If this variable is joined with the one currently being edited, skip it
-            {
-                jQuery('#joinedVariablePicker').append(jQuery('<option/>').attr('value', currentVariable.originalName).text(currentVariable.name));
+
+        currentVariable = variable;
+
+        if (currentVariable.id == variableSettings.current.id)	// If this is the current variable skip it
+        {
+        }
+        var isJoinedVariable = false;
+        for (var i = 0; i < joinedVariablesCount; i++) {
+            if (currentVariable.id == variableSettings.current['joinedVariables'][i].id) {
+                isJoinedVariable = true;
             }
         }
+        if (!isJoinedVariable)	// If this variable is joined with the one currently being edited, skip it
+        {
+            jQuery('#joinedVariablePicker').append(jQuery('<option/>').attr('value', currentVariable.originalName).text(currentVariable.name));
+        }
+
 
         // Generate list of joined variables
         jQuery('#joinedVariablesList').empty();
@@ -128,7 +129,7 @@ var variableSettings = {
         jQuery("#input-variable-name").val(variableSettings.current.name);
         jQuery("#input-variable-id").val(variableSettings.current.id);
         //jQuery("#input-variable-name").attr('placeholder', variableSettings.current.name);
-        jQuery("#selectVariableUnitSetting").val(variableSettings.current.unit);
+        jQuery("#selectVariableUnitSetting").val(variableSettings.current.abbreviatedUnitName);
         jQuery("#selectVariableCategorySetting").val(variableSettings.current.category);
 
         jQuery('#unitForMinValue').text(variableSettings.current.unit);
