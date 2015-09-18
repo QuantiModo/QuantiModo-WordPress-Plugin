@@ -199,7 +199,7 @@ var AnalyzePage = function () {
     var storeSelectedVariable = function (variable) {
         if (typeof(Storage) !== 'undefined') {
             try {
-                var storedVariables = JSON.parse(localStorage['selectedVariables']);
+                var storedVariables = JSON.parse(localStorage.getItem('selectedVariables'));
 
                 var contains = false;
                 for (var i = 0; i < storedVariables.length; i++) {
@@ -224,7 +224,7 @@ var AnalyzePage = function () {
     var removeSelectedVariable = function (variable) {
         if (typeof(Storage) !== 'undefined') {
             try {
-                var storedVariables = JSON.parse(localStorage['selectedVariables']);
+                var storedVariables = JSON.parse(localStorage.getItem('selectedVariables'));
 
                 for (var i = 0; i < storedVariables.length; i++) {
                     if (storedVariables[i].id == variable.id) {
@@ -263,15 +263,15 @@ var AnalyzePage = function () {
 
     var retrieveSettings = function () {
         if (typeof(Storage) !== 'undefined') {
-            dateSelectorVisible = (localStorage['dateSelectorVisible'] || 'true') == 'true' ? true : false;
-            inputSelectorVisible = (localStorage['inputSelectorVisible'] || 'true') == 'true' ? true : false;
-            outputSelectorVisible = (localStorage['outputSelectorVisible'] || 'true') == 'true' ? true : false;
+            dateSelectorVisible = (localStorage.getItem('dateSelectorVisible') || 'true') == 'true' ? true : false;
+            inputSelectorVisible = (localStorage.getItem('inputSelectorVisible') || 'true') == 'true' ? true : false;
+            outputSelectorVisible = (localStorage.getItem('outputSelectorVisible') || 'true') == 'true' ? true : false;
         }
     };
 
     var saveSetting = function (setting, value) {
         if (typeof(Storage) !== 'undefined') {
-            localStorage[setting] = value;
+            localStorage.setItem(setting, value);
         }
     };
 
@@ -280,7 +280,7 @@ var AnalyzePage = function () {
 
             var storedVariables = [];
             if (localStorage.getItem('selectedVariables')) {
-                storedVariables = JSON.parse(localStorage['selectedVariables']);
+                storedVariables = JSON.parse(localStorage.getItem('selectedVariables'));
             }
             jQuery('#selectedVariables').empty();
             for (i = 0; i < storedVariables.length; i++) {
