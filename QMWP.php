@@ -3,10 +3,12 @@
 /**
  * Plugin Name: QuantiModo
  * Plugin URI: https://app.quantimod.do
- * Description: A WordPress plugin that allows users to login or register by authenticating with an existing Quantimodo account via OAuth 2.0. Easily drops into new or existing sites, integrates with existing users.
- * Version: 0.3.0
+ * Description: A WordPress plugin that allows users to login or register by
+ * authenticating with an existing Quantimodo account. Easily
+ * drops into new or existing sites, integrates with existing users.
+ * Version: 0.3.1
  * Author: QuantiModo
- * Author URI: https://app.quantimod.do
+ * Author URI: https://app.quantimo.do
  * License: GPL2
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -1328,11 +1330,3 @@ Class QMWP
 }
 
 $GLOBALS['QuantiModo'] = QMWP::get_instance();
-
-
-
-
-
-
-
-
