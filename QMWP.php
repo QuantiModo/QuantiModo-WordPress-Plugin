@@ -203,7 +203,7 @@ Class QMWP
     function qmwp_deactivate()
     {
 
-        $this->delete_plugin_pages($this->settings['qmwp_plugin_pages']);
+        //$this->delete_plugin_pages($this->settings['qmwp_plugin_pages']); //no need to remove pages
 
     }
 
