@@ -279,8 +279,8 @@ AnalyzeChart = function () {
             }, false);
             scatterplotChart.tooltip.options.formatter = function () {
                 return '<b>' + Highcharts.dateFormat('%Y %b %d', this.point.time) + '</b><br>' +
-                    '<span style="color: ' + effectColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + effect.unit + ' (' + effect.source + ')</span> with ' +
-                    '<span style="color: ' + causeColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + cause.unit + ' (' + cause.source + ')</span>';
+                    '<span style="color: ' + effectColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + effect.unit + ' (' + effect.variableName + ')</span> with ' +
+                    '<span style="color: ' + causeColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + cause.unit + ' (' + cause.variableName + ')</span>';
             };
 
             scatterplotChart.series[0].setData(QuantimodoMath.linearRegressionEndpoints(scatterDots, cause.minimum, cause.maximum), false);
