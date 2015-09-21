@@ -865,9 +865,9 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
 
     var varName = jQuery('#selectOutputVariable').val();
     var valAs = jQuery('#selectOutputAsType').val();
-    var headerText = "Effect on ";
+    var headerText = "Predictors of ";
     if (valAs == 'cause')
-        headerText = "Effect of ";
+        headerText = "Predicted by ";
 
     var headerTextTruncated = headerText + varName;
     jQuery(jQuery("#bar-graph-header div")[0]).attr('title', headerTextTruncated);
