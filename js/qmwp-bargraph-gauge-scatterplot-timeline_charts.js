@@ -222,7 +222,7 @@ AnalyzeChart = function () {
                 }
             });
 
-            inputDates.sort();
+            mergedDates.sort();
 
             var xMax = -Infinity, yMax = -Infinity, xMin = +Infinity, yMin = +Infinity;
             var scatterDots = [];

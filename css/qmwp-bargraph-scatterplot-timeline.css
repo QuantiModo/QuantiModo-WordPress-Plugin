@@ -336,3 +336,7 @@
     width: 200px !important;
     border-bottom: none !important;
 }
+
+#selectOutputCategory, #selectOutputVariable, #selectOutputAsType {
+    display: none;
+}

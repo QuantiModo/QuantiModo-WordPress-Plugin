@@ -56,14 +56,16 @@ var AnalyzePage = function () {
     };
 
     var initVariableSelectors = function () {
-        jQuery('#selectOutputCategory').change(outputCategoryUpdated);
+
+        /*jQuery('#selectOutputCategory').change(outputCategoryUpdated);
         jQuery('#selectOutputVariable').change(function () {
             outputVariableUpdated();
             getBargraph();
         });
         jQuery('#selectOutputAsType').change(function () {
             getBargraph(true);
-        });
+        });*/
+
     };
 
     var lastStartTime = null;
@@ -181,12 +183,14 @@ var AnalyzePage = function () {
 
     var lastOutputVariable = null;
     var outputVariableUpdated = function () {
-        var newOutputVariable = AnalyzePage.getOutputVariable();
-        if (newOutputVariable !== AnalyzePage.lastOutputVariable) {
-            refreshOutputData();
-            AnalyzePage.lastOutputVariable = newOutputVariable;
-            saveSetting('lastOutputVariableName', AnalyzePage.lastOutputVariable.originalName);
-        }
+        newOutputVariable = AnalyzePage.getOutputVariable(function (newOutputVariable) {
+            if (newOutputVariable !== AnalyzePage.lastOutputVariable) {
+                refreshOutputData();
+                AnalyzePage.lastOutputVariable = newOutputVariable;
+                saveSetting('lastOutputVariableName', AnalyzePage.lastOutputVariable.originalName);
+            }
+        });
+
     };
 
     var retrieveSettings = function () {
@@ -459,17 +463,22 @@ var AnalyzePage = function () {
         getInputVariable: function () {
             return AnalyzePage.getVariableFromOriginalName(AnalyzePage.selectedInputVariableName);
         },
-        getOutputVariable: function () {
-            var categoryName = jQuery('#selectOutputCategory :selected').val();
-            var variableName = jQuery('#selectOutputVariable :selected').val();
-            var wantedVariable;
-            jQuery.each(AnalyzePage.quantimodoVariables[categoryName], function (_, variable) {
-                if (variable.originalName == variableName) {
-                    wantedVariable = variable;
-                    return;
-                }
+        getOutputVariable: function (callback) {
+
+            Quantimodo.getVariableByName(qmwpShortCodeDefinedCause, function (variable) {
+                callback(variable);
             });
-            return wantedVariable;
+
+            /*            var categoryName = jQuery('#selectOutputCategory :selected').val();
+             var variableName = jQuery('#selectOutputVariable :selected').val();
+             var wantedVariable;
+             jQuery.each(AnalyzePage.quantimodoVariables[categoryName], function (_, variable) {
+             if (variable.originalName == variableName) {
+             wantedVariable = variable;
+             return;
+             }
+             });
+             return wantedVariable;*/
         },
         setInputVariable: function (originalVariableName) {
             AnalyzePage.selectedInputVariableName = originalVariableName;
