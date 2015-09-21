@@ -196,9 +196,12 @@ AnalyzeChart = function () {
 
             var getValueForDate = function (measurements, date) {
                 var measurementValue = null;
+                var lookUpDate = new Date(date).setHours(0, 0, 0, 0);
                 for (var j = 0; j < measurements.length; j++) {
-                    if (measurements[j][0] == date) {
+                    var measurementDate = new Date(measurements[j][0]).setHours(0, 0, 0, 0);
+                    if (measurementDate == lookUpDate) {
                         measurementValue = measurements[j][1];
+                        break;
                     }
                 }
                 return measurementValue;
