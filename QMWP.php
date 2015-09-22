@@ -116,7 +116,7 @@ Class QMWP
             'QMWP Mood Tracker' => '[qmwp_mood_tracker]',
             'QMWP Connectors' => '[qmwp_connectors]',
             'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
-            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline cause="overall mood"]',
+            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
             'QMWP Timeline' => '[qmwp_timeline variables="overall mood"]',
             'QMWP Add Measurement' => '[qmwp_add_measurement]'
         )
@@ -1255,18 +1255,22 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'cause' => null,
+            'variable' => null,
+            'variable_as'    =>  'cause',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-bargraph-scatterplot-timeline', $version);
 
-        $cause = $attributes['cause'];
+        $variable = $attributes['variable'];
 
-        if (!is_null($cause)) {
+        if (!is_null($variable)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
-                array('qmwpShortCodeDefinedCause' => $cause));
+                array(
+                    'qmwpShortCodeDefinedVariable' => $variable,
+                    'qmwpShortCodeDefinedVariableAs'  => $attributes['variable_as']
+                ));
         }
 
         $template_content = $this->process_template($pluginContentHTML);

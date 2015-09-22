@@ -58,13 +58,13 @@ var AnalyzePage = function () {
     var initVariableSelectors = function () {
 
         /*jQuery('#selectOutputCategory').change(outputCategoryUpdated);
-        jQuery('#selectOutputVariable').change(function () {
-            outputVariableUpdated();
-            getBargraph();
-        });
-        jQuery('#selectOutputAsType').change(function () {
-            getBargraph(true);
-        });*/
+         jQuery('#selectOutputVariable').change(function () {
+         outputVariableUpdated();
+         getBargraph();
+         });
+         jQuery('#selectOutputAsType').change(function () {
+         getBargraph(true);
+         });*/
 
     };
 
@@ -183,7 +183,7 @@ var AnalyzePage = function () {
 
     var lastOutputVariable = null;
     var outputVariableUpdated = function () {
-        newOutputVariable = AnalyzePage.getOutputVariable(function (newOutputVariable) {
+        AnalyzePage.getOutputVariable(function (newOutputVariable) {
             if (newOutputVariable !== AnalyzePage.lastOutputVariable) {
                 refreshOutputData();
                 AnalyzePage.lastOutputVariable = newOutputVariable;
@@ -464,21 +464,9 @@ var AnalyzePage = function () {
             return AnalyzePage.getVariableFromOriginalName(AnalyzePage.selectedInputVariableName);
         },
         getOutputVariable: function (callback) {
-
-            Quantimodo.getVariableByName(qmwpShortCodeDefinedCause, function (variable) {
+            Quantimodo.getVariableByName(qmwpShortCodeDefinedVariable, function (variable) {
                 callback(variable);
             });
-
-            /*            var categoryName = jQuery('#selectOutputCategory :selected').val();
-             var variableName = jQuery('#selectOutputVariable :selected').val();
-             var wantedVariable;
-             jQuery.each(AnalyzePage.quantimodoVariables[categoryName], function (_, variable) {
-             if (variable.originalName == variableName) {
-             wantedVariable = variable;
-             return;
-             }
-             });
-             return wantedVariable;*/
         },
         setInputVariable: function (originalVariableName) {
             AnalyzePage.selectedInputVariableName = originalVariableName;
@@ -682,7 +670,8 @@ function jsonCallback(data) {
         sortedByCorrelation = new Array();
         sortedByCausality = new Array();
 
-        var valAs = jQuery('#selectOutputAsType').val();
+        //var valAs = jQuery('#selectOutputAsType').val();
+        var valAs = qmwpShortCodeDefinedVariableAs;
 
         for (var i in data) {
             dataArray[i] = ((valAs === 'cause') ? {
@@ -787,10 +776,11 @@ function getBargraph(bUseCache) {
 
     jQuery('#graph-bar').hide();
     jQuery('.barloading').show();
-    var val = jQuery('#selectOutputVariable').val();
+    var val = qmwpShortCodeDefinedVariable;
     var url = Quantimodo.url + 'correlations';
 
-    var valAs = jQuery('#selectOutputAsType').val();
+    //var valAs = jQuery('#selectOutputAsType').val();
+    var valAs = qmwpShortCodeDefinedVariableAs;
     var jsonParam = {effect: val};
     if (valAs == 'cause')
         jsonParam = {cause: val};
@@ -844,8 +834,8 @@ function getBargraph(bUseCache) {
             bargraphDataAsCause = data;
         } else {
             bargraphDataAsEffect = data;
-            jsonCallback(data);
         }
+        jsonCallback(data);
     })
 }
 function resetBarGraph() {
@@ -863,8 +853,9 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
 
     selectedVariableName = sortedByCorrelation[0].label;
 
-    var varName = jQuery('#selectOutputVariable').val();
-    var valAs = jQuery('#selectOutputAsType').val();
+    var varName = qmwpShortCodeDefinedVariable;
+    //var valAs = jQuery('#selectOutputAsType').val();
+    var valAs = qmwpShortCodeDefinedVariableAs;
     var headerText = "Predictors of ";
     if (valAs == 'cause')
         headerText = "Predicted by ";
@@ -1009,7 +1000,8 @@ function filterByNumberOfPairs(numberOfPairs) {
         var causesFiltered = new Array();
         var filteredByNumberOfPairs = new Array();
         var k = 0;
-        var isEffect = (jQuery('#selectOutputAsType').val() === 'cause');
+        //var isEffect = (jQuery('#selectOutputAsType').val() === 'cause');
+        var isEffect = (qmwpShortCodeDefinedVariableAs === 'cause');
         for (var i in bargraphData) {
             // bargraphData.sort(compare);
             if (numberOfPairs < parseInt(bargraphData[i].numberOfPairs)) {
