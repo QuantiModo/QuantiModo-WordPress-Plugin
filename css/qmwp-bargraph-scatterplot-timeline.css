@@ -1,29 +1,30 @@
 @charset "utf-8";
 
-#content{
+#content {
     background: #f2f2f2;
     padding: 0px 12px 12px 12px;
-    overflow:hidden;
+    overflow: hidden;
     width: 100%;
 }
-#section-configure{
+
+#section-configure {
     float: left;
     width: 320px;
 }
-#section-analyze{
+
+#section-analyze {
     overflow: hidden;
     padding-left: 12px;
 }
 
-#section-analyze-top{
+#section-analyze-top {
     overflow: hidden;
 }
-
 
 /***************************************/
 /* Analyze section 					    */
 /***************************************/
-.graph-header{
+.graph-header {
     width: 100%;
     height: 42px;
     color: #fff;
@@ -34,28 +35,30 @@
     border-bottom: solid 3px #229DA5;
     margin-top: 12px;
 }
-.graph-content{
-    width:100%; 
-    background:#FFFFFF;
-   /* border-bottom: solid 3px #DDDDDD;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;*/
+
+.graph-content {
+    width: 100%;
+    background: #FFFFFF;
+    /* border-bottom: solid 3px #DDDDDD;
+     border-bottom-left-radius: 3px;
+     border-bottom-right-radius: 3px;*/
     overflow: hidden;
 }
 
 /***************************************/
 /* Left menubar					       */
 /***************************************/
-#section-configure-input{
-    overflow: hidden;
-    position: relative;
-}
-#section-configure-settings{
+#section-configure-input {
     overflow: hidden;
     position: relative;
 }
 
-.accordion-header{
+#section-configure-settings {
+    overflow: hidden;
+    position: relative;
+}
+
+.accordion-header {
     color: #fff;
 }
 
@@ -70,15 +73,17 @@
 /******************/
 /* Output variable*/
 /******************/
-#accordion-output-header{
+#accordion-output-header {
     background: #29bdca;
     border-bottom: solid 3px #409caf;
 }
-#accordion-output-content{
+
+#accordion-output-content {
     line-height: 2em;
     color: #555555;
 }
-#accordion-output-content select{
+
+#accordion-output-content select {
     background-color: #F6F6F6;
     margin-bottom: 12px;
     height: 35px;
@@ -86,26 +91,30 @@
     border-radius: 4px;
     border: solid 1px #ddd;
 }
-#button-output-varsettings{
+
+#button-output-varsettings {
     width: 100%;
 }
 
 /*******************/
 /* Correlation card*/
 /*******************/
-#correlation-gauge{
+#correlation-gauge {
     font-size: 1.15em;
-   // padding-left: 12px;
+/ / padding-left : 12 px;
     width: 0px;
     float: left;
 }
-#correlation-gauge .graph-content{
+
+#correlation-gauge .graph-content {
     height: 350px;
 }
-#correlation-gauge td{
+
+#correlation-gauge td {
     vertical-align: middle;
     border: none;
 }
+
 #correlation-gauge tr:nth-child(even) {
     background-color: #F5FBFB;
 }
@@ -113,97 +122,108 @@
 /*******************/
 /* Scatterplot card*/
 /*******************/
-#scatterplot-graph{
-    // padding-left: 12px;
+#scatterplot-graph {
+/ / padding-left : 12 px;
     overflow: hidden;
 }
-#scatterplot-graph .graph-content{
+
+#scatterplot-graph .graph-content {
     height: 350px;
 }
 
 /*******************/
 /* Bar Graph card*/
 /*******************/
-#bar-graph{
+#bar-graph {
     overflow: hidden;
 }
-#bar-graph .graph-content{
+
+#bar-graph .graph-content {
 
 }
 
 /****************/
 /* Timeline card*/
 /****************/
-#timeline-graph{
+#timeline-graph {
     overflow: hidden;
 }
-#timeline-graph .graph-content{
+
+#timeline-graph .graph-content {
     height: 450px;
 }
 
-.inoutstate{ float: left; width:200px}
-.outstate { }
-.daterange {}
+.inoutstate {
+    float: left;
+    width: 200px
+}
+
+.outstate {
+}
+
+.daterange {
+}
 
 /* Responsive stuffs */
 @media only screen and (max-width: 1480px) {
 
-
 }
+
 @media only screen and (max-width: 1100px) {
-    #correlation-gauge{
+    #correlation-gauge {
         width: 100%;
     }
-    #scatterplot-graph{
+
+    #scatterplot-graph {
         width: 100%;
         padding-left: 0;
     }
 }
 
 @media only screen and (max-width: 768px) {
-    #section-configure{
+    #section-configure {
         width: 100%;
     }
-    #section-analyze{
+
+    #section-analyze {
         overflow: visible;
         padding: 0;
     }
 }
 
-.variableInBarGraph .variableName{
-    width:125px;
-    float:left;
+.variableInBarGraph .variableName {
+    width: 125px;
+    float: left;
 }
 
-.variableInBarGraph .gear{    
-    width:16px;   
+.variableInBarGraph .gear {
+    width: 16px;
 }
 
-.variableInBarGraph .setButton {      
-    cursor: pointer;   
+.variableInBarGraph .setButton {
+    cursor: pointer;
     opacity: 0;
     border: none;
     transition: all 0.2s ease-in-out;
     margin-left: 3px;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
-    color:#FFF;
+    color: #FFF;
 }
 
 .variableInBarGraph {
-    width:170px;
-    cursor: pointer; 
+    width: 170px;
+    cursor: pointer;
 }
 
-
-.variableInBarGraph:hover{
+.variableInBarGraph:hover {
     color: #FFF;
 }
+
 .variableInBarGraph:hover .setButton {
     opacity: 1;
-    color:#FFF;
+    color: #FFF;
 }
-
 
 #selectVariableCategorySetting[disabled] {
     background-color: #eeeeee;
@@ -211,14 +231,11 @@
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 }
 
-
-
-
 /**********************/
 /* new inlined styles */
 /**********************/
 .floatRight {
-    float:right;
+    float: right;
 }
 
 .marginTopTen {
@@ -232,14 +249,17 @@
 .marginTopSeven {
     margin-top: 7px;
 }
+
 .generalHeader {
-    float: left; 
+    float: left;
     line-height: 42px;
-    max-height: 42px;     
-    overflow:hidden;
+    max-height: 42px;
+    overflow: hidden;
 }
+
 .bargraphHeader {
     max-width: 255px;
+    font-size: 18px;
 }
 
 .resolutionHeader {
@@ -247,10 +267,10 @@
 }
 
 .questionMark {
-    float:right; 
-    margin-right: 3px ; 
-    margin-top: 6px !important; 
-    font-size:22px;
+    float: right;
+    margin-right: 3px;
+    margin-top: 6px !important;
+    font-size: 22px;
     text-indent: 0px;
 }
 
@@ -271,11 +291,11 @@
 }
 
 .plusMark {
-    float:right; 
-    margin-top: 7px !important; 
-    margin-right:3px; 
+    float: right;
+    margin-top: 7px !important;
+    margin-right: 3px;
     font-size: 28px !important;
-    text-indent: 0px; 
+    text-indent: 0px;
     cursor: pointer;
 }
 
@@ -283,12 +303,41 @@
     max-width: 900px;
 }
 
-.keepInline{
-    position:absolute;
-    right:12px;
-    
+.keepInline {
+    position: absolute;
+    right: 12px;
+
 }
-  .resolutionOnTimeLine { height:22px !important;padding:0px !important; }
-  .resolutionOnTimeLine span { padding-top: 2.5px !important; padding-bottom: 2.5px !important;}  
-  .resolutionLabel { position:absolute; top: 31px;left: -60px;color: #666;font-size: 12px; font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #666; fill: #666;}
-  .resolutionCover { position:absolute !important;top:28px !important; width:200px !important;border-bottom:none !important; }
+
+.resolutionOnTimeLine {
+    height: 22px !important;
+    padding: 0px !important;
+}
+
+.resolutionOnTimeLine span {
+    padding-top: 2.5px !important;
+    padding-bottom: 2.5px !important;
+}
+
+.resolutionLabel {
+    position: absolute;
+    top: 31px;
+    left: -60px;
+    color: #666;
+    font-size: 12px;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #666;
+    fill: #666;
+}
+
+.resolutionCover {
+    position: absolute !important;
+    top: 28px !important;
+    width: 200px !important;
+    border-bottom: none !important;
+}
+
+#selectOutputCategory, #selectOutputVariable, #selectOutputAsType {
+    display: none;
+}

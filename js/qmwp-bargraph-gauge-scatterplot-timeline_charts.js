@@ -196,9 +196,12 @@ AnalyzeChart = function () {
 
             var getValueForDate = function (measurements, date) {
                 var measurementValue = null;
+                var lookUpDate = new Date(date).setHours(0, 0, 0, 0);
                 for (var j = 0; j < measurements.length; j++) {
-                    if (measurements[j][0] == date) {
+                    var measurementDate = new Date(measurements[j][0]).setHours(0, 0, 0, 0);
+                    if (measurementDate == lookUpDate) {
                         measurementValue = measurements[j][1];
+                        break;
                     }
                 }
                 return measurementValue;
@@ -222,7 +225,7 @@ AnalyzeChart = function () {
                 }
             });
 
-            inputDates.sort();
+            mergedDates.sort();
 
             var xMax = -Infinity, yMax = -Infinity, xMin = +Infinity, yMin = +Infinity;
             var scatterDots = [];
@@ -276,8 +279,8 @@ AnalyzeChart = function () {
             }, false);
             scatterplotChart.tooltip.options.formatter = function () {
                 return '<b>' + Highcharts.dateFormat('%Y %b %d', this.point.time) + '</b><br>' +
-                    '<span style="color: ' + effectColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + effect.unit + ' (' + effect.source + ')</span> with ' +
-                    '<span style="color: ' + causeColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + cause.unit + ' (' + cause.source + ')</span>';
+                    '<span style="color: ' + effectColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + effect.unit + ' (' + effect.variableName + ')</span> with ' +
+                    '<span style="color: ' + causeColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + cause.unit + ' (' + cause.variableName + ')</span>';
             };
 
             scatterplotChart.series[0].setData(QuantimodoMath.linearRegressionEndpoints(scatterDots, cause.minimum, cause.maximum), false);

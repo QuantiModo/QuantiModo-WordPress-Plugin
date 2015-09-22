@@ -116,7 +116,7 @@ Class QMWP
             'QMWP Mood Tracker' => '[qmwp_mood_tracker]',
             'QMWP Connectors' => '[qmwp_connectors]',
             'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
-            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline]',
+            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
             'QMWP Timeline' => '[qmwp_timeline variables="overall mood"]',
             'QMWP Add Measurement' => '[qmwp_add_measurement]'
         )
@@ -203,7 +203,7 @@ Class QMWP
     function qmwp_deactivate()
     {
 
-        $this->delete_plugin_pages($this->settings['qmwp_plugin_pages']);
+        //$this->delete_plugin_pages($this->settings['qmwp_plugin_pages']); //no need to remove pages
 
     }
 
@@ -1253,11 +1253,25 @@ Class QMWP
      */
     function qmwp_bargraph_scatterplot_timeline($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_bargraph_scatterplot_timeline');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'variable' => null,
+            'variable_as'    =>  'cause',
+        ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-bargraph-scatterplot-timeline', $version);
+
+        $variable = $attributes['variable'];
+
+        if (!is_null($variable)) {
+            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
+                array(
+                    'qmwpShortCodeDefinedVariable' => $variable,
+                    'qmwpShortCodeDefinedVariableAs'  => $attributes['variable_as']
+                ));
+        }
 
         $template_content = $this->process_template($pluginContentHTML);
 
@@ -1278,7 +1292,7 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
 
-        $variables = isset($attributes['variables']) ? $attributes['variables'] : null;
+        $variables = $attributes['variables'];
 
         if (!is_null($variables)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
