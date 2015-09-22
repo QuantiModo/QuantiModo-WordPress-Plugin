@@ -1,73 +1,52 @@
-function setMoodButtonListeners() {
-    document.getElementById("buttonMoodDepressed").onclick = onMoodButtonClicked;
-    document.getElementById("buttonMoodSad").onclick = onMoodButtonClicked;
-    document.getElementById("buttonMoodOk").onclick = onMoodButtonClicked;
-    document.getElementById("buttonMoodHappy").onclick = onMoodButtonClicked;
-    document.getElementById("buttonMoodEcstatic").onclick = onMoodButtonClicked;
-}
-var onMoodButtonClicked = function () {
-    // Figure out what rating was selected
-    var buttonId = this.id;
-    if (buttonId == "buttonMoodDepressed") {
-        var moodValue = 1;
-    }
-    else if (buttonId == "buttonMoodSad") {
-        var moodValue = 2;
-    }
-    else if (buttonId == "buttonMoodOk") {
-        var moodValue = 3;
-    }
-    else if (buttonId == "buttonMoodHappy") {
-        var moodValue = 4;
-    }
-    else if (buttonId == "buttonMoodEcstatic") {
-        var moodValue = 5;
-    }
-    else {
-        console.log("How did I get here...");
-        return;
-    }
+var onMoodButtonClicked = function (value, variable) {
+
     jQuery("#sectionSendingMood").html("");
-    var datet = Math.floor(Date.now() / 1000);
+    var timestamp = Math.floor(Date.now() / 1000);
     var measurements = [
         {
-            timestamp: datet,
-            value: moodValue
+            timestamp: timestamp,
+            value: value
         }
-    ]
-    var mooddata = [{
+    ];
+    var payload = [{
         measurements: measurements,
-        name: "Overall Mood",
+        name: variable.name,
         source: "MoodiModo",
-        category: "Mood",
-        combinationOperation: "MEAN",
-        unit: "/5"
-    }]
-    if (typeof accessToken == "undefined" || !accessToken) {
-        window.location.href = "?connect=quantimodo";
-    } else {
-        jQuery.ajax({
-            type: "POST",
-            data: JSON.stringify(mooddata),
-            url: (typeof apiHost !== "undefined") ? apiHost + "/api/measurements/v2" : "/api/measurements/v2",
-            contentType: "application/json",
-            headers: {
-                "Authorization": "Bearer " + accessToken,
-                "X-Mashape-Key": (typeof mashapeKey !== "undefined") ? mashapeKey : null
-            },
-            success: function (dataString) {
-                jQuery("#sectionSendingMood").html("Your Request has been sent!");
-                window.measurementPostingResult = true;
-                console.log("**mentor_list div updated via ajax.**");
-            },
-            error: function (dataString) {
-                jQuery("#sectionSendingMood").html("Not Authenticated");
-                window.measurementPostingResult = false;
-                console.log("**mentor_list div updated via ajax.**");
-            }
-        });
-    }
-}
+        category: variable.category,
+        combinationOperation: variable.combinationOperation,
+        unit: variable.abbreviatedUnitName
+    }];
+
+    Quantimodo.postMeasurementsV2(payload, function (response) {
+        if (response.status == 201) {
+            jQuery("#sectionSendingMood").html("Measurement has been posted successfully");
+            window.measurementPostingResult = true;
+        } else {
+            jQuery("#sectionSendingMood").html("Error while posting measurement");
+            window.measurementPostingResult = false;
+            console.error(response);
+        }
+    });
+};
+
+
 jQuery(document).ready(function () {
-    setMoodButtonListeners();
+    Quantimodo.getVariableByName(qmwpShortCodeDefinedVariable, function (variable) {
+        if (variable && variable.abbreviatedUnitName == "/5") {
+            console.debug('Tracker is set to post measurements for variable:');
+            console.debug(variable);
+            jQuery('#track-variable-content').toggle();
+            jQuery('#track-variable-name').html(variable.name);
+
+            jQuery('.track-icon').click(function (event) {
+
+                onMoodButtonClicked(jQuery(event.currentTarget).data('value'), variable);
+            });
+
+        } else {
+            console.error(variable);
+            alert('Variable: ' + qmwpShortCodeDefinedVariable + '\n can not be tracked with this shortcode.')
+        }
+    });
+
 });

@@ -95,3 +95,7 @@
 @media (max-width: 767px) {
 
 }
+
+#track-variable-content {
+    display: none;
+}

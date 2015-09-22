@@ -113,7 +113,7 @@ Class QMWP
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
             'QMWP Search Correlations' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
-            'QMWP Mood Tracker' => '[qmwp_mood_tracker]',
+            'QMWP Mood Tracker' => '[qmwp_mood_tracker variable="Overall Mood"]',
             'QMWP Connectors' => '[qmwp_connectors]',
             'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
@@ -1197,11 +1197,18 @@ Class QMWP
      */
     function qmwp_mood_tracker($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_mood_tracker');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'variable' => 'Overall Mood',
+        ), $attributes, 'qmwp_mood_tracker');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-mood-tracker', $version);
+
+        $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
+            'qmwpShortCodeDefinedVariable' => $attributes['variable'],
+        ));
 
         $template_content = $this->process_template($pluginContentHTML);
 
