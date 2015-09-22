@@ -22,10 +22,7 @@ wp_enqueue_script("qmwp-search-correlations", plugins_url('../../', __FILE__) . 
         <div>
             <div class="fieldsContainer">
                 <div>
-                    <select class="selectOutputAsType" ng-model="selectOutputAsType" ng-init="selectOutputAsType = 'effect'">
-                        <option value="effect">Predictive of...</option>
-                        <option value="cause">Predicted by...</option>
-                    </select>
+
                 </div>
                 <div>
                     <input auto-complete ui-items="names"  ng-model="searchVariable" class="searchVariable" type="text" placeholder="Enter a medication, food supplement or anything else..." />
@@ -41,7 +38,7 @@ wp_enqueue_script("qmwp-search-correlations", plugins_url('../../', __FILE__) . 
     <div id="searchResultRegion" ng-show="!homeShown" ng-cloak>
         <div class="qmSearchMiniLogo"></div>
         <div class="fieldsContainer">
-            <select class="selectOutputAsType" ng-model="selectOutputAsType" ng-init="selectOutputAsType = 'effect'">
+            <select class="selectOutputAsType" ng-model="selectOutputAsType">
                 <option value="effect">Predictive of...</option>
                 <option value="cause">Predicted by...</option>
             </select>
