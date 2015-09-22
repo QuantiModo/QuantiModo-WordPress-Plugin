@@ -590,7 +590,7 @@ AnalyzeChart = function () {
         timelineChart = new Highcharts.StockChart({
             chart: {renderTo: 'graph-timeline', zoomType: 'x'},
             title: {text: 'Thank you for holding. Your call is very important to us.'},
-            subtitle: {text: 'Longitudinal Timeline' + resolution, useHTML: true},
+            //subtitle: {text: 'Longitudinal Timeline' + resolution, useHTML: true},
             legend: {enabled: false},
             scrollbar: {
                 barBackgroundColor: '#eeeeee',
