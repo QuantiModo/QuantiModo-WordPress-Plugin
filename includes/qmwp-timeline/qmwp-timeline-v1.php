@@ -23,9 +23,21 @@ wp_enqueue_script("jquery-touch", plugins_url('../../', __FILE__) . "js/libs/jqu
 wp_enqueue_script("qm-math", plugins_url('../../', __FILE__) . "js/math.js", "jquery", false, true);
 wp_enqueue_script("timezone", plugins_url('../../', __FILE__) . "js/jstz.min.js", "jquery", false, true);
 wp_enqueue_script("moment", plugins_url('../../', __FILE__) . "js/libs/moment.min.js", "jquery", false, true);
+
 wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
+
 wp_enqueue_script("highcharts", plugins_url('../../', __FILE__) . "js/libs/highstock.js", "jquery", false, true);
 wp_enqueue_script("highcharts-more", plugins_url('../../', __FILE__) . "js/libs/highcharts-more.js", "highcharts", false, true);
+wp_enqueue_script("highcharts-fix", plugins_url('../../', __FILE__) . "js/highcharts-fix.js", "highcharts", false, true);
+
+wp_enqueue_script("highcharts-exporting", plugins_url('../../', __FILE__) . "js/libs/exporting.js", "highcharts", false, true);
+wp_enqueue_script("canvas-tools", plugins_url('../../', __FILE__) . "js/libs/canvas-tools.js", "highcharts", false, true);
+wp_enqueue_script("highcharts-export-csv", plugins_url('../../', __FILE__) . "js/libs/export-csv.js", "highcharts", false, true);
+wp_enqueue_script("js-pdf", plugins_url('../../', __FILE__) . "js/libs/jspdf/jspdf.debug.js", "jquery", false, true);
+wp_enqueue_script("highcharts-export", plugins_url('../../', __FILE__) . "js/libs/highcharts-export-clientside.js", "highcharts", false, true);
+
+
+
 wp_enqueue_script("timeline-charts", plugins_url('../../', __FILE__) . "js/timeline_charts.js", array("highcharts-more", "qm-sdk", "qm-math"), false, true);
 wp_enqueue_script("other-shared", plugins_url('../../', __FILE__) . "js/_other_shared.js", array("jquery"), false, true);
 wp_enqueue_script("variable-settings", plugins_url('../../', __FILE__) . "js/_variable_settings.js", array("jquery"), false, true);

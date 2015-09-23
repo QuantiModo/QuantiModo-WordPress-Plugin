@@ -175,14 +175,14 @@ AnalyzeChart = function () {
         var inputIsCause = (jQuery('#selectOutputAsType').val() == 'effect');
 
         if (inputIsCause) {
-            cause = inputData;
+            cause = jQuery.extend({}, inputData);
             causeColor = inputColor;
-            effect = outputData;
+            effect =  jQuery.extend({}, outputData);
             effectColor = outputColor;
         } else {
-            cause = outputData;
+            cause = jQuery.extend({}, outputData);
             causeColor = outputColor;
-            effect = inputData;
+            effect = jQuery.extend({}, inputData);
             effectColor = inputColor;
         }
 
@@ -590,7 +590,7 @@ AnalyzeChart = function () {
         timelineChart = new Highcharts.StockChart({
             chart: {renderTo: 'graph-timeline', zoomType: 'x'},
             title: {text: 'Thank you for holding. Your call is very important to us.'},
-            subtitle: {text: 'Longitudinal Timeline' + resolution, useHTML: true},
+            //subtitle: {text: 'Longitudinal Timeline' + resolution, useHTML: true},
             legend: {enabled: false},
             scrollbar: {
                 barBackgroundColor: '#eeeeee',

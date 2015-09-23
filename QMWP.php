@@ -112,8 +112,8 @@ Class QMWP
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
-            'QMWP Search Correlations' => '[qmwp_search_correlations]',
-            'QMWP Mood Tracker' => '[qmwp_mood_tracker]',
+            'QMWP Search Correlations' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
+            'QMWP Mood Tracker' => '[qmwp_mood_tracker variable="Overall Mood"]',
             'QMWP Connectors' => '[qmwp_connectors]',
             'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
@@ -1197,11 +1197,18 @@ Class QMWP
      */
     function qmwp_mood_tracker($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_mood_tracker');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'variable' => 'Overall Mood',
+        ), $attributes, 'qmwp_mood_tracker');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-mood-tracker', $version);
+
+        $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
+            'qmwpShortCodeDefinedVariable' => $attributes['variable'],
+        ));
 
         $template_content = $this->process_template($pluginContentHTML);
 
@@ -1256,7 +1263,7 @@ Class QMWP
         $attributes = shortcode_atts(array(
             'version' => 1,
             'variable' => null,
-            'variable_as'    =>  'cause',
+            'variable_as' => 'cause',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
@@ -1269,7 +1276,7 @@ Class QMWP
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs'  => $attributes['variable_as']
+                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as']
                 ));
         }
 
@@ -1312,11 +1319,25 @@ Class QMWP
      */
     function qmwp_search_correlations($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_search_correlations');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'variable' => null,
+            'variable_as' => 'cause',
+        ), $attributes, 'qmwp_search_correlations');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
+
+        $variable = $attributes['variable'];
+
+        if (!is_null($variable)) {
+            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
+                array(
+                    'qmwpShortCodeDefinedVariable' => $variable,
+                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as'],
+                ));
+        }
 
         $template_content = $this->process_template($pluginContentHTML);
 
