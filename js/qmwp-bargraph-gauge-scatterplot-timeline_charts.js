@@ -175,14 +175,14 @@ AnalyzeChart = function () {
         var inputIsCause = (jQuery('#selectOutputAsType').val() == 'effect');
 
         if (inputIsCause) {
-            cause = inputData;
+            cause = jQuery.extend({}, inputData);
             causeColor = inputColor;
-            effect = outputData;
+            effect =  jQuery.extend({}, outputData);
             effectColor = outputColor;
         } else {
-            cause = outputData;
+            cause = jQuery.extend({}, outputData);
             causeColor = outputColor;
-            effect = inputData;
+            effect = jQuery.extend({}, inputData);
             effectColor = inputColor;
         }
 

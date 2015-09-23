@@ -142,6 +142,10 @@
 
 }
 
+#bar-graph .highcharts-button {
+    display: none;
+}
+
 /****************/
 /* Timeline card*/
 /****************/
@@ -192,7 +196,7 @@
 }
 
 .variableInBarGraph .variableName {
-    width: 125px;
+    width: 180px;
     float: left;
 }
 
