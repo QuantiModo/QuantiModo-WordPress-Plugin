@@ -492,6 +492,7 @@ var AnalyzePage = function () {
         init: function () {
             retrieveSettings();
             if (typeof accessToken == "undefined" || !accessToken) {
+                console.warn('No access token. Now will try to authenticate and to get it');
                 window.location.href = "?connect=quantimodo";
             } else {
                 refreshMeasurementsRange(function () {
