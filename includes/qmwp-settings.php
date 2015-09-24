@@ -90,18 +90,7 @@ $cc_ux = qmwp_cc_ux();
                         <a href="https://app.quantimo.do" target="_blank"><strong>QuantiModo</strong></a>
                     </p>
 
-                    <!-- <p>Rate it 5 stars: <a id="qmwp-rate-5stars"
-                                           href="https://wordpress.org/support/view/plugin-reviews/quantimodo?rate=5"
-                                           target="_blank"><img src="//ps.w.org/qm-oauth/assets/5stars.png"
-                                                                style="vertical-align:text-top;"></a></p> -->
-                    <nav>
-                        <ul>
-                            <!-- <li><a href="https://wordpress.org/plugins/qm-oauth/" target="_blank">QuantiModo at
-                                    WordPress.org</a></li>
-                            <li><a href="https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin"
-                                   target="_blank">QuantiModo at Github</a></li>
-                        </ul>
-                    </nav>
+
                 </div>
             </div>
 
@@ -488,110 +477,6 @@ $cc_ux = qmwp_cc_ux();
                     <!-- .form-padding -->
                 </div>
                 <!-- .qmwp-settings-section -->
-                <!-- END Login with QuantiModo section -->
-
-
-                <!-- START Back Channel Configuration section -->
-<!--                <div id="qmwp-settings-section-back-channel=configuration" class="qmwp-settings-section">
-                    <h3>Back Channel Configuration</h3>
-
-                    <div class='form-padding'>
-                        <p>These settings are for troubleshooting and/or fine tuning the back channel communication this
-                            plugin utilizes between your server and the third-party providers.</p>
-                        <table class='form-table'>
-                            <tr valign='top' class="has-tip">
-                                <th scope='row'>HTTP utility: <a href="#" class="tip-button">[?]</a></th>
-                                <td>
-                                    <select name='qmwp_http_util'>
-                                        <option value='curl' <?php /*selected(get_option('qmwp_http_util'), 'curl'); */?>>
-                                            cURL
-                                        </option>
-                                        <option
-                                            value='stream-context' <?php /*selected(get_option('qmwp_http_util'), 'stream-context'); */?>>
-                                            Stream Context
-                                        </option>
-                                    </select>
-
-                                    <p class="tip-message">The method used by the web server for performing HTTP
-                                        requests to the third-party providers. Most servers support cURL, but some
-                                        servers may require Stream Context instead.</p>
-                                </td>
-                            </tr>
-
-                            <tr valign='top' class="has-tip">
-                                <th scope='row'>Verify Peer/Host SSL Certificates: <a href="#"
-                                                                                      class="tip-button">[?]</a></th>
-                                <td>
-                                    <input type='checkbox' name='qmwp_http_util_verify_ssl'
-                                           value='1' <?php /*checked(get_option('qmwp_http_util_verify_ssl') == 1); */?> />
-
-                                    <p class="tip-message">Determines whether or not to validate peer/host SSL
-                                        certificates during back channel HTTP calls to the third-party login providers.
-                                        If your server has an incorrect SSL configuration or doesn't support SSL, you
-                                        may try disabling this setting as a workaround.</p>
-
-                                    <p class="tip-message tip-warning"><strong>Warning:</strong> Disabling this is not
-                                        recommended. For maximum security it would be a good idea to get your server's
-                                        SSL configuration fixed and keep this setting enabled.</p>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- .form-table -->
-                        <?php /*submit_button('Save all settings'); */?>
-                    </div>
-                    <!-- .form-padding -->
-                </div>-->
-                <!-- .qmwp-settings-section -->
-                <!-- END Back Channel Configuration section -->
-
-                <!-- START Maintenance & Troubleshooting section -->
-<!--                <div id="qmwp-settings-section-maintenance-troubleshooting" class="qmwp-settings-section">
-                    <h3>Maintenance & Troubleshooting</h3>
-
-                    <div class='form-padding'>
-                        <table class='form-table'>
-                            <tr valign='top' class="has-tip">
-                                <th scope='row'>Restore default settings: <a href="#" class="tip-button">[?]</a></th>
-                                <td>
-                                    <input type='checkbox' name='qmwp_restore_default_settings'
-                                           value='1' <?php /*checked(get_option('qmwp_restore_default_settings') == 1); */?> />
-
-                                    <p class="tip-message"><strong>Instructions:</strong> Check the box above, click the
-                                        Save all settings button, and the settings will be restored to default.</p>
-
-                                    <p class="tip-message tip-warning"><strong>Warning:</strong> This will restore the
-                                        default settings, erasing any API keys/secrets that you may have entered above.
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr valign='top' class="has-tip">
-                                <th scope='row'>Delete settings on uninstall: <a href="#" class="tip-button">[?]</a>
-                                </th>
-                                <td>
-                                    <input type='checkbox' name='qmwp_delete_settings_on_uninstall'
-                                           value='1' <?php /*checked(get_option('qmwp_delete_settings_on_uninstall') == 1); */?> />
-
-                                    <p class="tip-message"><strong>Instructions:</strong> Check the box above, click the
-                                        Save all settings button, then uninstall this plugin as normal from the Plugins
-                                        page.</p>
-
-                                    <p class="tip-message tip-warning"><strong>Warning:</strong> This will delete all
-                                        settings that may have been created in your database by this plugin, including
-                                        all linked third-party login providers. This will not delete any WordPress user
-                                        accounts, but users who may have registered with or relied upon their
-                                        third-party login providers may have trouble logging into your site. Make
-                                        absolutely sure you won't need the values on this page any time in the future,
-                                        because they will be deleted permanently.</p>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- .form-table -->
-                        <?php /*submit_button('Save all settings'); */?>
-                    </div>
-                    <!-- .form-padding -->
-                </div>-->
-                <!-- .qmwp-settings-section -->
-                <!-- END  Maintenance & Troubleshooting section -->
             </form>
             <!-- form -->
         </div>
