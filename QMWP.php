@@ -112,13 +112,13 @@ Class QMWP
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
-            'QMWP Search Correlations' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
-            'QMWP Mood Tracker' => '[qmwp_mood_tracker variable="Overall Mood"]',
-            'QMWP Connectors' => '[qmwp_connectors]',
-            'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
-            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
-            'QMWP Timeline' => '[qmwp_timeline variables="overall mood"]',
-            'QMWP Add Measurement' => '[qmwp_add_measurement]'
+            'Search for Predictors' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
+            'Track Mood' => '[qmwp_mood_tracker variable="Overall Mood"]',
+            'Import Data' => '[qmwp_connectors]',
+            //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
+            'Predictor Analysis' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
+            'Timeline' => '[qmwp_timeline variables="overall mood"]',
+            'Add a Measurement' => '[qmwp_add_measurement]'
         )
     );
 
