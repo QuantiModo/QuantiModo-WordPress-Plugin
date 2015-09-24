@@ -527,15 +527,16 @@ Class QMWP
             include 'includes/qmwp-register.php';
         }
         // we shouldn't be here, but just in case...
-        $this->qmwp_end_login("Sorry, we couldn't log you in. The login flow terminated in an unexpected way. Please notify the admin or try again later.");
+        $this->qmwp_end_login("Sorry, we couldn't log you in. The login flow terminated in an unexpected way. Please notify the admin or try again later.", true);
     }
 
     /**
      * ends the login request by clearing the login state and redirecting the user to the desired page
      *
      * @param $msg
+     * @param bool $shouldDie
      */
-    function qmwp_end_login($msg)
+    function qmwp_end_login($msg, $shouldDie = false)
     {
         $last_url = isset($_SESSION["QMWP"]["LAST_URL"]) ? $_SESSION["QMWP"]["LAST_URL"] : null;
         unset($_SESSION["QMWP"]["LAST_URL"]);
@@ -564,10 +565,18 @@ Class QMWP
                 break;
         }
         //header("Location: " . $redirect_url);
-        if (!empty($redirect_url)) {
-            wp_safe_redirect($redirect_url);
+        if ($shouldDie) {
+            if (!empty($redirect_url)) {
+                $msg = "<span>$msg</span>" . "<br>" . "<span>Return to: <a href='$redirect_url'>$redirect_url</a></span>";
+            }
+            wp_die($msg);
+        } else {
+            if (!empty($redirect_url)) {
+                wp_safe_redirect($redirect_url);
+            }
+            die();
         }
-        die();
+
     }
 
     /**

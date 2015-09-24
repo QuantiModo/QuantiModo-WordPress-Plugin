@@ -44,7 +44,7 @@ class QMWPAuth
             'scope' => $this->scope,
             'state' => uniqid('', true),
             'redirect_uri' => $this->redirectUri,
-            'mashape-key'   =>  get_option('qmwp_x_mashape_key')
+            'mashape-key' => get_option('qmwp_x_mashape_key')
         );
         $_SESSION['QMWP']['STATE'] = $params['state'];
         $url = $this->urlAuth . http_build_query($params);
@@ -98,13 +98,18 @@ class QMWPAuth
                 $context = $context = stream_context_create($opts);
                 $result = @file_get_contents($url, false, $context);
                 if ($result === false) {
-                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream context. Please notify the admin or try again later.");
+                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream context. Please notify the admin or try again later.", true);
                 }
                 break;
         }
 
         if (!$this->populate_session_vars($result)) {
-            $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Malformed access token result detected. Please notify the admin or try again later.");
+            $message = "Sorry, we couldn't log you in. Malformed access token result detected. Please notify the admin or try again later.";
+            $serverErrorMessage = $this->get_error_message_from_response($result);
+            if ($serverErrorMessage) {
+                $message .= $serverErrorMessage;
+            }
+            $qmwp->qmwp_end_login($message, true);
         }
     }
 
@@ -153,13 +158,18 @@ class QMWPAuth
                 $context = $context = stream_context_create($opts);
                 $result = @file_get_contents($url, false, $context);
                 if ($result === false) {
-                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream context. Please notify the admin or try again later.");
+                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream context. Please notify the admin or try again later.", true);
                 }
                 break;
         }
 
         if (!$this->populate_session_vars($result)) {
-            $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Malformed access token result detected. Please notify the admin or try again later.");
+            $message = "Sorry, we couldn't log you in. Malformed access token result detected. Please notify the admin or try again later.";
+            $serverErrorMessage = $this->get_error_message_from_response($result);
+            if ($serverErrorMessage) {
+                $message .= $serverErrorMessage;
+            }
+            $qmwp->qmwp_end_login($message, true);
         }
     }
 
@@ -203,7 +213,7 @@ class QMWPAuth
                 $context = $context = stream_context_create($opts);
                 $result = @file_get_contents($url, false, $context);
                 if ($result === false) {
-                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve user identity via stream context. Please notify the admin or try again later.");
+                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve user identity via stream context. Please notify the admin or try again later.", true);
                 }
                 $result_obj = json_decode($result, true);
                 break;
@@ -214,7 +224,7 @@ class QMWPAuth
         $oauth_identity['id'] = $result_obj['id']; // PROVIDER SPECIFIC: QuantiModo returns the user's OAuth identity as id
         //$oauth_identity['email'] = $result_obj['emails'][0]['value']; // PROVIDER SPECIFIC: QuantiModo returns an array of email addresses. To respect privacy we currently don't collect the user's email address.
         if (!$oauth_identity['id']) {
-            $qmwp->qmwp_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.");
+            $qmwp->qmwp_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.", true);
         }
         return $oauth_identity;
     }
@@ -245,6 +255,18 @@ class QMWPAuth
             return true;
         }
 
+    }
+
+    /**
+     * This method will parse response and will return error description
+     * If field with description will be not found - it will return null
+     * @param $response
+     * @return string|null
+     */
+    private function get_error_message_from_response($response)
+    {
+        $parsedResponse = json_decode($response, true);
+        return isset($parsedResponse['error_description']) ? " Error description: '" . $parsedResponse['error_description'] . "'" : null;
     }
 
 }

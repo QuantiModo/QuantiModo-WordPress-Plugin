@@ -27,16 +27,16 @@ if (!isset($_SESSION['QMWP']['LAST_URL']) || !$_SESSION['QMWP']['LAST_URL']) {
 # AUTHENTICATION FLOW #
 // the oauth 2.0 authentication flow will start in this script and make several calls to the third-party authentication provider which in turn will make callbacks to this script that we continue to handle until the login completes with a success or failure:
 if (!$authenticator->clientEnabled) {
-    $this->qmwp_end_login("This third-party authentication provider has not been enabled. Please notify the admin or try again later.");
+    $this->qmwp_end_login("This third-party authentication provider has not been enabled. Please notify the admin or try again later.", true);
 } elseif (!$authenticator->clientId || !$authenticator->clientSecret) {
     // do not proceed if id or secret is null:
-    $this->qmwp_end_login("This third-party authentication provider has not been configured with an API key/secret. Please notify the admin or try again later.");
+    $this->qmwp_end_login("This third-party authentication provider has not been configured with an API key/secret. Please notify the admin or try again later.", true);
 } elseif (isset($_GET['error_description'])) {
     // do not proceed if an error was detected:
-    $this->qmwp_end_login($_GET['error_description']);
+    $this->qmwp_end_login($_GET['error_description'], true);
 } elseif (isset($_GET['error_message'])) {
     // do not proceed if an error was detected:
-    $this->qmwp_end_login($_GET['error_message']);
+    $this->qmwp_end_login($_GET['error_message'], true);
 } elseif (isset($_GET['code'])) {
     // post-auth phase, verify the state:
     if ($_SESSION['QMWP']['STATE'] == $_GET['state']) {
@@ -48,7 +48,7 @@ if (!$authenticator->clientEnabled) {
     } else {
         // possible CSRF attack, end the login with a generic message to the user and a detailed message to the admin/logs in case of abuse:
         // TODO: report detailed message to admin/logs here...
-        $this->qmwp_end_login("Sorry, we couldn't log you in. Please notify the admin or try again later.");
+        $this->qmwp_end_login("Sorry, we couldn't log you in. Please notify the admin or try again later.", true);
     }
 } else {
     // pre-auth, start the auth process:
