@@ -41,6 +41,7 @@ wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustach
             content.appendChild(connectJs);
 
         } else {
+            console.warn('No access token. Now will try to authenticate and to get it');
             window.location.href = "?connect=quantimodo";
         }
 
