@@ -134,6 +134,9 @@ Class QMWP
         add_action('plugins_loaded', array($this, 'qmwp_update'));
         // hook init event to handle plugin initialization:
         add_action('init', array($this, 'init'));
+
+        add_action('admin_notices', array($this, 'check_plugin_requirements'));
+
     }
 
     /**
@@ -194,7 +197,43 @@ Class QMWP
      */
     function qmwp_activate()
     {
-        $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
+        if ($this->check_plugin_requirements()) {
+            $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
+        }
+    }
+
+
+    /**
+     * This function checks all requirements which are needed for plugin correct work
+     * In case when some requirements are not met:
+     *  1. WP instance will be stopped
+     *  2. Plugin will be deactivated
+     *  3. Message will be displayed to admin
+     * In case when all checks have been passed - method will return true
+     * @return bool
+     */
+    function check_plugin_requirements()
+    {
+        $messages = array();
+
+        if (!get_option("users_can_register")) {
+            $settingPageUrl = site_url() . '/wp-admin/options-general.php';
+            $message = "In order to user the QuantiModo plugin, the site administrator must check " .
+                "'Anyone can register' at: <a href='$settingPageUrl#users_can_register'>$settingPageUrl</a>";
+            array_push($messages, $message);
+        }
+
+        if (count($messages) > 0) {
+
+            deactivate_plugins(plugin_basename(__FILE__));
+            $fullOutput = "";
+            foreach ($messages as $message) {
+                $fullOutput .= $message . "<br>";
+            }
+
+            wp_die($fullOutput);
+        }
+        return true;
     }
 
     /**
@@ -488,15 +527,16 @@ Class QMWP
             include 'includes/qmwp-register.php';
         }
         // we shouldn't be here, but just in case...
-        $this->qmwp_end_login("Sorry, we couldn't log you in. The login flow terminated in an unexpected way. Please notify the admin or try again later.");
+        $this->qmwp_end_login("Sorry, we couldn't log you in. The login flow terminated in an unexpected way. Please notify the admin or try again later.", true);
     }
 
     /**
      * ends the login request by clearing the login state and redirecting the user to the desired page
      *
      * @param $msg
+     * @param bool $shouldDie
      */
-    function qmwp_end_login($msg)
+    function qmwp_end_login($msg, $shouldDie = false)
     {
         $last_url = isset($_SESSION["QMWP"]["LAST_URL"]) ? $_SESSION["QMWP"]["LAST_URL"] : null;
         unset($_SESSION["QMWP"]["LAST_URL"]);
@@ -525,10 +565,18 @@ Class QMWP
                 break;
         }
         //header("Location: " . $redirect_url);
-        if (!empty($redirect_url)) {
-            wp_safe_redirect($redirect_url);
+        if ($shouldDie) {
+            if (!empty($redirect_url)) {
+                $msg = "<span>$msg</span>" . "<br>" . "<span>Return to: <a href='$redirect_url'>$redirect_url</a></span>";
+            }
+            wp_die($msg);
+        } else {
+            if (!empty($redirect_url)) {
+                wp_safe_redirect($redirect_url);
+            }
+            die();
         }
-        die();
+
     }
 
     /**
