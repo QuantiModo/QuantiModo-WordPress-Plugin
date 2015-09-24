@@ -87,7 +87,7 @@ Class QMWP
                 'icon_set' => 'none',
                 'layout' => 'buttons-row',
                 'align' => 'left',
-                'show_login' => 'always',
+                'show_login' => 'conditional',
                 'show_logout' => 'never',
                 'button_prefix' => 'Link',
                 'logged_out_title' => 'Select a provider:',
@@ -844,29 +844,33 @@ Class QMWP
         // if a design was specified and that design exists, load the shortcode attributes from that design:
         if ($design != '' && QMWP::qmwp_login_form_design_exists($design)) { // TODO: remove first condition not needed
             $a = QMWP::qmwp_get_login_form_design($design);
-            $icon_set = $a['icon_set'];
-            $layout = $a['layout'];
-            $button_prefix = $a['button_prefix'];
-            $align = $a['align'];
-            $show_login = $a['show_login'];
-            $show_logout = $a['show_logout'];
-            $logged_out_title = $a['logged_out_title'];
-            $logged_in_title = $a['logged_in_title'];
-            $logging_in_title = $a['logging_in_title'];
-            $logging_out_title = $a['logging_out_title'];
-            $style = $a['style'];
-            $class = $a['class'];
+            $icon_set = isset($a['icon_set']) ? $a['icon_set'] : null;
+            $layout = isset($a['layout']) ? $a['layout'] : null;
+            $button_prefix = isset($a['button_prefix']) ? $a['button_prefix'] : null;
+            $align = isset($a['align']) ? $a['align'] : null;
+            $show_login = isset($a['show_login']) ? $a['show_login'] : null;
+            $show_logout = isset ($a['show_logout']) ? $a['show_logout'] : null;
+            $logged_out_title = isset ($a['logged_out_title']) ? $a['logged_out_title'] : null;
+            $logged_in_title = isset ($a['logged_in_title']) ? $a['logged_in_title'] : null;
+            $logging_in_title = isset ($a['logging_in_title']) ? $a['logging_in_title'] : null;
+            $logging_out_title = isset($a['logging_out_title']) ? $a['logging_out_title'] : null;
+            $style = isset($a['style']) ? $a['style'] : null;
+            $class = isset($a['class']) ? $a['class'] : null;
         }
         // build the shortcode markup:
         $html = "";
         $html .= "<div class='qmwp-login-form qmwp-layout-$layout qmwp-layout-align-$align $class' style='$style' data-logging-in-title='$logging_in_title' data-logging-out-title='$logging_out_title'>";
         $html .= "<nav>";
         if (is_user_logged_in()) {
-            if ($logged_in_title) {
+            if ($logged_in_title && !$this->do_qmwp_account_linked()) {
                 $html .= "<p id='qmwp-title'>" . $logged_in_title . "</p>";
             }
             if ($show_login == 'always') {
                 $html .= $this->qmwp_login_buttons($icon_set, $button_prefix);
+            } else if ($show_login == 'conditional') {
+                if (!$this->do_qmwp_account_linked()) {
+                    $html .= $this->qmwp_login_buttons($icon_set, $button_prefix);
+                }
             }
             if ($show_logout == 'always' || $show_logout == 'conditional') {
                 $html .= "<a class='qmwp-logout-button' href='" . wp_logout_url() . "' title='Logout'>Logout</a>";
@@ -1393,7 +1397,7 @@ Class QMWP
     }
 
     /**
-     * Return rendered html string with plugin content
+     * Return rendered html string with plugin content!
      * @param $attributes
      * @return string
      */
@@ -1408,6 +1412,19 @@ Class QMWP
         $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
+    }
+
+    /**
+     * Will check if current user have linked QuantiModo account
+     * @return bool
+     */
+    function do_qmwp_account_linked()
+    {
+
+        global $current_user;
+        get_currentuserinfo();
+        $user_id = $current_user->ID;
+        return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
     }
 
 }
