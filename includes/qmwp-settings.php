@@ -424,7 +424,7 @@ $cc_ux = qmwp_cc_ux();
 
                 <!-- START Login with QuantiModo section -->
                 <div id="qmwp-settings-section-login-with-quantimodo" class="qmwp-settings-section">
-                    <h3>Login with QuantiModo</h3>
+                    <h3>Credentials</h3>
 
                     <div class='form-padding'>
                         <table class='form-table'>
@@ -492,7 +492,7 @@ $cc_ux = qmwp_cc_ux();
 
 
                 <!-- START Back Channel Configuration section -->
-                <div id="qmwp-settings-section-back-channel=configuration" class="qmwp-settings-section">
+<!--                <div id="qmwp-settings-section-back-channel=configuration" class="qmwp-settings-section">
                     <h3>Back Channel Configuration</h3>
 
                     <div class='form-padding'>
@@ -503,11 +503,11 @@ $cc_ux = qmwp_cc_ux();
                                 <th scope='row'>HTTP utility: <a href="#" class="tip-button">[?]</a></th>
                                 <td>
                                     <select name='qmwp_http_util'>
-                                        <option value='curl' <?php selected(get_option('qmwp_http_util'), 'curl'); ?>>
+                                        <option value='curl' <?php /*selected(get_option('qmwp_http_util'), 'curl'); */?>>
                                             cURL
                                         </option>
                                         <option
-                                            value='stream-context' <?php selected(get_option('qmwp_http_util'), 'stream-context'); ?>>
+                                            value='stream-context' <?php /*selected(get_option('qmwp_http_util'), 'stream-context'); */?>>
                                             Stream Context
                                         </option>
                                     </select>
@@ -523,7 +523,7 @@ $cc_ux = qmwp_cc_ux();
                                                                                       class="tip-button">[?]</a></th>
                                 <td>
                                     <input type='checkbox' name='qmwp_http_util_verify_ssl'
-                                           value='1' <?php checked(get_option('qmwp_http_util_verify_ssl') == 1); ?> />
+                                           value='1' <?php /*checked(get_option('qmwp_http_util_verify_ssl') == 1); */?> />
 
                                     <p class="tip-message">Determines whether or not to validate peer/host SSL
                                         certificates during back channel HTTP calls to the third-party login providers.
@@ -537,15 +537,15 @@ $cc_ux = qmwp_cc_ux();
                             </tr>
                         </table>
                         <!-- .form-table -->
-                        <?php submit_button('Save all settings'); ?>
+                        <?php /*submit_button('Save all settings'); */?>
                     </div>
                     <!-- .form-padding -->
-                </div>
+                </div>-->
                 <!-- .qmwp-settings-section -->
                 <!-- END Back Channel Configuration section -->
 
                 <!-- START Maintenance & Troubleshooting section -->
-                <div id="qmwp-settings-section-maintenance-troubleshooting" class="qmwp-settings-section">
+<!--                <div id="qmwp-settings-section-maintenance-troubleshooting" class="qmwp-settings-section">
                     <h3>Maintenance & Troubleshooting</h3>
 
                     <div class='form-padding'>
@@ -554,7 +554,7 @@ $cc_ux = qmwp_cc_ux();
                                 <th scope='row'>Restore default settings: <a href="#" class="tip-button">[?]</a></th>
                                 <td>
                                     <input type='checkbox' name='qmwp_restore_default_settings'
-                                           value='1' <?php checked(get_option('qmwp_restore_default_settings') == 1); ?> />
+                                           value='1' <?php /*checked(get_option('qmwp_restore_default_settings') == 1); */?> />
 
                                     <p class="tip-message"><strong>Instructions:</strong> Check the box above, click the
                                         Save all settings button, and the settings will be restored to default.</p>
@@ -569,7 +569,7 @@ $cc_ux = qmwp_cc_ux();
                                 </th>
                                 <td>
                                     <input type='checkbox' name='qmwp_delete_settings_on_uninstall'
-                                           value='1' <?php checked(get_option('qmwp_delete_settings_on_uninstall') == 1); ?> />
+                                           value='1' <?php /*checked(get_option('qmwp_delete_settings_on_uninstall') == 1); */?> />
 
                                     <p class="tip-message"><strong>Instructions:</strong> Check the box above, click the
                                         Save all settings button, then uninstall this plugin as normal from the Plugins
@@ -586,10 +586,10 @@ $cc_ux = qmwp_cc_ux();
                             </tr>
                         </table>
                         <!-- .form-table -->
-                        <?php submit_button('Save all settings'); ?>
+                        <?php /*submit_button('Save all settings'); */?>
                     </div>
                     <!-- .form-padding -->
-                </div>
+                </div>-->
                 <!-- .qmwp-settings-section -->
                 <!-- END  Maintenance & Troubleshooting section -->
             </form>
