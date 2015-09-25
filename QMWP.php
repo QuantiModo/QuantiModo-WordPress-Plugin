@@ -118,7 +118,30 @@ Class QMWP
             //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'Predictor Analysis' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
             'Timeline' => '[qmwp_timeline variables="overall mood"]',
-            'Add a Measurement' => '[qmwp_add_measurement]'
+            'Track Mood (Faces)' => '[qmwp_add_measurement category="Mood"]',
+            'Track Physique' => '[qmwp_add_measurement category="Physique"]',
+            'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
+            'Track Location' => '[qmwp_add_measurement category="Location"]',
+            'Track Miscellaneous' => '[qmwp_add_measurement category="Miscellaneous"]',
+            'Track Sleep' => '[qmwp_add_measurement category="Sleep"]',
+            'Track Social Interactions' => '[qmwp_add_measurement category="Social Interactions"]',
+            'Track Vital Signs' => '[qmwp_add_measurement category="Vital Signs"]',
+            'Track Cognitive Performance' => '[qmwp_add_measurement category="Cognitive Performance"]',
+            'Track Symptoms' => '[qmwp_add_measurement category="Symptoms"]',
+            'Track Nutrition' => '[qmwp_add_measurement category="Nutrition"]',
+            'Track Work' => '[qmwp_add_measurement category="Work"]',
+            'Track Treatments' => '[qmwp_add_measurement category="Treatments"]',
+            'Track Activity' => '[qmwp_add_measurement category="Activity"]',
+            'Track Foods' => '[qmwp_add_measurement category="Foods"]',
+            'Track Conditions' => '[qmwp_add_measurement category="Conditions"]',
+            'Track Environment' => '[qmwp_add_measurement category="Environment"]',
+            'Track Causes of Illness' => '[qmwp_add_measurement category="Causes of Illness"]',
+            'Track Books' => '[qmwp_add_measurement category="Books"]',
+            'Track Software & Mobile Apps' => '[qmwp_add_measurement category="Software & Mobile Apps"]',
+            'Track Finance' => '[qmwp_add_measurement category="Finance"]',
+            'Track Payments' => '[qmwp_add_measurement category="Payments"]',
+            'Track Other' => '[qmwp_add_measurement category="Other"]',
+            'Track Music' => '[qmwp_add_measurement category="Music"]',
         )
     );
 
@@ -201,7 +224,6 @@ Class QMWP
             $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
         }
     }
-
 
     /**
      * This function checks all requirements which are needed for plugin correct work
@@ -1238,6 +1260,19 @@ Class QMWP
 
     }
 
+    /**
+     * Will check if current user have linked QuantiModo account
+     * @return bool
+     */
+    function do_qmwp_account_linked()
+    {
+
+        global $current_user;
+        get_currentuserinfo();
+        $user_id = $current_user->ID;
+        return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
+    }
+
     // ====================
     // PLUGIN SHORT CODES
     // ====================
@@ -1403,28 +1438,21 @@ Class QMWP
      */
     function qmwp_add_measurement($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1,), $attributes, 'qmwp_add_measurement');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'category' => null,
+        ), $attributes, 'qmwp_add_measurement');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-add-measurement', $version);
 
+        $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
+            'qmwpShortCodeDefinedCategory' => $attributes['category']));
+
         $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
-    }
-
-    /**
-     * Will check if current user have linked QuantiModo account
-     * @return bool
-     */
-    function do_qmwp_account_linked()
-    {
-
-        global $current_user;
-        get_currentuserinfo();
-        $user_id = $current_user->ID;
-        return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
     }
 
 }

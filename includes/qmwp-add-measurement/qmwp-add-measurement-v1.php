@@ -42,7 +42,7 @@ wp_enqueue_script("qmwp-add-measurement",
                 <span></span>
             </div>
 
-            <input type="text" placeholder="Enter food, symptom, medication, or anything else!"
+            <input type="text" placeholder=""
                    id="addmeasurement-variable-name" style="font-weight:bold;">
 
             <center>
@@ -64,7 +64,7 @@ wp_enqueue_script("qmwp-add-measurement",
                     src="<?php echo plugins_url('../../', __FILE__) . "images/logo-full.png" ?>"
                     alt="Better living through data." width=100></a></div>
 
-        <input type="text" placeholder="Enter food, symptom, medication, or anything else!"
+        <input type="text" placeholder=""
                id="edt-addmeasurement-variable-name" style="font-weight:bold;">
 
         <div class="sectionTitle">
@@ -107,7 +107,7 @@ wp_enqueue_script("qmwp-add-measurement",
                     alt="Better living through data." width=100></a></div>
 
 
-        <input type="text" placeholder="Enter food, symptom, medication, or anything else!"
+        <input type="text" placeholder=""
                id="add-addmeasurement-variable-name">
 
         <div class="sectionTitle">

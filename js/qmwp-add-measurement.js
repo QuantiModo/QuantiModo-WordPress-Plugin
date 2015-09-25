@@ -540,11 +540,25 @@ jQuery(document).ready(function () {
 
                 variables = data;
                 resp(jQuery.map(data, function (variable) {
-                    return {
-                        label: variable.name,
-                        value: variable.name,
-                        variable: variable
+                    //if variable category is defined in shortcode
+                    if (qmwpShortCodeDefinedCategory) {
+                        //check if current variable is from defined category
+                        if (variable.category == qmwpShortCodeDefinedCategory) {
+                            //and if so - return this variable to autocomplete
+                            return {
+                                label: variable.name,
+                                value: variable.name,
+                                variable: variable
+                            };
+                        }
+                    } else {    //if category is not defined at shortcode - show all variables in autocomplete
+                        return {
+                            label: variable.name,
+                            value: variable.name,
+                            variable: variable
+                        };
                     }
+
                 }));
 
             });
