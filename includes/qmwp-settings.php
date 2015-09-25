@@ -373,7 +373,61 @@ $cc_ux = qmwp_cc_ux();
                                 </td>
                             </tr>
 
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Automatically logout inactive users: <a href="#"
+                                                                                        class="tip-button">[?]</a></th>
+                                <td>
+                                    <select name='qmwp_logout_inactive_users'>
+                                        <option
+                                            value='0' <?php selected(get_option('qmwp_logout_inactive_users'), '0'); ?>>
+                                            Never
+                                        </option>
+                                        <option
+                                            value='1' <?php selected(get_option('qmwp_logout_inactive_users'), '1'); ?>>
+                                            After 1
+                                            minute
+                                        </option>
+                                        <option
+                                            value='5' <?php selected(get_option('qmwp_logout_inactive_users'), '5'); ?>>
+                                            After 5
+                                            minutes
+                                        </option>
+                                        <option
+                                            value='15' <?php selected(get_option('qmwp_logout_inactive_users'), '15'); ?>>
+                                            After 15
+                                            minutes
+                                        </option>
+                                        <option
+                                            value='30' <?php selected(get_option('qmwp_logout_inactive_users'), '30'); ?>>
+                                            After 30
+                                            minutes
+                                        </option>
+                                        <option
+                                            value='60' <?php selected(get_option('qmwp_logout_inactive_users'), '60'); ?>>
+                                            After 1
+                                            hour
+                                        </option>
+                                        <option
+                                            value='120' <?php selected(get_option('qmwp_logout_inactive_users'), '120'); ?>>
+                                            After 2
+                                            hours
+                                        </option>
+                                        <option
+                                            value='240' <?php selected(get_option('qmwp_logout_inactive_users'), '240'); ?>>
+                                            After 4
+                                            hours
+                                        </option>
+                                    </select>
 
+                                    <p class="tip-message">Specifies whether to log out users automatically after a
+                                        period of inactivity.</p>
+
+                                    <p class="tip-message tip-warning"><strong>Warning:</strong> When a user logs out of
+                                        WordPress, they will remain logged into their third-party provider until they
+                                        close their browser. Logging out of WordPress DOES NOT log you out of
+                                        QuantiModo...</p>
+                                </td>
+                            </tr>
                         </table>
                         <!-- .form-table -->
                         <?php submit_button('Save all settings'); ?>
@@ -383,6 +437,305 @@ $cc_ux = qmwp_cc_ux();
                 <!-- .qmwp-settings-section -->
                 <!-- END General Settings section -->
 
+                <!-- START Login Page & Form Customization section -->
+                <div id="qmwp-settings-section-login-forms" class="qmwp-settings-section">
+                    <h3>Login Forms</h3>
+
+                    <div class='form-padding'>
+                        <table class='form-table'>
+
+                            <tr valign='top'>
+                                <th colspan="2">
+                                    <h4>Default Login Form / Page / Popup</h4>
+                                </th>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Hide the WordPress login form: <a href="#" class="tip-button">[?]</a>
+                                </th>
+                                <td>
+                                    <input type='checkbox' name='qmwp_hide_wordpress_login_form'
+                                           value='1' <?php checked(get_option('qmwp_hide_wordpress_login_form') == 1); ?> />
+
+                                    <p class="tip-message">Use this to hide the WordPress username/password login form
+                                        that is shown by default on the Login Screen and Login Popup.</p>
+
+                                    <p class="tip-message tip-warning"><strong>Warning: </strong>Hiding the WordPress
+                                        login form may prevent you from being able to login. If you normally rely on
+                                        this method, DO NOT enable this setting. Furthermore, please make sure your
+                                        login provider(s) are active and working BEFORE enabling this setting.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Logo links to site: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <input type='checkbox' name='qmwp_logo_links_to_site'
+                                           value='1' <?php checked(get_option('qmwp_logo_links_to_site') == 1); ?> />
+
+                                    <p class="tip-message">Forces the logo image on the login form to link to your site
+                                        instead of WordPress.org.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Logo image: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <p>
+                                        <input id='qmwp_logo_image' type='text' size='' name='qmwp_logo_image'
+                                               value="<?php echo get_option('qmwp_logo_image'); ?>"/>
+                                        <input id='qmwp_logo_image_button' type='button' class='button' value='Select'/>
+                                    </p>
+
+                                    <p class="tip-message">Changes the default WordPress logo on the login form to an
+                                        image of your choice. You may select an image from the Media Library, or specify
+                                        a custom URL.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Background image: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <p>
+                                        <input id='qmwp_bg_image' type='text' size='' name='qmwp_bg_image'
+                                               value="<?php echo get_option('qmwp_bg_image'); ?>"/>
+                                        <input id='qmwp_bg_image_button' type='button' class='button' value='Select'/>
+                                    </p>
+
+                                    <p class="tip-message">Changes the background on the login form to an image of your
+                                        choice. You may select an image from the Media Library, or specify a custom
+                                        URL.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top'>
+                                <th colspan="2">
+                                    <h4>Custom Login Forms</h4>
+                                </th>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Custom form to show on the login screen: <a href="#" class="tip-button">[?]</a>
+                                </th>
+                                <td>
+                                    <?php echo QMWP::qmwp_login_form_designs_selector('qmwp-login-form-show-login-screen'); ?>
+                                    <p class="tip-message">Create or manage these login form designs in the CUSTOM LOGIN
+                                        FORM DESIGNS section.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Custom form to show on the user's profile page: <a href="#"
+                                                                                                   class="tip-button">[?]</a>
+                                </th>
+                                <td>
+                                    <?php echo QMWP::qmwp_login_form_designs_selector('qmwp-login-form-show-profile-page'); ?>
+                                    <p class="tip-message">Create or manage these login form designs in the CUSTOM LOGIN
+                                        FORM DESIGNS section.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Custom form to show in the comments section: <a href="#"
+                                                                                                class="tip-button">[?]</a>
+                                </th>
+                                <td>
+                                    <?php echo QMWP::qmwp_login_form_designs_selector('qmwp-login-form-show-comments-section'); ?>
+                                    <p class="tip-message">Create or manage these login form designs in the CUSTOM LOGIN
+                                        FORM DESIGNS section.</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- .form-table -->
+                        <?php submit_button('Save all settings'); ?>
+                    </div>
+                    <!-- .form-padding -->
+                </div>
+                <!-- .qmwp-settings-section -->
+                <!-- END Login Page & Form Customization section -->
+
+                <!-- START Custom Login Form Designs section -->
+                <div id="qmwp-settings-section-custom-login-form-designs" class="qmwp-settings-section">
+                    <h3>Custom Login Form Designs</h3>
+
+                    <div class='form-padding'>
+                        <p>You may create multiple login form <strong><em>designs</em></strong> and use them throughout
+                            your
+                            site. A design is essentially a re-usable <em>shortcode preset</em>. Instead of writing out
+                            the
+                            login form shortcode ad-hoc each time you want to use it, you can build a design here, save
+                            it, and
+                            then specify that design in the shortcode's <em>design</em> attribute. For example:
+                        <pre><code>[qmwp_login_form design='CustomDesign1']</code></pre>
+                        </p>
+                        <table class='form-table'>
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Design: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <?php echo QMWP::qmwp_login_form_designs_selector('qmwp-login-form-design', true); ?>
+                                    <p>
+                                        <input type="button" id="qmwp-login-form-new" class="button" value="New">
+                                        <input type="button" id="qmwp-login-form-edit" class="button" value="Edit">
+                                        <input type="button" id="qmwp-login-form-delete" class="button" value="Delete">
+                                    </p>
+
+                                    <p class="tip-message">Here you may create a new design, select an existing design
+                                        to edit, or delete an existing design.</p>
+
+                                    <p class="tip-message tip-info"><strong>Tip: </strong>Make sure to click the <em>Save
+                                            all settings</em> button after making changes here.</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- .form-table -->
+
+                        <table class="form-table" id="qmwp-login-form-design-form">
+                            <tr valign='top'>
+                                <th colspan="2">
+                                    <h4>Edit Design</h4>
+                                </th>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Design name: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <input id='qmwp-login-form-design-name' type='text' size='36'
+                                           name='qmwp_login_form_design_name'
+                                           value=""/>
+
+                                    <p class="tip-message">Sets the name to use for this design.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Icon set: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <select name='qmwp_login_form_icon_set'>
+                                        <option value='none'>None</option>
+                                        <option value='hex'>Hex</option>
+                                    </select>
+
+                                    <p class="tip-message">Specifies which icon set to use for displaying provider icons
+                                        on the login buttons.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Show login buttons: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <select name='qmwp_login_form_show_login'>
+                                        <option value='always'>Always</option>
+                                        <option value='conditional'>Conditional</option>
+                                        <option value='never'>Never</option>
+                                    </select>
+
+                                    <p class="tip-message">Determines when the login buttons should be shown.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Show logout button: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <select name='qmwp_login_form_show_logout'>
+                                        <option value='always'>Always</option>
+                                        <option value='conditional'>Conditional</option>
+                                        <option value='never'>Never</option>
+                                    </select>
+
+                                    <p class="tip-message">Determines when the logout button should be shown.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Layout: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <select name='qmwp_login_form_layout'>
+                                        <option value='links-row'>Links Row</option>
+                                        <option value='links-column'>Links Column</option>
+                                        <option value='buttons-row'>Buttons Row</option>
+                                        <option value='buttons-column'>Buttons Column</option>
+                                    </select>
+
+                                    <p class="tip-message">Sets vertical or horizontal layout for the buttons.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Login button prefix: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <input id='qmwp_login_form_button_prefix' type='text' size='36'
+                                           name='qmwp_login_form_button_prefix'
+                                           value=""/>
+
+                                    <p class="tip-message">Sets the text prefix to be displayed on the social login
+                                        buttons.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Logged out title: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <input id='qmwp_login_form_logged_out_title' type='text' size='36'
+                                           name='qmwp_login_form_logged_out_title' value=""/>
+
+                                    <p class="tip-message">Sets the text to be displayed above the login form for logged
+                                        out users.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Logged in title: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <input id='qmwp_login_form_logged_in_title' type='text' size='36'
+                                           name='qmwp_login_form_logged_in_title' value=""/>
+
+                                    <p class="tip-message">Sets the text to be displayed above the login form for logged
+                                        in users.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Logging in title: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <input id='qmwp_login_form_logging_in_title' type='text' size='36'
+                                           name='qmwp_login_form_logging_in_title' value=""/>
+
+                                    <p class="tip-message">Sets the text to be displayed above the login form for users
+                                        who are logging in.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' class="has-tip">
+                                <th scope='row'>Logging out title: <a href="#" class="tip-button">[?]</a></th>
+                                <td>
+                                    <input id='qmwp_login_form_logging_out_title' type='text' size='36'
+                                           name='qmwp_login_form_logging_out_title' value=""/>
+
+                                    <p class="tip-message">Sets the text to be displayed above the login form for users
+                                        who are logging out.</p>
+                                </td>
+                            </tr>
+
+                            <tr valign='top' id='qmwp-login-form-actions'>
+                                <th scope='row'>
+                                    <input type="button" id="qmwp-login-form-ok" name="qmwp_login_form_ok"
+                                           class="button" value="OK">
+                                    <input type="button" id="qmwp-login-form-cancel" name="qmwp_login_form_cancel"
+                                           class="button"
+                                           value="Cancel">
+                                </th>
+                                <td>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- .form-table -->
+                        <?php submit_button('Save all settings'); ?>
+                    </div>
+                    <!-- .form-padding -->
+                </div>
+                <!-- .qmwp-settings-section -->
+                <!-- END Login Buttons section -->
 
                 <!-- START User Registration section -->
                 <div id="qmwp-settings-section-user-registration" class="qmwp-settings-section">
@@ -492,7 +845,7 @@ $cc_ux = qmwp_cc_ux();
 
 
                 <!-- START Back Channel Configuration section -->
-<!--                <div id="qmwp-settings-section-back-channel=configuration" class="qmwp-settings-section">
+                <div id="qmwp-settings-section-back-channel=configuration" class="qmwp-settings-section">
                     <h3>Back Channel Configuration</h3>
 
                     <div class='form-padding'>
@@ -503,11 +856,11 @@ $cc_ux = qmwp_cc_ux();
                                 <th scope='row'>HTTP utility: <a href="#" class="tip-button">[?]</a></th>
                                 <td>
                                     <select name='qmwp_http_util'>
-                                        <option value='curl' <?php /*selected(get_option('qmwp_http_util'), 'curl'); */?>>
+                                        <option value='curl' <?php selected(get_option('qmwp_http_util'), 'curl'); ?>>
                                             cURL
                                         </option>
                                         <option
-                                            value='stream-context' <?php /*selected(get_option('qmwp_http_util'), 'stream-context'); */?>>
+                                            value='stream-context' <?php selected(get_option('qmwp_http_util'), 'stream-context'); ?>>
                                             Stream Context
                                         </option>
                                     </select>
@@ -523,7 +876,7 @@ $cc_ux = qmwp_cc_ux();
                                                                                       class="tip-button">[?]</a></th>
                                 <td>
                                     <input type='checkbox' name='qmwp_http_util_verify_ssl'
-                                           value='1' <?php /*checked(get_option('qmwp_http_util_verify_ssl') == 1); */?> />
+                                           value='1' <?php checked(get_option('qmwp_http_util_verify_ssl') == 1); ?> />
 
                                     <p class="tip-message">Determines whether or not to validate peer/host SSL
                                         certificates during back channel HTTP calls to the third-party login providers.
@@ -537,15 +890,15 @@ $cc_ux = qmwp_cc_ux();
                             </tr>
                         </table>
                         <!-- .form-table -->
-                        <?php /*submit_button('Save all settings'); */?>
+                        <?php submit_button('Save all settings'); ?>
                     </div>
                     <!-- .form-padding -->
-                </div>-->
+                </div>
                 <!-- .qmwp-settings-section -->
                 <!-- END Back Channel Configuration section -->
 
                 <!-- START Maintenance & Troubleshooting section -->
-<!--                <div id="qmwp-settings-section-maintenance-troubleshooting" class="qmwp-settings-section">
+                <div id="qmwp-settings-section-maintenance-troubleshooting" class="qmwp-settings-section">
                     <h3>Maintenance & Troubleshooting</h3>
 
                     <div class='form-padding'>
@@ -554,7 +907,7 @@ $cc_ux = qmwp_cc_ux();
                                 <th scope='row'>Restore default settings: <a href="#" class="tip-button">[?]</a></th>
                                 <td>
                                     <input type='checkbox' name='qmwp_restore_default_settings'
-                                           value='1' <?php /*checked(get_option('qmwp_restore_default_settings') == 1); */?> />
+                                           value='1' <?php checked(get_option('qmwp_restore_default_settings') == 1); ?> />
 
                                     <p class="tip-message"><strong>Instructions:</strong> Check the box above, click the
                                         Save all settings button, and the settings will be restored to default.</p>
@@ -569,7 +922,7 @@ $cc_ux = qmwp_cc_ux();
                                 </th>
                                 <td>
                                     <input type='checkbox' name='qmwp_delete_settings_on_uninstall'
-                                           value='1' <?php /*checked(get_option('qmwp_delete_settings_on_uninstall') == 1); */?> />
+                                           value='1' <?php checked(get_option('qmwp_delete_settings_on_uninstall') == 1); ?> />
 
                                     <p class="tip-message"><strong>Instructions:</strong> Check the box above, click the
                                         Save all settings button, then uninstall this plugin as normal from the Plugins
@@ -586,10 +939,10 @@ $cc_ux = qmwp_cc_ux();
                             </tr>
                         </table>
                         <!-- .form-table -->
-                        <?php /*submit_button('Save all settings'); */?>
+                        <?php submit_button('Save all settings'); ?>
                     </div>
                     <!-- .form-padding -->
-                </div>-->
+                </div>
                 <!-- .qmwp-settings-section -->
                 <!-- END  Maintenance & Troubleshooting section -->
             </form>
