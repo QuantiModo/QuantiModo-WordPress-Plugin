@@ -49,15 +49,15 @@ $query_result = $wpdb->get_results($query_string);
         </tr>
 
         <tr valign="top">
-            <th scope="row">Link Another Provider</th>
+            <th scope="row">Link Another Provider:</th>
             <td>
                 <?php
                 $design = get_option('qmwp_login_form_show_profile_page');
                 if ($design != "None") {
                     // TODO: we need to use $settings defaults here, not hard-coded defaults...
                     echo $this->qmwp_login_form_content(
-                        $design, 'none', 'buttons-row', 'Link', 'left', 'always', 'never', 'Select a provider:',
-                        'Select a provider:', 'Authenticating...', '');
+                        $design, 'none', 'buttons-row', 'Link', 'left', 'always', 'never', '',
+                        '', 'Authenticating...', '');
                 } ?>
             </td>
         </tr>

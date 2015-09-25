@@ -82,17 +82,19 @@ var refreshInputData = function () {
 };
 
 var refreshOutputData = function () {
-    var variable = AnalyzePage.getOutputVariable();
-    Quantimodo.getDailyMeasurements({
-        'variableName': variable.originalName,
-        'startTime': AnalyzePage.getStartTime(),
-        'endTime': AnalyzePage.getEndTime(),
-        //'groupingWidth': AnalyzePage.getPeriod(),
-        'groupingTimezone': AnalyzePage.getTimezone()
-    }, function (measurements) {
-        AnalyzePage.outputMeasurements = measurements;
-        AnalyzeChart.setOutputData(variable, measurements);
+    AnalyzePage.getOutputVariable(function (variable) {
+        Quantimodo.getDailyMeasurements({
+            'variableName': variable.originalName,
+            'startTime': AnalyzePage.getStartTime(),
+            'endTime': AnalyzePage.getEndTime(),
+            //'groupingWidth': AnalyzePage.getPeriod(),
+            'groupingTimezone': AnalyzePage.getTimezone()
+        }, function (measurements) {
+            AnalyzePage.outputMeasurements = measurements;
+            AnalyzeChart.setOutputData(variable, measurements);
+        });
     });
+
 };
 
 var refreshData = function () {

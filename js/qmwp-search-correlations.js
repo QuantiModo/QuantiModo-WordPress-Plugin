@@ -5,7 +5,9 @@ var QuantimodoSearchConstants = {
     cURL: 'public/correlations/search/',
     predOfURL: apiHost + '/api/v1/variables/_VARIABLE_/public/causes',
     predByURL: apiHost + '/api/v1/variables/_VARIABLE_/public/effects',
-    method: 'JSONP'
+    method: 'JSONP',
+    predefinedVariable: (typeof qmwpShortCodeDefinedVariable !== 'undefined') ? qmwpShortCodeDefinedVariable : null,
+    predefinedVariableAs: (typeof qmwpShortCodeDefinedVariableAs !== 'undefined') ? qmwpShortCodeDefinedVariableAs : null,
 };
 
 // Define a new module for our search page app
@@ -121,6 +123,15 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
             );
 
         };
+
+        if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
+            console.log('Variable: ' + QuantimodoSearchConstants.predefinedVariable);
+            console.log('Variable as: ' + QuantimodoSearchConstants.predefinedVariableAs);
+
+            $scope.selectOutputAsType = QuantimodoSearchConstants.predefinedVariableAs;
+            $scope.searchVariable = QuantimodoSearchConstants.predefinedVariable;
+            $scope.showCorrelations($scope.searchVariable);
+        }
     }]);
 
 

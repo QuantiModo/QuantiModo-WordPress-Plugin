@@ -99,8 +99,6 @@ $cc_ux = qmwp_cc_ux();
                             <!-- <li><a href="https://wordpress.org/plugins/qm-oauth/" target="_blank">QuantiModo at
                                     WordPress.org</a></li>
                             <li><a href="https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin"
-                                   target="_blank">QuantiModo at GitHub.com</a></li> -->
-                            <li><a href="https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin"
                                    target="_blank">QuantiModo at Github</a></li>
                         </ul>
                     </nav>
@@ -196,7 +194,7 @@ $cc_ux = qmwp_cc_ux();
                     <p>Do you enjoy using this plugin? Do you want to help improve it? Consider donating via <strong>PayPal</strong>!
                     </p>
 
-                    <p>QuantiModo remains free for open source projects. <em>Your donations help make this
+                    <p>The QuantiModo WP plugin remains free for open source projects. <em>Your donations help make this
                             possible.</em></p>
 
                     <form action="https://www.paypal.com/cgi-bin/webscr" target="_blank" method="post">
@@ -217,7 +215,7 @@ $cc_ux = qmwp_cc_ux();
                 <h3 id="bookmark-live-demo">Live Demo</h3>
 
                 <div class='form-padding'>
-                    <p>A live demo is available at <a href="http://choiceschances.com" target="_blank">choiceschances.com</a>.
+                    <p>A live demo is available at <a href="https://quantipress.quantimo.do" target="_blank">quantipress.quantimo.do</a>.
                     </p>
                 </div>
             </div>
@@ -779,7 +777,7 @@ $cc_ux = qmwp_cc_ux();
 
                 <!-- START Login with QuantiModo section -->
                 <div id="qmwp-settings-section-login-with-quantimodo" class="qmwp-settings-section">
-                    <h3>Login with QuantiModo</h3>
+                    <h3>Credentials</h3>
 
                     <div class='form-padding'>
                         <table class='form-table'>

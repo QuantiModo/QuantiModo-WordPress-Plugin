@@ -175,6 +175,7 @@ ManageAccountsPage = function () {
             if (accessToken) {
                 reloadConnectorData();
             } else {
+                console.warn('No access token. Now will try to authenticate and to get it');
                 window.location.href = "?connect=quantimodo";
             }
         },

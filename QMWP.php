@@ -6,7 +6,7 @@
  * Description: A WordPress plugin that allows users to login or register by
  * authenticating with an existing Quantimodo account. Easily
  * drops into new or existing sites, integrates with existing users.
- * Version: 0.3.1
+ * Version: 0.3.2
  * Author: QuantiModo
  * Author URI: https://app.quantimo.do
  * License: GPL2
@@ -87,7 +87,7 @@ Class QMWP
                 'icon_set' => 'none',
                 'layout' => 'buttons-row',
                 'align' => 'left',
-                'show_login' => 'always',
+                'show_login' => 'conditional',
                 'show_logout' => 'never',
                 'button_prefix' => 'Link',
                 'logged_out_title' => 'Select a provider:',
@@ -112,13 +112,36 @@ Class QMWP
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
-            'QMWP Search Correlations' => '[qmwp_search_correlations]',
-            'QMWP Mood Tracker' => '[qmwp_mood_tracker]',
-            'QMWP Connectors' => '[qmwp_connectors]',
-            'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
-            'QMWP Bargraph Scatterplot Timeline' => '[qmwp_bargraph_scatterplot_timeline]',
-            'QMWP Timeline' => '[qmwp_timeline variables="overall mood"]',
-            'QMWP Add Measurement' => '[qmwp_add_measurement]'
+            'Search for Predictors' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
+            'Track Mood' => '[qmwp_mood_tracker variable="Overall Mood"]',
+            'Import Data' => '[qmwp_connectors]',
+            //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
+            'Predictor Analysis' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
+            'Timeline' => '[qmwp_timeline variables="overall mood"]',
+            'Track Mood (Faces)' => '[qmwp_add_measurement category="Mood"]',
+            'Track Physique' => '[qmwp_add_measurement category="Physique"]',
+            'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
+            'Track Location' => '[qmwp_add_measurement category="Location"]',
+            'Track Miscellaneous' => '[qmwp_add_measurement category="Miscellaneous"]',
+            'Track Sleep' => '[qmwp_add_measurement category="Sleep"]',
+            'Track Social Interactions' => '[qmwp_add_measurement category="Social Interactions"]',
+            'Track Vital Signs' => '[qmwp_add_measurement category="Vital Signs"]',
+            'Track Cognitive Performance' => '[qmwp_add_measurement category="Cognitive Performance"]',
+            'Track Symptoms' => '[qmwp_add_measurement category="Symptoms"]',
+            'Track Nutrition' => '[qmwp_add_measurement category="Nutrition"]',
+            'Track Work' => '[qmwp_add_measurement category="Work"]',
+            'Track Treatments' => '[qmwp_add_measurement category="Treatments"]',
+            'Track Activity' => '[qmwp_add_measurement category="Activity"]',
+            'Track Foods' => '[qmwp_add_measurement category="Foods"]',
+            'Track Conditions' => '[qmwp_add_measurement category="Conditions"]',
+            'Track Environment' => '[qmwp_add_measurement category="Environment"]',
+            'Track Causes of Illness' => '[qmwp_add_measurement category="Causes of Illness"]',
+            'Track Books' => '[qmwp_add_measurement category="Books"]',
+            'Track Software & Mobile Apps' => '[qmwp_add_measurement category="Software & Mobile Apps"]',
+            'Track Finance' => '[qmwp_add_measurement category="Finance"]',
+            'Track Payments' => '[qmwp_add_measurement category="Payments"]',
+            'Track Other' => '[qmwp_add_measurement category="Other"]',
+            'Track Music' => '[qmwp_add_measurement category="Music"]',
         )
     );
 
@@ -134,6 +157,9 @@ Class QMWP
         add_action('plugins_loaded', array($this, 'qmwp_update'));
         // hook init event to handle plugin initialization:
         add_action('init', array($this, 'init'));
+
+        add_action('admin_notices', array($this, 'check_plugin_requirements'));
+
     }
 
     /**
@@ -194,7 +220,42 @@ Class QMWP
      */
     function qmwp_activate()
     {
-        $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
+        if ($this->check_plugin_requirements()) {
+            $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
+        }
+    }
+
+    /**
+     * This function checks all requirements which are needed for plugin correct work
+     * In case when some requirements are not met:
+     *  1. WP instance will be stopped
+     *  2. Plugin will be deactivated
+     *  3. Message will be displayed to admin
+     * In case when all checks have been passed - method will return true
+     * @return bool
+     */
+    function check_plugin_requirements()
+    {
+        $messages = array();
+
+        if (!get_option("users_can_register")) {
+            $settingPageUrl = site_url() . '/wp-admin/options-general.php';
+            $message = "In order to user the QuantiModo plugin, the site administrator must check " .
+                "'Anyone can register' at: <a href='$settingPageUrl#users_can_register'>$settingPageUrl</a>";
+            array_push($messages, $message);
+        }
+
+        if (count($messages) > 0) {
+
+            deactivate_plugins(plugin_basename(__FILE__));
+            $fullOutput = "";
+            foreach ($messages as $message) {
+                $fullOutput .= $message . "<br>";
+            }
+
+            wp_die($fullOutput);
+        }
+        return true;
     }
 
     /**
@@ -203,7 +264,7 @@ Class QMWP
     function qmwp_deactivate()
     {
 
-        $this->delete_plugin_pages($this->settings['qmwp_plugin_pages']);
+        //$this->delete_plugin_pages($this->settings['qmwp_plugin_pages']); //no need to remove pages
 
     }
 
@@ -488,15 +549,16 @@ Class QMWP
             include 'includes/qmwp-register.php';
         }
         // we shouldn't be here, but just in case...
-        $this->qmwp_end_login("Sorry, we couldn't log you in. The login flow terminated in an unexpected way. Please notify the admin or try again later.");
+        $this->qmwp_end_login("Sorry, we couldn't log you in. The login flow terminated in an unexpected way. Please notify the admin or try again later.", true);
     }
 
     /**
      * ends the login request by clearing the login state and redirecting the user to the desired page
      *
      * @param $msg
+     * @param bool $shouldDie
      */
-    function qmwp_end_login($msg)
+    function qmwp_end_login($msg, $shouldDie = false)
     {
         $last_url = isset($_SESSION["QMWP"]["LAST_URL"]) ? $_SESSION["QMWP"]["LAST_URL"] : null;
         unset($_SESSION["QMWP"]["LAST_URL"]);
@@ -525,10 +587,18 @@ Class QMWP
                 break;
         }
         //header("Location: " . $redirect_url);
-        if (!empty($redirect_url)) {
-            wp_safe_redirect($redirect_url);
+        if ($shouldDie) {
+            if (!empty($redirect_url)) {
+                $msg = "<span>$msg</span>" . "<br>" . "<span>Return to: <a href='$redirect_url'>$redirect_url</a></span>";
+            }
+            wp_die($msg);
+        } else {
+            if (!empty($redirect_url)) {
+                wp_safe_redirect($redirect_url);
+            }
+            die();
         }
-        die();
+
     }
 
     /**
@@ -796,29 +866,33 @@ Class QMWP
         // if a design was specified and that design exists, load the shortcode attributes from that design:
         if ($design != '' && QMWP::qmwp_login_form_design_exists($design)) { // TODO: remove first condition not needed
             $a = QMWP::qmwp_get_login_form_design($design);
-            $icon_set = $a['icon_set'];
-            $layout = $a['layout'];
-            $button_prefix = $a['button_prefix'];
-            $align = $a['align'];
-            $show_login = $a['show_login'];
-            $show_logout = $a['show_logout'];
-            $logged_out_title = $a['logged_out_title'];
-            $logged_in_title = $a['logged_in_title'];
-            $logging_in_title = $a['logging_in_title'];
-            $logging_out_title = $a['logging_out_title'];
-            $style = $a['style'];
-            $class = $a['class'];
+            $icon_set = isset($a['icon_set']) ? $a['icon_set'] : null;
+            $layout = isset($a['layout']) ? $a['layout'] : null;
+            $button_prefix = isset($a['button_prefix']) ? $a['button_prefix'] : null;
+            $align = isset($a['align']) ? $a['align'] : null;
+            $show_login = isset($a['show_login']) ? $a['show_login'] : null;
+            $show_logout = isset ($a['show_logout']) ? $a['show_logout'] : null;
+            $logged_out_title = isset ($a['logged_out_title']) ? $a['logged_out_title'] : null;
+            $logged_in_title = isset ($a['logged_in_title']) ? $a['logged_in_title'] : null;
+            $logging_in_title = isset ($a['logging_in_title']) ? $a['logging_in_title'] : null;
+            $logging_out_title = isset($a['logging_out_title']) ? $a['logging_out_title'] : null;
+            $style = isset($a['style']) ? $a['style'] : null;
+            $class = isset($a['class']) ? $a['class'] : null;
         }
         // build the shortcode markup:
         $html = "";
         $html .= "<div class='qmwp-login-form qmwp-layout-$layout qmwp-layout-align-$align $class' style='$style' data-logging-in-title='$logging_in_title' data-logging-out-title='$logging_out_title'>";
         $html .= "<nav>";
         if (is_user_logged_in()) {
-            if ($logged_in_title) {
+            if ($logged_in_title && !$this->do_qmwp_account_linked()) {
                 $html .= "<p id='qmwp-title'>" . $logged_in_title . "</p>";
             }
             if ($show_login == 'always') {
                 $html .= $this->qmwp_login_buttons($icon_set, $button_prefix);
+            } else if ($show_login == 'conditional') {
+                if (!$this->do_qmwp_account_linked()) {
+                    $html .= $this->qmwp_login_buttons($icon_set, $button_prefix);
+                }
             }
             if ($show_logout == 'always' || $show_logout == 'conditional') {
                 $html .= "<a class='qmwp-logout-button' href='" . wp_logout_url() . "' title='Logout'>Logout</a>";
@@ -1186,6 +1260,19 @@ Class QMWP
 
     }
 
+    /**
+     * Will check if current user have linked QuantiModo account
+     * @return bool
+     */
+    function do_qmwp_account_linked()
+    {
+
+        global $current_user;
+        get_currentuserinfo();
+        $user_id = $current_user->ID;
+        return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
+    }
+
     // ====================
     // PLUGIN SHORT CODES
     // ====================
@@ -1197,11 +1284,18 @@ Class QMWP
      */
     function qmwp_mood_tracker($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_mood_tracker');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'variable' => 'Overall Mood',
+        ), $attributes, 'qmwp_mood_tracker');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-mood-tracker', $version);
+
+        $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
+            'qmwpShortCodeDefinedVariable' => $attributes['variable'],
+        ));
 
         $template_content = $this->process_template($pluginContentHTML);
 
@@ -1253,11 +1347,25 @@ Class QMWP
      */
     function qmwp_bargraph_scatterplot_timeline($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_bargraph_scatterplot_timeline');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'variable' => null,
+            'variable_as' => 'cause',
+        ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-bargraph-scatterplot-timeline', $version);
+
+        $variable = $attributes['variable'];
+
+        if (!is_null($variable)) {
+            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
+                array(
+                    'qmwpShortCodeDefinedVariable' => $variable,
+                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as']
+                ));
+        }
 
         $template_content = $this->process_template($pluginContentHTML);
 
@@ -1278,7 +1386,7 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
 
-        $variables = isset($attributes['variables']) ? $attributes['variables'] : null;
+        $variables = $attributes['variables'];
 
         if (!is_null($variables)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
@@ -1298,11 +1406,25 @@ Class QMWP
      */
     function qmwp_search_correlations($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1), $attributes, 'qmwp_search_correlations');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'variable' => null,
+            'variable_as' => 'cause',
+        ), $attributes, 'qmwp_search_correlations');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
+
+        $variable = $attributes['variable'];
+
+        if (!is_null($variable)) {
+            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
+                array(
+                    'qmwpShortCodeDefinedVariable' => $variable,
+                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as'],
+                ));
+        }
 
         $template_content = $this->process_template($pluginContentHTML);
 
@@ -1310,17 +1432,23 @@ Class QMWP
     }
 
     /**
-     * Return rendered html string with plugin content
+     * Return rendered html string with plugin content!
      * @param $attributes
      * @return string
      */
     function qmwp_add_measurement($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1,), $attributes, 'qmwp_add_measurement');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'category' => null,
+        ), $attributes, 'qmwp_add_measurement');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-add-measurement', $version);
+
+        $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
+            'qmwpShortCodeDefinedCategory' => $attributes['category']));
 
         $template_content = $this->process_template($pluginContentHTML);
 
