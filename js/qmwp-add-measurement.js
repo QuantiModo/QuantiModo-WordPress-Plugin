@@ -549,14 +549,14 @@ jQuery(document).ready(function () {
                                 label: variable.name,
                                 value: variable.name,
                                 variable: variable
-                            }
+                            };
                         }
                     } else {    //if category is not defined at shortcode - show all variables in autocomplete
                         return {
                             label: variable.name,
                             value: variable.name,
                             variable: variable
-                        }
+                        };
                     }
 
                 }));
