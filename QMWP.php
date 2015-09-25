@@ -118,7 +118,30 @@ Class QMWP
             //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'Predictor Analysis' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
             'Timeline' => '[qmwp_timeline variables="overall mood"]',
-            'Add a Measurement' => '[qmwp_add_measurement]'
+            'Add a Measurement (Mood)' => '[qmwp_add_measurement category="Mood"]',
+            'Add a Measurement (Physique)' => '[qmwp_add_measurement category="Physique"]',
+            'Add a Measurement (Physical Activity)' => '[qmwp_add_measurement category="Physical Activity"]',
+            'Add a Measurement (Location)' => '[qmwp_add_measurement category="Location"]',
+            'Add a Measurement (Miscellaneous)' => '[qmwp_add_measurement category="Miscellaneous"]',
+            'Add a Measurement (Sleep)' => '[qmwp_add_measurement category="Sleep"]',
+            'Add a Measurement (Social Interactions)' => '[qmwp_add_measurement category="Social Interactions"]',
+            'Add a Measurement (Vital Signs)' => '[qmwp_add_measurement category="Vital Signs"]',
+            'Add a Measurement (Cognitive Performance)' => '[qmwp_add_measurement category="Cognitive Performance"]',
+            'Add a Measurement (Symptoms)' => '[qmwp_add_measurement category="Symptoms"]',
+            'Add a Measurement (Nutrition)' => '[qmwp_add_measurement category="Nutrition"]',
+            'Add a Measurement (Work)' => '[qmwp_add_measurement category="Work"]',
+            'Add a Measurement (Treatments)' => '[qmwp_add_measurement category="Treatments"]',
+            'Add a Measurement (Activity)' => '[qmwp_add_measurement category="Activity"]',
+            'Add a Measurement (Foods)' => '[qmwp_add_measurement category="Foods"]',
+            'Add a Measurement (Conditions)' => '[qmwp_add_measurement category="Conditions"]',
+            'Add a Measurement (Environment)' => '[qmwp_add_measurement category="Environment"]',
+            'Add a Measurement (Causes of Illness)' => '[qmwp_add_measurement category="Causes of Illness"]',
+            'Add a Measurement (Books)' => '[qmwp_add_measurement category="Books"]',
+            'Add a Measurement (Software & Mobile Apps)' => '[qmwp_add_measurement category="Software & Mobile Apps"]',
+            'Add a Measurement (Finance)' => '[qmwp_add_measurement category="Finance"]',
+            'Add a Measurement (Payments)' => '[qmwp_add_measurement category="Payments"]',
+            'Add a Measurement (Other)' => '[qmwp_add_measurement category="Other"]',
+            'Add a Measurement (Music)' => '[qmwp_add_measurement category="Music"]',
         )
     );
 
@@ -201,7 +224,6 @@ Class QMWP
             $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
         }
     }
-
 
     /**
      * This function checks all requirements which are needed for plugin correct work
@@ -1238,6 +1260,19 @@ Class QMWP
 
     }
 
+    /**
+     * Will check if current user have linked QuantiModo account
+     * @return bool
+     */
+    function do_qmwp_account_linked()
+    {
+
+        global $current_user;
+        get_currentuserinfo();
+        $user_id = $current_user->ID;
+        return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
+    }
+
     // ====================
     // PLUGIN SHORT CODES
     // ====================
@@ -1403,28 +1438,21 @@ Class QMWP
      */
     function qmwp_add_measurement($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1,), $attributes, 'qmwp_add_measurement');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'category' => null,
+        ), $attributes, 'qmwp_add_measurement');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-add-measurement', $version);
 
+        $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
+            'qmwpShortCodeDefinedCategory' => $attributes['category']));
+
         $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
-    }
-
-    /**
-     * Will check if current user have linked QuantiModo account
-     * @return bool
-     */
-    function do_qmwp_account_linked()
-    {
-
-        global $current_user;
-        get_currentuserinfo();
-        $user_id = $current_user->ID;
-        return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
     }
 
 }
