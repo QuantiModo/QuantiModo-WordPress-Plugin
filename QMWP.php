@@ -6,7 +6,7 @@
  * Description: A WordPress plugin that allows users to login or register by
  * authenticating with an existing Quantimodo account. Easily
  * drops into new or existing sites, integrates with existing users.
- * Version: 0.3.1
+ * Version: 0.3.2
  * Author: QuantiModo
  * Author URI: https://app.quantimo.do
  * License: GPL2
