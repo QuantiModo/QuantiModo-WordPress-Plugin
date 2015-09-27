@@ -113,12 +113,12 @@ Class QMWP
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
             'Search for Predictors' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
-            'Track Mood' => '[qmwp_mood_tracker variable="Overall Mood"]',
+            'Track Mood (Faces)' => '[qmwp_mood_tracker variable="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
             //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'Predictor Analysis' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
             'Timeline' => '[qmwp_timeline variables="overall mood"]',
-            'Track Mood (Faces)' => '[qmwp_add_measurement category="Mood"]',
+            'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
             'Track Physique' => '[qmwp_add_measurement category="Physique"]',
             'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
             'Track Location' => '[qmwp_add_measurement category="Location"]',
