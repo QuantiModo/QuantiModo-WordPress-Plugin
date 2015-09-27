@@ -116,7 +116,7 @@ Class QMWP
             'Track Mood (Faces)' => '[qmwp_mood_tracker variable="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
             //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
-            'Predictor Analysis' => '[qmwp_bargraph_scatterplot_timeline variable="overall mood" variable_as="cause"]',
+            'Predictor Search' => '[qmwp_bargraph_scatterplot_timeline]',
             'Timeline' => '[qmwp_timeline variables="overall mood"]',
             'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
             'Track Physique' => '[qmwp_add_measurement category="Physique"]',
