@@ -222,7 +222,9 @@ class QMWPAuth
         $oauth_identity = array();
         $oauth_identity['provider'] = $_SESSION['QMWP']['PROVIDER'];
         $oauth_identity['id'] = $result_obj['id']; // PROVIDER SPECIFIC: QuantiModo returns the user's OAuth identity as id
-        //$oauth_identity['email'] = $result_obj['emails'][0]['value']; // PROVIDER SPECIFIC: QuantiModo returns an array of email addresses. To respect privacy we currently don't collect the user's email address.
+        $oauth_identity['email'] = $result_obj['email'];
+        $oauth_identity['displayName'] = $result_obj['displayName'];
+        $oauth_identity['loginName'] =   $result_obj['loginName'];
         if (!$oauth_identity['id']) {
             $qmwp->qmwp_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.", true);
         }
