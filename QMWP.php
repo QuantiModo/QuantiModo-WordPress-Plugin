@@ -175,6 +175,9 @@ Class QMWP
         add_shortcode('qmwp_search_correlations', array($this, 'qmwp_search_correlations'));
         add_shortcode('qmwp_add_measurement', array($this, 'qmwp_add_measurement'));
 
+        //add shortcake plugin features to qmwp shortcodes (if plugin is installed)
+        $this->add_shortcake_ui_features();
+
         // restore default settings if necessary; this might get toggled by the admin or forced by a new version of the plugin:
         if (get_option("qmwp_restore_default_settings")) {
             $this->qmwp_restore_default_settings();
@@ -729,7 +732,7 @@ Class QMWP
      */
     function qmwp_push_login_messages()
     {
-        $result = isset($_SESSION['QMWP']['RESULT']) ? $_SESSION['QMWP']['RESULT'] : null ;
+        $result = isset($_SESSION['QMWP']['RESULT']) ? $_SESSION['QMWP']['RESULT'] : null;
         $_SESSION['QMWP']['RESULT'] = '';
         echo "<div id='qm-result'>" . $result . "</div>";
     }
@@ -1352,7 +1355,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'variable' => null,
+            'variable' => 'Overall Mood',
             'variable_as' => 'cause',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
@@ -1457,6 +1460,163 @@ Class QMWP
 
         return $template_content;
     }
+
+
+    // ====================
+    // Shortcake UI additions
+    // ====================
+
+    /**
+     *  Will check if shortcake plugin is installed and add it's features to a qmwp shortcodes
+     */
+    function add_shortcake_ui_features()
+    {
+        if (function_exists('shortcode_ui_register_for_shortcode')) {
+
+            $this->add_shortcake_to_faces_tracker();
+            $this->add_shortcake_to_bargraph_scatterplot();
+            $this->add_shortcake_to_timeline();
+            $this->add_shortcake_to_search_correlations();
+            $this->add_shortcake_to_add_measurement();
+
+        }
+
+    }
+
+    function add_shortcake_to_faces_tracker()
+    {
+        shortcode_ui_register_for_shortcode(
+            'qmwp_mood_tracker', array(
+                'label' => 'QuantiModo "Faces" Tracker',
+                'attrs' => array(
+
+                    array(
+                        'label' => 'Variable',
+                        'attr' => 'variable',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type variable name to track',
+                        ),
+                    ),
+
+                ),
+            )
+        );
+    }
+
+    function add_shortcake_to_bargraph_scatterplot()
+    {
+        shortcode_ui_register_for_shortcode(
+            'qmwp_bargraph_scatterplot_timeline', array(
+                'label' => 'QuantiModo Predictor Analysis',
+                'attrs' => array(
+
+                    array(
+                        'label' => 'Variable',
+                        'attr' => 'variable',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type variable name',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Consider Variable As',
+                        'attr' => 'variable_as',
+                        'type' => 'select',
+                        'options' => array(
+                            'cause' => 'Cause',
+                            'effect' => 'Effect',
+                        ),
+                    ),
+
+                ),
+            )
+        );
+    }
+
+    function add_shortcake_to_timeline()
+    {
+        shortcode_ui_register_for_shortcode(
+            'qmwp_timeline', array(
+                'label' => 'QuantiModo Timeline',
+                'attrs' => array(
+
+                    array(
+                        'label' => 'Variable',
+                        'attr' => 'variables',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type variable name',
+                        ),
+                    ),
+                ),
+            )
+        );
+    }
+
+    function add_shortcake_to_search_correlations()
+    {
+        shortcode_ui_register_for_shortcode(
+            'qmwp_search_correlations', array(
+                'label' => 'QuantiModo Predictors Search',
+                'attrs' => array(
+
+                    array(
+                        'label' => 'Variable',
+                        'attr' => 'variable',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type variable name',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Consider Variable As',
+                        'attr' => 'variable_as',
+                        'type' => 'select',
+                        'options' => array(
+                            'cause' => 'Cause',
+                            'effect' => 'Effect',
+                        ),
+                    ),
+                ),
+            )
+        );
+    }
+
+    function add_shortcake_to_add_measurement()
+    {
+        shortcode_ui_register_for_shortcode(
+            'qmwp_add_measurement', array(
+                'label' => 'QuantiModo Track Measurement',
+                'attrs' => array(
+
+                    array(
+                        'label' => 'Category',
+                        'attr' => 'category',
+                        'type' => 'select',
+                        'options' => array(
+                            'Mood' => 'Emotions',
+                            'Physique' => 'Physique',
+                            'Physical Activity' => 'Physical Activity',
+                            'Location' => 'Location',
+                            'Sleep' => 'Sleep',
+                            'Vital Signs' => 'Vital Signs',
+                            'Cognitive Performance' => 'Cognitive Performance',
+                            'Symptoms' => 'Symptoms',
+                            'Treatments' => 'Treatments',
+                            'Activity' => 'Activity',
+                            'Foods' => 'Foods',
+                            'Conditions' => 'Conditions',
+                            'Finance' => 'Finance',
+                        ),
+                    ),
+                ),
+            )
+        );
+    }
+
 
 }
 
