@@ -1,5 +1,5 @@
 // ocean five
-var oceanFive = ['#00A0B0', '#6A4A3C', '#CC333F', '#EB6841', '#EDC951'];
+var oceanFive = ['#3284FF', '#FFBB00', '#26B14C', '#FF3424', '#00A0B0'];
 
 // ocean five in Use
 var oceanFiveInUse = [];
@@ -42,13 +42,13 @@ function toggleElement(element) {
     }
     else if (content.hasClass('open')) {
         content.contentHeight += content.inner.outerHeight();
-        setTimeout(function() {
+        setTimeout(function () {
             content.addClass('transitions').css(
                 {
                     //'max-height': content.contentHeight,
                     'display': 'block'
                 });
-        },77);
+        }, 77);
     }
 }
 
