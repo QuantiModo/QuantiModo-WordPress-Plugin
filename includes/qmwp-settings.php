@@ -99,6 +99,8 @@ $cc_ux = qmwp_cc_ux();
                             <!-- <li><a href="https://wordpress.org/plugins/qm-oauth/" target="_blank">QuantiModo at
                                     WordPress.org</a></li>
                             <li><a href="https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin"
+                                   target="_blank">QuantiModo at GitHub.com</a></li> -->
+                            <li><a href="https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin"
                                    target="_blank">QuantiModo at Github</a></li>
                         </ul>
                     </nav>
