@@ -692,10 +692,10 @@ function jsonCallback(data) {
             var statisticalSignificance = data[i].statisticalSignificance;
 
 
-            var color = 'blue';
+            var color = '#3284FF';
 
             if (value > 0) {
-                color = 'red';
+                color = '#FF3424';
             }
 
             sortedByCorrelation[i] = {
@@ -1010,9 +1010,9 @@ function filterByNumberOfPairs(numberOfPairs) {
                     'originalName': bargraphData[i].originalEffect,
                     'name': bargraphData[i].effect
                 } : {'originalName': bargraphData[i].originalCause, 'name': bargraphData[i].cause}));
-                var color = 'blue';
+                var color = '#3284FF';
                 if (bargraphData[i].correlationCoefficient > 0) {
-                    color = 'red';
+                    color = '#FF3424';
                 }
                 filteredByNumberOfPairs[k] = {
                     y: bargraphData[i].correlationCoefficient,
