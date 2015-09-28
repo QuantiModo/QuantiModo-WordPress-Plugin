@@ -546,7 +546,10 @@ Class QMWP
         // handle the logged out user or no matching user (register the user):
         if (!is_user_logged_in() && !$matched_user) {
             // this person is not logged into a wordpress account and has no third party authentications registered, so proceed to register the wordpress user:
-            include 'includes/qmwp-register.php';
+            include_once 'includes/qmwp-register.php';
+            $qmwpReg = new QMWPUserReg($this);
+            $qmwpReg->registerUserFromIdentity($oauth_identity);
+
         }
         // we shouldn't be here, but just in case...
         $this->qmwp_end_login("Sorry, we couldn't log you in. The login flow terminated in an unexpected way. Please notify the admin or try again later.", true);
@@ -726,7 +729,7 @@ Class QMWP
      */
     function qmwp_push_login_messages()
     {
-        $result = $_SESSION['QMWP']['RESULT'];
+        $result = isset($_SESSION['QMWP']['RESULT']) ? $_SESSION['QMWP']['RESULT'] : null ;
         $_SESSION['QMWP']['RESULT'] = '';
         echo "<div id='qm-result'>" . $result . "</div>";
     }
@@ -1100,7 +1103,7 @@ Class QMWP
     /**
      * @param $user_id
      */
-    private function update_user_tokens($user_id)
+    public function update_user_tokens($user_id)
     {
         update_user_meta($user_id, 'qmwp_access_token', $_SESSION['QMWP']['ACCESS_TOKEN']);
         update_user_meta($user_id, 'qmwp_refresh_token', $_SESSION['QMWP']['REFRESH_TOKEN']);
