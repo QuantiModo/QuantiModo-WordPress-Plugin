@@ -19,10 +19,10 @@ var onMoodButtonClicked = function (value, variable) {
 
     Quantimodo.postMeasurementsV2(payload, function (response) {
         if (response.status == 201) {
-            jQuery('#sectionSendingMood').html('Measurement has been posted successfully');
+            jQuery('#sectionSendingMood').html('Thanks!  We love you!');
             window.measurementPostingResult = true;
         } else {
-            jQuery('#sectionSendingMood').html('Error while posting measurement');
+            jQuery('#sectionSendingMood').html('Error! Please contact help@quantimo.do');
             window.measurementPostingResult = false;
             console.error(response);
         }
