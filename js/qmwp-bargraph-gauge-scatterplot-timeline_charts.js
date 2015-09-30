@@ -1,5 +1,5 @@
 AnalyzeChart = function () {
-    var inputColor = '#42e212', outputColor = '#1a92c6', mixedColor = '#31B639', linearRegressionColor = '#bf8f1f';
+    var inputColor = '#26B14C', outputColor = '#3284FF', mixedColor = '#26B14C', linearRegressionColor = '#FFBB00';
 
     var inputData = {
         variableName: 'Data loading...',
@@ -584,7 +584,7 @@ AnalyzeChart = function () {
             '</div>';
 
         Highcharts.setOptions({
-            colors: ['#1851CE', '#C61800', '#31B639', '#FFCF00']
+            colors: ['#3284FF', '#FF3424', '#26B14C', '#FFBB00']
         });
 
         timelineChart = new Highcharts.StockChart({
@@ -705,7 +705,7 @@ AnalyzeChart = function () {
     var initScatterplotChart = function () {
 
         Highcharts.setOptions({
-            colors: ['#1851CE', '#C61800', '#31B639', '#FFCF00']
+            colors: ['#3284FF', '#FF3424', '#26B14C', '#FFBB00']
         });
 
         scatterplotChart = new Highcharts.Chart({
@@ -765,7 +765,7 @@ AnalyzeChart = function () {
 
     var initCorrelationGauge = function () {
         Highcharts.setOptions({
-            colors: ['#1851CE', '#C61800', '#31B639', '#FFCF00']
+            colors: ['#3284FF', '#FF3424', '#26B14C', '#FFBB00']
         });
 
         correlationGauge = new Highcharts.Chart({
@@ -798,13 +798,13 @@ AnalyzeChart = function () {
                 plotBands: [{
                     from: -1,
                     to: 0,
-                    color: '#e5394a',
+                    color: '#FF3424',
                     innerRadius: '100%',
                     outerRadius: '105%'
                 }, {
                     from: 0,
                     to: 1,
-                    color: '#65af5d',
+                    color: '#26B14C',
                     innerRadius: '100%',
                     outerRadius: '105%'
                 }
