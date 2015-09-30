@@ -6,7 +6,7 @@ wp_enqueue_script("quantimodo-js-sdk", plugins_url('../../', __FILE__) . "js/lib
 ?>
 
 <div id="track-variable-content">
-    <div id="track-variable-header">How do you feel about <span id="track-variable-name"></span>?</div>
+<!--    <div id="track-variable-header">How do you feel about <span id="track-variable-name"></span>?</div>-->
     <section id="sectionRateMood">
         <ul>
             <li><img id="buttonMoodDepressed" class="track-icon" data-value="1"
