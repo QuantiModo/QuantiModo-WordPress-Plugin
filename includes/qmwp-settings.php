@@ -258,7 +258,7 @@ $cc_ux = qmwp_cc_ux();
                                 <td class="shortcode">[qmwp_mood_tracker]</td>
                                 <td>
                                     <ul>
-                                        <li>variable</li>
+                                        <li>examined_variable_name</li>
                                     </ul>
                                     <p>
                                         Specify variable name to track. This kind of tracker supports
@@ -267,7 +267,7 @@ $cc_ux = qmwp_cc_ux();
 
                                     <p>
                                         Example: <br>
-                                        [qmwp_mood_tracker variable="Overall Mood"]
+                                        [qmwp_mood_tracker examined_variable_name="Overall Mood"]
                                     </p>
                                 </td>
                                 <td>
@@ -289,7 +289,7 @@ $cc_ux = qmwp_cc_ux();
 
                                     <p>
                                         Example: <br>
-                                        [qmwp_timeline variables="Overall Mood;Sleep Quality"]
+                                        [qmwp_timeline examined_variable_names="Overall Mood;Sleep Quality"]
                                     </p>
                                 </td>
                                 <td>
@@ -312,10 +312,10 @@ $cc_ux = qmwp_cc_ux();
                                 <td>
                                     <ul>
                                         <li>
-                                            variable
+                                            examined_variable_name
                                         </li>
                                         <li>
-                                            variable_as
+                                            show_predictors_or_outcomes
                                         </li>
                                     </ul>
                                     <p>
@@ -324,13 +324,13 @@ $cc_ux = qmwp_cc_ux();
 
                                     <p>
                                         Example: <br>
-                                        [qmwp_bargraph_scatterplot_timeline variable="Sleep Quality"
-                                        variable_as="effect"]
+                                        [qmwp_bargraph_scatterplot_timeline examined_variable_name="Sleep Quality"
+                                        show_predictors_or_outcomes="predictors"]
                                     </p>
                                 </td>
                                 <td>
                                     Search for predictors or likely effects of a given variable
-                                    <a href="/qmwp-search-correlations">Take a look</a>
+                                    <a target="_blank" href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
                                 </td>
                             </tr>
                             <tr>
@@ -338,21 +338,25 @@ $cc_ux = qmwp_cc_ux();
                                 <td>
                                     <ul>
                                         <li>
-                                            variable
+                                            examined_variable_name
                                         </li>
                                         <li>
-                                            variable_as
+                                            show_predictors_or_outcomes
                                         </li>
                                     </ul>
                                     <p>
-                                        The optional "examined_variable_name" parameter is used to pre-specify the variable name. If absent, the user may select it from a menu.  
-                                        The optional "show_predictors_or_outcomes" parameter whether the chart should display predictors or outcomes of the examined variable.
+                                        The optional "examined_variable_name" parameter is used to pre-specify the
+                                        variable name. If absent, the user may select it from a menu.
+                                        The optional "show_predictors_or_outcomes" parameter whether the chart should
+                                        display predictors or outcomes of the examined variable.
                                     </p>
 
                                     <p>
                                         Example: <br>
-                                        This shortcode would display a graph exploring all possible predictors of the user's Attention ratings. 
-                                        [qmwp_search_correlations examined_variable_name="Attention" show_predictors_or_outcomes="predictors"]
+                                        This shortcode would display a graph exploring all possible predictors of the
+                                        user's Attention ratings.
+                                        [qmwp_search_correlations examined_variable_name="Attention"
+                                        show_predictors_or_outcomes="predictors"]
                                     </p>
                                 </td>
                                 <td>

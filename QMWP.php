@@ -30,10 +30,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-/*
- * Plugin Class
-*/
-
 Class QMWP
 {
     // singleton class pattern:
@@ -112,12 +108,15 @@ Class QMWP
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
-            'Strongest Predictors of Mood' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
-            'Track Mood (Faces)' => '[qmwp_mood_tracker variable="Overall Mood"]',
+            'Strongest Predictors of Mood' =>
+                '[qmwp_search_correlations examined_variable_name="Overall Mood" variable_as="effect"]',
+            'Track Mood (Faces)' =>
+                '[qmwp_mood_tracker examined_variable_name="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
             //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
-            'Predictor Search' => '[qmwp_bargraph_scatterplot_timeline]',
-            'Timeline' => '[qmwp_timeline variables="overall mood"]',
+            'Predictor Search' =>
+                '[qmwp_bargraph_scatterplot_timeline]',
+            'Timeline' => '[qmwp_timeline examined_variable_names="overall mood"]',
             'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
             'Track Physique' => '[qmwp_add_measurement category="Physique"]',
             'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
@@ -1292,7 +1291,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'variable' => 'Overall Mood',
+            'examined_variable_name' => 'Overall Mood',
         ), $attributes, 'qmwp_mood_tracker');
 
         $version = $attributes['version'];
@@ -1300,7 +1299,7 @@ Class QMWP
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-mood-tracker', $version);
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
-            'qmwpShortCodeDefinedVariable' => $attributes['variable'],
+            'qmwpShortCodeDefinedVariable' => $attributes['examined_variable_name'],
         ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1355,21 +1354,27 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'variable' => 'Overall Mood',
-            'variable_as' => 'cause',
+            'examined_variable_name' => 'Overall Mood',
+            'show_predictors_or_outcomes' => 'outcomes',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-bargraph-scatterplot-timeline', $version);
 
-        $variable = $attributes['variable'];
+        $variable = $attributes['examined_variable_name'];
+
+        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
+            $variableAs = 'cause';
+        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
+            $variableAs = 'effect';
+        }
 
         if (!is_null($variable)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as']
+                    'qmwpShortCodeDefinedVariableAs' => $variableAs
                 ));
         }
 
@@ -1386,13 +1391,16 @@ Class QMWP
      */
     function qmwp_timeline($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1, 'variables' => null), $attributes, 'qmwp_timeline');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'examined_variable_names' => null
+        ), $attributes, 'qmwp_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
 
-        $variables = $attributes['variables'];
+        $variables = $attributes['examined_variable_names'];
 
         if (!is_null($variables)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
@@ -1414,21 +1422,27 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'variable' => null,
-            'variable_as' => 'cause',
+            'examined_variable_name' => null,
+            'show_predictors_or_outcomes' => 'outcomes',
         ), $attributes, 'qmwp_search_correlations');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
 
-        $variable = $attributes['variable'];
+        $variable = $attributes['examined_variable_name'];
+
+        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
+            $variableAs = 'cause';
+        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
+            $variableAs = 'effect';
+        }
 
         if (!is_null($variable)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as'],
+                    'qmwpShortCodeDefinedVariableAs' => $variableAs,
                 ));
         }
 
@@ -1492,7 +1506,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'variable',
+                        'attr' => 'examined_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name to track',
@@ -1513,7 +1527,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'variable',
+                        'attr' => 'examined_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
@@ -1521,12 +1535,12 @@ Class QMWP
                     ),
 
                     array(
-                        'label' => 'Consider Variable As',
-                        'attr' => 'variable_as',
+                        'label' => 'Show predictors or outcomes',
+                        'attr' => 'show_predictors_or_outcomes',
                         'type' => 'select',
                         'options' => array(
-                            'cause' => 'Cause',
-                            'effect' => 'Effect',
+                            'predictors' => 'Predictors',
+                            'outcomes' => 'Outcomes',
                         ),
                     ),
 
@@ -1543,8 +1557,8 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'variables',
+                        'label' => 'Variables',
+                        'attr' => 'examined_variable_names',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
@@ -1564,7 +1578,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'variable',
+                        'attr' => 'examined_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
@@ -1572,12 +1586,12 @@ Class QMWP
                     ),
 
                     array(
-                        'label' => 'Consider Variable As',
-                        'attr' => 'variable_as',
+                        'label' => 'Show predictors or outcomes',
+                        'attr' => 'show_predictors_or_outcomes',
                         'type' => 'select',
                         'options' => array(
-                            'cause' => 'Cause',
-                            'effect' => 'Effect',
+                            'predictors' => 'Predictors',
+                            'outcomes' => 'Outcomes',
                         ),
                     ),
                 ),
