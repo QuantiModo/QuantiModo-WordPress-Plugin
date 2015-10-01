@@ -319,7 +319,7 @@ $cc_ux = qmwp_cc_ux();
                                         </li>
                                     </ul>
                                     <p>
-                                        Specify variable and how it should be considered (causer or effect)
+                                        Specify variable and how it should be considered (cause or effect)
                                     </p>
 
                                     <p>
@@ -345,12 +345,14 @@ $cc_ux = qmwp_cc_ux();
                                         </li>
                                     </ul>
                                     <p>
-                                        Specify variable and how it should be considered (causer or effect)
+                                        The optional "examined_variable_name" parameter is used to pre-specify the variable name. If absent, the user may select it from a menu.  
+                                        The optional "predictors_or_outcomes" parameter whether the chart should display predictors or outcomes of the examined variable.
                                     </p>
 
                                     <p>
                                         Example: <br>
-                                        [qmwp_search_correlations variable="Attention" variable_as="cause"]
+                                        This shortcode would display a graph exploring all possible predictors of the user's Attention ratings. 
+                                        [qmwp_search_correlations examined_variable_name="Attention" predictors_or_outcomes="predictors"]
                                     </p>
                                 </td>
                                 <td>
