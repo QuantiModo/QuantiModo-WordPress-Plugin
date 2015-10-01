@@ -345,32 +345,10 @@ $cc_ux = qmwp_cc_ux();
 
                         </table>
 
-                        <!--<ul>
-                            <li>
-                                <strong>[qmwp_mood_tracker]</strong> - Allow users to rate their moods
-                                <a target="_blank" href="qmwp-mood-tracker">Take a look</a>)
-                            </li>
-                            <li>
-                                <strong>[qmwp_timeline]</strong> - Graph any variable over time
-                                <a href="/qmwp-timeline" target="_blank">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_connectors]</strong> - Allow users to import their data from 3rd party
-                                sources
-                                <a href="/qmwp-connectors" target="_blank">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - Find out the top predictors for
-                                mood
-                                <a href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_search_correlations]</strong> - Search for predictors or likely effects of
-                                a given variable
-                                <a href="/qmwp-search-correlations">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_add_measurement]</strong> - Track anything!
-                                measurements
-                                <a href="/qmwp-add-measurement">Take a look</a>
-                            </li>
-                        </ul>-->
+                        <p>
+                            Usage examples can be found at automatically created pages. Check them out
+                            <a href="/wp-admin/edit.php?post_type=page">here</a>
+                        </p>
 
                     </div>
 
