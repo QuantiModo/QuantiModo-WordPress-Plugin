@@ -157,7 +157,7 @@ The code and more information can be found at https://github.com/QuantiModo/Quan
 - Code from WP custom template needs to be made available for embed as a shortcode with options specified above
 
 ## Mood Tracker
-Shortcode - [qmwp_mood_tracker]
+Shortcode - [qm_rating_faces]
 
 This would create a widget/shortcode with the mood-rating faces that we could put in a page/post or sidebar. If clicked on, it would submit an overall mood measurement for the currently logged in user.
 

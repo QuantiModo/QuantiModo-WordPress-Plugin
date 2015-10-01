@@ -247,7 +247,7 @@ $cc_ux = qmwp_cc_ux();
                         <p>Currently plugin supports following shortcodes:</p>
                         <ul>
                             <li>
-                                <strong>[qmwp_mood_tracker]</strong> - Allow users to rate their moods
+                                <strong>[qm_rating_faces]</strong> - Allow users to rate their moods
                                 <a target="_blank" href="/qmwp-mood-tracker">Take a look</a>)
                             </li>
                             <li>
