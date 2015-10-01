@@ -260,6 +260,15 @@ $cc_ux = qmwp_cc_ux();
                                     <ul>
                                         <li>variable</li>
                                     </ul>
+                                    <p>
+                                        Specify variable name to track. This kind of tracker supports
+                                        variables which can be measured by rate 1..5
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_mood_tracker variable="Overall Mood"]
+                                    </p>
                                 </td>
                                 <td>
                                     Allow users to rate their moods
@@ -274,6 +283,14 @@ $cc_ux = qmwp_cc_ux();
                                             variables
                                         </li>
                                     </ul>
+                                    <p>
+                                        Specify variable(s) to be displayed. Separate variable names by a semicolon
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_timeline variables="Overall Mood;Sleep Quality"]
+                                    </p>
                                 </td>
                                 <td>
                                     Graph any variable over time
@@ -283,9 +300,7 @@ $cc_ux = qmwp_cc_ux();
                             <tr>
                                 <td class="shortcode">[qmwp_connectors]</td>
                                 <td>
-                                    <ul>
 
-                                    </ul>
                                 </td>
                                 <td>
                                     Allow users to import their data from 3rd party sources
@@ -303,6 +318,15 @@ $cc_ux = qmwp_cc_ux();
                                             variable_as
                                         </li>
                                     </ul>
+                                    <p>
+                                        Specify variable and how it should be considered (causer or effect)
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_bargraph_scatterplot_timeline variable="Sleep Quality"
+                                        variable_as="effect"]
+                                    </p>
                                 </td>
                                 <td>
                                     Search for predictors or likely effects of a given variable
@@ -320,6 +344,14 @@ $cc_ux = qmwp_cc_ux();
                                             variable_as
                                         </li>
                                     </ul>
+                                    <p>
+                                        Specify variable and how it should be considered (causer or effect)
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_search_correlations variable="Attention" variable_as="cause"]
+                                    </p>
                                 </td>
                                 <td>
                                     Search for predictors or likely effects of a given variable
@@ -334,6 +366,14 @@ $cc_ux = qmwp_cc_ux();
                                             category
                                         </li>
                                     </ul>
+                                    <p>
+                                        Narrow a list of variables by category
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_add_measurement category="Environment"]
+                                    </p>
                                 </td>
                                 <td>
                                     Track anything!
