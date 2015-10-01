@@ -109,7 +109,7 @@ Class QMWP
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
             'Strongest Predictors of Mood' =>
-                '[qmwp_search_correlations examined_variable_name="Overall Mood" variable_as="effect"]',
+                '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
             'Track Mood (Faces)' =>
                 '[qmwp_mood_tracker examined_variable_name="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
