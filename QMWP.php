@@ -1297,7 +1297,7 @@ Class QMWP
 
         $version = $attributes['version'];
 
-        $pluginContentHTML = $this->get_plugin_template_html('qmwp-mood-tracker', $version);
+        $pluginContentHTML = $this->get_plugin_template_html('qm-rating-faces', $version);
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
             'qmwpShortCodeDefinedVariable' => $attributes['variable'],
