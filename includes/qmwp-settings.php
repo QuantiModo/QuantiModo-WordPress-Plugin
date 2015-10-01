@@ -247,7 +247,7 @@ $cc_ux = qmwp_cc_ux();
                         <p>Currently plugin supports following shortcodes:</p>
                         <ul>
                             <li>
-                                <strong>[qm_rating_faces]</strong> - Allow users to submit ratings on a 1 to 5 scale
+                                <strong>[qmwp_rating_faces]</strong> - Allow users to submit ratings on a 1 to 5 scale
                                 using faces as buttons
                                 <a target="_blank" href="/qm-rating-faces">Take a look</a>)
                             </li>
