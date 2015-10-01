@@ -346,13 +346,13 @@ $cc_ux = qmwp_cc_ux();
                                     </ul>
                                     <p>
                                         The optional "examined_variable_name" parameter is used to pre-specify the variable name. If absent, the user may select it from a menu.  
-                                        The optional "predictors_or_outcomes" parameter whether the chart should display predictors or outcomes of the examined variable.
+                                        The optional "show_predictors_or_outcomes" parameter whether the chart should display predictors or outcomes of the examined variable.
                                     </p>
 
                                     <p>
                                         Example: <br>
                                         This shortcode would display a graph exploring all possible predictors of the user's Attention ratings. 
-                                        [qmwp_search_correlations examined_variable_name="Attention" predictors_or_outcomes="predictors"]
+                                        [qmwp_search_correlations examined_variable_name="Attention" show_predictors_or_outcomes="predictors"]
                                     </p>
                                 </td>
                                 <td>
