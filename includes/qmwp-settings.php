@@ -112,12 +112,12 @@ $cc_ux = qmwp_cc_ux();
 
                 <div class='form-padding'>
                     <?php
-                    $rss = fetch_feed("http://glassocean.net/tag/qm-oauth/feed/");
-                    if (!is_wp_error($rss)) {
-                        $maxitems = $rss->get_item_quantity(5);
-                        $rss_items = $rss->get_items(0, $maxitems);
-                    }
-                    ?>
+            $rss = fetch_feed("http://glassocean.net/tag/qm-oauth/feed/");
+            if (!is_wp_error($rss)) {
+                $maxitems = $rss->get_item_quantity(5);
+                $rss_items = $rss->get_items(0, $maxitems);
+            }
+            ?>
                     <?php if (isset($maxitems) && $maxitems == 0) : ?>
                         <p><?php _e("Sorry, news was inaccessible or does not exist.", 'my-text-domain'); ?></p>
                     <?php elseif (isset($rss_items) && count($rss_items) > 0) : ?>
@@ -245,32 +245,132 @@ $cc_ux = qmwp_cc_ux();
                         <p>QuantiModo WordPress plugin gives capability to render shortcodes at the posts and pages.</p>
 
                         <p>Currently plugin supports following shortcodes:</p>
-                        <ul>
+                        <table class="available-shortcodes">
+                            <thead>
+                            <tr>
+                                <th>Shortcode</th>
+                                <th>Supported attributes</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="shortcode">[qmwp_mood_tracker]</td>
+                                <td>
+                                    <ul>
+                                        <li>variable</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Allow users to rate their moods
+                                    <a target="_blank" href="qmwp-mood-tracker">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_timeline]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            variables
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Graph any variable over time
+                                    <a href="/qmwp-timeline" target="_blank">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_connectors]</td>
+                                <td>
+                                    <ul>
+
+                                    </ul>
+                                </td>
+                                <td>
+                                    Allow users to import their data from 3rd party sources
+                                    <a href="/qmwp-connectors" target="_blank">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_bargraph_scatterplot_timeline]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            variable
+                                        </li>
+                                        <li>
+                                            variable_as
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Search for predictors or likely effects of a given variable
+                                    <a href="/qmwp-search-correlations">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_search_correlations]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            variable
+                                        </li>
+                                        <li>
+                                            variable_as
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Search for predictors or likely effects of a given variable
+                                    <a href="/qmwp-search-correlations">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_add_measurement]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            category
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Track anything!
+                                    <a href="/qmwp-add-measurement">Take a look</a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <!--<ul>
                             <li>
                                 <strong>[qmwp_mood_tracker]</strong> - Allow users to rate their moods
-                                <a target="_blank" href="/qmwp-mood-tracker">Take a look</a>)
+                                <a target="_blank" href="qmwp-mood-tracker">Take a look</a>)
                             </li>
                             <li>
                                 <strong>[qmwp_timeline]</strong> - Graph any variable over time
                                 <a href="/qmwp-timeline" target="_blank">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_connectors]</strong> - Allow users to import their data from 3rd party sources
+                            <li><strong>[qmwp_connectors]</strong> - Allow users to import their data from 3rd party
+                                sources
                                 <a href="/qmwp-connectors" target="_blank">Take a look</a>
                             </li>
-                            <!-- <li><strong>[qmwp_manage_accounts]</strong> - renders accounts management shortcode
-                                <a href="/qmwp-manage-accounts" target="_blank">Take a look</a>
-                            </li> -->
-                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - Find out the top predictors for mood
+                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - Find out the top predictors for
+                                mood
                                 <a href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
                             </li>
-                            <li><strong>[qmwp_search_correlations]</strong> - Search for predictors or likely effects of a given variable
+                            <li><strong>[qmwp_search_correlations]</strong> - Search for predictors or likely effects of
+                                a given variable
                                 <a href="/qmwp-search-correlations">Take a look</a>
                             </li>
                             <li><strong>[qmwp_add_measurement]</strong> - Track anything!
                                 measurements
                                 <a href="/qmwp-add-measurement">Take a look</a>
                             </li>
-                        </ul>
+                        </ul>-->
 
                     </div>
 
