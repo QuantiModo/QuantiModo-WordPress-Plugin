@@ -112,36 +112,37 @@ Class QMWP
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
-            'Strongest Predictors of Mood' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
-            'Track Mood (Rating Faces)' => '[qmwp_rating_faces variable="Overall Mood"]',
+            'Strongest Predictors of Mood' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="outcomes"]',
+            'Track Mood (Rating Faces)' => '[qmwp_rating_faces examined_variable_name="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
-            //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'Predictor Search' => '[qmwp_bargraph_scatterplot_timeline]',
-            'Timeline' => '[qmwp_timeline variables="overall mood"]',
+            'Timeline' => '[qmwp_timeline examined_variable_names="overall mood"]',
             'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
             'Track Physique' => '[qmwp_add_measurement category="Physique"]',
             'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
             'Track Location' => '[qmwp_add_measurement category="Location"]',
-            //'Track Miscellaneous' => '[qmwp_add_measurement category="Miscellaneous"]',
             'Track Sleep' => '[qmwp_add_measurement category="Sleep"]',
-            //'Track Social Interactions' => '[qmwp_add_measurement category="Social Interactions"]',
             'Track Vital Signs' => '[qmwp_add_measurement category="Vital Signs"]',
             'Track Cognitive Performance' => '[qmwp_add_measurement category="Cognitive Performance"]',
             'Track Symptoms' => '[qmwp_add_measurement category="Symptoms"]',
-            //'Track Nutrition' => '[qmwp_add_measurement category="Nutrition"]',
-            //'Track Work' => '[qmwp_add_measurement category="Work"]',
             'Track Treatments' => '[qmwp_add_measurement category="Treatments"]',
             'Track Activity' => '[qmwp_add_measurement category="Activity"]',
             'Track Foods' => '[qmwp_add_measurement category="Foods"]',
             'Track Conditions' => '[qmwp_add_measurement category="Conditions"]',
+            'Track Finance' => '[qmwp_add_measurement category="Finance"]',
+            //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
+            //'Track Payments' => '[qmwp_add_measurement category="Payments"]',
+            //'Track Other' => '[qmwp_add_measurement category="Other"]',
+            //'Track Music' => '[qmwp_add_measurement category="Music"]',
             //'Track Environment' => '[qmwp_add_measurement category="Environment"]',
             //'Track Causes of Illness' => '[qmwp_add_measurement category="Causes of Illness"]',
             //'Track Books' => '[qmwp_add_measurement category="Books"]',
             //'Track Software & Mobile Apps' => '[qmwp_add_measurement category="Software & Mobile Apps"]',
-            'Track Finance' => '[qmwp_add_measurement category="Finance"]',
-            //'Track Payments' => '[qmwp_add_measurement category="Payments"]',
-            //'Track Other' => '[qmwp_add_measurement category="Other"]',
-            //'Track Music' => '[qmwp_add_measurement category="Music"]',
+            //'Track Nutrition' => '[qmwp_add_measurement category="Nutrition"]',
+            //'Track Work' => '[qmwp_add_measurement category="Work"]',
+            //'Track Social Interactions' => '[qmwp_add_measurement category="Social Interactions"]',
+            //'Track Miscellaneous' => '[qmwp_add_measurement category="Miscellaneous"]',
+            'Numbers Rating' => '[qm_numbers_rating examined_varible_name="Overall Mood" show_symptom_labels="true" negative="false"]'
         )
     );
 
@@ -174,6 +175,7 @@ Class QMWP
         add_shortcode('qmwp_timeline', array($this, 'qmwp_timeline'));
         add_shortcode('qmwp_search_correlations', array($this, 'qmwp_search_correlations'));
         add_shortcode('qmwp_add_measurement', array($this, 'qmwp_add_measurement'));
+        add_shortcode('qm_numbers_rating', array($this, 'qm_numbers_rating'));
 
         //add shortcake plugin features to qmwp shortcodes (if plugin is installed)
         $this->add_shortcake_ui_features();
@@ -1292,7 +1294,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'variable' => 'Overall Mood',
+            'examined_variable_name' => 'Overall Mood',
         ), $attributes, 'qmwp_rating_faces');
 
         $version = $attributes['version'];
@@ -1300,7 +1302,7 @@ Class QMWP
         $pluginContentHTML = $this->get_plugin_template_html('qm-rating-faces', $version);
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
-            'qmwpShortCodeDefinedVariable' => $attributes['variable'],
+            'qmwpShortCodeDefinedVariable' => $attributes['examined_variable_name'],
         ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1355,21 +1357,27 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'variable' => 'Overall Mood',
-            'variable_as' => 'cause',
+            'examined_variable_name' => 'Overall Mood',
+            'show_predictors_or_outcomes' => 'outcomes',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-bargraph-scatterplot-timeline', $version);
 
-        $variable = $attributes['variable'];
+        $variable = $attributes['examined_variable_name'];
+
+        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
+            $showPredictorsOrOutcomes = 'cause';
+        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
+            $showPredictorsOrOutcomes = 'effect';
+        }
 
         if (!is_null($variable)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as']
+                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes
                 ));
         }
 
@@ -1386,13 +1394,16 @@ Class QMWP
      */
     function qmwp_timeline($attributes)
     {
-        $attributes = shortcode_atts(array('version' => 1, 'variables' => null), $attributes, 'qmwp_timeline');
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'examined_variable_names' => null
+        ), $attributes, 'qmwp_timeline');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
 
-        $variables = $attributes['variables'];
+        $variables = $attributes['examined_variable_names'];
 
         if (!is_null($variables)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
@@ -1414,21 +1425,27 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'variable' => null,
-            'variable_as' => 'cause',
+            'examined_variable_name' => null,
+            'show_predictors_or_outcomes' => 'outcomes',
         ), $attributes, 'qmwp_search_correlations');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
 
-        $variable = $attributes['variable'];
+        $variable = $attributes['examined_variable_name'];
+
+        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
+            $showPredictorsOrOutcomes = 'cause';
+        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
+            $showPredictorsOrOutcomes = 'effect';
+        }
 
         if (!is_null($variable)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $attributes['variable_as'],
+                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
                 ));
         }
 
@@ -1461,6 +1478,35 @@ Class QMWP
         return $template_content;
     }
 
+    /**
+     * Return rendered html string with plugin content!
+     * @param $attributes
+     * @return string
+     */
+    function qm_numbers_rating($attributes)
+    {
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'examined_variable_name' => 'Overall Mood',
+            'negative' => "false",
+            'show_symptom_labels' => "true"
+        ), $attributes, 'qm_numbers_rating');
+
+        $version = $attributes['version'];
+
+        $pluginContentHTML = $this->get_plugin_template_html('qm-numbers-rating', $version);
+
+        $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
+            'qmShortCodeDefinedVariable' => $attributes['examined_variable_name'],
+            'qmShortCodeDefinedNegative' => $attributes['negative'],
+            'qmShortCodeDefinedShowLabels' => $attributes['show_symptom_labels'],
+        ));
+
+        $template_content = $this->process_template($pluginContentHTML);
+
+        return $template_content;
+    }
+
 
     // ====================
     // Shortcake UI additions
@@ -1478,6 +1524,7 @@ Class QMWP
             $this->add_shortcake_to_timeline();
             $this->add_shortcake_to_search_correlations();
             $this->add_shortcake_to_add_measurement();
+            $this->add_shortcake_to_numbers_rating();
 
         }
 
@@ -1492,7 +1539,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'variable',
+                        'attr' => 'examined_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name to track',
@@ -1513,7 +1560,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'variable',
+                        'attr' => 'examined_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
@@ -1521,12 +1568,12 @@ Class QMWP
                     ),
 
                     array(
-                        'label' => 'Consider Variable As',
-                        'attr' => 'variable_as',
+                        'label' => 'Show predictors or outcomes',
+                        'attr' => 'show_predictors_or_outcomes',
                         'type' => 'select',
                         'options' => array(
-                            'cause' => 'Cause',
-                            'effect' => 'Effect',
+                            'predictors' => 'Predictors',
+                            'outcomes' => 'Outcomes',
                         ),
                     ),
 
@@ -1543,8 +1590,8 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'variables',
+                        'label' => 'Variables',
+                        'attr' => 'examined_variable_names',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
@@ -1564,7 +1611,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'variable',
+                        'attr' => 'examined_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
@@ -1572,12 +1619,12 @@ Class QMWP
                     ),
 
                     array(
-                        'label' => 'Consider Variable As',
-                        'attr' => 'variable_as',
+                        'label' => 'Show predictors or outcomes',
+                        'attr' => 'show_predictors_or_outcomes',
                         'type' => 'select',
                         'options' => array(
-                            'cause' => 'Cause',
-                            'effect' => 'Effect',
+                            'predictors' => 'Predictors',
+                            'outcomes' => 'Outcomes',
                         ),
                     ),
                 ),
@@ -1610,6 +1657,46 @@ Class QMWP
                             'Foods' => 'Foods',
                             'Conditions' => 'Conditions',
                             'Finance' => 'Finance',
+                        ),
+                    ),
+                ),
+            )
+        );
+    }
+
+    function add_shortcake_to_numbers_rating()
+    {
+        shortcode_ui_register_for_shortcode(
+            'qm_numbers_rating', array(
+                'label' => 'QuantiModo Numbers Rating',
+                'attrs' => array(
+
+                    array(
+                        'label' => 'Variable',
+                        'attr' => 'examined_variable_name',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type variable name',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Negative',
+                        'attr' => 'negative',
+                        'type' => 'select',
+                        'options' => array(
+                            'true' => 'True',
+                            'false' => 'False',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Show symptom labels',
+                        'attr' => 'show_symptom_labels',
+                        'type' => 'select',
+                        'options' => array(
+                            'true' => 'True',
+                            'false' => 'False',
                         ),
                     ),
                 ),
