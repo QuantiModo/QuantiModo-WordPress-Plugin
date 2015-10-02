@@ -365,6 +365,29 @@ $cc_ux = qmwp_cc_ux();
                                 </td>
                             </tr>
                             <tr>
+                                <td class="shortcode">[qm_numbers_rating]</td>
+                                <td>
+                                    <ul>
+                                        <li>examined_variable_name</li>
+                                        <li>show_symptom_labels</li>
+                                        <li>negative</li>
+                                    </ul>
+                                    <p>
+                                        Set variable to track. Tune up tracker accordingly
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qm_numbers_rating examined_varible_name="Overall Mood"
+                                        show_symptom_labels="true" negative="false"]
+                                    </p>
+                                </td>
+                                <td>
+                                    Track anything!
+                                </td>
+                            </tr>
+
+                            <tr>
                                 <td class="shortcode">[qmwp_add_measurement]</td>
                                 <td>
                                     <ul>
