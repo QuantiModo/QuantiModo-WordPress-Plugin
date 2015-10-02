@@ -247,8 +247,9 @@ $cc_ux = qmwp_cc_ux();
                         <p>Currently plugin supports following shortcodes:</p>
                         <ul>
                             <li>
-                                <strong>[qmwp_mood_tracker]</strong> - Allow users to rate their moods
-                                <a target="_blank" href="/qmwp-mood-tracker">Take a look</a>)
+                                <strong>[qmwp_rating_faces]</strong> - Allow users to submit ratings on a 1 to 5 scale
+                                using faces as buttons
+                                <a target="_blank" href="/qm-rating-faces">Take a look</a>)
                             </li>
                             <li>
                                 <strong>[qmwp_timeline]</strong> - Graph any variable over time
@@ -260,7 +261,8 @@ $cc_ux = qmwp_cc_ux();
                             <!-- <li><strong>[qmwp_manage_accounts]</strong> - renders accounts management shortcode
                                 <a href="/qmwp-manage-accounts" target="_blank">Take a look</a>
                             </li> -->
-                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - Find out the top predictors for mood
+                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - Find out the top predictors or
+                                outcomes for any variable or a preset variable
                                 <a href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
                             </li>
                             <li><strong>[qmwp_search_correlations]</strong> - Search for predictors or likely effects of a given variable
