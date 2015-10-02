@@ -30,6 +30,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+/*
+ * Plugin Class
+*/
+
 Class QMWP
 {
     // singleton class pattern:
@@ -108,10 +112,8 @@ Class QMWP
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
-            'Strongest Predictors of Mood' =>
-                '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
-            'Track Mood (Faces)' =>
-                '[qmwp_mood_tracker examined_variable_name="Overall Mood"]',
+            'Strongest Predictors of Mood' => '[qmwp_search_correlations variable="Overall Mood" variable_as="effect"]',
+            'Track Mood (Rating Faces)' => '[qmwp_rating_faces variable="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
             //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             'Predictor Search' =>
@@ -166,7 +168,7 @@ Class QMWP
      */
     function init()
     {
-        add_shortcode('qmwp_mood_tracker', array($this, 'qmwp_mood_tracker'));
+        add_shortcode('qmwp_rating_faces', array($this, 'qmwp_rating_faces'));
         add_shortcode('qmwp_connectors', array($this, 'qmwp_connectors'));
         add_shortcode('qmwp_manage_accounts', array($this, 'qmwp_manage_accounts'));
         add_shortcode('qmwp_bargraph_scatterplot_timeline', array($this, 'qmwp_bargraph_scatterplot_timeline'));
@@ -1287,19 +1289,21 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_mood_tracker($attributes)
+    function qmwp_rating_faces($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
+            'variable' => 'Overall Mood',
+        ), $attributes, 'qmwp_rating_faces');
             'examined_variable_name' => 'Overall Mood',
         ), $attributes, 'qmwp_mood_tracker');
 
         $version = $attributes['version'];
 
-        $pluginContentHTML = $this->get_plugin_template_html('qmwp-mood-tracker', $version);
+        $pluginContentHTML = $this->get_plugin_template_html('qm-rating-faces', $version);
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
-            'qmwpShortCodeDefinedVariable' => $attributes['examined_variable_name'],
+            'qmwpShortCodeDefinedVariable' => $attributes['variable'],
         ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1500,7 +1504,7 @@ Class QMWP
     function add_shortcake_to_faces_tracker()
     {
         shortcode_ui_register_for_shortcode(
-            'qmwp_mood_tracker', array(
+            'qmwp_rating_faces', array(
                 'label' => 'QuantiModo "Faces" Tracker',
                 'attrs' => array(
 
