@@ -112,12 +112,12 @@ $cc_ux = qmwp_cc_ux();
 
                 <div class='form-padding'>
                     <?php
-                    $rss = fetch_feed("http://glassocean.net/tag/qm-oauth/feed/");
-                    if (!is_wp_error($rss)) {
-                        $maxitems = $rss->get_item_quantity(5);
-                        $rss_items = $rss->get_items(0, $maxitems);
-                    }
-                    ?>
+            $rss = fetch_feed("http://glassocean.net/tag/qm-oauth/feed/");
+            if (!is_wp_error($rss)) {
+                $maxitems = $rss->get_item_quantity(5);
+                $rss_items = $rss->get_items(0, $maxitems);
+            }
+            ?>
                     <?php if (isset($maxitems) && $maxitems == 0) : ?>
                         <p><?php _e("Sorry, news was inaccessible or does not exist.", 'my-text-domain'); ?></p>
                     <?php elseif (isset($rss_items) && count($rss_items) > 0) : ?>
@@ -245,34 +245,156 @@ $cc_ux = qmwp_cc_ux();
                         <p>QuantiModo WordPress plugin gives capability to render shortcodes at the posts and pages.</p>
 
                         <p>Currently plugin supports following shortcodes:</p>
-                        <ul>
-                            <li>
-                                <strong>[qmwp_rating_faces]</strong> - Allow users to submit ratings on a 1 to 5 scale
-                                using faces as buttons
-                                <a target="_blank" href="/qm-rating-faces">Take a look</a>)
-                            </li>
-                            <li>
-                                <strong>[qmwp_timeline]</strong> - Graph any variable over time
-                                <a href="/qmwp-timeline" target="_blank">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_connectors]</strong> - Allow users to import their data from 3rd party sources
-                                <a href="/qmwp-connectors" target="_blank">Take a look</a>
-                            </li>
-                            <!-- <li><strong>[qmwp_manage_accounts]</strong> - renders accounts management shortcode
-                                <a href="/qmwp-manage-accounts" target="_blank">Take a look</a>
-                            </li> -->
-                            <li><strong>[qmwp_bargraph_scatterplot_timeline]</strong> - Find out the top predictors or
-                                outcomes for any variable or a preset variable
-                                <a href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_search_correlations]</strong> - Search for predictors or likely effects of a given variable
-                                <a href="/qmwp-search-correlations">Take a look</a>
-                            </li>
-                            <li><strong>[qmwp_add_measurement]</strong> - Track anything!
-                                measurements
-                                <a href="/qmwp-add-measurement">Take a look</a>
-                            </li>
-                        </ul>
+                        <table class="available-shortcodes">
+                            <thead>
+                            <tr>
+                                <th>Shortcode</th>
+                                <th>Supported attributes</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="shortcode">[qmwp_mood_tracker]</td>
+                                <td>
+                                    <ul>
+                                        <li>examined_variable_name</li>
+                                    </ul>
+                                    <p>
+                                        Specify variable name to track. This kind of tracker supports
+                                        variables which can be measured by rate 1..5
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_mood_tracker examined_variable_name="Overall Mood"]
+                                    </p>
+                                </td>
+                                <td>
+                                    Allow users to rate their moods
+                                    <a target="_blank" href="qmwp-mood-tracker">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_timeline]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            variables
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Specify variable(s) to be displayed. Separate variable names by a semicolon
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_timeline examined_variable_names="Overall Mood;Sleep Quality"]
+                                    </p>
+                                </td>
+                                <td>
+                                    Graph any variable over time
+                                    <a href="/qmwp-timeline" target="_blank">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_connectors]</td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    Allow users to import their data from 3rd party sources
+                                    <a href="/qmwp-connectors" target="_blank">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_bargraph_scatterplot_timeline]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            examined_variable_name
+                                        </li>
+                                        <li>
+                                            show_predictors_or_outcomes
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Specify variable and how it should be considered (cause or effect)
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_bargraph_scatterplot_timeline examined_variable_name="Sleep Quality"
+                                        show_predictors_or_outcomes="predictors"]
+                                    </p>
+                                </td>
+                                <td>
+                                    Search for predictors or likely effects of a given variable
+                                    <a target="_blank" href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_search_correlations]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            examined_variable_name
+                                        </li>
+                                        <li>
+                                            show_predictors_or_outcomes
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        The optional "examined_variable_name" parameter is used to pre-specify the
+                                        variable name. If absent, the user may select it from a menu.
+                                        The optional "show_predictors_or_outcomes" parameter whether the chart should
+                                        display predictors or outcomes of the examined variable.
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        This shortcode would display a graph exploring all possible predictors of the
+                                        user's Attention ratings.
+                                        [qmwp_search_correlations examined_variable_name="Attention"
+                                        show_predictors_or_outcomes="predictors"]
+                                    </p>
+                                </td>
+                                <td>
+                                    Search for predictors or likely effects of a given variable
+                                    <a href="/qmwp-search-correlations">Take a look</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qmwp_add_measurement]</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            category
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Narrow a list of variables by category
+                                    </p>
+
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_add_measurement category="Environment"]
+                                    </p>
+                                </td>
+                                <td>
+                                    Track anything!
+                                    <a href="/qmwp-add-measurement">Take a look</a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <p>
+                            Usage examples can be found at automatically created pages. Check them out
+                            <a href="/wp-admin/edit.php?post_type=page">here</a>
+                        </p>
 
                     </div>
 
