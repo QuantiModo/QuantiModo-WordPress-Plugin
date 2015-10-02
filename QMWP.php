@@ -1365,16 +1365,16 @@ Class QMWP
         $variable = $attributes['examined_variable_name'];
 
         if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
-            $variableAs = 'cause';
+            $showPredictorsOrOutcomes = 'cause';
         } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
-            $variableAs = 'effect';
+            $showPredictorsOrOutcomes = 'effect';
         }
 
         if (!is_null($variable)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $variableAs
+                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes
                 ));
         }
 
@@ -1433,16 +1433,16 @@ Class QMWP
         $variable = $attributes['examined_variable_name'];
 
         if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
-            $variableAs = 'cause';
+            $showPredictorsOrOutcomes = 'cause';
         } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
-            $variableAs = 'effect';
+            $showPredictorsOrOutcomes = 'effect';
         }
 
         if (!is_null($variable)) {
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $variableAs,
+                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
                 ));
         }
 
