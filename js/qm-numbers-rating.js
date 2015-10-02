@@ -75,9 +75,9 @@ jQuery(document).ready(function () {
                 resultHolder.html('Error! Please contact help@quantimo.do');
                 window.measurementPostingResult = false;
                 console.error(response);
-            };
+            }
 
         });
-    }
+    };
 
 });
