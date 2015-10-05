@@ -378,7 +378,7 @@ $cc_ux = qmwp_cc_ux();
 
                                     <p>
                                         Example: <br>
-                                        [qm_numbers_rating examined_varible_name="Overall Mood"
+                                        [qm_numbers_rating examined_variable_name="Overall Mood"
                                         show_symptom_labels="true" negative="false"]
                                     </p>
                                 </td>

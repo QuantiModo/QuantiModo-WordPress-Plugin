@@ -145,7 +145,7 @@ Class QMWP
             //'Track Work' => '[qmwp_add_measurement category="Work"]',
             //'Track Social Interactions' => '[qmwp_add_measurement category="Social Interactions"]',
             //'Track Miscellaneous' => '[qmwp_add_measurement category="Miscellaneous"]',
-            'Rate Back Pain' => '[qm_numbers_rating examined_varible_name="Back Pain" show_symptom_labels="true" negative="true"]'
+            'Rate Back Pain' => '[qm_numbers_rating examined_variable_name="Back Pain" show_symptom_labels="true" negative="true"]'
         )
     );
 
