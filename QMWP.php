@@ -112,24 +112,27 @@ Class QMWP
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_plugin_pages' => array(
-            'Strongest Predictors of Mood' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="outcomes"]',
-            'Track Mood (Rating Faces)' => '[qmwp_rating_faces examined_variable_name="Overall Mood"]',
+            'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
+            'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
+            'Track Mood (Faces)' => '[qmwp_rating_faces examined_variable_name="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
-            'Predictor Search' => '[qmwp_bargraph_scatterplot_timeline]',
-            'Timeline' => '[qmwp_timeline examined_variable_names="overall mood"]',
+            'Predictors/Outcomes Analysis Charts' => '[qmwp_bargraph_scatterplot_timeline]',
+            'Mood Over Time' => '[qmwp_timeline examined_variable_names="overall mood"]',
+            'Timeline Chart' => '[qmwp_timeline]',
+            'Track Anything' => '[qmwp_add_measurement]',
             'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
-            'Track Physique' => '[qmwp_add_measurement category="Physique"]',
+            //'Track Physique' => '[qmwp_add_measurement category="Physique"]',
             'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
-            'Track Location' => '[qmwp_add_measurement category="Location"]',
-            'Track Sleep' => '[qmwp_add_measurement category="Sleep"]',
+            //'Track Location' => '[qmwp_add_measurement category="Location"]',
+            //'Track Sleep' => '[qmwp_add_measurement category="Sleep"]',
             'Track Vital Signs' => '[qmwp_add_measurement category="Vital Signs"]',
-            'Track Cognitive Performance' => '[qmwp_add_measurement category="Cognitive Performance"]',
+            //'Track Cognitive Performance' => '[qmwp_add_measurement category="Cognitive Performance"]',
             'Track Symptoms' => '[qmwp_add_measurement category="Symptoms"]',
             'Track Treatments' => '[qmwp_add_measurement category="Treatments"]',
-            'Track Activity' => '[qmwp_add_measurement category="Activity"]',
+            //'Track Activity' => '[qmwp_add_measurement category="Activity"]',
             'Track Foods' => '[qmwp_add_measurement category="Foods"]',
-            'Track Conditions' => '[qmwp_add_measurement category="Conditions"]',
-            'Track Finance' => '[qmwp_add_measurement category="Finance"]',
+            //'Track Conditions' => '[qmwp_add_measurement category="Conditions"]',
+            //'Track Finance' => '[qmwp_add_measurement category="Finance"]',
             //'QMWP Manage Accounts' => '[qmwp_manage_accounts]',
             //'Track Payments' => '[qmwp_add_measurement category="Payments"]',
             //'Track Other' => '[qmwp_add_measurement category="Other"]',
@@ -142,7 +145,7 @@ Class QMWP
             //'Track Work' => '[qmwp_add_measurement category="Work"]',
             //'Track Social Interactions' => '[qmwp_add_measurement category="Social Interactions"]',
             //'Track Miscellaneous' => '[qmwp_add_measurement category="Miscellaneous"]',
-            'Numbers Rating' => '[qm_numbers_rating examined_varible_name="Overall Mood" show_symptom_labels="true" negative="false"]'
+            'Rate Back Pain' => '[qm_numbers_rating examined_variable_name="Back Pain" show_symptom_labels="true" negative="true"]'
         )
     );
 
