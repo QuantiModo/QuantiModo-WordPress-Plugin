@@ -114,7 +114,7 @@ Class QMWP
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
             'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
-            'Track Mood (Faces)' => '[qmwp_rating_faces examined_variable_name="Overall Mood"]',
+            'Track Mood (Faces)' => '[qmwp_rating_faces tracked_variable_name="Overall Mood"]',
             'Import Data' => '[qmwp_connectors]',
             'Predictors/Outcomes Analysis Charts' => '[qmwp_bargraph_scatterplot_timeline]',
             'Mood Over Time' => '[qmwp_timeline examined_variable_names="overall mood"]',
@@ -145,7 +145,7 @@ Class QMWP
             //'Track Work' => '[qmwp_add_measurement category="Work"]',
             //'Track Social Interactions' => '[qmwp_add_measurement category="Social Interactions"]',
             //'Track Miscellaneous' => '[qmwp_add_measurement category="Miscellaneous"]',
-            'Rate Back Pain' => '[qm_numbers_rating examined_variable_name="Back Pain" show_symptom_labels="true" negative="true"]'
+            'Rate Back Pain' => '[qm_numbers_rating tracked_variable_name="Back Pain" show_symptom_labels="true" negative="true"]'
         )
     );
 
@@ -1297,7 +1297,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => 'Overall Mood',
+            'tracked_variable_name' => 'Overall Mood',
         ), $attributes, 'qmwp_rating_faces');
 
         $version = $attributes['version'];
@@ -1305,7 +1305,7 @@ Class QMWP
         $pluginContentHTML = $this->get_plugin_template_html('qm-rating-faces', $version);
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
-            'qmwpShortCodeDefinedVariable' => $attributes['examined_variable_name'],
+            'qmwpShortCodeDefinedVariable' => $attributes['tracked_variable_name'],
         ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1490,7 +1490,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => 'Overall Mood',
+            'tracked_variable_name' => 'Overall Mood',
             'negative' => "false",
             'show_symptom_labels' => "true"
         ), $attributes, 'qm_numbers_rating');
@@ -1500,7 +1500,7 @@ Class QMWP
         $pluginContentHTML = $this->get_plugin_template_html('qm-numbers-rating', $version);
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
-            'qmShortCodeDefinedVariable' => $attributes['examined_variable_name'],
+            'qmShortCodeDefinedVariable' => $attributes['tracked_variable_name'],
             'qmShortCodeDefinedNegative' => $attributes['negative'],
             'qmShortCodeDefinedShowLabels' => $attributes['show_symptom_labels'],
         ));
@@ -1542,7 +1542,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'attr' => 'tracked_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name to track',
@@ -1676,7 +1676,7 @@ Class QMWP
 
                     array(
                         'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'attr' => 'tracked_variable_name',
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
