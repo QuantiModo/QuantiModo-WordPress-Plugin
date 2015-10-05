@@ -233,3 +233,7 @@
 }
 
 .ui-autocomplete-loading { background:url('images/ajax-loader.gif') no-repeat right center }
+
+#variable-selector {
+    width: 100%;
+}
