@@ -258,7 +258,7 @@ $cc_ux = qmwp_cc_ux();
                                 <td class="shortcode">[qmwp_mood_tracker]</td>
                                 <td>
                                     <ul>
-                                        <li>examined_variable_name</li>
+                                        <li>tracked_variable_name</li>
                                     </ul>
                                     <p>
                                         Specify variable name to track. This kind of tracker supports
@@ -267,7 +267,7 @@ $cc_ux = qmwp_cc_ux();
 
                                     <p>
                                         Example: <br>
-                                        [qmwp_mood_tracker examined_variable_name="Overall Mood"]
+                                        [qmwp_mood_tracker tracked_variable_name="Overall Mood"]
                                     </p>
                                 </td>
                                 <td>
@@ -368,7 +368,7 @@ $cc_ux = qmwp_cc_ux();
                                 <td class="shortcode">[qm_numbers_rating]</td>
                                 <td>
                                     <ul>
-                                        <li>examined_variable_name</li>
+                                        <li>tracked_variable_name</li>
                                         <li>show_symptom_labels</li>
                                         <li>negative</li>
                                     </ul>
@@ -378,7 +378,7 @@ $cc_ux = qmwp_cc_ux();
 
                                     <p>
                                         Example: <br>
-                                        [qm_numbers_rating examined_variable_name="Overall Mood"
+                                        [qm_numbers_rating tracked_variable_name="Overall Mood"
                                         show_symptom_labels="true" negative="false"]
                                     </p>
                                 </td>
