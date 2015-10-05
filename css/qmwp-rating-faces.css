@@ -1,10 +1,10 @@
-#sectionRateMood {
+#sectionRatingFaces {
     opacity: 1;
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
-#sectionRateMood img {
+#sectionRatingFaces img {
     height: 100%;
     display: inline-block;
     background-color: #FFFFFF;
@@ -12,12 +12,12 @@
     width: 100%;
 }
 
-#sectionRateMood img:hover {
+#sectionRatingFaces img:hover {
     -webkit-filter: blur(1px) brightness(110%) saturate(150%);
     cursor: pointer;
 }
 
-#sectionRateMood div {
+#sectionRatingFaces div {
     width: 1px;
     position: relative;
     display: inline-block;
@@ -25,7 +25,7 @@
     bottom: 32%;
 }
 
-#sectionSendingMood {
+#sectionSendingRating {
     display: block;
     clear: both;
     width: auto;
@@ -50,12 +50,12 @@
     -webkit-animation-fill-mode: forwards;
 }
 
-#sectionRateMood ul {
+#sectionRatingFaces ul {
     margin: 0;
     padding: 0;
 }
 
-#sectionRateMood li {
+#sectionRatingFaces li {
     display: inline-block;
     float: left;
     padding: 0 7px;

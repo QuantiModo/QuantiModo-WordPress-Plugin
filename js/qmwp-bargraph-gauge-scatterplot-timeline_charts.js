@@ -177,7 +177,7 @@ AnalyzeChart = function () {
         if (inputIsCause) {
             cause = jQuery.extend({}, inputData);
             causeColor = inputColor;
-            effect =  jQuery.extend({}, outputData);
+            effect = jQuery.extend({}, outputData);
             effectColor = outputColor;
         } else {
             cause = jQuery.extend({}, outputData);
@@ -456,17 +456,22 @@ AnalyzeChart = function () {
                         else {
                             currentMax.setTime(currentMax.getTime());
                         }
-                        jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'defaultDate', currentMax);
-                        jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).val(jQuery.datepicker.formatDate('"To" MM d"," yy', new Date(currentMax.getTime() + (24 * 60 * 60 * 1000))));
+                        jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo))
+                            .datepicker('option', 'defaultDate', currentMax);
+                        jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo))
+                            .val(jQuery.datepicker.formatDate('"To" MM d"," yy', new Date(currentMax.getTime() + (24 * 60 * 60 * 1000))));
                         this.onchange();
                         this.onblur();
                     }
                 });
             }
             else {
-                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'defaultDate', new Date(maximum));
-                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'minDate', new Date(minimum));
-                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo)).datepicker('option', 'maxDate', new Date(maximum));
+                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo))
+                    .datepicker('option', 'defaultDate', new Date(maximum));
+                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo))
+                    .datepicker('option', 'minDate', new Date(minimum));
+                jQuery('input.highcharts-range-selector[name="max"]', jQuery('#' + timelineChart.options.chart.renderTo))
+                    .datepicker('option', 'maxDate', new Date(maximum));
             }
         }
     }
@@ -554,7 +559,8 @@ AnalyzeChart = function () {
             minimum: minimum,
             maximum: maximum,
             timeSeries: timeSeries,
-            interpolant: QuantimodoMath.createInterpolant(dates, values)
+            interpolant: QuantimodoMath.createInterpolant(dates, values),
+            source: variable.sources
         };
     };
 
@@ -649,14 +655,17 @@ AnalyzeChart = function () {
             ],
             tooltip: {
                 formatter: function () {
-                    var result = '<span style="color: ' + (this.points.length === 1 ? this.points[0].series.options.color : mixedColor) + ';"><i>' +
+                    var result = '<span style="color: ' +
+                        (this.points.length === 1 ? this.points[0].series.options.color : mixedColor) + ';"><i>' +
                         Highcharts.dateFormat('%Y %b %d', this.points[0].x) + '</i></span><br>';
                     for (var i = 0; i < this.points.length; i++) {
                         var point = this.points[i];
                         if (i !== 0) {
                             result += '<br>';
                         }
-                        result += '<span style="color: ' + point.series.options.color + ';"><b>' + point.series.name + ' (' + (point.series.options.color == inputColor ? inputData.source : outputData.source) + ')</b>: ' +
+                        result += '<span style="color: ' + point.series.options.color + ';"><b>' + point.series.name +
+                            ' (' + (point.series.options.color == inputColor ? inputData.source.replace(/,/g, '<br>') :
+                                outputData.source).replace(',', '<br>') + ')</b>: ' +
                             Highcharts.numberFormat(point.y, 2) + '</span>';
                     }
                     return result;
@@ -741,8 +750,10 @@ AnalyzeChart = function () {
             tooltip: {
                 formatter: function () {
                     return '<b>' + Highcharts.dateFormat('%Y %b %d', this.point.time) + '</b><br>' +
-                        '<span style="color: ' + inputColor + ';">' + Highcharts.numberFormat(this.point.y, 2) + inputData.unit + ' (' + inputData.source + ')</span> with ' +
-                        '<span style="color: ' + outputColor + ';">' + Highcharts.numberFormat(this.point.x, 2) + outputData.unit + ' (' + outputData.source + ')</span>';
+                        '<span style="color: ' + inputColor + ';">' + Highcharts.numberFormat(this.point.y, 2) +
+                        inputData.unit + ' (' + inputData.source + ')</span> with ' +
+                        '<span style="color: ' + outputColor + ';">' + Highcharts.numberFormat(this.point.x, 2) +
+                        outputData.unit + ' (' + outputData.source + ')</span>';
                 },
                 useHTML: true
             },

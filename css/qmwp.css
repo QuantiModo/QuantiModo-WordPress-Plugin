@@ -596,3 +596,23 @@ body.qmwp-lightbox-visible {
 .qmwp-linked-accounts {
     font-weight: bold;
 }
+
+table.available-shortcodes {
+    border-collapse: collapse;
+}
+
+table.available-shortcodes td {
+    padding: 10px 0;
+    border-width: 1px 0;
+    border-color: #000;
+    border-style: solid;
+}
+
+table.available-shortcodes tr:last-of-type td {
+    border: none;
+}
+
+table.available-shortcodes td.shortcode {
+    font-weight: bold;
+}
+

@@ -1,6 +1,6 @@
-var onMoodButtonClicked = function (value, variable) {
+var onFaceButtonClicked = function (value, variable) {
 
-    jQuery('#sectionSendingMood').html('');
+    jQuery('#sectionSendingRating').html('');
     var timestamp = Math.floor(Date.now() / 1000);
     var measurements = [
         {
@@ -11,7 +11,7 @@ var onMoodButtonClicked = function (value, variable) {
     var payload = [{
         measurements: measurements,
         name: variable.name,
-        source: 'MoodiModo',
+        source: 'QuantiPress',
         category: variable.category,
         combinationOperation: variable.combinationOperation,
         unit: variable.abbreviatedUnitName
@@ -19,10 +19,10 @@ var onMoodButtonClicked = function (value, variable) {
 
     Quantimodo.postMeasurementsV2(payload, function (response) {
         if (response.status == 201) {
-            jQuery('#sectionSendingMood').html('Thanks!  We love you!');
+            jQuery('#sectionSendingRating').html('Thanks!  We love you!');
             window.measurementPostingResult = true;
         } else {
-            jQuery('#sectionSendingMood').html('Error! Please contact help@quantimo.do');
+            jQuery('#sectionSendingRating').html('Error! Please contact help@quantimo.do');
             window.measurementPostingResult = false;
             console.error(response);
         }
@@ -40,7 +40,7 @@ jQuery(document).ready(function () {
 
             jQuery('.track-icon').click(function (event) {
 
-                onMoodButtonClicked(jQuery(event.currentTarget).data('value'), variable);
+                onFaceButtonClicked(jQuery(event.currentTarget).data('value'), variable);
             });
 
         } else {

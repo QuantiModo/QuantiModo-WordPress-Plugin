@@ -1,0 +1,60 @@
+.shortcode-content {
+    text-align: center;
+}
+
+.rating-buttons {
+    width: 500px;
+    margin: 20px auto;
+}
+.rating-button-wrap {
+    float: left;
+    width: 90px;
+    margin: 0 5px;
+}
+
+.rating-button {
+    padding: 7px 30px;
+    border: 5px solid;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+}
+
+.rating-button:hover {
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.rating-button .rating-button-value {
+    font-size: 2em;
+}
+
+.rating-button-label {
+    text-align: center;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.qm-black {
+    color: #646464;
+}
+
+.qm-blue {
+    color: #5CB3E9;
+}
+
+.qm-green {
+    color: #A2E555;
+}
+
+.qm-yellow {
+    color: #FDBC4D
+}
+
+.qm-red {
+    color: #D64F51;
+}
+
