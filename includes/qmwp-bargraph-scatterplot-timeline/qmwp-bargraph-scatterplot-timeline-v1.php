@@ -11,6 +11,7 @@ wp_enqueue_style("jquery-dropdown", plugins_url('../../', __FILE__) . "css/jquer
 wp_enqueue_style("jquery-tip", plugins_url('../../', __FILE__) . "css/simpletip.css");
 wp_enqueue_style("jquery-datetimepicker", plugins_url('../../', __FILE__) . "css/jquery.datetimepicker.css");
 wp_enqueue_style("jquery-fancybox", plugins_url('../../', __FILE__) . "js/libs/fancybox/jquery.fancybox.css");
+wp_enqueue_style("font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css");
 
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("jquery-ui-core");

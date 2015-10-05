@@ -196,7 +196,7 @@
 }
 
 .variableInBarGraph .variableName {
-    width: 180px;
+    width: 150px;
     float: left;
 }
 
@@ -213,15 +213,16 @@
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     color: #FFF;
+    float: left;
 }
 
 .variableInBarGraph {
-    width: 170px;
+    width: 190px;
     cursor: pointer;
 }
 
 .variableInBarGraph:hover {
-    color: #FFF;
+    /*color: #FFF;*/
 }
 
 .variableInBarGraph:hover .setButton {
