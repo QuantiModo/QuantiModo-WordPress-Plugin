@@ -933,11 +933,18 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                 x: 10,
                 useHTML: true,
                 formatter: function () {
-                    return '<div class="variableInBarGraph" data-row="' + escape(this.value.originalName) + '">' +
-                        '<div class="variableRowInBarGraph" onclick="highlightBargraphRow(); setInputVariable(\'' + escape(this.value.originalName) + '\');">' +
-                        '<div class="variableName">' + this.value.originalName + ' </div>' +
-                        '<div class="setButton icon-cog icon-large gear" onclick="event.stopPropagation(); getSettingsForm(\'' + escape(this.value.originalName) + '\');"></div>' +
-                        '<div class="setButton icon-plus icon-large plus" onclick="event.stopPropagation(); AnalyzePage.showAddMeasurementDialog(\'' + escape(this.value.originalName) + '\');"></div>' +
+
+                    var labelString = this.value.originalName;
+
+                    if (labelString.length > 50) {
+                        labelString = labelString.substr(0,50) + '...';
+                    }
+
+                    return '<div class="variableInBarGraph" data-row="' + this.value.originalName + '">' +
+                        '<div class="variableRowInBarGraph" onclick="highlightBargraphRow(); setInputVariable(\'' + this.value.originalName + '\');">' +
+                        '<div class="variableName">' + labelString + ' </div>' +
+                        '<div class="setButton icon-cog icon-large gear fa fa-cog" onclick="event.stopPropagation(); getSettingsForm(\'' + this.value.originalName + '\');"></div>' +
+                        '<div class="setButton icon-plus icon-large plus fa fa-plus" onclick="event.stopPropagation(); AnalyzePage.showAddMeasurementDialog(\'' + this.value.originalName + '\');"></div>' +
                         '</div>' +
                         '</div>';
                 },
