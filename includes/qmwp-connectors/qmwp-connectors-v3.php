@@ -11,6 +11,9 @@ wp_enqueue_script("jquery-ui-dialog");
 wp_enqueue_script("jquery-dropdown", plugins_url('../../', __FILE__) . "js/libs/jquery.dropdown.min.js", "jquery");
 wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustache.js");
 
+wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
+wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
+
 ?>
 
 <div id="content" style="margin: 0; padding: 0;">

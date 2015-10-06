@@ -3,10 +3,11 @@ wp_enqueue_style("qm-rating-faces", plugins_url('../../', __FILE__) . "css/qm-ra
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("qm-rating-faces", plugins_url('../../', __FILE__) . "js/qm-rating-faces.js", array('jquery'));
 wp_enqueue_script("quantimodo-js-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", array('jquery'));
+wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'quantimodo-js-sdk'));
 ?>
 
 <div id="track-variable-content">
-<!--    <div id="track-variable-header">How do you feel about <span id="track-variable-name"></span>?</div>-->
+    <!--    <div id="track-variable-header">How do you feel about <span id="track-variable-name"></span>?</div>-->
     <section id="sectionRatingFaces">
         <ul>
             <li><img id="buttonFaceDepressed" class="track-icon" data-value="1"
