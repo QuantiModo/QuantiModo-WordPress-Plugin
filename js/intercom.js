@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
         console.debug(user);
 
         window.intercomSettings = {
-            app_id: "wsj1w4xj",
+            app_id: 'wsj1w4xj',
             name: user.displayName,
             email: user.email,
             created_at: new Date(user.userRegistered) / 1000
@@ -13,7 +13,7 @@ jQuery(document).ready(function () {
         (function () {
             var w = window;
             var ic = w.Intercom;
-            if (typeof ic === "function") {
+            if (typeof ic === 'function') {
                 ic('reattach_activator');
                 ic('update', intercomSettings);
             } else {
