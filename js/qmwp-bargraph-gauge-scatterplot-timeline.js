@@ -943,8 +943,8 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                     return '<div class="variableInBarGraph" data-row="' + this.value.originalName + '">' +
                         '<div class="variableRowInBarGraph" onclick="highlightBargraphRow(); setInputVariable(\'' + this.value.originalName + '\');">' +
                         '<div class="variableName">' + labelString + ' </div>' +
-                        '<div class="setButton icon-cog icon-large gear fa fa-cog" onclick="event.stopPropagation(); getSettingsForm(\'' + this.value.originalName + '\');"></div>' +
-                        '<div class="setButton icon-plus icon-large plus fa fa-plus" onclick="event.stopPropagation(); AnalyzePage.showAddMeasurementDialog(\'' + this.value.originalName + '\');"></div>' +
+                        '<div class="setButton fa fa-cog" onclick="event.stopPropagation(); getSettingsForm(\'' + this.value.originalName + '\');"></div>' +
+                        '<div class="setButton fa fa-plus" onclick="event.stopPropagation(); AnalyzePage.showAddMeasurementDialog(\'' + this.value.originalName + '\');"></div>' +
                         '</div>' +
                         '</div>';
                 },
