@@ -51,6 +51,8 @@ wp_enqueue_script("refresh-shared", plugins_url('../../', __FILE__) . "js/_data_
 
 wp_enqueue_script("correlate", plugins_url('../../', __FILE__) . "js/qmwp-bargraph-gauge-scatterplot-timeline.js", array("correlate-charts", "jquery-ui-datepicker", "jquery-ui-button"), false, true);
 
+wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
+
 ?>
 
 <?php require plugin_dir_path(__FILE__) . "../modules/dialog_add_measurement.php"; ?>

@@ -12,6 +12,9 @@ wp_enqueue_script("ui-bootstrap", plugins_url('../../', __FILE__) . "js/libs/ui-
 
 wp_enqueue_script("qmwp-search-correlations", plugins_url('../../', __FILE__) . "js/qmwp-search-correlations.js", array('angular'));
 
+wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
+wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
+
 ?>
 
 <div ng-app="quantimodoSearch" ng-controller="QuantimodoSearchController">
