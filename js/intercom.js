@@ -19,11 +19,11 @@ jQuery(document).ready(function () {
             } else {
                 var d = document;
                 var i = function () {
-                    i.c(arguments)
+                    i.c(arguments);
                 };
                 i.q = [];
                 i.c = function (args) {
-                    i.q.push(args)
+                    i.q.push(args);
                 };
                 w.Intercom = i;
                 function l() {
@@ -38,7 +38,7 @@ jQuery(document).ready(function () {
                 l();
 
             }
-        })()
+        })();
 
     });
 
