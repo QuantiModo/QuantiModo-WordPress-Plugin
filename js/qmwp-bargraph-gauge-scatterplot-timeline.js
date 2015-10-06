@@ -937,7 +937,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                     var labelString = this.value.originalName;
 
                     if (labelString.length > 50) {
-                        labelString = labelString.substr(0,50) + '...';
+                        labelString = labelString.substr(0, 50) + '...';
                     }
 
                     return '<div class="variableInBarGraph" data-row="' + this.value.originalName + '">' +
@@ -977,7 +977,8 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                     s += '<b>' + name + ':</b> ' + value + '<br>';
                 });
                 return s;
-            }
+            },
+            backgroundColor: '#FFF'
         }
     });
 }
