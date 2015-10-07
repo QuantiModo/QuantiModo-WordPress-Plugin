@@ -27,7 +27,8 @@
 }
 
 .rating-button .rating-button-value {
-    font-size: 2em;
+    font-size: 38px;
+    line-height: 64px;
 }
 
 .rating-button-label {
