@@ -14,6 +14,7 @@ wp_enqueue_script("qm-sdk",
     plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
 wp_enqueue_script("qmwp-add-measurement",
     plugins_url('../../', __FILE__) . "js/qmwp-add-measurement.js", "jquery", false, true);
+wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
 
 ?>
 
@@ -26,16 +27,6 @@ wp_enqueue_script("qmwp-add-measurement",
     </div>
 
     <div id="record_a_measurement_block">
-        <div style="float:left;">
-            <h3>What do you want to track?</h3>
-        </div>
-        <div style="float:right; margin-right:8px; margin-top:14px;">
-            <a href="#" title="QuantiModo" id="logo-correlate">
-                <img
-                    src="<?php echo plugins_url('../../', __FILE__) . "images/logo-full.png" ?>"
-                    alt="Better living through data." width=100>
-            </a>
-        </div>
         <div style="display:block;">
 
             <div class="validation-holder">

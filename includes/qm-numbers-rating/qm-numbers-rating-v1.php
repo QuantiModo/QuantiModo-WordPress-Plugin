@@ -7,6 +7,7 @@ wp_enqueue_script("qm-sdk",
     plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
 wp_enqueue_script("qmwp-add-measurement",
     plugins_url('../../', __FILE__) . "js/qm-numbers-rating.js", "jquery", false, true);
+wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
 ?>
 
 

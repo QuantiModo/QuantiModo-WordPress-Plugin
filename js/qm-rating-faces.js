@@ -19,10 +19,10 @@ var onFaceButtonClicked = function (value, variable) {
 
     Quantimodo.postMeasurementsV2(payload, function (response) {
         if (response.status == 201) {
-            jQuery('#sectionSendingRating').html('Thanks!  We love you!');
+            jQuery('#result-string').html('Thanks!  We love you!');
             window.measurementPostingResult = true;
         } else {
-            jQuery('#sectionSendingRating').html('Error! Please contact help@quantimo.do');
+            jQuery('#result-string').html('Error! Please contact help@quantimo.do');
             window.measurementPostingResult = false;
             console.error(response);
         }
@@ -35,12 +35,13 @@ jQuery(document).ready(function () {
         if (variable && variable.abbreviatedUnitName == '/5') {
             console.debug('Tracker is set to post measurements for variable:');
             console.debug(variable);
-            jQuery('#track-variable-content').toggle();
-            jQuery('#track-variable-name').html(variable.name);
+            jQuery('#track-variable-content').show();
+            jQuery('#tracked-variable-name').html(variable.name);
 
             jQuery('.track-icon').click(function (event) {
 
                 onFaceButtonClicked(jQuery(event.currentTarget).data('value'), variable);
+
             });
 
         } else {

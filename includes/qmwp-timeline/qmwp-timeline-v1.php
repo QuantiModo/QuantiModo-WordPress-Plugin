@@ -52,6 +52,8 @@ wp_enqueue_script("timeline", plugins_url('../../', __FILE__) . "js/qmwp-timelin
         "jquery-ui-autocomplete"
     ), false, true);
 
+wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
+
 ?>
 
 <?php require plugin_dir_path(__FILE__) . "../modules/dialog_delete_measurements.php"; ?>

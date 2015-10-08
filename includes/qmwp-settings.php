@@ -242,9 +242,9 @@ $cc_ux = qmwp_cc_ux();
                     <h3>Plugin Short Codes</h3>
 
                     <div class='form-padding'>
-                        <p>QuantiModo WordPress plugin gives capability to render shortcodes at the posts and pages.</p>
+                        <p>The QuantiModo plugin allows you to easily embed data analysis, import, and collection tools
+                            on any post, page, or widget using the following shortcodes:</p>
 
-                        <p>Currently plugin supports following shortcodes:</p>
                         <table class="available-shortcodes">
                             <thead>
                             <tr>
@@ -255,23 +255,20 @@ $cc_ux = qmwp_cc_ux();
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="shortcode">[qmwp_mood_tracker]</td>
+                                <td class="shortcode">[qmwp_rating_faces]</td>
                                 <td>
                                     <ul>
-                                        <li>tracked_variable_name</li>
+                                        <li>tracked_variable_name - Use this shortcode attribute to specify what
+                                            variable that you want to track using a 1 to 5 rating scale.</li>
                                     </ul>
                                     <p>
-                                        Specify variable name to track. This kind of tracker supports
-                                        variables which can be measured by rate 1..5
-                                    </p>
-
-                                    <p>
                                         Example: <br>
-                                        [qmwp_mood_tracker tracked_variable_name="Overall Mood"]
+                                        [qmwp_rating_faces tracked_variable_name="Overall Mood"] allows one to rate
+                                        their "Overall Mood".
                                     </p>
                                 </td>
                                 <td>
-                                    Allow users to rate their moods
+                                    Allow users to submit ratings on a 1 to 5 scale using faces. <br>
                                     <a target="_blank" href="qmwp-mood-tracker">Take a look</a>
                                 </td>
                             </tr>
