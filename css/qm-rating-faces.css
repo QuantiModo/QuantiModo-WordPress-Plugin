@@ -1,101 +1,28 @@
-#sectionRatingFaces {
-    opacity: 1;
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
-#sectionRatingFaces img {
-    height: 100%;
-    display: inline-block;
-    background-color: #FFFFFF;
-    transition: all 200ms linear;
-    width: 100%;
-}
-
-#sectionRatingFaces img:hover {
-    -webkit-filter: blur(1px) brightness(110%) saturate(150%);
-    cursor: pointer;
-}
-
-#sectionRatingFaces div {
-    width: 1px;
-    position: relative;
-    display: inline-block;
-    background: lightgray;
-    bottom: 32%;
-}
-
-#sectionSendingRating {
-    display: block;
-    clear: both;
-    width: auto;
-    height: 50px;
-    transition: opacity 400ms linear;
-
-    font-family: news-gothic-std, sans-serif;
-    font-size: 40px;
-    font-weight: 800;
-    top: 2px;
-    text-align: center;
-    font-style: italic;
-    color: #bc2e1e;
-    text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
-}
-
-.invisible {
-    -webkit-animation-name: fadeOut;
-    -webkit-animation-duration: 0.4s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease;
-    -webkit-animation-fill-mode: forwards;
-}
-
-#sectionRatingFaces ul {
-    margin: 0;
-    padding: 0;
-}
-
-#sectionRatingFaces li {
-    display: inline-block;
-    float: left;
-    padding: 0 7px;
-    width: 53px;
-}
-
-@-webkit-keyframes fadeOut {
-    from {
-        -webkit-transform: rotate(0deg) scale(1) skew(0deg);
-        opacity: 1;
-    }
-    to {
-        -webkit-transform: rotate(0deg) scale(0.98) skew(0deg);
-        opacity: 0;
-    }
-}
-
-.visible {
-    -webkit-animation-name: fadeIn;
-    -webkit-animation-duration: 0.3s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease;
-    -webkit-animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes fadeIn {
-    from {
-        -webkit-transform: rotate(0deg) scale(1.02) skew(0deg);
-        opacity: 0;
-    }
-    to {
-        -webkit-transform: rotate(0deg) scale(1) skew(0deg);
-        opacity: 1;
-    }
-}
-
-@media (max-width: 767px) {
-
-}
-
 #track-variable-content {
     display: none;
+}
+
+.shortcode-content.rating-faces {
+    max-width: 500px;
+}
+
+.rating-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.rating-button {
+    max-width: 77px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.track-icon {
+    opacity: 0.5;
+    transition: opacity 177ms linear;
+}
+
+.track-icon:hover {
+    opacity: 1;
 }
