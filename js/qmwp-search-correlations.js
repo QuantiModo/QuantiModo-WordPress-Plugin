@@ -38,7 +38,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
         $scope.itemsPerPage = 10;
         $scope.autoLoad = false;
         $scope.homeShown = true;
-        $scope.selectOutputAsType = 0;
+        $scope.selectOutputAsType = qmwpShortCodeDefinedVariableAs;
         $scope.searchVariable = '';
         $scope.resultTitle = '';
         $scope.countAndTime = '';
