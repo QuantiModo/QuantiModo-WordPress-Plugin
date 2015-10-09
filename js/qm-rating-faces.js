@@ -36,7 +36,6 @@ jQuery(document).ready(function () {
             console.debug('Tracker is set to post measurements for variable:');
             console.debug(variable);
             jQuery('#track-variable-content').show();
-            jQuery('#tracked-variable-name').html(variable.name);
 
             jQuery('.track-icon').click(function (event) {
 
