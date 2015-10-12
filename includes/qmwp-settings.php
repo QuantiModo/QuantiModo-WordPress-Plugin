@@ -262,8 +262,10 @@ $cc_ux = qmwp_cc_ux();
                                             variable that you want to track using a 1 to 5 rating scale.
                                         </li>
                                         <li>
-                                            negative - set this parameter to true (false is default) to inverse icons
-                                            order
+                                            negative - Set this attribute to true (false is default) for rating negative 
+                                            symptom severity (such as Anxiety or Back Pain).  This will result in the 
+                                            ecstatic face posting a rating value of 1 and the depressed face posting a rating 
+                                            value of 5.
                                         </li>
                                     </ul>
                                     <p>
