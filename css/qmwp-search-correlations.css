@@ -52,7 +52,7 @@
     font-size: 14px;
     height: 34px;
     vertical-align: bottom;
-    margin: 10px auto;
+    margin: 10px auto !important;
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
