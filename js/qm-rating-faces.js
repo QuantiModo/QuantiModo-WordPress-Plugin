@@ -1,3 +1,6 @@
+var ratingIconImages =
+    ['ic_mood_depressed.png', 'ic_mood_sad.png', 'ic_mood_ok.png', 'ic_mood_happy.png', 'ic_mood_ecstatic.png'];
+
 var onFaceButtonClicked = function (value, variable) {
 
     jQuery('#sectionSendingRating').html('');
@@ -29,15 +32,31 @@ var onFaceButtonClicked = function (value, variable) {
     });
 };
 
-
 jQuery(document).ready(function () {
     Quantimodo.getVariableByName(qmwpShortCodeDefinedVariable, function (variable) {
         if (variable && variable.abbreviatedUnitName == '/5') {
             console.debug('Tracker is set to post measurements for variable:');
             console.debug(variable);
+
+            var ratingButtons = jQuery('.rating-button');
+
+            for (var i = 0; i < ratingButtons.length; i++) {
+
+                var srcUrl = qmwpPluginUrl + 'images/' + ratingIconImages[i];
+
+                if (qmShortCodeDefinedNegative === 'true') {
+                    srcUrl = qmwpPluginUrl + 'images/' + ratingIconImages[ratingIconImages.length - 1 - i];
+                }
+
+                var image = jQuery('<img class="track-icon" src="' + srcUrl + '">' +
+                    '</img>');
+                jQuery(ratingButtons[i]).append(image);
+
+            }
+
             jQuery('#track-variable-content').show();
 
-            jQuery('.track-icon').click(function (event) {
+            jQuery('.rating-button-wrap').click(function (event) {
 
                 onFaceButtonClicked(jQuery(event.currentTarget).data('value'), variable);
 
@@ -48,5 +67,4 @@ jQuery(document).ready(function () {
             alert('Variable: ' + qmwpShortCodeDefinedVariable + '\n can not be tracked with this shortcode.');
         }
     });
-
 });

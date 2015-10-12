@@ -259,7 +259,12 @@ $cc_ux = qmwp_cc_ux();
                                 <td>
                                     <ul>
                                         <li>tracked_variable_name - Use this shortcode attribute to specify what
-                                            variable that you want to track using a 1 to 5 rating scale.</li>
+                                            variable that you want to track using a 1 to 5 rating scale.
+                                        </li>
+                                        <li>
+                                            negative - set this parameter to true (false is default) to inverse icons
+                                            order
+                                        </li>
                                     </ul>
                                     <p>
                                         Example: <br>
