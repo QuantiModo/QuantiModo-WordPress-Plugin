@@ -114,7 +114,7 @@ Class QMWP
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
             'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
-            'Track Mood (Faces)' => '[qmwp_rating_faces tracked_variable_name="Overall Mood"]',
+            'Track Mood (Faces)' => '[qmwp_rating_faces tracked_variable_name="Overall Mood" negative="false"]',
             'Import Data' => '[qmwp_connectors]',
             'Predictors/Outcomes Analysis Charts' => '[qmwp_bargraph_scatterplot_timeline]',
             'Mood Over Time' => '[qmwp_timeline examined_variable_names="overall mood"]',
@@ -1304,6 +1304,7 @@ Class QMWP
         $attributes = shortcode_atts(array(
             'version' => 1,
             'tracked_variable_name' => 'Overall Mood',
+            'negative'  =>  'false',
         ), $attributes, 'qmwp_rating_faces');
 
         $version = $attributes['version'];
@@ -1312,6 +1313,8 @@ Class QMWP
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
             'qmwpShortCodeDefinedVariable' => $attributes['tracked_variable_name'],
+            'qmwpPluginUrl' =>  plugins_url('/', __FILE__),
+            'qmShortCodeDefinedNegative' => $attributes['negative'],
         ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1626,6 +1629,16 @@ Class QMWP
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name to track',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Negative',
+                        'attr' => 'negative',
+                        'type' => 'select',
+                        'options' => array(
+                            'true' => 'True',
+                            'false' => 'False',
                         ),
                     ),
 

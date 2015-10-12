@@ -259,7 +259,14 @@ $cc_ux = qmwp_cc_ux();
                                 <td>
                                     <ul>
                                         <li>tracked_variable_name - Use this shortcode attribute to specify what
-                                            variable that you want to track using a 1 to 5 rating scale.</li>
+                                            variable that you want to track using a 1 to 5 rating scale.
+                                        </li>
+                                        <li>
+                                            negative - Set this attribute to true (false is default) for rating negative 
+                                            symptom severity (such as Anxiety or Back Pain).  This will result in the 
+                                            ecstatic face posting a rating value of 1 and the depressed face posting a rating 
+                                            value of 5.
+                                        </li>
                                     </ul>
                                     <p>
                                         Example: <br>
