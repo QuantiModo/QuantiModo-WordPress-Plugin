@@ -262,9 +262,10 @@ $cc_ux = qmwp_cc_ux();
                                             variable that you want to track using a 1 to 5 rating scale.
                                         </li>
                                         <li>
-                                            negative - Set this attribute to true (false is default) for rating negative 
-                                            symptom severity (such as Anxiety or Back Pain).  This will result in the 
-                                            ecstatic face posting a rating value of 1 and the depressed face posting a rating 
+                                            negative - Set this attribute to true (false is default) for rating negative
+                                            symptom severity (such as Anxiety or Back Pain). This will result in the
+                                            ecstatic face posting a rating value of 1 and the depressed face posting a
+                                            rating
                                             value of 5.
                                         </li>
                                     </ul>
@@ -581,6 +582,36 @@ $cc_ux = qmwp_cc_ux();
                                         QuantiModo...</p>
                                 </td>
                             </tr>
+
+                            <tr valign='top'>
+                                <th scope='row'>Default Outcome Variable:</th>
+                                <td>
+                                    <input type='text' name='qmwp_default_outcome_variable'
+                                           value='<?php echo get_option('qmwp_default_outcome_variable'); ?>'/>
+                                </td>
+                            </tr>
+
+                            <tr valign='top'>
+                                <th scope='row'>Default Outcome Variable Undesirable:</th>
+                                <td>
+
+                                    <select name='qmwp_default_outcome_variable_undesirable'>
+
+                                        <option
+                                            value="false" <?php selected(get_option('qmwp_default_outcome_variable_undesirable'), 'false'); ?>>
+                                            False
+                                        </option>
+
+                                        <option
+                                            value="true" <?php selected(get_option('qmwp_default_outcome_variable_undesirable'), 'true'); ?>>
+                                            True
+                                        </option>
+
+                                    </select>
+
+                                </td>
+                            </tr>
+
                         </table>
                         <!-- .form-table -->
                         <?php submit_button('Save all settings'); ?>
