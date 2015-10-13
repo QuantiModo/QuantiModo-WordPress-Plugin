@@ -522,10 +522,6 @@ jQuery(document).ready(function () {
     inputField.onfocus = onVariableNameInputFocussed;
     inputField.onblur = onVariableNameInputUnfocussed;
 
-    setInterval(function () {
-        inputField.focus();
-    }, 50);
-
     jQuery('#addmeasurement-variable-name').keypress(function () {
         if (jQuery(this).val().length > 0) {
             jQuery('#addmeasurement-variable-name').removeClass('error');
