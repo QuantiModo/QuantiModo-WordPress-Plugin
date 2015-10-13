@@ -111,6 +111,8 @@ Class QMWP
         'qmwp_http_util_verify_ssl' => 1,                                // 0, 1
         'qmwp_restore_default_settings' => 0,                            // 0, 1
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
+        'qmwp_default_outcome_variable' => 'Overall Mood',
+        'qmwp_default_outcome_variable_undesirable' => 'false',
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
             'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
@@ -175,6 +177,9 @@ Class QMWP
      */
     function init()
     {
+
+        $this->qmwp_add_missing_settings();
+
         add_shortcode('qmwp_rating_faces', array($this, 'qmwp_rating_faces'));
         add_shortcode('qmwp_connectors', array($this, 'qmwp_connectors'));
         add_shortcode('qmwp_manage_accounts', array($this, 'qmwp_manage_accounts'));
@@ -1303,8 +1308,8 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'tracked_variable_name' => 'Overall Mood',
-            'negative'  =>  'false',
+            'tracked_variable_name' => get_option('qmwp_default_outcome_variable'),
+            'negative' => get_option('qmwp_default_outcome_variable_undesirable'),
         ), $attributes, 'qmwp_rating_faces');
 
         $version = $attributes['version'];
@@ -1313,7 +1318,7 @@ Class QMWP
 
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML, array(
             'qmwpShortCodeDefinedVariable' => $attributes['tracked_variable_name'],
-            'qmwpPluginUrl' =>  plugins_url('/', __FILE__),
+            'qmwpPluginUrl' => plugins_url('/', __FILE__),
             'qmShortCodeDefinedNegative' => $attributes['negative'],
         ));
 
@@ -1369,7 +1374,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => 'Overall Mood',
+            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'outcomes',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
@@ -1408,7 +1413,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_names' => null
+            'examined_variable_names' => get_option('qmwp_default_outcome_variable')
         ), $attributes, 'qmwp_timeline');
 
         $version = $attributes['version'];
@@ -1437,7 +1442,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => null,
+            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'outcomes',
         ), $attributes, 'qmwp_search_correlations');
 
@@ -1473,7 +1478,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => null,
+            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'predictors',
         ), $attributes, 'qmwp_search_for_predictors');
 
@@ -1509,7 +1514,7 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => null,
+            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'outcomes',
         ), $attributes, 'qmwp_search_for_outcomes');
 
@@ -1571,8 +1576,8 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'tracked_variable_name' => 'Overall Mood',
-            'negative' => "false",
+            'tracked_variable_name' => get_option('qmwp_default_outcome_variable'),
+            'negative' => get_option('qmwp_default_outcome_variable_undesirable'),
             'show_symptom_labels' => "true"
         ), $attributes, 'qm_numbers_rating');
 
