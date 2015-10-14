@@ -64,7 +64,8 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
     <section id="section-configure">
         <div id="section-configure-input" class="open">
             <div class="inner">
-                <div class="card-header accordion-header" id="accordion-date-header">
+
+                <!--<div class="card-header accordion-header" id="accordion-date-header">
                     <div style="float: left; line-height: 42px;">
                         Date range
                     </div>
@@ -80,7 +81,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                                 for="radio6">Month</label>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="card-header accordion-header" id="accordion-input-header">
                     <div style="float: left; line-height: 42px;">
@@ -113,8 +114,6 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 <div style="float: left; line-height: 42px;">
                     Timeline
                 </div>
-                <div id="gauge-timeline-settingsicon" data-dropdown="#dropdown-timeline-settings"
-                     class="gear-icon"></div>
             </header>
             <div class="graph-content" id="graph-timeline">
             </div>
