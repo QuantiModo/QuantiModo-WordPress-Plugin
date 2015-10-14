@@ -236,7 +236,7 @@ AnalyzeChart = function () {
                 var inputVar = getValueForDate(cause.timeSeries, date);
                 var outputVar = getValueForDate(effect.timeSeries, date);
 
-                if (typeof inputVar == 'number' && typeof outputVar == 'number') {
+                if (typeof inputVar === 'number' && typeof outputVar === 'number') {
 
                     var dot = {
                         time: date,
