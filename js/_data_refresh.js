@@ -69,6 +69,7 @@ var refreshInputData = function () {
     if (variable == null) {
         return;
     }
+    jQuery('#please-wait').show();
     Quantimodo.getDailyMeasurements({
         'variableName': variable.originalName,
         'startTime': AnalyzePage.getStartTime(),
@@ -76,6 +77,7 @@ var refreshInputData = function () {
         //'groupingWidth': AnalyzePage.getPeriod(),
         'groupingTimezone': AnalyzePage.getTimezone()
     }, function (measurements) {
+        jQuery('#please-wait').hide();
         AnalyzePage.inputMeasurements = measurements;
         AnalyzeChart.setInputData(variable, measurements);
     });

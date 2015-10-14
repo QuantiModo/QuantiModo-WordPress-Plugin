@@ -89,8 +89,6 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 <div class="generalHeader bargraphHeader">
                     Correlations
                 </div>
-                <div id="gauge-timeline-settingsicon" data-dropdown="#dropdown-barchart-settings"
-                     class="gear-icon"></div>
                 <div class="icon-question-sign icon-large questionMark"
                      title="This is the list of variables in order of their correlation with your examined variable."></div>
             </header>
@@ -212,8 +210,8 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 <div class="generalHeader timelineHeader">
                     Timeline
                 </div>
-                <div id="gauge-timeline-settingsicon" data-dropdown="#dropdown-timeline-settings"
-                     class="gear-icon"></div>
+                <!--<div id="gauge-timeline-settingsicon" data-dropdown="#dropdown-timeline-settings"
+                     class="gear-icon"></div>-->
                 <div class="icon-plus-sign icon-2x plusMark" title="Click to add a measurement."></div>
                 <div class="icon-question-sign icon-large questionMark questionMarkPlus"
                      title="Shows the measurement data in the order of measurement dates."></div>
@@ -259,3 +257,13 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                                              placeholder="Min. Number of Samples"></li>
     </ul>
 </div>
+
+
+<div id="please-wait">
+    <div id="please-wait-overlay">&nbsp;</div>
+    <div class="please-wait-content">
+        <img src="<?php echo plugins_url('../../', __FILE__) . 'css/images/ajax-loader.gif' ?>" alt="">
+        <span>please wait...</span>
+    </div>
+</div>
+
