@@ -236,7 +236,7 @@ AnalyzeChart = function () {
                 var inputVar = getValueForDate(cause.timeSeries, date);
                 var outputVar = getValueForDate(effect.timeSeries, date);
 
-                if (inputVar && outputVar) {
+                if (typeof inputVar === 'number' && typeof outputVar === 'number') {
 
                     var dot = {
                         time: date,
@@ -665,7 +665,7 @@ AnalyzeChart = function () {
                         }
                         result += '<span style="color: ' + point.series.options.color + ';"><b>' + point.series.name +
                             ' (' + (point.series.options.color == inputColor ? inputData.source.replace(/,/g, '<br>') :
-                                outputData.source).replace(',', '<br>') + ')</b>: ' +
+                                outputData.source.replace(/,/g, '<br>')).replace(',', '<br>') + ')</b>: ' +
                             Highcharts.numberFormat(point.y, 2) + '</span>';
                     }
                     return result;
