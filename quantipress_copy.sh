@@ -40,8 +40,8 @@ echo "Adding cron job to syncronize quantipress themes and plugins directories w
 #write out current crontab
 crontab -l > mycron
 #echo new cron into cron file
-echo "15 * * * * sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/plugins/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/plugins" >> mycron
-echo "15 * * * * sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/themes/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/themes" >> mycron
+echo "05 * * * * sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/plugins/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/plugins" >> mycron
+echo "05 * * * * sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/themes/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/themes" >> mycron
 #install new cron file
 crontab mycron
 rm mycron
