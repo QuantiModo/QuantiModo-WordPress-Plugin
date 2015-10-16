@@ -31,9 +31,9 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
         <form>
             <div class="form-group">
-                <label for="addmeasurement-variable-name">
-                    Variable Name:
-                </label>
+<!--                <label for="addmeasurement-variable-name">
+                    Variable Name
+                </label>-->
                 <input id="addmeasurement-variable-name"
                        type="text"
                        class="form-control"
@@ -50,9 +50,9 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         <form>
 
             <div class="form-group">
-                <label for="edt-addmeasurement-variable-name">
-                    Variable Name:
-                </label>
+<!--                <label for="edt-addmeasurement-variable-name">
+                    Variable Name
+                </label>-->
                 <input id="edt-addmeasurement-variable-name"
                        type="text"
                        class="form-control"
@@ -60,11 +60,11 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 <span class="help-block"></span>
             </div>
 
-            <h4>Enter Your Measurement:</h4>
+            <h4>Enter Your Measurement</h4>
 
             <div class="form-group">
                 <label for="addmeasurement-variable-value">
-                    Measurement Value:
+                    Value
                 </label>
                 <input id="addmeasurement-variable-value"
                        type="text"
@@ -75,7 +75,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
             <div class="form-group">
                 <label for="addmeasurement-variable-unit">
-                    Measurement Unit:
+                    Unit
                 </label>
                 <input id="addmeasurement-variable-unitCategory" type="hidden">
                 <select id="addmeasurement-variable-unit" class="form-control"></select>
@@ -84,7 +84,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
             <div class="form-group">
                 <label for="addmeasurement-variable-date">
-                    Measurement Date:
+                    Date
                 </label>
                 <input id="addmeasurement-variable-date" type="text">
                 <span class="help-block"></span>
@@ -104,7 +104,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
             <div class="form-group">
                 <label for="add-addmeasurement-variable-name">
-                    New Variable Name:
+                    New Variable Name
                 </label>
                 <input id="add-addmeasurement-variable-name"
                        type="text"
@@ -117,7 +117,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
             <div class="form-group">
                 <label for="add-addmeasurement-variable-value">
-                    Measurement Value:
+                    Value
                 </label>
                 <input id="add-addmeasurement-variable-value"
                        type="text"
@@ -128,7 +128,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
             <div class="form-group">
                 <label for="add-addmeasurement-variable-unit">
-                    Measurement Unit:
+                    Unit
                 </label>
                 <input id="add-addmeasurement-variable-unitCategory" type="hidden">
                 <select id="add-addmeasurement-variable-unit" class="form-control"></select>
@@ -137,7 +137,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
             <div class="form-group">
                 <label for="add-addmeasurement-variable-date">
-                    Measurement Date:
+                    Date
                 </label>
                 <input id="add-addmeasurement-variable-date" type="text">
                 <span class="help-block"></span>
@@ -145,7 +145,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
             <div class="form-group">
                 <label for="add-addmeasurement-variable-date">
-                    Variable Category:
+                    Category
                 </label>
                 <select id="addmeasurement-variable-category" class="form-control"></select>
                 <input type="hidden" name="combineOperation" value="MEAN" id="combineOperation">
