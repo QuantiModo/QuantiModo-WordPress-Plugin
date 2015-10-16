@@ -22,16 +22,29 @@ sudo ee site create ${SITE_PREFIX}.quantimo.do --wp
 echo "Removing plugins and creating symlinks to quantipress.quantimo.do plugin directory"
 #sudo rm -rf /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/plugins
 #sudo ln -s /var/www/quantipress.quantimo.do/htdocs/wp-content/plugins /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/plugins
-sudo cp -Rf /var/www/quantipress.quantimo.do/htdocs/wp-content/uploads /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/
+#sudo cp -Rf /var/www/quantipress.quantimo.do/htdocs/wp-content/uploads /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/
+sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/plugins/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/plugins
 
 echo "Removing themes and creating symlinks to quantipress.quantimo.do theme directory"
 #sudo rm -rf /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/themes/
 #sudo ln -s /var/www/quantipress.quantimo.do/htdocs/wp-content/themes /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/themes
-sudo cp -Rf /var/www/quantipress.quantimo.do/htdocs/wp-content/uploads /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/
+#sudo cp -Rf /var/www/quantipress.quantimo.do/htdocs/wp-content/uploads /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/
+sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/themes/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/themes
 
 echo "Copying contents of quantipress.quantimo.do uploads"
 sudo cp -Rf /var/www/quantipress.quantimo.do/htdocs/wp-content/uploads /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/
 #sudo cp -Rf /var/www/quantipress.quantimo.do/htdocs/wp-content/uploads /var/www/samuel.quantimo.do/htdocs/wp-content/
+
+
+echo "Adding cron job to syncronize quantipress themes and plugins directories with newly created WP instance"
+#write out current crontab
+crontab -l > mycron
+#echo new cron into cron file
+echo "05 * * * * sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/plugins/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/plugins" >> mycron
+echo "05 * * * * sudo rsync -av /var/www/quantipress.quantimo.do/htdocs/wp-content/themes/ /var/www/${SITE_PREFIX}.quantimo.do/htdocs/wp-content/themes" >> mycron
+#install new cron file
+crontab mycron
+rm mycron
 
 echo "Setting permissions"
 sudo chown -R www-data:www-data /var/www/
