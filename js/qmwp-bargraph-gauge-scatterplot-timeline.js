@@ -251,15 +251,15 @@ var AnalyzePage = function () {
     var selectVariableName = function (variableName) {
         var variable = AnalyzePage.getVariableFromName(variableName);
         if (!variableName || variableName == '') {
-            jQuery("#addmeasurement-variable-name").val('');
-            jQuery("#addmeasurement-variable-original-name").val('');
-            jQuery("#addmeasurement-variable-unit").val('');
-            jQuery("#addmeasurement-variable-value").val('');
-            jQuery("#addmeasurement-variable-datetime").val('');
+            jQuery("#module-addmeasurementvariable-name").val('');
+            jQuery("#module-addmeasurementvariable-original-name").val('');
+            jQuery("#module-addmeasurementvariable-unit").val('');
+            jQuery("#module-addmeasurementvariable-value").val('');
+            jQuery("#module-addmeasurementvariable-datetime").val('');
             return false;
         } else {
             if (variable)
-                jQuery("#addmeasurement-variable-original-name").val(variable.originalName);
+                jQuery("#module-addmeasurementvariable-original-name").val(variable.originalName);
         }
         Quantimodo.getDailyMeasurements(
             {
@@ -299,27 +299,27 @@ var AnalyzePage = function () {
                             var currentUnit = units[n];
                             if (currentUnit.abbreviatedName == variable.unit) {
                                 selectedUnitToAdd = currentUnit;
-                                jQuery('#addmeasurement-variable-unit').append(jQuery('<option/>').attr('selected', 'selected').attr('value', currentUnit.abbreviatedName).text(currentUnit.name));
+                                jQuery('#module-addmeasurementvariable-unit').append(jQuery('<option/>').attr('selected', 'selected').attr('value', currentUnit.abbreviatedName).text(currentUnit.name));
                             }
                             else
-                                jQuery('#addmeasurement-variable-unit').append(jQuery('<option/>').attr('value', currentUnit.abbreviatedName).text(currentUnit.name));
+                                jQuery('#module-addmeasurementvariable-unit').append(jQuery('<option/>').attr('value', currentUnit.abbreviatedName).text(currentUnit.name));
                         }
                     });
 
                     /*
-                     jQuery("#addmeasurement-variable-unit").catcomplete({
+                     jQuery("#module-addmeasurementvariable-unit").catcomplete({
                      source: varunits,
                      select: function (event, ui) {
                      //AnalyzePage.quantimodoUnits
-                     jQuery("#addmeasurement-variable-value").val('');
+                     jQuery("#module-addmeasurementvariable-value").val('');
                      }
                      });
                      */
                     if (selectedUnitToAdd && selectedUnitToAdd.name != '') {
-                        //jQuery("#addmeasurement-variable-unit").val(selectedUnitToAdd.name);
+                        //jQuery("#module-addmeasurementvariable-unit").val(selectedUnitToAdd.name);
                         var meanValue = meanByUnits[selectedUnitToAdd.abbreviatedName];
                         if (meanValue && meanValue.count > 0) {
-                            jQuery("#addmeasurement-variable-value").val(Math.round(meanValue.sum / meanValue.count * 100) / 100);
+                            jQuery("#module-addmeasurementvariable-value").val(Math.round(meanValue.sum / meanValue.count * 100) / 100);
                         }
                     }
                 });
@@ -328,12 +328,12 @@ var AnalyzePage = function () {
 
 
     var initAddMeasurement = function () {
-        jQuery("#addmeasurement-dialog #button-add").on('click', function () {
-            var name = jQuery("#addmeasurement-variable-name").val();
-            var originalName = jQuery("#addmeasurement-variable-original-name").val();
-            var unit = jQuery("#addmeasurement-variable-unit").val();
-            var value = jQuery("#addmeasurement-variable-value").val();
-            var datetime = jQuery("#addmeasurement-variable-datetime").val();
+        jQuery("#module-addmeasurementdialog #button-add").on('click', function () {
+            var name = jQuery("#module-addmeasurementvariable-name").val();
+            var originalName = jQuery("#module-addmeasurementvariable-original-name").val();
+            var unit = jQuery("#module-addmeasurementvariable-unit").val();
+            var value = jQuery("#module-addmeasurementvariable-value").val();
+            var datetime = jQuery("#module-addmeasurementvariable-datetime").val();
             var values = [];
             var variable = AnalyzePage.getVariableFromOriginalName(originalName);
 
@@ -360,11 +360,11 @@ var AnalyzePage = function () {
                 function (response) {
                     if (response.success == true) {
                         alert('Measurement data is stored successfully.');
-                        jQuery("#addmeasurement-variable-name").val('');
-                        jQuery("#addmeasurement-variable-original-name").val('');
-                        jQuery("#addmeasurement-variable-unit").val('');
-                        jQuery("#addmeasurement-variable-value").val('');
-                        jQuery("#addmeasurement-variable-datetime").val('');
+                        jQuery("#module-addmeasurementvariable-name").val('');
+                        jQuery("#module-addmeasurementvariable-original-name").val('');
+                        jQuery("#module-addmeasurementvariable-unit").val('');
+                        jQuery("#module-addmeasurementvariable-value").val('');
+                        jQuery("#module-addmeasurementvariable-datetime").val('');
                     }
                     else {
                         alert('Measurement data is not stored. error code: ' + response.error);
@@ -373,13 +373,13 @@ var AnalyzePage = function () {
             );
         });
 
-        jQuery("#addmeasurement-dialog #button-close").on('click', function () {
-            jQuery("#addmeasurement-dialog-background").css({'opacity': 0});
-            jQuery("#addmeasurement-dialog").css({'opacity': 0});
+        jQuery("#module-addmeasurementdialog #button-close").on('click', function () {
+            jQuery("#module-addmeasurementdialog-background").css({'opacity': 0});
+            jQuery("#module-addmeasurementdialog").css({'opacity': 0});
 
             setTimeout(function () {
-                jQuery("#addmeasurement-dialog-background").css({'display': 'none'});
-                jQuery("#addmeasurement-dialog").css({'display': 'none'});
+                jQuery("#module-addmeasurementdialog-background").css({'display': 'none'});
+                jQuery("#module-addmeasurementdialog").css({'display': 'none'});
             }, 500);
         });
 
@@ -581,11 +581,11 @@ var AnalyzePage = function () {
                 }
             });
 
-            jQuery("#addmeasurement-variable-name").catcomplete({
+            jQuery("#module-addmeasurementvariable-name").catcomplete({
                 source: varnames,
                 select: function (event, ui) {
-                    jQuery("#addmeasurement-variable-unit").val('');
-                    jQuery("#addmeasurement-variable-value").val('');
+                    jQuery("#module-addmeasurementvariable-unit").val('');
+                    jQuery("#module-addmeasurementvariable-value").val('');
 
                     selectVariableName(ui.item.label);
                 }
@@ -594,20 +594,20 @@ var AnalyzePage = function () {
             if (variableName != null && variableName !== undefined) {
                 variableName = unescape(variableName);
                 var variable = AnalyzePage.getVariableFromOriginalName(variableName);
-                jQuery("#addmeasurement-variable-name").val(variable.name);
-                jQuery("#addmeasurement-variable-original-name").val(variable.originalName);
+                jQuery("#module-addmeasurementvariable-name").val(variable.name);
+                jQuery("#module-addmeasurementvariable-original-name").val(variable.originalName);
                 selectVariableName(variable.name);
             } else {
                 selectVariableName('');
             }
 
 
-            jQuery("#addmeasurement-variable-datetime").datetimepicker();
+            jQuery("#module-addmeasurementvariable-datetime").datetimepicker();
             var currentTime = new Date();
-            jQuery("#addmeasurement-variable-datetime").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate() + ' ' + currentTime.getHours() + ':00');
+            jQuery("#module-addmeasurementvariable-datetime").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate() + ' ' + currentTime.getHours() + ':00');
 
-            jQuery("#addmeasurement-dialog-background").css({'display': 'block', 'opacity': 0.5});
-            jQuery("#addmeasurement-dialog").css({'display': 'block', 'opacity': 1});
+            jQuery("#module-addmeasurementdialog-background").css({'display': 'block', 'opacity': 0.5});
+            jQuery("#module-addmeasurementdialog").css({'display': 'block', 'opacity': 1});
 
 
         }

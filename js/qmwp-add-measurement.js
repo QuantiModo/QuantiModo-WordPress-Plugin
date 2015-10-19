@@ -205,7 +205,7 @@ var onEdtButtonClicked = function () {
             localCache.setSubmittedMeasurement(name, value, unit);
             jQuery('#addmeasurement-variable-name').val('');
             setBlockHideShow();
-            alert('Measurement have been posted successfully');
+            alert('Measurement posted successfully');
         }
         else {
             alert('Adding a measurement failed.');
@@ -281,7 +281,7 @@ var onAddButtonClicked = function () {
             localCache.setSubmittedMeasurement(name, value, unit);
             jQuery('#addmeasurement-variable-name').val('');
             setBlockHideShow();
-            alert('Measurement have been posted successfully');
+            alert('Measurement posted successfully');
         }
         else {
             alert('Adding a measurement failed.');
@@ -521,10 +521,6 @@ jQuery(document).ready(function () {
     var inputField = document.getElementById('addmeasurement-variable-name');
     inputField.onfocus = onVariableNameInputFocussed;
     inputField.onblur = onVariableNameInputUnfocussed;
-
-    setInterval(function () {
-        inputField.focus();
-    }, 50);
 
     jQuery('#addmeasurement-variable-name').keypress(function () {
         if (jQuery(this).val().length > 0) {

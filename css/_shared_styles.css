@@ -298,18 +298,18 @@
 /********************/
 /* Add measurements */
 /********************/
-#addmeasurement-dialog-background {
+#module-addmeasurement-dialog-background {
     display: none;
     opacity: 0;
 }
 
-#addmeasurement-dialog {
+#module-addmeasurement-dialog {
     display: none;
     max-width: 500px;
     opacity: 0;
 }
 
-#addmeasurement-dialog-content {
+#module-addmeasurement-dialog-content {
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
@@ -323,7 +323,7 @@
     border-bottom-right-radius: 3px;
 }
 
-.addmeasurement-header {
+.module-addmeasurement-header {
     width: 100%;
     height: 42px;
     color: #fff;
@@ -334,7 +334,7 @@
     margin-top: 12px;
 }
 
-.addmeasurement-content {
+.module-addmeasurement-content {
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
@@ -348,50 +348,50 @@
     border-bottom-right-radius: 3px;
 }
 
-.addmeasurement-content .inner {
+.module-addmeasurement-content .inner {
     padding-top: 12px;
     padding-bottom: 12px;
 }
 
-#addmeasurement-dialog-header {
+#module-addmeasurement-dialog-header {
     color: #fff;
     background: #29bdca;
     border-bottom: solid 3px #229DA5;
     cursor: auto;
 }
 
-#addmeasurement-dialog-content b {
+#module-addmeasurement-dialog-content b {
     font-size: 1.05em;
     display: block;
     color: #29bdca;
 }
 
-#addmeasurement-dialog-content table {
+#module-addmeasurement-dialog-content table {
     border: none;
     margin: 0px;
     margin-bottom: 10px;
     border-collapse: collapse;
 }
 
-#addmeasurement-dialog-content td {
+#module-addmeasurement-dialog-content td {
     padding-bottom: 4px;
     padding-top: 4px;
     border: none;
     vertical-align: middle;
 }
 
-#addmeasurement-dialog-content td:first-child {
+#module-addmeasurement-dialog-content td:first-child {
     padding-left: 8px;
 }
 
-#addmeasurement-dialog-content td:last-child {
+#module-addmeasurement-dialog-content td:last-child {
     float: right;
     height: 40px;
     line-height: 20px;
     width: 140px;
 }
 
-#addmeasurement-dialog-content div {
+#module-addmeasurement-dialog-content div {
     padding-left: 8px;
     padding-bottom: 4px;
     padding-top: 4px;
@@ -399,7 +399,7 @@
     vertical-align: middle;
 }
 
-#addmeasurement-dialog-content td:first-child {
+#module-addmeasurement-dialog-content td:first-child {
     white-space: nowrap;
 }
 

@@ -30,7 +30,6 @@ jQuery(document).ready(function () {
             console.debug('Tracker is set to post measurements for variable:');
             console.debug(variable);
             jQuery('.shortcode-content').show();
-            jQuery('#tracked-variable-name').html(variable.name);
 
             jQuery('.rating-button-wrap').click(function (event) {
                 ratingButtonClicked(jQuery(event.currentTarget).data('value'), variable);

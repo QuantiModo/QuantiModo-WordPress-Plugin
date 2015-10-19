@@ -13,8 +13,6 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
 <div class="shortcode-content">
 
-    <span>Please rate: <span id="tracked-variable-name"></span></span>
-
     <div class="rating-buttons">
 
         <div class="rating-button-wrap" data-value="1">
