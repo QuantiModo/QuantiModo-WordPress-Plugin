@@ -391,7 +391,6 @@ $cc_ux = qmwp_cc_ux();
                                     Track anything!
                                 </td>
                             </tr>
-
                             <tr>
                                 <td class="shortcode">[qmwp_add_measurement]</td>
                                 <td>
@@ -414,7 +413,14 @@ $cc_ux = qmwp_cc_ux();
                                     <a href="/qmwp-add-measurement">Take a look</a>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <td class="shortcode">[qm_ionic_app]</td>
+                                <td>
+                                </td>
+                                <td>
+                                    Put functionality of QuantiModo ionic application to any page
+                                </td>
+                            </tr>
                             </tbody>
 
                         </table>

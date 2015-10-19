@@ -152,6 +152,7 @@ Class QMWP
             'Predictors of Overall Mood' => '[qmwp_search_for_predictors examined_variable_name="Overall Mood"]',
             'Search for Outcomes' => '[qmwp_search_for_outcomes]',
             'Outcomes Of Steps' => '[qmwp_search_for_outcomes examined_variable_name="Steps"]',
+            'Quantimodo Ionic Application' => '[qm_ionic_app]',
         )
     );
 
@@ -190,6 +191,7 @@ Class QMWP
         add_shortcode('qmwp_search_for_outcomes', array($this, 'qmwp_search_for_outcomes'));
         add_shortcode('qmwp_add_measurement', array($this, 'qmwp_add_measurement'));
         add_shortcode('qm_numbers_rating', array($this, 'qm_numbers_rating'));
+        add_shortcode('qm_ionic_app', array($this, 'qm_ionic_app'));
 
         //add shortcake plugin features to qmwp shortcodes (if plugin is installed)
         $this->add_shortcake_ui_features();
@@ -1594,6 +1596,26 @@ Class QMWP
         $template_content = $this->process_template($pluginContentHTML);
 
         return $template_content;
+    }
+
+    /**
+     * Return rendered html string with plugin content!
+     * @param $attributes
+     * @return string
+     */
+    function qm_ionic_app($attributes)
+    {
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+        ), $attributes, 'qm_ionic_app');
+
+        $version = $attributes['version'];
+
+        $pluginContentHTML = $this->get_plugin_template_html('qm-ionic-app', $version);
+
+        $templateContent = $this->process_template($pluginContentHTML);
+
+        return $templateContent;
     }
 
 

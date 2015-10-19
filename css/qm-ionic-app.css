@@ -1,0 +1,32 @@
+#show-ionic-app {
+    display: none;
+}
+
+#ionic-app-holder {
+    display: none;
+    z-index: 999999;
+    position: fixed;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    border: 1px solid #eee;
+    background: white;
+}
+
+#ionic-app-holder iframe {
+    z-index: 999998;
+    width: 360px;
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+#qm-ionic-app-show-hide {
+    display: none;
+    height: 48px;
+    width: 48px;
+    position: fixed;
+    bottom: 48px;
+    right: 96px;
+    cursor: pointer;
+}
