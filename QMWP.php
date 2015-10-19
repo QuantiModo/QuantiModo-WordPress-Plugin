@@ -6,7 +6,7 @@
  * Description: A WordPress plugin that allows users to login or register by
  * authenticating with an existing Quantimodo account. Easily
  * drops into new or existing sites, integrates with existing users.
- * Version: 0.3.5
+ * Version: 0.3.6
  * Author: QuantiModo
  * Author URI: https://app.quantimo.do
  * License: GPL2
@@ -49,7 +49,7 @@ Class QMWP
     }
 
     // set a version that we can use for performing plugin updates, this should always match the plugin version:
-    const PLUGIN_VERSION = "0.3.3";
+    const PLUGIN_VERSION = "0.3.6";
 
     // define the settings used by this plugin; this array will be used for registering settings, applying default values, and deleting them during uninstall:
     private $settings = array(
