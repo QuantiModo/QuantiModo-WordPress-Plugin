@@ -4,9 +4,10 @@ jQuery(document).ready(function () {
     var showHideButton = jQuery('#qm-ionic-app-show-hide');
     var iFrame = jQuery('#ionic-app-holder iframe');
 
-    iFrame.load(function () {
+
+    setTimeout(function () {
         showHideButton.show();
-    });
+    }, 4444);
 
     showHideButton.click(function () {
 
