@@ -690,6 +690,19 @@ function jsonCallback(data) {
             var onsetDelay = data[i].onsetDelay;
             var reverseCorrelation = data[i].reverseCorrelation;
             var statisticalSignificance = data[i].statisticalSignificance;
+            var correlationExplanationArray = data[i].correlationExplanation.split(" ");
+            var correlationExplanation = "";
+
+            for (var j = 0; j < correlationExplanationArray.length; j++) {
+
+                correlationExplanation += correlationExplanationArray[j];
+
+                if ((j + 1) % 2 == 0) {
+                    correlationExplanation += "<br>";
+                } else {
+                    correlationExplanation += " ";
+                }
+            }
 
 
             var color = '#3284FF';
@@ -711,6 +724,7 @@ function jsonCallback(data) {
                     //'Effect Size': effectSize,
                     'Number Of Samples': numberOfPairs,
                     'Onset Delay': onsetDelay,
+                    'Explanation': correlationExplanation
                     //'Reverse Correlation': reverseCorrelation,
                     //'Statistical Significance': statisticalSignificance,
                 },
@@ -729,6 +743,7 @@ function jsonCallback(data) {
                     //'Effect Size': effectSize,
                     'Number Of Samples': numberOfPairs,
                     'Onset Delay': onsetDelay,
+                    'Explanation': correlationExplanation
                     //'Reverse Correlation': reverseCorrelation,
                     //'Statistical Significance': statisticalSignificance,
                 },
