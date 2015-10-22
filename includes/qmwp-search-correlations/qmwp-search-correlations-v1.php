@@ -2,6 +2,7 @@
 
 wp_enqueue_style("qmwp-search-correlations", plugins_url('../../', __FILE__) . "css/qmwp-search-correlations.css");
 wp_enqueue_style("jquery-ui-flick", plugins_url('../../', __FILE__) . "css/jquery-ui-flick.css");
+wp_enqueue_style("bootstrap", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("jquery-ui-core");
@@ -53,26 +54,41 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         <p ng-show="isNotEmpty(correlations)">{{countAndTime}}</p>
 
         <div id="searchResultList">
-            <ul>
-                <li ng-repeat="c in correlations">
-                    <div class="resultVariableName"><a
-                            href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
-                            class="result-title" target="_blank">{{c.variable}}</a>
-                        <?php /*<span class="correlationValue">{{c.correlation}}</span> */ ?>
-                        <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
-                           class="shop-cart" target="_blank">
-                            <img src="<?php echo plugins_url('../../', __FILE__) . '/css/images/shop-cart.png'; ?>"/>
+
+            <div class="row search-result" ng-repeat="c in correlations">
+                <div class="col-md-10">
+
+                    <h4>
+                        <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20">
+                            {{c.variable}}
                         </a>
-                    </div>
-                    <div class="resultCategoryName">{{c.category}}</div>
-                </li>
-            </ul>
-        </div>
-        <div id="paginationSearchResultList" ng-show="hasMoreThanTen()">
-            <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
-                        ng-change="pageChanged()"></pagination>
+                        <small>({{c.category}})</small>
+
+                    </h4>
+
+                    <span>{{c.explanation}}</span>
+
+                </div>
+
+                <div class="col-md-2">
+
+                   <!-- <span class="glyphicon glyphicon-thumbs-up"></span>
+
+                    <span class="glyphicon glyphicon-thumbs-down"></span>-->
+
+                    <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
+                       class="shop-cart" target="_blank">
+                        <span class="glyphicon glyphicon-shopping-cart"></span></a>
+
+                </div>
+            </div>
         </div>
     </div>
+    <div id="paginationSearchResultList" ng-show="hasMoreThanTen()">
+        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+                    ng-change="pageChanged()"></pagination>
+    </div>
+</div>
 
 </div>
 

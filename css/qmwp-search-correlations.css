@@ -286,3 +286,14 @@
     background-size: 100% auto;
     margin-bottom: 10px;
 }
+
+#searchResultList h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#searchResultList .search-result {
+    display: flex;
+    align-items: center;
+    margin: 7px 0;
+}

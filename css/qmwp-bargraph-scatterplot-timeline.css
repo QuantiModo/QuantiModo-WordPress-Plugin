@@ -378,3 +378,8 @@
     top: 50%;
     right: 40%;
 }
+
+.bg-tooltip {
+    background: #0044cc;
+    display: none;
+}

@@ -98,13 +98,15 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                                 $scope.totalCorrelations.push({
                                     correlation: correlation.correlationCoefficient,
                                     variable: correlation.cause,
-                                    category: correlation.causeCategory
+                                    category: correlation.causeCategory,
+                                    explanation: correlation.correlationExplanation
                                 });
                             } else {
                                 $scope.totalCorrelations.push({
                                     correlation: correlation.correlationCoefficient,
                                     variable: correlation.effect,
-                                    category: correlation.effectCategory
+                                    category: correlation.effectCategory,
+                                    explanation: correlation.correlationExplanation
                                 });
                             }
                         });
