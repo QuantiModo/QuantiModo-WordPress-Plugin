@@ -61,7 +61,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                         <?php /*<span class="correlationValue">{{c.correlation}}</span> */ ?>
                         <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
                            class="shop-cart" target="_blank">
-                            <img src="<?php echo plugins_url('../../', '/css/images/shop-cart.png', __FILE__); ?>"/>
+                            <img src="<?php echo plugins_url('../../', __FILE__) . '/css/images/shop-cart.png'; ?>"/>
                         </a>
                     </div>
                     <div class="resultCategoryName">{{c.category}}</div>
