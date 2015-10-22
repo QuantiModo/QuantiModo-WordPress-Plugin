@@ -987,11 +987,10 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
 
                 var serie = this.series;
                 //	var s = '<b>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b><br>';
-                var s = '<div class="bg-tooltip"><span style="color:' + serie.color + '">' + rex.name + '</span>: <b>' + this.y + '</b><br/>';
+                var s = '<span style="color:' + serie.color + '">' + rex.name + '</span>: <b>' + this.y + '</b><br/>';
                 jQuery.each(rex.composition, function (name, value) {
                     s += '<b>' + name + ':</b> ' + value + '<br>';
                 });
-                s += '</div>';
                 return s;
             },
             backgroundColor: '#FFF'
