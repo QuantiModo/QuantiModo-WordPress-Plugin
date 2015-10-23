@@ -3,6 +3,7 @@ var QuantimodoSearchConstants = {
     // sourceURL: 'https://dilshod-dev-wplms.quantimo.do/api/',
     vURL: 'public/variables/search/',
     cURL: 'public/correlations/search/',
+    voteURL: 'v1/votes',
     predOfURL: apiHost + '/api/v1/variables/_VARIABLE_/public/causes',
     predByURL: apiHost + '/api/v1/variables/_VARIABLE_/public/effects',
     method: 'JSONP',
@@ -47,6 +48,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
             $scope.correlations =
                 $scope.totalCorrelations.slice(($scope.bigCurrentPage - 1) *
                     $scope.itemsPerPage, $scope.itemsPerPage * $scope.bigCurrentPage);
+            updateVotedCorrelations();
         };
 
         $scope.loadData = function () {
@@ -79,12 +81,6 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
 
             var queryVariable = variable.replace(/ /g, '+');
 
-
-            /*if ($scope.selectOutputAsType === 'effect') {
-             correlationURL = QuantimodoSearchConstants.predOfURL;
-             } else {
-             correlationURL = QuantimodoSearchConstants.predByURL;
-             } */
             correlationURL = QuantimodoSearchConstants.sourceURL + QuantimodoSearchConstants.cURL + variable;
 
             correlationURL = correlationURL.replace('_VARIABLE_', queryVariable);
@@ -99,14 +95,16 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                                     correlation: correlation.correlationCoefficient,
                                     variable: correlation.cause,
                                     category: correlation.causeCategory,
-                                    explanation: correlation.correlationExplanation
+                                    explanation: correlation.correlationExplanation,
+                                    originalCorrelation: correlation
                                 });
                             } else {
                                 $scope.totalCorrelations.push({
                                     correlation: correlation.correlationCoefficient,
                                     variable: correlation.effect,
                                     category: correlation.effectCategory,
-                                    explanation: correlation.correlationExplanation
+                                    explanation: correlation.correlationExplanation,
+                                    originalCorrelation: correlation
                                 });
                             }
                         });
@@ -126,6 +124,33 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
 
         };
 
+        $scope.vote = function (correlationSet, like) {
+            console.log('Liked: ' + like);
+            console.log(correlationSet);
+            QuantimodoSearchService.vote(correlationSet.originalCorrelation, like, function (resp) {
+                console.log(resp);
+
+                var votedCorrelations = JSON.parse(localStorage.getItem('votedCorrelations'));
+
+                if (!votedCorrelations) {
+                    votedCorrelations = [];
+                }
+
+                var votedCorrelation = {
+                    cause: correlationSet.originalCorrelation.cause,
+                    effect: correlationSet.originalCorrelation.effect,
+                    like: like
+                };
+
+                votedCorrelations.push(votedCorrelation);
+
+                localStorage.setItem('votedCorrelations', JSON.stringify(votedCorrelations));
+
+                updateVotedCorrelations();
+
+            })
+        };
+
         if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
             console.log('Variable: ' + QuantimodoSearchConstants.predefinedVariable);
             console.log('Variable as: ' + QuantimodoSearchConstants.predefinedVariableAs);
@@ -133,6 +158,23 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
             $scope.selectOutputAsType = QuantimodoSearchConstants.predefinedVariableAs;
             $scope.searchVariable = QuantimodoSearchConstants.predefinedVariable;
             $scope.showCorrelations($scope.searchVariable);
+        }
+
+        function updateVotedCorrelations() {
+            var votedCorrelations = JSON.parse(localStorage.getItem('votedCorrelations'));
+            if (votedCorrelations && $scope.correlations) {
+                for (var i = 0; i < votedCorrelations.length; i++) {
+                    var votedCorrelation = votedCorrelations[i];
+
+                    for (var j = 0; j < $scope.correlations.length; j++) {
+                        if (votedCorrelation.effect === $scope.correlations[j].originalCorrelation.effect) {
+                            if (votedCorrelation.cause === $scope.correlations[j].originalCorrelation.cause) {
+                                $scope.correlations[j].like = votedCorrelation.like;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }]);
 
@@ -144,6 +186,17 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
             f(response.data);
         });
     };
+
+    this.vote = function (correlation, vote, callback) {
+        $http.post(QuantimodoSearchConstants.sourceURL + QuantimodoSearchConstants.voteURL, {
+            cause: correlation.cause,
+            correlation: correlation.correlationCoefficient,
+            effect: correlation.effect,
+            vote: vote
+        }).then(function (response) {
+            callback(response.data);
+        });
+    }
 });
 
 
@@ -187,6 +240,65 @@ quantimodoSearch.directive('autoComplete', ['QuantimodoSearchService',
             }
         };
     }]);
+
+
+//quantimodo factoty to interact with API server
+/*quantimodoSearch.factory('QuantiModo', function($http, $q, authService){
+ var QuantiModo = {};
+
+ // POST method with the added token
+ QuantiModo.post = function(baseURL, requiredFields, items, successHandler, errorHandler){
+ authService.getAccessToken().then(function(token){
+
+ console.log("TOKKEN : ", token.accessToken);
+ // configure params
+ for (var i = 0; i < items.length; i++)
+ {
+ var item = items[i];
+ for (var j = 0; j < requiredFields.length; j++) {
+ if (!(requiredFields[j] in item)) {
+ throw 'missing required field in POST data; required fields: ' + requiredFields.toString();
+ }
+ }
+ }
+
+ // configure request
+ var request = {
+ method : 'POST',
+ url: config.getURL(baseURL),
+ responseType: 'json',
+ headers : {
+ "Authorization" : "Bearer " + token.accessToken,
+ 'Content-Type': "application/json"
+ },
+ data : JSON.stringify(items)
+ };
+
+ // mashape headers
+ if(config.get('use_mashape') && config.getMashapeKey()){
+ request.headers['X-Mashape-Key'] = config.getMashapeKey();
+ console.log('added mashape_key', request.headers);
+ }
+
+ $http(request).success(successHandler).error(function(data,status,headers,config){
+ Bugsnag.notify("API Request to "+request.url+" Failed",data.error.message,{},"error");
+ errorHandler(data,status,headers,config);
+ });
+
+ }, errorHandler);
+ };
+
+ // post a vote
+ QuantiModo.postVote = function(correlationSet, successHandler , errorHandler){
+ QuantiModo.post('api/v1/votes',
+ ['cause', 'effect', 'correlation', 'vote'],
+ correlationSet,
+ successHandler,
+ errorHandler);
+ };
+
+ return QuantiModo;
+ });*/
 
 
 

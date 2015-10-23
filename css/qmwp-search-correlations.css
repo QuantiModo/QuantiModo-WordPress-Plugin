@@ -297,3 +297,11 @@
     align-items: center;
     margin: 7px 0;
 }
+
+.vote-thumb {
+    cursor: pointer;
+}
+
+.voted {
+    color: #337AB7;
+}

@@ -72,9 +72,11 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
                 <div class="col-md-2">
 
-                   <!-- <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <span class="glyphicon glyphicon-thumbs-up vote-thumb" ng-class="{voted: c.like==1}"
+                          ng-click="vote(c,1)"></span>
 
-                    <span class="glyphicon glyphicon-thumbs-down"></span>-->
+                    <span class="glyphicon glyphicon-thumbs-down vote-thumb" ng-class="{voted: c.like==0}"
+                          ng-click="vote(c,0)"></span>
 
                     <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
                        class="shop-cart" target="_blank">
