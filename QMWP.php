@@ -531,6 +531,12 @@ Class QMWP
         return $user;
     }
 
+    function qmwp_get_local_user_by_email($identity)
+    {
+        global $wpdb;
+        $usermeta_table = $wpdb->usermeta;
+    }
+
     /**
      * login (or register and login) a wordpress user based on their oauth identity
      *
@@ -542,11 +548,23 @@ Class QMWP
         $_SESSION["QMWP"]["USER_ID"] = $oauth_identity["id"];
         // try to find a matching wordpress user for the now-authenticated user's oauth identity:
         $matched_user = $this->qmwp_match_wordpress_user($oauth_identity);
+        $userWithSameEmail = get_user_by('email', $oauth_identity["email"]);
         // handle the matched user if there is one:
         if ($matched_user) {
             // there was a matching wordpress user account, log it in now:
             $user_id = $matched_user->ID;
             $user_login = $matched_user->user_login;
+            wp_set_current_user($user_id, $user_login);
+            wp_set_auth_cookie($user_id);
+            do_action('wp_signon', $user_login, $matched_user);
+            // after login, redirect to the user's last location
+            $this->update_user_tokens($user_id);
+            $this->qmwp_end_login("Logged in successfully!");
+        }
+        if ($userWithSameEmail) {
+            //user with such email is already in registered but not matched
+            $user_id = $userWithSameEmail->ID;
+            $user_login = $userWithSameEmail->user_login;
             wp_set_current_user($user_id, $user_login);
             wp_set_auth_cookie($user_id);
             do_action('wp_signon', $user_login, $matched_user);
