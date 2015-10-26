@@ -302,6 +302,14 @@
     cursor: pointer;
 }
 
-.voted {
+.up.voted {
     color: #337AB7;
+}
+
+.down.voted {
+    color: red;
+}
+
+#searchResultRegion .controls a {
+    text-decoration: none;
 }
