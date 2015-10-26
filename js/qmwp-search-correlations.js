@@ -188,7 +188,7 @@ quantimodoSearch.controller('QuantimodoSearchController',
                         }
                     }
                 }
-            };
+            }
 
         }
 
@@ -278,7 +278,7 @@ quantimodoSearch.service('correlationsVoteHelper', function () {
 
         localStorage.setItem('votedCorrelations', JSON.stringify(votedCorrelations));
 
-    }
+    };
 
 });
 
