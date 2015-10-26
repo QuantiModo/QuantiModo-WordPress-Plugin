@@ -1011,7 +1011,8 @@ Class QMWP
         if (get_option("qmwp_" . $provider . "_api_enabled")) {
             $html .= "<a id='qmwp-login-" . $provider . "' class='qmwp-login-button' href='" . $atts['site_url'] . "?connect=" . $provider . $atts['redirect_to'] . "'>";
             if ($atts['icon_set'] != 'none') {
-                $html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . $display_name . "' class='icon'></img>";
+                //$html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . $display_name . "' class='icon'></img>";
+                $html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . "Sign in" . "' class='icon'></img>";
             }
             $html .= $atts['button_prefix'] . " " . $display_name;
             $html .= "</a>";
