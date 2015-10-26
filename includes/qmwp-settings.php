@@ -255,6 +255,26 @@ $cc_ux = qmwp_cc_ux();
                             </thead>
                             <tbody>
                             <tr>
+                                <td class="shortcode">[qmwp_login_form]</td>
+                                <td>
+                                    <ul>
+                                        <li><strong>layout</strong> - determines whether to display the login buttons as links or buttons, stacked vertically or lined up horizontally. Possible values: links-row, links-column, buttons-row, buttons-column</li>
+                                        <li><strong>align</strong> - sets the horizontal alignment of the custom form elements. Possible values: left, middle, right</li>
+                                        <li><strong>show_login</strong> - determines when the login buttons will be shown. Possible values: never, conditional, always</li>
+                                        <li><strong>show_logout</strong> - determines when the logout button will be shown. Possible values: never, conditional, always</li>
+                                        <li><strong>logged_out_title</strong> - sets the text to display above the custom login form when the user is logged out. Possible values: any text</li>
+                                        <li><strong>logged_in_title</strong> - sets the text to display above the custom login form when the user is logged in. Possible values: any text</li>
+                                        <li><strong>logging_in_title</strong> - sets the text to display above the custom login form when the user is logging ing. Possible values: any text</li>
+                                        <li><strong>logging_out_title</strong> - sets the text to display above the custom login form when the user is logging out. Possible values: any text</li>
+                                        <li><strong>style</strong> - sets the custom css style to apply to the custom login form. Possible values: any text</li>
+                                        <li><strong>class</strong> - sets the custom css class to apply to the custom login form. Possible values: any text</li>
+                                    </ul>
+                                    <p>
+                                        Example: <br>
+                                        [qmwp_login_form layout="buttons-column" align="left" show_logout="never"] allows one to add a login
+                                        form on any page or in a sidebar widget.
+                                    </p>
+                                </td>
                                 <td class="shortcode">[qmwp_rating_faces]</td>
                                 <td>
                                     <ul>
