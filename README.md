@@ -23,15 +23,11 @@ Once a user has authorized QuantiModo to obtain their data, the WordPress site c
 
 SETUP:
 - Download and install the QuantiModo-WordPress-Plugin.
-- Email api@quantimo.do to get an API client id and secret.
-- Setup your QM API key/secret in the WordPress backend under Settings > QM-OAuth.
+- Create a new app in the [QuantiModo Developer Portal](https://admin.quantimo.do/register) to get an API client id and secret.
+- Add your QM API key/secret in the WordPress backend under Settings > QuantiModo.
 - Add the QM Login button anywhere to your site with the [qmoa_login_form] shortcode.
 
 Once a user authorizes you to access their measurements, their OAuth access tokens will be stored and refreshed automatically. They will be able to continue to access their data through your site until they revoke access. 
-
-For example:
-
-[qmoa_login_form layout="buttons-column" align="left"]
 
 *Possible shortcode attributes:*
 
@@ -45,6 +41,10 @@ For example:
 - logging_out_title - sets the text to display above the custom login form when the user is logging out. Possible values: any text
 - style - sets the custom css style to apply to the custom login form. Possible values: any text
 - class - sets the custom css class to apply to the custom login form. Possible values: any text
+
+For example:
+
+[qmoa_login_form layout="buttons-column" align="left"]
 
 ## Timeline Graph
 Shortcode - [qmwp_timeline]
