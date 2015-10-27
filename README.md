@@ -112,9 +112,6 @@ Demo: Try https://chrome.google.com/webstore/detail/quantimodo-universal-trac/ji
 
 The relevant code and more information on the functionality can be found at https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/QM-Search-Plugin
 
-### What still needs to be done for the "Add a Measurment" button shortcode to be complete
-- Code from Chrome extension needs to be re-formatted and made available for embed as a shortcode
-
 ## Correlation Search Box
 Shortcode - [qm_correlation_search]
 
