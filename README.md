@@ -76,7 +76,7 @@ If you have any problems with this process, please submit a help request by clic
 The code to be used for this shortcode is here: 
 https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/correlation_charts
 
-![](https://quantimo.do/wp-content/uploads/2013/08/Correlations-Page-Demo-Sleep-Mood-1024x648.png)
+![correlations-page-demo-sleep-mood-1024x648](https://cloud.githubusercontent.com/assets/2808553/10770971/25b5c1d4-7cbc-11e5-90d5-5c046cb70d89.png)
 
 *Possible shortcode attributes for correlation charts:*
 
