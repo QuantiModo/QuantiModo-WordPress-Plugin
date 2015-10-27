@@ -2,8 +2,8 @@
 
 class QMWPAuth
 {
-    //const API_HOST = 'https://app.quantimo.do:443';
-    const API_HOST = 'https://quantimodo-quantimodo-v1.p.mashape.com';
+    const API_HOST = 'https://app.quantimo.do:443';
+    //const API_HOST = 'https://quantimodo-quantimodo-v1.p.mashape.com';
 
     public $httpUtil;
     public $clientEnabled;
