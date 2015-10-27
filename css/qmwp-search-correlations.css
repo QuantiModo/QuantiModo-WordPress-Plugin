@@ -297,3 +297,19 @@
     align-items: center;
     margin: 7px 0;
 }
+
+.vote-thumb {
+    cursor: pointer;
+}
+
+.up.voted {
+    color: #337AB7;
+}
+
+.down.voted {
+    color: red;
+}
+
+#searchResultRegion .controls a {
+    text-decoration: none;
+}

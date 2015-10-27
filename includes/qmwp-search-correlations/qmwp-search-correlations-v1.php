@@ -1,14 +1,15 @@
 <?php
 
-wp_enqueue_style("qmwp-search-correlations", plugins_url('../../', __FILE__) . "css/qmwp-search-correlations.css");
 wp_enqueue_style("jquery-ui-flick", plugins_url('../../', __FILE__) . "css/jquery-ui-flick.css");
-wp_enqueue_style("bootstrap", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
+wp_enqueue_style("bootstrap-with-icons", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
+wp_enqueue_style("qmwp-search-correlations", plugins_url('../../', __FILE__) . "css/qmwp-search-correlations.css");
 
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("jquery-ui-core");
 wp_enqueue_script("jquery-ui-autocomplete");
-wp_enqueue_script("angular", plugins_url('../../', __FILE__) . "js/libs/angular.min.js");
-wp_enqueue_script("ui-bootstrap", plugins_url('../../', __FILE__) . "js/libs/ui-bootstrap-tpls-0.11.0.min.js");
+wp_enqueue_script("angular", "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular.min.js");
+wp_enqueue_script("ui-bootstrap", "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js");
+wp_enqueue_script("underscore", "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js");
 
 
 wp_enqueue_script("qmwp-search-correlations", plugins_url('../../', __FILE__) . "js/qmwp-search-correlations.js", array('angular'));
@@ -70,11 +71,15 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 controls">
 
-                   <!-- <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <span class="glyphicon glyphicon-thumbs-up vote-thumb up"
+                          ng-class="{voted: c.originalCorrelation.userVote==1}"
+                          ng-click="vote(c, 1)"></span>
 
-                    <span class="glyphicon glyphicon-thumbs-down"></span>-->
+                    <span class="glyphicon glyphicon-thumbs-down vote-thumb down"
+                          ng-class="{voted: c.originalCorrelation.userVote==0}"
+                          ng-click="vote(c, 0)"></span>
 
                     <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
                        class="shop-cart" target="_blank">

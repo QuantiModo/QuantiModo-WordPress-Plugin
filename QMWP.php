@@ -1237,16 +1237,16 @@ Class QMWP
         $template_content = $this->set_js_variables($template, array(
             'accessToken' => $access_token,
             'apiHost' => QMWPAuth::API_HOST,
-            'mashapeKey' => get_option('qmwp_x_mashape_key')    //from settings
+            /*'mashapeKey' => get_option('qmwp_x_mashape_key')*/    //from settings
         ));
 
-        $template_content = $this->add_null_global_variable_alerts(array(
+        /*$template_content = $this->add_null_global_variable_alerts(array(
             get_option('qmwp_x_mashape_key') =>
                 'Please go to:\nhttps://market.mashape.com/quantimodo/quantimodo\n' .
                 'and sign up to get an X-Mashape-Key.\nThen enter it in:\n' .
                 $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] .
                 '/wp-admin/options-general.php?page=QuantiModo'
-        ), $template_content);
+        ), $template_content);*/
 
         return $template_content;
 
@@ -1483,6 +1483,7 @@ Class QMWP
             array(
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPluginUrl' => plugins_url('/', __FILE__),
             ));
 
         $template_content = $this->process_template($pluginContentHTML);
