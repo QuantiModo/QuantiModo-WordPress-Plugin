@@ -1,8 +1,9 @@
 var refreshMeasurementsRange = function (callback) {
+    jQuery('#please-wait').show();
     Quantimodo.getMeasurementsRange([], function (range) {
         AnalyzePage.dateRangeStart = range['lowerLimit'];
         AnalyzePage.dateRangeEnd = range['upperLimit'];
-
+        jQuery('#please-wait').hide();
         if (callback) {
             callback();
         }
@@ -10,6 +11,7 @@ var refreshMeasurementsRange = function (callback) {
 };
 
 var refreshUnits = function (callback) {
+    jQuery('#please-wait').show();
     Quantimodo.getUnits({}, function (units) {
         jQuery.each(units, function (_, unit) {
             var category = AnalyzePage.quantimodoUnits[unit.category];
@@ -23,7 +25,7 @@ var refreshUnits = function (callback) {
         jQuery.each(Object.keys(AnalyzePage.quantimodoUnits), function (_, category) {
             AnalyzePage.quantimodoUnits[category] = AnalyzePage.quantimodoUnits[category].sort();
         });
-
+        jQuery('#please-wait').hide();
         if (callback) {
             callback();
         }
@@ -31,6 +33,7 @@ var refreshUnits = function (callback) {
 };
 
 var refreshVariables = function (variables, callback) {
+    jQuery('#please-wait').show();
     Quantimodo.getVariables({}, function (variables) {
         var storedLastInputVariableName = window.localStorage['lastInputVariableName'],
             storedLastOutputVariableName = window.localStorage['lastOutputVariableName'];
@@ -57,7 +60,7 @@ var refreshVariables = function (variables, callback) {
                 return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
             });
         });
-
+        jQuery('#please-wait').hide();
         if (callback) {
             callback();
         }
@@ -85,6 +88,7 @@ var refreshInputData = function () {
 
 var refreshOutputData = function () {
     AnalyzePage.getOutputVariable(function (variable) {
+        jQuery('#please-wait').show();
         Quantimodo.getDailyMeasurements({
             'variableName': variable.originalName,
             'startTime': AnalyzePage.getStartTime(),
@@ -92,6 +96,7 @@ var refreshOutputData = function () {
             //'groupingWidth': AnalyzePage.getPeriod(),
             'groupingTimezone': AnalyzePage.getTimezone()
         }, function (measurements) {
+            jQuery('#please-wait').hide();
             AnalyzePage.outputMeasurements = measurements;
             AnalyzeChart.setOutputData(variable, measurements);
         });
@@ -125,7 +130,9 @@ var refreshData = function () {
 };
 
 var refreshVariableCategories = function (callback) {
+    jQuery('#please-wait').show();
     Quantimodo.getVariableCategories(null, function (categories) {
+        jQuery('#please-wait').hide();
         AnalyzePage.variableCategories = categories;
 
         if (callback) {

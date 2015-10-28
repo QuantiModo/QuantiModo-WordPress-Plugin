@@ -690,7 +690,7 @@ function jsonCallback(data) {
             var onsetDelay = data[i].onsetDelay;
             var reverseCorrelation = data[i].reverseCorrelation;
             var statisticalSignificance = data[i].statisticalSignificance;
-            var correlationExplanationArray = data[i].correlationExplanation.split(" ");
+            var correlationExplanationArray = data[i].predictorExplanation.split(" ");
             var correlationExplanation = "";
 
             for (var j = 0; j < correlationExplanationArray.length; j++) {
