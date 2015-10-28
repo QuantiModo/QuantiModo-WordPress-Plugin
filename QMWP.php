@@ -76,7 +76,7 @@ Class QMWP
                 'show_login' => 'conditional',
                 'show_logout' => 'conditional',
                 'button_prefix' => 'Login with',
-                'logged_out_title' => 'Please login:',
+                'logged_out_title' => '',
                 'logged_in_title' => 'You are already logged in.',
                 'logging_in_title' => 'Logging in...',
                 'logging_out_title' => 'Logging out...',
@@ -869,7 +869,7 @@ Class QMWP
             'align' => 'left',
             'show_login' => 'conditional',
             'show_logout' => 'conditional',
-            'logged_out_title' => 'Please login:',
+            'logged_out_title' => '',
             'logged_in_title' => 'You are already logged in.',
             'logging_in_title' => 'Logging in...',
             'logging_out_title' => 'Logging out...',
@@ -1011,7 +1011,8 @@ Class QMWP
         if (get_option("qmwp_" . $provider . "_api_enabled")) {
             $html .= "<a id='qmwp-login-" . $provider . "' class='qmwp-login-button' href='" . $atts['site_url'] . "?connect=" . $provider . $atts['redirect_to'] . "'>";
             if ($atts['icon_set'] != 'none') {
-                $html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . $display_name . "' class='icon'></img>";
+                //$html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . $display_name . "' class='icon'></img>";
+                $html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . "Sign in" . "' class='icon'></img>";
             }
             $html .= $atts['button_prefix'] . " " . $display_name;
             $html .= "</a>";
