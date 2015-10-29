@@ -113,7 +113,7 @@ Class QMWP
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_default_outcome_variable' => 'Overall Mood',
         'qmwp_default_outcome_variable_undesirable' => 'false',
-        'qmwp_add_login_logout_nav_items' => 'false',
+        //'qmwp_add_login_logout_nav_items' => 'false',
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
             'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
@@ -237,7 +237,7 @@ Class QMWP
         }
 
         /*add_filter('wp_setup_nav_menu_item', array($this, 'qm_setup_nav_menu_item'), 10, 1);*/
-        add_filter('wp_nav_menu_items', array($this, 'qm_setup_nav_menu_item'));
+        //add_filter('wp_nav_menu_items', array($this, 'qm_setup_nav_menu_item'));
     }
 
     function qm_setup_nav_menu_item($menu)
