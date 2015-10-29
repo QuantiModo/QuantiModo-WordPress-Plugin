@@ -497,6 +497,27 @@ $cc_ux = qmwp_cc_ux();
                                 </td>
                             </tr>
 
+                            <tr valign='top'>
+                                <th scope='row'>Add QuantiModo login/logout items to navigation menu:</th>
+                                <td>
+
+                                    <select name='qmwp_add_login_logout_nav_items'>
+
+                                        <option
+                                            value="false" <?php selected(get_option('qmwp_add_login_logout_nav_items'), 'false'); ?>>
+                                            False
+                                        </option>
+
+                                        <option
+                                            value="true" <?php selected(get_option('qmwp_add_login_logout_nav_items'), 'true'); ?>>
+                                            True
+                                        </option>
+
+                                    </select>
+
+                                </td>
+                            </tr>
+
                             <tr valign='top' class="has-tip">
                                 <th scope='row'>Login redirects to: <a href="#" class="tip-button">[?]</a></th>
                                 <td>
