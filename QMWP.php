@@ -236,7 +236,6 @@ Class QMWP
             add_filter('login_footer', array($this, 'qmwp_push_login_messages'));
         }
 
-        /*add_filter('wp_setup_nav_menu_item', array($this, 'qm_setup_nav_menu_item'), 10, 1);*/
         add_filter('wp_nav_menu_items', array($this, 'qm_setup_nav_menu_item'));
     }
 
@@ -253,7 +252,6 @@ Class QMWP
         } else {
             return $menu;
         }
-
 
     }
 
