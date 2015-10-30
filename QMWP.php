@@ -242,10 +242,7 @@ Class QMWP
 
     function qm_setup_nav_menu_item($menu)
     {
-        $isSetToAddLinks = get_option('qmwp_add_login_logout_nav_items');
-        var_dump($isSetToAddLinks);
-        if ($isSetToAddLinks) {
-            var_dump('inside if');
+        if (get_option('qmwp_add_login_logout_nav_items')) {
             if (!is_user_logged_in()) {
                 $menuItem = "<li><a id='login-with-qm' class='qmwp-login-button' href='/?connect=quantimodo'>Login with QuantiModo</a></li>";
                 return $menu . $menuItem;
@@ -253,7 +250,8 @@ Class QMWP
                 $menuItem = "<li><a id='logout-with-qm' href='" . wp_logout_url() . "'>Logout</a></li>";
                 return $menu . $menuItem;
             }
-
+        } else {
+            return $menu;
         }
 
 
