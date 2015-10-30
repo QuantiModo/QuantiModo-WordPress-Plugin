@@ -67,7 +67,16 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
                     </h4>
 
-                    <span>{{c.explanation}}</span>
+                    <p ng-if="c.originalCorrelation.predictorExplanation">
+                        {{c.originalCorrelation.predictorExplanation}}</p>
+
+                    <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
+                        {{c.originalCorrelation.valuePredictingHighOutcomeExplanation}}
+                    </p>
+
+                    <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
+                        {{c.originalCorrelation.valuePredictingLowOutcomeExplanation}}
+                    </p>
 
                 </div>
 
