@@ -113,7 +113,7 @@ Class QMWP
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_default_outcome_variable' => 'Overall Mood',
         'qmwp_default_outcome_variable_undesirable' => 'false',
-        'qmwp_add_login_logout_nav_items' => 'false',
+        'qmwp_add_login_logout_nav_items' => 0,
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
             'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
@@ -242,8 +242,10 @@ Class QMWP
 
     function qm_setup_nav_menu_item($menu)
     {
-        if (get_option('qmwp_add_login_logout_nav_items') == 'true') {
-
+        $isSetToAddLinks = get_option('qmwp_add_login_logout_nav_items');
+        var_dump($isSetToAddLinks);
+        if ($isSetToAddLinks) {
+            var_dump('inside if');
             if (!is_user_logged_in()) {
                 $menuItem = "<li><a id='login-with-qm' class='qmwp-login-button' href='/?connect=quantimodo'>Login with QuantiModo</a></li>";
                 return $menu . $menuItem;

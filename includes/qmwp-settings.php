@@ -504,12 +504,12 @@ $cc_ux = qmwp_cc_ux();
                                     <select name='qmwp_add_login_logout_nav_items'>
 
                                         <option
-                                            value="false" <?php selected(get_option('qmwp_add_login_logout_nav_items'), 'false'); ?>>
+                                            value="0" <?php selected(get_option('qmwp_add_login_logout_nav_items'), 0); ?>>
                                             False
                                         </option>
 
                                         <option
-                                            value="true" <?php selected(get_option('qmwp_add_login_logout_nav_items'), 'true'); ?>>
+                                            value="1" <?php selected(get_option('qmwp_add_login_logout_nav_items'), 1); ?>>
                                             True
                                         </option>
 
