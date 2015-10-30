@@ -20,6 +20,9 @@
     vertical-align: bottom !important;
     margin-bottom: 10px;
     margin-top: 0 !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .searchsubmit:active {
@@ -161,7 +164,8 @@
 
 #paginationSearchResultList {
     font-size: 0;
-    width: 100%;
+    width: 50%;
+    margin: 0 auto;
 }
 
 #paginationSearchResultList .pagination {
@@ -282,4 +286,31 @@
     background: url(images/quantimodo.png) left top no-repeat;
     background-size: 100% auto;
     margin-bottom: 10px;
+}
+
+#searchResultList h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#searchResultList .search-result {
+    display: flex;
+    align-items: center;
+    margin: 7px 0;
+}
+
+.vote-thumb {
+    cursor: pointer;
+}
+
+.up.voted {
+    color: #337AB7;
+}
+
+.down.voted {
+    color: red;
+}
+
+#searchResultRegion .controls a {
+    text-decoration: none;
 }

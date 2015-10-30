@@ -6,7 +6,7 @@
  * Description: A WordPress plugin that allows users to login or register by
  * authenticating with an existing Quantimodo account. Easily
  * drops into new or existing sites, integrates with existing users.
- * Version: 0.3.6
+ * Version: 0.3.7
  * Author: QuantiModo
  * Author URI: https://app.quantimo.do
  * License: GPL2
@@ -49,7 +49,7 @@ Class QMWP
     }
 
     // set a version that we can use for performing plugin updates, this should always match the plugin version:
-    const PLUGIN_VERSION = "0.3.6";
+    const PLUGIN_VERSION = "0.3.7";
 
     // define the settings used by this plugin; this array will be used for registering settings, applying default values, and deleting them during uninstall:
     private $settings = array(
@@ -76,7 +76,7 @@ Class QMWP
                 'show_login' => 'conditional',
                 'show_logout' => 'conditional',
                 'button_prefix' => 'Login with',
-                'logged_out_title' => 'Please login:',
+                'logged_out_title' => '',
                 'logged_in_title' => 'You are already logged in.',
                 'logging_in_title' => 'Logging in...',
                 'logging_out_title' => 'Logging out...',
@@ -113,6 +113,7 @@ Class QMWP
         'qmwp_delete_settings_on_uninstall' => 0,                        // 0, 1
         'qmwp_default_outcome_variable' => 'Overall Mood',
         'qmwp_default_outcome_variable_undesirable' => 'false',
+        'qmwp_add_login_logout_nav_items' => 0,
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
             'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
@@ -234,6 +235,24 @@ Class QMWP
             add_filter('admin_footer', array($this, 'qmwp_push_login_messages'));
             add_filter('login_footer', array($this, 'qmwp_push_login_messages'));
         }
+
+        add_filter('wp_nav_menu_items', array($this, 'qm_setup_nav_menu_item'));
+    }
+
+    function qm_setup_nav_menu_item($menu)
+    {
+        if (get_option('qmwp_add_login_logout_nav_items')) {
+            if (!is_user_logged_in()) {
+                $menuItem = "<li><a id='login-with-qm' class='qmwp-login-button' href='/?connect=quantimodo'>Login with QuantiModo</a></li>";
+                return $menu . $menuItem;
+            } else {
+                $menuItem = "<li><a id='logout-with-qm' href='" . wp_logout_url() . "'>Logout</a></li>";
+                return $menu . $menuItem;
+            }
+        } else {
+            return $menu;
+        }
+
     }
 
     /**
@@ -531,6 +550,12 @@ Class QMWP
         return $user;
     }
 
+    function qmwp_get_local_user_by_email($identity)
+    {
+        global $wpdb;
+        $usermeta_table = $wpdb->usermeta;
+    }
+
     /**
      * login (or register and login) a wordpress user based on their oauth identity
      *
@@ -542,11 +567,23 @@ Class QMWP
         $_SESSION["QMWP"]["USER_ID"] = $oauth_identity["id"];
         // try to find a matching wordpress user for the now-authenticated user's oauth identity:
         $matched_user = $this->qmwp_match_wordpress_user($oauth_identity);
+        $userWithSameEmail = get_user_by('email', $oauth_identity["email"]);
         // handle the matched user if there is one:
         if ($matched_user) {
             // there was a matching wordpress user account, log it in now:
             $user_id = $matched_user->ID;
             $user_login = $matched_user->user_login;
+            wp_set_current_user($user_id, $user_login);
+            wp_set_auth_cookie($user_id);
+            do_action('wp_signon', $user_login, $matched_user);
+            // after login, redirect to the user's last location
+            $this->update_user_tokens($user_id);
+            $this->qmwp_end_login("Logged in successfully!");
+        }
+        if ($userWithSameEmail) {
+            //user with such email is already in registered but not matched
+            $user_id = $userWithSameEmail->ID;
+            $user_login = $userWithSameEmail->user_login;
             wp_set_current_user($user_id, $user_login);
             wp_set_auth_cookie($user_id);
             do_action('wp_signon', $user_login, $matched_user);
@@ -851,7 +888,7 @@ Class QMWP
             'align' => 'left',
             'show_login' => 'conditional',
             'show_logout' => 'conditional',
-            'logged_out_title' => 'Please login:',
+            'logged_out_title' => '',
             'logged_in_title' => 'You are already logged in.',
             'logging_in_title' => 'Logging in...',
             'logging_out_title' => 'Logging out...',
@@ -993,7 +1030,8 @@ Class QMWP
         if (get_option("qmwp_" . $provider . "_api_enabled")) {
             $html .= "<a id='qmwp-login-" . $provider . "' class='qmwp-login-button' href='" . $atts['site_url'] . "?connect=" . $provider . $atts['redirect_to'] . "'>";
             if ($atts['icon_set'] != 'none') {
-                $html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . $display_name . "' class='icon'></img>";
+                //$html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . $display_name . "' class='icon'></img>";
+                $html .= "<img src='" . $atts['icon_set_path'] . $provider . ".png' alt='" . "Sign in" . "' class='icon'></img>";
             }
             $html .= $atts['button_prefix'] . " " . $display_name;
             $html .= "</a>";
@@ -1218,16 +1256,16 @@ Class QMWP
         $template_content = $this->set_js_variables($template, array(
             'accessToken' => $access_token,
             'apiHost' => QMWPAuth::API_HOST,
-            'mashapeKey' => get_option('qmwp_x_mashape_key')    //from settings
+            /*'mashapeKey' => get_option('qmwp_x_mashape_key')*/    //from settings
         ));
 
-        $template_content = $this->add_null_global_variable_alerts(array(
+        /*$template_content = $this->add_null_global_variable_alerts(array(
             get_option('qmwp_x_mashape_key') =>
                 'Please go to:\nhttps://market.mashape.com/quantimodo/quantimodo\n' .
                 'and sign up to get an X-Mashape-Key.\nThen enter it in:\n' .
                 $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] .
                 '/wp-admin/options-general.php?page=QuantiModo'
-        ), $template_content);
+        ), $template_content);*/
 
         return $template_content;
 
@@ -1464,6 +1502,7 @@ Class QMWP
             array(
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPluginUrl' => plugins_url('/', __FILE__),
             ));
 
         $template_content = $this->process_template($pluginContentHTML);

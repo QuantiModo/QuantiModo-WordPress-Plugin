@@ -17,7 +17,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 ?>
 
 <div id="content" style="margin: 0; padding: 0;">
-    <div class="my-location" style="width: 800px; padding: 15px; background-color: #fff; margin: 0 auto;"></div>
+    <div class="my-location"></div>
     <script>
         if (accessToken) {
 

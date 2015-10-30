@@ -1,4 +1,4 @@
-=== QuantiModo Wordpress Plugin ===
+=== QuantiModo ===
 Contributors: mikepsinn
 Tags: social, science
 Requires at least: 4.3

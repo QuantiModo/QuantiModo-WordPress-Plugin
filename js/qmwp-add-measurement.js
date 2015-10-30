@@ -439,21 +439,7 @@ var loadDateTime = function () {
         format: 'h:i A m/d/Y'
     });
 
-
-    var currentTime = new Date();
-
-    var jYears = currentTime.getFullYear();
-    var jMonths = currentTime.getMonth() + 1;   //months in JS starts from 0 (January)
-    var jDate = currentTime.getDate();
-
-    var jHours = addZero(currentTime.getHours());
-    var jMinutes = addZero(currentTime.getMinutes());
-
-    var jJjMinutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
-
-    var cDate = jMonths + '/' + jDate + '/' + jYears;
-
-    var cDateTime = jJjMinutes + ' ' + cDate;
+    var cDateTime = moment().format('h:mmA M/D/YYYY');
 
     jQuery('#addmeasurement-variable-date').datetimepicker({value: cDateTime, step: 10});
 
@@ -470,20 +456,7 @@ var loadAddDateTime = function () {
         inverseButton: true
     });
 
-    var currentTime = new Date();
-
-    var jYears = currentTime.getFullYear();
-    var jMonths = currentTime.getMonth() + 1;   //months in JS starts from 0 (January)
-    var jDate = currentTime.getDate();
-
-    var jHours = addZero(currentTime.getHours());
-    var jMinutes = addZero(currentTime.getMinutes());
-
-    var cDate = jMonths + '/' + jDate + '/' + jYears;
-
-    var jJjMinutes = ((currentTime.getHours() % 12) ? currentTime.getHours() % 12 : 12) + ':' + currentTime.getMinutes() + (currentTime.getHours() < 12 ? 'AM' : 'PM');
-
-    var cDateTime = jJjMinutes + ' ' + cDate;
+    var cDateTime = moment().format('h:mmA M/D/YYYY');
 
     jQuery('#add-addmeasurement-variable-date').datetimepicker({value: cDateTime, step: 10});
 
