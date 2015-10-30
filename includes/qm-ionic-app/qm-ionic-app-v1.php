@@ -11,7 +11,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
 ?>
 
-<p>Hello from ionic app</p>
+<!--<p>Hello from ionic app</p>-->
 
 <div>
     <div id="qm-ionic-button-holder">
