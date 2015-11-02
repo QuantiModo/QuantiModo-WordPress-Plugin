@@ -16,7 +16,6 @@ var quantimodoSearch = angular.module('quantimodoSearch', ['ui.bootstrap']);
 
 // Define config
 quantimodoSearch.config(function ($httpProvider) {
-
     if (typeof mashapeKey !== 'undefined' && mashapeKey) {
         $httpProvider.defaults.headers.common['X-Mashape-Key'] = mashapeKey;
     }
@@ -24,10 +23,6 @@ quantimodoSearch.config(function ($httpProvider) {
     if (typeof accessToken !== 'undefined' && accessToken) {
         $httpProvider.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
     }
-
-    // for CORS requests but we are going to use JSONP so no need to do these lines
-    // $httpProvider.defaults.useXDomain = true;
-    //  delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
 // The controller
@@ -165,6 +160,45 @@ quantimodoSearch.controller('QuantimodoSearchController',
 
             };
 
+            $scope.addMeasurement = function (variable) {
+                console.log('Going to add measurement for variable: ' + variable);
+                QuantimodoSearchService.getVariableByName(variable, function (varDetails) {
+                    console.log(varDetails);
+
+                    var modalInstance = $uibModal.open({
+                        templateUrl: qmwpPluginUrl + '/templates/search-correlations/add-measurement-modal.html',
+                        controller: 'addMeasurementModalInstanceController',
+                        resolve: {
+                            variable: function () {
+                                return varDetails;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (measurement) {
+                        //confirmed
+                        QuantimodoSearchService.addMeasurement(
+                            [{
+                                measurements: [{
+                                    value: measurement.value,
+                                    timestamp: moment(new Date(measurement.date)).unix()
+                                }],
+                                name: measurement.variable.name,
+                                source: 'QuantiModo',
+                                category: measurement.variable.category,
+                                combinationOperation: measurement.variable.combinationOperation,
+                                unit: measurement.variable.abbreviatedUnitName
+                            }],
+                            function (result) {
+                                console.log(result);
+                            });
+                    }, function () {
+                        console.debug('dismissed');
+                    });
+
+                })
+            };
+
             if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
                 console.log('Variable: ' + QuantimodoSearchConstants.predefinedVariable);
                 console.log('Variable as: ' + QuantimodoSearchConstants.predefinedVariableAs);
@@ -211,6 +245,29 @@ quantimodoSearch.controller('voteModalInstanceController', function ($scope, $ui
 
 });
 
+quantimodoSearch.controller('addMeasurementModalInstanceController',
+    function ($scope, $uibModalInstance, variable) {
+
+        $scope.variable = variable;
+
+        $scope.mgmtVal = variable.mostCommonValue;
+
+        $scope.mgmtDate = moment().format('lll');
+
+        $scope.ok = function () {
+            $uibModalInstance.close({
+                variable: variable,
+                value: $scope.mgmtVal,
+                date: $scope.mgmtDate
+            });
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
+    });
+
 
 // The service
 quantimodoSearch.service('QuantimodoSearchService', function ($http) {
@@ -228,6 +285,21 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
             vote: vote
         }).then(function (response) {
             callback(response.data);
+        });
+    };
+
+    this.getVariableByName = function (varName, callback) {
+        $http.get(QuantimodoSearchConstants.sourceURL + 'v1/variables/' + varName).then(function (response) {
+            callback(response.data);
+        })
+    };
+
+    this.addMeasurement = function (measurement, callback) {
+        console.log('Going to post this measurement:');
+        console.log(measurement);
+
+        $http.post(QuantimodoSearchConstants.sourceURL + 'measurements/v2', measurement, function (result) {
+            callback(result);
         });
     }
 });
@@ -323,6 +395,29 @@ quantimodoSearch.directive('autoComplete', ['QuantimodoSearchService',
             }
         };
     }]);
+
+
+quantimodoSearch.directive('dateTimePicker', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModelCtrl) {
+            jQuery(function () {
+                element.datetimepicker({
+                    dayOfWeekStart: 1,
+                    lang: 'en',
+                    startDate: '1986/01/05',
+                    format: 'M j, Y h:i A',
+                    step: 10,
+                    onChangeDateTime: function (date) {
+                        ngModelCtrl.$setViewValue(moment(date).format('lll'));
+                        scope.$apply();
+                    }
+                });
+            });
+        }
+    }
+});
 
 
 //quantimodo factoty to interact with API server
