@@ -196,7 +196,7 @@ quantimodoSearch.controller('QuantimodoSearchController',
                         console.debug('dismissed');
                     });
 
-                })
+                });
             };
 
             if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
@@ -291,7 +291,7 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
     this.getVariableByName = function (varName, callback) {
         $http.get(QuantimodoSearchConstants.sourceURL + 'v1/variables/' + varName).then(function (response) {
             callback(response.data);
-        })
+        });
     };
 
     this.addMeasurement = function (measurement, callback) {
@@ -416,7 +416,7 @@ quantimodoSearch.directive('dateTimePicker', function () {
                 });
             });
         }
-    }
+    };
 });
 
 
