@@ -288,23 +288,37 @@
     margin-bottom: 10px;
 }
 
+#searchResultList a {
+    color: rgba(66, 133, 244, 1);
+}
+
 #searchResultList h4 {
     margin-top: 10px;
     margin-bottom: 5px;
+    font-weight: 700;
 }
 
 #searchResultList .search-result {
-    display: flex;
-    align-items: center;
     margin: 7px 0;
 }
 
-.vote-thumb {
+.details-and-controls {
+    display: flex;
+    align-items: center;
+}
+
+.controls > * {
+    font-size: 32px;
     cursor: pointer;
+    opacity: 0.5;
+}
+
+.controls > *:hover {
+    opacity: 1;
 }
 
 .up.voted {
-    color: #337AB7;
+    color: rgba(66, 133, 244, 1);
 }
 
 .down.voted {
@@ -313,4 +327,5 @@
 
 #searchResultRegion .controls a {
     text-decoration: none;
+    color: inherit;
 }
