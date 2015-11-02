@@ -58,50 +58,58 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         <div id="searchResultList">
 
             <div class="row search-result" ng-repeat="c in correlations">
-                <div class="col-md-10">
 
-                    <h4>
-                        <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20">
-                            {{c.variable}}
-                        </a>
-                        <small>({{c.category}})</small>
+                <h4>
+                    <a target="_blank"
+                       href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20">
+                        {{c.variable}}
+                    </a>
+                    <small>({{c.category}})</small>
 
-                    </h4>
+                </h4>
 
-                    <p ng-if="c.originalCorrelation.predictorExplanation">
-                        {{c.originalCorrelation.predictorExplanation}}</p>
+                <div class="details-and-controls">
+                    <div class="col-md-6">
 
-                    <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
-                        {{c.originalCorrelation.valuePredictingHighOutcomeExplanation}}
-                    </p>
+                        <p ng-if="c.originalCorrelation.predictorExplanation">
+                            {{c.originalCorrelation.predictorExplanation}}</p>
 
-                    <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
-                        {{c.originalCorrelation.valuePredictingLowOutcomeExplanation}}
-                    </p>
+                        <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
+                            {{c.originalCorrelation.valuePredictingHighOutcomeExplanation}}
+                        </p>
 
-                </div>
+                        <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
+                            {{c.originalCorrelation.valuePredictingLowOutcomeExplanation}}
+                        </p>
 
-                <div class="col-md-2 controls">
+                    </div>
 
-                    <span class="fa fa-thumbs-o-up vote-thumb up"
+                    <div class="col-md-6 controls">
+
+                    <span class="fa fa-thumbs-up vote-thumb up"
                           ng-class="{voted: c.originalCorrelation.userVote==1}"
                           ng-click="vote(c, 1)"></span>
 
-                    <span class="fa fa-thumbs-o-down vote-thumb down"
+                    <span class="fa fa-thumbs-down vote-thumb down"
                           ng-class="{voted: c.originalCorrelation.userVote==0}"
                           ng-click="vote(c, 0)"></span>
 
-                    <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
-                       class="shop-cart" target="_blank">
-                        <span class="fa fa-shopping-cart"></span></a>
 
+                        <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
+                           class="shop-cart" target="_blank">
+                            <span class="fa fa-shopping-cart"></span>
+                        </a>
+
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
     <div id="paginationSearchResultList" ng-show="hasMoreThanTen()">
         <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
-                    ng-change="pageChanged()" previous-text="<" next-text=">"></uib-pagination>
+                        ng-change="pageChanged()" previous-text="<" next-text=">"></uib-pagination>
     </div>
 </div>
 
