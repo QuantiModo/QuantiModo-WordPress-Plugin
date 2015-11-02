@@ -86,12 +86,12 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 
                     <div class="col-md-6 controls">
 
-                    <span class="fa fa-thumbs-up vote-thumb up"
-                          ng-class="{voted: c.originalCorrelation.userVote==1}"
+                    <span class="fa fa-thumbs-o-up vote-thumb up"
+                          ng-class="{'voted fa-thumbs-up': c.originalCorrelation.userVote==1}"
                           ng-click="vote(c, 1)"></span>
 
-                    <span class="fa fa-thumbs-down vote-thumb down"
-                          ng-class="{voted: c.originalCorrelation.userVote==0}"
+                    <span class="fa fa-thumbs-o-down vote-thumb down"
+                          ng-class="{'voted fa-thumbs-o-down': c.originalCorrelation.userVote==0}"
                           ng-click="vote(c, 0)"></span>
 
 
