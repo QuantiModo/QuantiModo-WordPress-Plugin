@@ -1,6 +1,5 @@
 var QuantimodoSearchConstants = {
     sourceURL: apiHost + '/api/',
-    // sourceURL: 'https://dilshod-dev-wplms.quantimo.do/api/',
     vURL: 'public/variables/search/',
     cURL: 'public/correlations/search/',
     voteURL: 'v1/votes',
@@ -26,208 +25,221 @@ quantimodoSearch.config(function ($httpProvider) {
 });
 
 // The controller
-quantimodoSearch.controller('QuantimodoSearchController',
-    ['$scope', 'QuantimodoSearchService', '$uibModal', 'correlationsVoteHelper',
-        function ($scope, QuantimodoSearchService, $uibModal, correlationsVoteHelper) {
-            $scope.correlations = [];
-            $scope.totalCorrelations = [];
-            $scope.maxSize = 10;
-            $scope.itemsPerPage = 10;
-            $scope.autoLoad = false;
-            $scope.homeShown = true;
-            $scope.selectOutputAsType = qmwpShortCodeDefinedVariableAs;
-            $scope.searchVariable = '';
-            $scope.resultTitle = '';
-            $scope.countAndTime = '';
+quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'QuantimodoSearchService', '$uibModal', 'correlationsVoteHelper',
+    function ($scope, QuantimodoSearchService, $uibModal, correlationsVoteHelper) {
+        $scope.correlations = [];
+        $scope.totalCorrelations = [];
+        $scope.maxSize = 10;
+        $scope.itemsPerPage = 10;
+        $scope.autoLoad = false;
+        $scope.homeShown = true;
+        $scope.selectOutputAsType = qmwpShortCodeDefinedVariableAs;
+        $scope.searchVariable = '';
+        $scope.resultTitle = '';
+        $scope.countAndTime = '';
 
-            $scope.loadCurrentPageData = function () {
-                $scope.correlations =
-                    $scope.totalCorrelations.slice(($scope.bigCurrentPage - 1) *
-                        $scope.itemsPerPage, $scope.itemsPerPage * $scope.bigCurrentPage);
-                refreshCorrelationsConsiderVotes();
-            };
+        $scope.loadCurrentPageData = function () {
+            $scope.correlations =
+                $scope.totalCorrelations.slice(($scope.bigCurrentPage - 1) *
+                    $scope.itemsPerPage, $scope.itemsPerPage * $scope.bigCurrentPage);
+        };
 
-            $scope.loadData = function () {
-                $scope.bigTotalItems = $scope.totalCorrelations.length;
-                $scope.bigCurrentPage = 1;
-                $scope.loadCurrentPageData();
-            };
+        $scope.loadData = function () {
+            $scope.bigTotalItems = $scope.totalCorrelations.length;
+            $scope.bigCurrentPage = 1;
+            $scope.loadCurrentPageData();
+        };
 
-            $scope.setPage = function (pageNo) {
-                $scope.currentPage = pageNo;
-            };
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
 
-            $scope.pageChanged = function () {
-                $scope.loadCurrentPageData();
-            };
+        $scope.pageChanged = function () {
+            $scope.loadCurrentPageData();
+        };
 
-            $scope.hasMoreThanTen = function () {
-                return $scope.totalCorrelations.length > 10;
-            };
+        $scope.hasMoreThanTen = function () {
+            return $scope.totalCorrelations.length > 10;
+        };
 
-            $scope.isNotEmpty = function () {
-                return $scope.totalCorrelations.length > 0;
-            };
+        $scope.isNotEmpty = function () {
+            return $scope.totalCorrelations.length > 0;
+        };
 
-            $scope.showCorrelations = function (variable) {
-                var timeToSearch = (new Date()).getTime();
-                var correlationURL = '';
-                $scope.homeShown = false;
-                $scope.autoLoad = true;
+        $scope.showCorrelations = function (variable) {
+            var timeToSearch = (new Date()).getTime();
+            var correlationURL = '';
+            $scope.homeShown = false;
+            $scope.autoLoad = true;
 
-                var queryVariable = variable.replace(/ /g, '+');
+            var queryVariable = variable.replace(/ /g, '+');
 
-                correlationURL = QuantimodoSearchConstants.sourceURL + QuantimodoSearchConstants.cURL + variable;
+            correlationURL = QuantimodoSearchConstants.sourceURL + QuantimodoSearchConstants.cURL + variable;
 
-                correlationURL = correlationURL.replace('_VARIABLE_', queryVariable);
+            correlationURL = correlationURL.replace('_VARIABLE_', queryVariable);
 
-                QuantimodoSearchService.getData(correlationURL, {'effectOrCause': $scope.selectOutputAsType},
-                    function (correlations) {
-                        $scope.totalCorrelations = [];
-                        if (jQuery.isArray(correlations)) {
-                            jQuery.each(correlations, function (_, correlation) {
-                                if ($scope.selectOutputAsType === 'effect') {
-                                    $scope.totalCorrelations.push({
-                                        correlation: correlation.correlationCoefficient,
-                                        variable: correlation.cause,
-                                        category: correlation.causeCategory,
-                                        explanation: correlation.correlationExplanation,
-                                        originalCorrelation: correlation
-                                    });
-                                } else {
-                                    $scope.totalCorrelations.push({
-                                        correlation: correlation.correlationCoefficient,
-                                        variable: correlation.effect,
-                                        category: correlation.effectCategory,
-                                        explanation: correlation.correlationExplanation,
-                                        originalCorrelation: correlation
-                                    });
-                                }
-                            });
-                        }
-                        $scope.resultTitle = 'Strongly predicted by ' + variable;
-                        if ($scope.selectOutputAsType === 'effect') {
-                            $scope.resultTitle = 'Strongest predictors of ' + variable;
-                        }
-                        $scope.countAndTime = $scope.totalCorrelations.length +
-                            ' results  (' + (((new Date()).getTime() - timeToSearch) / 1000) + ' seconds)';
-                        if ($scope.totalCorrelations.length === 0) {
-                            $scope.resultTitle = 'Your search for variable ' + variable + ' does not have any results';
-                        }
-                        $scope.loadData();
+            QuantimodoSearchService.getData(correlationURL, {'effectOrCause': $scope.selectOutputAsType},
+                function (correlations) {
+                    $scope.totalCorrelations = [];
+                    if (jQuery.isArray(correlations)) {
+                        jQuery.each(correlations, function (_, correlation) {
+                            if ($scope.selectOutputAsType === 'effect') {
+                                $scope.totalCorrelations.push({
+                                    correlation: correlation.correlationCoefficient,
+                                    variable: correlation.cause,
+                                    category: correlation.causeCategory,
+                                    explanation: correlation.correlationExplanation,
+                                    originalCorrelation: correlation
+                                });
+                            } else {
+                                $scope.totalCorrelations.push({
+                                    correlation: correlation.correlationCoefficient,
+                                    variable: correlation.effect,
+                                    category: correlation.effectCategory,
+                                    explanation: correlation.correlationExplanation,
+                                    originalCorrelation: correlation
+                                });
+                            }
+                        });
                     }
-                );
+                    $scope.resultTitle = 'Strongly predicted by ' + variable;
+                    if ($scope.selectOutputAsType === 'effect') {
+                        $scope.resultTitle = 'Strongest predictors of ' + variable;
+                    }
+                    $scope.countAndTime = $scope.totalCorrelations.length +
+                        ' results  (' + (((new Date()).getTime() - timeToSearch) / 1000) + ' seconds)';
+                    if ($scope.totalCorrelations.length === 0) {
+                        $scope.resultTitle = 'Your search for variable ' + variable + ' does not have any results';
+                    }
+                    $scope.loadData();
+                }
+            );
 
-            };
+        };
 
-            $scope.vote = function (correlationSet, likeValue) {
-                console.log('Liked: ' + likeValue);
-                console.log(correlationSet);
+        $scope.vote = function (correlationSet, likeValue) {
+            console.log('Liked: ' + likeValue);
+            console.log(correlationSet);
+
+            var modalInstance = $uibModal.open({
+                templateUrl: qmwpPluginUrl + '/templates/search-correlations/vote-confirm-modal.html',
+                controller: 'voteModalInstanceController',
+                resolve: {
+                    confirmationOptions: function () {
+                        return {
+                            correlation: correlationSet.originalCorrelation,
+                            likeValue: likeValue
+                        }
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                //confirmed
+                var prevVoted = correlationsVoteHelper.getPreviouslyVoted(correlationSet.originalCorrelation);
+
+                if (prevVoted === likeValue) {
+                    likeValue = 'null';
+                }
+
+                QuantimodoSearchService.vote(correlationSet.originalCorrelation, likeValue, function (resp) {
+                    console.log(resp);
+
+                    correlationsVoteHelper.saveVotedCorrelation(correlationSet.originalCorrelation, likeValue);
+
+                    correlationSet.originalCorrelation.userVote = likeValue;
+
+                })
+
+            }, function () {
+                console.debug('dismissed');
+            });
+
+        };
+
+        $scope.addMeasurement = function (variable) {
+            console.log('Going to add measurement for variable: ' + variable);
+            QuantimodoSearchService.getVariableByName(variable, function (varDetails) {
+                console.log(varDetails);
 
                 var modalInstance = $uibModal.open({
-                    templateUrl: qmwpPluginUrl + '/templates/search-correlations/vote-confirm-modal.html',
-                    controller: 'voteModalInstanceController',
+                    templateUrl: qmwpPluginUrl + '/templates/search-correlations/add-measurement-modal.html',
+                    controller: 'addMeasurementModalInstanceController',
                     resolve: {
-                        confirmationOptions: function () {
-                            return {
-                                correlation: correlationSet.originalCorrelation,
-                                likeValue: likeValue
-                            }
+                        variable: function () {
+                            return varDetails;
                         }
                     }
                 });
 
-                modalInstance.result.then(function () {
+                modalInstance.result.then(function (measurement) {
                     //confirmed
-                    var prevVoted = correlationsVoteHelper.getPreviouslyVoted(correlationSet.originalCorrelation);
-
-                    if (prevVoted === likeValue) {
-                        likeValue = 'null';
-                    }
-
-                    QuantimodoSearchService.vote(correlationSet.originalCorrelation, likeValue, function (resp) {
-                        console.log(resp);
-
-                        correlationsVoteHelper.saveVotedCorrelation(correlationSet.originalCorrelation, likeValue);
-
-                        refreshCorrelationsConsiderVotes();
-
-                    })
-
+                    QuantimodoSearchService.addMeasurement(
+                        [{
+                            measurements: [{
+                                value: measurement.value,
+                                timestamp: moment(new Date(measurement.date)).unix()
+                            }],
+                            name: measurement.variable.name,
+                            source: 'QuantiModo',
+                            category: measurement.variable.category,
+                            combinationOperation: measurement.variable.combinationOperation,
+                            unit: measurement.variable.abbreviatedUnitName
+                        }],
+                        function (result) {
+                            console.log(result);
+                        });
                 }, function () {
                     console.debug('dismissed');
                 });
 
-            };
+            });
+        };
 
-            $scope.addMeasurement = function (variable) {
-                console.log('Going to add measurement for variable: ' + variable);
-                QuantimodoSearchService.getVariableByName(variable, function (varDetails) {
-                    console.log(varDetails);
+        $scope.openVarSettingsModal = function (variable) {
+
+            console.log('Going change setting for: ' + variable);
+            QuantimodoSearchService.getVariableByName(variable, function (varDetails) {
+                QuantimodoSearchService.getUnitsForVariableByName(varDetails.name, function (units) {
+
+                    console.log('Variable details:' + varDetails);
 
                     var modalInstance = $uibModal.open({
-                        templateUrl: qmwpPluginUrl + '/templates/search-correlations/add-measurement-modal.html',
-                        controller: 'addMeasurementModalInstanceController',
+                        templateUrl: qmwpPluginUrl + '/templates/search-correlations/variable-settings-modal.html',
+                        controller: 'varSettingsModalInstanceController',
                         resolve: {
                             variable: function () {
                                 return varDetails;
+                            },
+                            varUnits: function () {
+                                return units.data;
                             }
                         }
                     });
 
-                    modalInstance.result.then(function (measurement) {
-                        //confirmed
-                        QuantimodoSearchService.addMeasurement(
-                            [{
-                                measurements: [{
-                                    value: measurement.value,
-                                    timestamp: moment(new Date(measurement.date)).unix()
-                                }],
-                                name: measurement.variable.name,
-                                source: 'QuantiModo',
-                                category: measurement.variable.category,
-                                combinationOperation: measurement.variable.combinationOperation,
-                                unit: measurement.variable.abbreviatedUnitName
-                            }],
-                            function (result) {
-                                console.log(result);
-                            });
+                    modalInstance.result.then(function (variable) {
+                        console.log('confirmed');
                     }, function () {
                         console.debug('dismissed');
                     });
 
                 });
-            };
+            });
 
-            if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
-                console.log('Variable: ' + QuantimodoSearchConstants.predefinedVariable);
-                console.log('Variable as: ' + QuantimodoSearchConstants.predefinedVariableAs);
+        };
 
-                $scope.selectOutputAsType = QuantimodoSearchConstants.predefinedVariableAs;
-                $scope.searchVariable = QuantimodoSearchConstants.predefinedVariable;
-                $scope.showCorrelations($scope.searchVariable);
-            }
+        if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
+            console.log('Variable: ' + QuantimodoSearchConstants.predefinedVariable);
+            console.log('Variable as: ' + QuantimodoSearchConstants.predefinedVariableAs);
 
-            function refreshCorrelationsConsiderVotes() {
-                var votedCorrelations = JSON.parse(localStorage.getItem('votedCorrelations'));
-                if (votedCorrelations && $scope.correlations) {
-                    for (var i = 0; i < votedCorrelations.length; i++) {
-                        var votedCorrelation = votedCorrelations[i];
-                        for (var j = 0; j < $scope.correlations.length; j++) {
-                            if (votedCorrelation.effect === $scope.correlations[j].originalCorrelation.effect) {
-                                if (votedCorrelation.cause === $scope.correlations[j].originalCorrelation.cause) {
-                                    $scope.correlations[j].originalCorrelation.userVote = votedCorrelation.like;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
+            $scope.selectOutputAsType = QuantimodoSearchConstants.predefinedVariableAs;
+            $scope.searchVariable = QuantimodoSearchConstants.predefinedVariable;
+            $scope.showCorrelations($scope.searchVariable);
         }
 
-    ]);
+    }
 
+]);
 
 quantimodoSearch.controller('voteModalInstanceController', function ($scope, $uibModalInstance, confirmationOptions) {
 
@@ -245,20 +257,63 @@ quantimodoSearch.controller('voteModalInstanceController', function ($scope, $ui
 
 });
 
-quantimodoSearch.controller('addMeasurementModalInstanceController',
-    function ($scope, $uibModalInstance, variable) {
+quantimodoSearch.controller('addMeasurementModalInstanceController', function ($scope, $uibModalInstance, variable) {
 
-        $scope.variable = variable;
+    $scope.variable = variable;
 
-        $scope.mgmtVal = variable.mostCommonValue;
+    $scope.mgmtVal = variable.mostCommonValue;
 
-        $scope.mgmtDate = moment().format('lll');
+    $scope.mgmtDate = moment().format('lll');
+
+    $scope.ok = function () {
+        $uibModalInstance.close({
+            variable: variable,
+            value: $scope.mgmtVal,
+            date: $scope.mgmtDate
+        });
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+});
+
+quantimodoSearch.controller('varSettingsModalInstanceController',
+    function ($scope, $uibModalInstance, QuantimodoSearchService, variable, varUnits) {
+
+        $scope.varUnits = varUnits;
+        $scope.variable = angular.copy(variable);
+        $scope.assumeMissing = "true";
 
         $scope.ok = function () {
+
+            if ($scope.assumeMissing === "true") {
+                $scope.variable.fillingValue = null;
+            }
+
+            QuantimodoSearchService.getCurrentUserData(function (userData) {
+
+                var variableSettings = {
+                    user: userData.id,
+                    variable: variable.name,
+                    name: $scope.variable.name,
+                    durationOfAction: $scope.variable.durationOfAction,
+                    fillingValue: $scope.variable.fillingValue,
+                    maximumAllowedValue: $scope.variable.maximumAllowedValue,
+                    minimumAllowedValue: $scope.variable.minimumAllowedValue,
+                    onsetDelay: $scope.variable.onsetDelay,
+                    unit: $scope.variable.abbreviatedUnitName
+                };
+
+                QuantimodoSearchService.setVariableSettings(variableSettings, function (response) {
+                    console.log(response);
+                })
+
+            });
+
             $uibModalInstance.close({
-                variable: variable,
-                value: $scope.mgmtVal,
-                date: $scope.mgmtDate
+                variable: $scope.variable,
             });
         };
 
@@ -268,9 +323,9 @@ quantimodoSearch.controller('addMeasurementModalInstanceController',
 
     });
 
-
 // The service
 quantimodoSearch.service('QuantimodoSearchService', function ($http) {
+
     this.getData = function (url, p, f) {
         $http.get(url, {params: p}).then(function (response) {
             f(response.data);
@@ -302,6 +357,26 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
             callback(result);
         });
     }
+
+    this.getUnitsForVariableByName = function (variableName, callback) {
+        $http.get(QuantimodoSearchConstants.sourceURL + 'v1/unitsVariable?variable=' + variableName)
+            .then(function (response) {
+                callback(response);
+            });
+    }
+
+    this.setVariableSettings = function (variableSettings, callback) {
+        $http.post(QuantimodoSearchConstants.sourceURL + 'v1/userVariables', variableSettings, function (response) {
+            callback(response.data);
+        })
+    };
+
+    this.getCurrentUserData = function (callback) {
+        $http.get(QuantimodoSearchConstants.sourceURL + 'v1/user/me').then(function (response) {
+            callback(response.data);
+        })
+    };
+
 });
 
 quantimodoSearch.service('correlationsVoteHelper', function () {
@@ -354,7 +429,6 @@ quantimodoSearch.service('correlationsVoteHelper', function () {
 
 });
 
-
 // The autocomplete directive
 quantimodoSearch.directive('autoComplete', ['QuantimodoSearchService',
     function (QuantimodoSearchService) {
@@ -396,7 +470,6 @@ quantimodoSearch.directive('autoComplete', ['QuantimodoSearchService',
         };
     }]);
 
-
 quantimodoSearch.directive('dateTimePicker', function () {
     return {
         restrict: 'A',
@@ -419,64 +492,6 @@ quantimodoSearch.directive('dateTimePicker', function () {
     };
 });
 
-
-//quantimodo factoty to interact with API server
-/*quantimodoSearch.factory('QuantiModo', function($http, $q, authService){
- var QuantiModo = {};
-
- // POST method with the added token
- QuantiModo.post = function(baseURL, requiredFields, items, successHandler, errorHandler){
- authService.getAccessToken().then(function(token){
-
- console.log("TOKKEN : ", token.accessToken);
- // configure params
- for (var i = 0; i < items.length; i++)
- {
- var item = items[i];
- for (var j = 0; j < requiredFields.length; j++) {
- if (!(requiredFields[j] in item)) {
- throw 'missing required field in POST data; required fields: ' + requiredFields.toString();
- }
- }
- }
-
- // configure request
- var request = {
- method : 'POST',
- url: config.getURL(baseURL),
- responseType: 'json',
- headers : {
- "Authorization" : "Bearer " + token.accessToken,
- 'Content-Type': "application/json"
- },
- data : JSON.stringify(items)
- };
-
- // mashape headers
- if(config.get('use_mashape') && config.getMashapeKey()){
- request.headers['X-Mashape-Key'] = config.getMashapeKey();
- console.log('added mashape_key', request.headers);
- }
-
- $http(request).success(successHandler).error(function(data,status,headers,config){
- Bugsnag.notify("API Request to "+request.url+" Failed",data.error.message,{},"error");
- errorHandler(data,status,headers,config);
- });
-
- }, errorHandler);
- };
-
- // post a vote
- QuantiModo.postVote = function(correlationSet, successHandler , errorHandler){
- QuantiModo.post('api/v1/votes',
- ['cause', 'effect', 'correlation', 'vote'],
- correlationSet,
- successHandler,
- errorHandler);
- };
-
- return QuantiModo;
- });*/
 
 
 

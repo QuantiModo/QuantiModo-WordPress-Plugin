@@ -329,3 +329,8 @@
     text-decoration: none;
     color: inherit;
 }
+
+.variable-settings-modal .modal-body {
+    max-height: 333px;
+    overflow-y: scroll;
+}
