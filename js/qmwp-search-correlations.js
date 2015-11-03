@@ -284,11 +284,11 @@ quantimodoSearch.controller('varSettingsModalInstanceController',
 
         $scope.varUnits = varUnits;
         $scope.variable = angular.copy(variable);
-        $scope.assumeMissing = "true";
+        $scope.assumeMissing = 'true';
 
         $scope.ok = function () {
 
-            if ($scope.assumeMissing === "true") {
+            if ($scope.assumeMissing === 'true') {
                 $scope.variable.fillingValue = null;
             }
 
@@ -308,7 +308,7 @@ quantimodoSearch.controller('varSettingsModalInstanceController',
 
                 QuantimodoSearchService.setVariableSettings(variableSettings, function (response) {
                     console.log(response);
-                })
+                });
 
             });
 
@@ -363,12 +363,12 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
             .then(function (response) {
                 callback(response);
             });
-    }
+    };
 
     this.setVariableSettings = function (variableSettings, callback) {
         $http.post(QuantimodoSearchConstants.sourceURL + 'v1/userVariables', variableSettings, function (response) {
             callback(response.data);
-        })
+        });
     };
 
     this.getCurrentUserData = function (callback) {
