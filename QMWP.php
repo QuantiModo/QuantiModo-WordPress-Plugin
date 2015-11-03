@@ -1539,6 +1539,7 @@ Class QMWP
             array(
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPluginUrl' => plugins_url('/', __FILE__),
             ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1576,6 +1577,7 @@ Class QMWP
             array(
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPluginUrl' => plugins_url('/', __FILE__),
             ));
 
 
