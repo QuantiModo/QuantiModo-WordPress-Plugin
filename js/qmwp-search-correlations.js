@@ -294,7 +294,7 @@ quantimodoSearch.controller('varSettingsModalInstanceController',
 
             QuantimodoSearchService.getCurrentUserData(function (userData) {
 
-                var variableSettings = {
+                var variableSettings = [{
                     user: userData.id,
                     variable: variable.name,
                     name: $scope.variable.name,
@@ -304,7 +304,7 @@ quantimodoSearch.controller('varSettingsModalInstanceController',
                     minimumAllowedValue: $scope.variable.minimumAllowedValue,
                     onsetDelay: $scope.variable.onsetDelay,
                     unit: $scope.variable.abbreviatedUnitName
-                };
+                }];
 
                 QuantimodoSearchService.setVariableSettings(variableSettings, function (response) {
                     console.log(response);
