@@ -103,9 +103,9 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                             <span class="fa fa-shopping-cart"></span>
                         </a>
 
-                        <span class="fa fa-cog" ng-click="openVarSettingsModal(c.originalCorrelation.effect)"></span>
+                        <span class="fa fa-cog" ng-click="openVarSettingsModal(c.originalCorrelation)"></span>
 
-                        <span class="fa fa-plus" ng-click="addMeasurement(c.originalCorrelation.effect)"></span>
+                        <span class="fa fa-plus" ng-click="addMeasurement(c.originalCorrelation)"></span>
 
 
 
