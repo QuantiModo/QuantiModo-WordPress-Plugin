@@ -217,7 +217,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                         }
                     });
 
-                    modalInstance.result.then(function (variable) {
+                    modalInstance.result.then(function () {
                         console.log('confirmed');
                     }, function () {
                         console.debug('dismissed');
@@ -374,7 +374,7 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
     this.getCurrentUserData = function (callback) {
         $http.get(QuantimodoSearchConstants.sourceURL + 'v1/user/me').then(function (response) {
             callback(response.data);
-        })
+        });
     };
 
 });
