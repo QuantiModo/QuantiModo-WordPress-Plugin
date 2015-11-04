@@ -2,16 +2,17 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span
                 aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Voting thumb
-            <span ng-if="opts.likeValue == 1">up</span>
-            <span ng-if="opts.likeValue == 0">down</span> indicates that you
+        <h4 class="modal-title">Vote Thumbs
+            <span ng-if="opts.likeValue == 1">Up</span>
+            <span ng-if="opts.likeValue == 0">Down</span>
         </h4>
     </div>
     <div class="modal-body">
         <p>
-            <u ng-if="opts.likeValue == 1">agree</u>
-            <u ng-if="opts.likeValue == 0">disagree</u>
-            <span> <strong>{{opts.correlation.cause}}</strong> increases <strong>{{opts.correlation.effect}}</strong></span>
+            <span> Do you </span>
+            <u ng-if="opts.likeValue == 1">AGREE</u>
+            <u ng-if="opts.likeValue == 0">DISAGREE</u>
+            <span> <strong>{{opts.correlation.cause}}</strong> increases <strong>{{opts.correlation.effect}}</strong>?</span>
         </p>
     </div>
     <div class="modal-footer">
