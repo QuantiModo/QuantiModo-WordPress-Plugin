@@ -157,7 +157,14 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
 
         };
 
-        $scope.addMeasurement = function (variable) {
+        $scope.addMeasurement = function (correlation) {
+
+            var variable = correlation.effect;
+
+            if (QuantimodoSearchConstants.predefinedVariableAs === 'effect') {
+                variable = correlation.cause;
+            }
+
             console.log('Going to add measurement for variable: ' + variable);
             QuantimodoSearchService.getVariableByName(variable, function (varDetails) {
                 console.log(varDetails);
@@ -196,7 +203,13 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
             });
         };
 
-        $scope.openVarSettingsModal = function (variable) {
+        $scope.openVarSettingsModal = function (correlation) {
+
+            var variable = correlation.effect;
+
+            if (QuantimodoSearchConstants.predefinedVariableAs === 'effect') {
+                variable = correlation.cause;
+            }
 
             console.log('Going change setting for: ' + variable);
             QuantimodoSearchService.getVariableByName(variable, function (varDetails) {
@@ -217,7 +230,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                         }
                     });
 
-                    modalInstance.result.then(function (variable) {
+                    modalInstance.result.then(function () {
                         console.log('confirmed');
                     }, function () {
                         console.debug('dismissed');
@@ -374,7 +387,7 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
     this.getCurrentUserData = function (callback) {
         $http.get(QuantimodoSearchConstants.sourceURL + 'v1/user/me').then(function (response) {
             callback(response.data);
-        })
+        });
     };
 
 });

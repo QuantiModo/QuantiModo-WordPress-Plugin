@@ -12,12 +12,14 @@
             <span> Do you </span>
             <u ng-if="opts.likeValue == 1">AGREE</u>
             <u ng-if="opts.likeValue == 0">DISAGREE</u>
-            <span> <strong>{{opts.correlation.cause}}</strong> increases <strong>{{opts.correlation.effect}}</strong>?</span>
+            <span>
+                {{opts.correlation.predictorExplanation}}?
+            </span>
         </p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" ng-click="ok()">Yes</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">No</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancel</button>
     </div>
 </div>
 <!-- /.modal-content -->

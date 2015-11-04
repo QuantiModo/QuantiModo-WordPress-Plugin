@@ -44,7 +44,6 @@ class QMWPAuth
             'scope' => $this->scope,
             'state' => uniqid('', true),
             'redirect_uri' => $this->redirectUri,
-            'mashape-key' => get_option('qmwp_x_mashape_key')
         );
         $_SESSION['QMWP']['STATE'] = $params['state'];
         $url = $this->urlAuth . http_build_query($params);
@@ -77,12 +76,6 @@ class QMWPAuth
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, (get_option('qmwp_http_util_verify_ssl') == 1 ? 1 : 0));
                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, (get_option('qmwp_http_util_verify_ssl') == 1 ? 2 : 0));
-
-                $mashapeKey = get_option('qmwp_x_mashape_key');
-
-                if (!empty($mashapeKey)) {
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, array("X-Mashape-Key: $mashapeKey"));
-                }
 
                 $result = curl_exec($curl);
                 break;
@@ -139,11 +132,6 @@ class QMWPAuth
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, (get_option('qmwp_http_util_verify_ssl') == 1 ? 1 : 0));
                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, (get_option('qmwp_http_util_verify_ssl') == 1 ? 2 : 0));
 
-                $mashapeKey = get_option('qmwp_x_mashape_key');
-                if (!empty($mashapeKey)) {
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, array("X-Mashape-Key: $mashapeKey"));
-                }
-
                 $result = curl_exec($curl);
                 break;
             case 'stream-context':
@@ -192,11 +180,6 @@ class QMWPAuth
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-                $mashapeKey = get_option('qmwp_x_mashape_key');
-                if (!empty($mashapeKey)) {
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, array("X-Mashape-Key: $mashapeKey"));
-                }
 
                 $result = curl_exec($curl);
                 $result_obj = json_decode($result, true);
