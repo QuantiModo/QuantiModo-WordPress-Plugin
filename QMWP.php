@@ -1484,6 +1484,7 @@ Class QMWP
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'outcomes',
+            'common_or_user' => 'common'
         ), $attributes, 'qmwp_search_correlations');
 
         $version = $attributes['version'];
@@ -1503,6 +1504,7 @@ Class QMWP
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
                 'qmwpPluginUrl' => plugins_url('/', __FILE__),
+                'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1521,6 +1523,7 @@ Class QMWP
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'predictors',
+            'common_or_user' => 'common'
         ), $attributes, 'qmwp_search_for_predictors');
 
         $version = $attributes['version'];
@@ -1540,6 +1543,7 @@ Class QMWP
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
                 'qmwpPluginUrl' => plugins_url('/', __FILE__),
+                'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1558,6 +1562,7 @@ Class QMWP
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'outcomes',
+            'common_or_user' => 'common'
         ), $attributes, 'qmwp_search_for_outcomes');
 
         $version = $attributes['version'];
@@ -1578,6 +1583,7 @@ Class QMWP
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
                 'qmwpPluginUrl' => plugins_url('/', __FILE__),
+                'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
 
 
@@ -1791,6 +1797,16 @@ Class QMWP
                             'outcomes' => 'Outcomes',
                         ),
                     ),
+
+                    array(
+                        'label' => 'Common or user measurements',
+                        'attr' => 'common_or_user',
+                        'type' => 'select',
+                        'options' => array(
+                            'common' => 'Common',
+                            'user' => 'User',
+                        ),
+                    ),
                 ),
             )
         );
@@ -1811,6 +1827,16 @@ Class QMWP
                             'placeholder' => 'Type variable name',
                         ),
                     ),
+
+                    array(
+                        'label' => 'Common or user measurements',
+                        'attr' => 'common_or_user',
+                        'type' => 'select',
+                        'options' => array(
+                            'common' => 'Common',
+                            'user' => 'User',
+                        ),
+                    ),
                 ),
             )
         );
@@ -1829,6 +1855,16 @@ Class QMWP
                         'type' => 'text',
                         'meta' => array(
                             'placeholder' => 'Type variable name',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Common or user measurements',
+                        'attr' => 'common_or_user',
+                        'type' => 'select',
+                        'options' => array(
+                            'common' => 'Common',
+                            'user' => 'User',
                         ),
                     ),
                 ),

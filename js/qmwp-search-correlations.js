@@ -1,13 +1,15 @@
 var QuantimodoSearchConstants = {
     sourceURL: apiHost + '/api/',
     vURL: 'public/variables/search/',
-    cURL: 'public/correlations/search/',
+    publicURL: 'public/correlations/search/',
+    privateURL: 'v1/correlations?',
     voteURL: 'v1/votes',
     predOfURL: apiHost + '/api/v1/variables/_VARIABLE_/public/causes',
     predByURL: apiHost + '/api/v1/variables/_VARIABLE_/public/effects',
     method: 'JSONP',
     predefinedVariable: (typeof qmwpShortCodeDefinedVariable !== 'undefined') ? qmwpShortCodeDefinedVariable : null,
     predefinedVariableAs: (typeof qmwpShortCodeDefinedVariableAs !== 'undefined') ? qmwpShortCodeDefinedVariableAs : null,
+    commonOrUser: (typeof qmwpCommonOrUser !== 'undefined') ? qmwpCommonOrUser : null,
 };
 
 // Define a new module for our search page app
@@ -74,11 +76,20 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
 
             var queryVariable = variable.replace(/ /g, '+');
 
-            correlationURL = QuantimodoSearchConstants.sourceURL + QuantimodoSearchConstants.cURL + variable;
+
+            if (QuantimodoSearchConstants.commonOrUser === 'common') {
+                correlationURL = QuantimodoSearchConstants.sourceURL +
+                    QuantimodoSearchConstants.publicURL + queryVariable +
+                    '?effectOrCause=' + $scope.selectOutputAsType;
+            } else if (QuantimodoSearchConstants.commonOrUser === 'user') {
+                correlationURL = QuantimodoSearchConstants.sourceURL +
+                    QuantimodoSearchConstants.privateURL + $scope.selectOutputAsType + '=' + queryVariable;
+            }
+
 
             correlationURL = correlationURL.replace('_VARIABLE_', queryVariable);
 
-            QuantimodoSearchService.getData(correlationURL, {'effectOrCause': $scope.selectOutputAsType},
+            QuantimodoSearchService.getData(correlationURL, null,
                 function (correlations) {
                     $scope.totalCorrelations = [];
                     if (jQuery.isArray(correlations)) {

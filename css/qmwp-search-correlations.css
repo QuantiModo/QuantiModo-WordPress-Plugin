@@ -338,3 +338,7 @@
 .modal-dialog {
     margin-top: 77px;
 }
+
+.qmwp-tooltip {
+    font-size: small;
+}
