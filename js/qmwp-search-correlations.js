@@ -77,11 +77,11 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
             var queryVariable = variable.replace(/ /g, '+');
 
 
-            if (QuantimodoSearchConstants.commonOrUser === "common") {
+            if (QuantimodoSearchConstants.commonOrUser === 'common') {
                 correlationURL = QuantimodoSearchConstants.sourceURL +
                     QuantimodoSearchConstants.publicURL + queryVariable +
                     '?effectOrCause=' + $scope.selectOutputAsType;
-            } else if (QuantimodoSearchConstants.commonOrUser === "user") {
+            } else if (QuantimodoSearchConstants.commonOrUser === 'user') {
                 correlationURL = QuantimodoSearchConstants.sourceURL +
                     QuantimodoSearchConstants.privateURL + $scope.selectOutputAsType + '=' + queryVariable;
             }
