@@ -334,3 +334,7 @@
     max-height: 333px;
     overflow-y: scroll;
 }
+
+.modal-dialog {
+    margin-top: 77px;
+}
