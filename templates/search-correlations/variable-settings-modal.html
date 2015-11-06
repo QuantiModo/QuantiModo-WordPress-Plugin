@@ -2,19 +2,20 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span
                 aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{variable.name}} settings</h4>
+        <h4 class="modal-title">{{variable.name}} Variable Settings</h4>
     </div>
     <div class="modal-body">
 
         <form>
 
             <div class="form-group">
-                <label for="var-name">Name:</label>
-                <input ng-model="variable.name" type="text" class="form-control" id="var-name" required>
+                <label for="var-name">Name</label>
+                <input ng-model="variable.name" type="text" class="form-control" id="var-name" required
+                       readonly>
             </div>
 
             <div class="form-group">
-                <label for="var-unit">Unit:</label>
+                <label for="var-unit">Unit</label>
 
                 <select ng-if="varUnits && varUnits.length > 0"
                         ng-model="variable.abbreviatedUnitName"
@@ -33,28 +34,28 @@
             </div>
 
             <div class="form-group">
-                <label for="var-category">Category:</label>
+                <label for="var-category">Variable Category</label>
                 <input ng-model="variable.category" type="text" class="form-control" id="var-category" required
                        readonly>
             </div>
 
             <div class="form-group">
-                <label for="var-min">Minimum Value:</label>
+                <label for="var-min">Minimum Value</label>
                 <input ng-model="variable.minimumAllowedValue" type="text" class="form-control" id="var-min" required>
             </div>
 
             <div class="form-group">
-                <label for="var-max">Maximum Value:</label>
+                <label for="var-max">Maximum Value</label>
                 <input ng-model="variable.maximumAllowedValue" type="text" class="form-control" id="var-max" required>
             </div>
 
             <div class="form-group">
-                <label for="var-delay">Onset Delay:</label>
+                <label for="var-delay">Onset Delay (seconds)</label>
                 <input ng-model="variable.onsetDelay" type="number" class="form-control" id="var-delay" required>
             </div>
 
             <div class="form-group">
-                <label for="var-duration">Duration of Action:</label>
+                <label for="var-duration">Duration of Action (seconds)</label>
                 <input ng-model="variable.durationOfAction" type="number" class="form-control" id="var-duration"
                        required>
             </div>
