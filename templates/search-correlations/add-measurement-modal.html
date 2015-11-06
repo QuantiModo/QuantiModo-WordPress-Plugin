@@ -2,13 +2,13 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span
                 aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Add measurement for: {{variable.name}}</h4>
+        <h4 class="modal-title">Add measurement for {{variable.name}}</h4>
     </div>
     <div class="modal-body">
 
         <form>
             <div class="form-group">
-                <label for="var-value">Measurement Value:</label>
+                <label for="var-value">Value</label>
 
                 <div class="input-group">
                     <input ng-model="mgmtVal" type="text" class="form-control" id="var-value" required>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="var-date">Mesaurement Date:</label>
+                <label for="var-date">Date</label>
                 <input type="text" ng-model="mgmtDate" date-time-picker class="form-control" id="var-date" required>
             </div>
         </form>
