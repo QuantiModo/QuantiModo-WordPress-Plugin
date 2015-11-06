@@ -90,23 +90,41 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                     <div class="col-md-4 controls">
 
                     <span class="fa fa-thumbs-o-up vote-thumb up"
+                          uib-tooltip="Give it a thumbs up if this helped you before!"
+                          tooltip-class="qmwp-tooltip"
                           ng-class="{'voted fa-thumbs-up': c.originalCorrelation.userVote==1}"
                           ng-click="vote(c, 1)"></span>
 
                     <span class="fa fa-thumbs-o-down vote-thumb down"
+                          uib-tooltip="Does this result look wrong to you? Help us improve our algorithms
+                          by giving it a thumbs down"
+                          tooltip-class="qmwp-tooltip"
                           ng-class="{'voted fa-thumbs-o-down': c.originalCorrelation.userVote==0}"
                           ng-click="vote(c, 0)"></span>
 
 
                         <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
                            class="shop-cart" target="_blank">
-                            <span class="fa fa-shopping-cart"></span>
+                            <span class="fa fa-shopping-cart"
+                                  tooltip-class="qmwp-tooltip"
+                                  uib-tooltip="Buy it here">
+
+                            </span>
                         </a>
 
-                        <span class="fa fa-cog" ng-click="openVarSettingsModal(c.originalCorrelation)"></span>
+                        <span class="fa fa-cog"
+                              uib-tooltip="Improve our algorithms by optimizing the variable settings"
+                              tooltip-class="qmwp-tooltip"
+                              ng-click="openVarSettingsModal(c.originalCorrelation)">
 
-                        <span class="fa fa-plus" ng-click="addMeasurement(c.originalCorrelation)"></span>
+                        </span>
 
+                        <span class="fa fa-plus"
+                              uib-tooltip="Add measurement for variable"
+                              tooltip-class="qmwp-tooltip"
+                              ng-click="addMeasurement(c.originalCorrelation)">
+
+                        </span>
 
 
                     </div>
