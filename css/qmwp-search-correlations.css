@@ -317,14 +317,6 @@
     opacity: 1;
 }
 
-.up.voted {
-    color: rgba(66, 133, 244, 1);
-}
-
-.down.voted {
-    color: red;
-}
-
 #searchResultRegion .controls a {
     text-decoration: none;
     color: inherit;

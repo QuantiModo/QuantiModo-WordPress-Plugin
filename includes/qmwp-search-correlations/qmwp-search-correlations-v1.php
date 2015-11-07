@@ -99,7 +99,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                           uib-tooltip="Does this result look wrong to you? Help us improve our algorithms
                           by giving it a thumbs down"
                           tooltip-class="qmwp-tooltip"
-                          ng-class="{'voted fa-thumbs-o-down': c.originalCorrelation.userVote==0}"
+                          ng-class="{'voted fa-thumbs-down': c.originalCorrelation.userVote==0}"
                           ng-click="vote(c, 0)"></span>
 
 
