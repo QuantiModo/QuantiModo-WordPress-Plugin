@@ -290,6 +290,8 @@
 
 #searchResultList a {
     color: #1A0DAB;
+    font-size: 24px;
+    font-family: arial,sans-serif;
 }
 
 #searchResultList h4 {
