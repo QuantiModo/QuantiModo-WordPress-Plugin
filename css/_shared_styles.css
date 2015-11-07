@@ -38,7 +38,7 @@
 #accordion-settings-header {
     color: #4387FD;
     background: #fff;
-    border-bottom: solid 3px #229DA5;
+    border-bottom: solid 3px #4387FD;
     cursor: auto;
 }
 
@@ -252,7 +252,7 @@
 #deletemeasurement-dialog-header {
     color: #fff;
     background: #4387FD;
-    border-bottom: solid 3px #229DA5;
+    border-bottom: solid 3px #4387FD;
     cursor: auto;
 }
 
@@ -356,7 +356,7 @@
 #module-addmeasurement-dialog-header {
     color: #fff;
     background: #4387FD;
-    border-bottom: solid 3px #229DA5;
+    border-bottom: solid 3px #4387FD;
     cursor: auto;
 }
 
