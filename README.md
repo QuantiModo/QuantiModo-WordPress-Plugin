@@ -19,7 +19,7 @@ The purpose of allowing users to log in via the QuantiModo API's OAuth2 endpoint
 
 It is in this way that the user may authorize the QM API to obtain their data from other API's such as Fitbit, MyFitnessPal, Withings, etc. This is done using the Connect shortcode.
 
-Once a user has authorized QuantiModo to obtain their data, the WordPress site can use the OAuth2 access token to also make API requests to the QM API in order to store new user supplied data or visualize their data on various graphs produced by the Timeline and Correlations shortcode. 
+Once a user has authorized QuantiModo to obtain their data, the WordPress site can use the OAuth2 access token to also make API requests to the QM API in order to store new user supplied data or visualize their data on various graphs produced by the Timeline and Predictors shortcode. 
 
 SETUP:
 - Download and install the QuantiModo-WordPress-Plugin.

@@ -87,7 +87,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         <div id="bar-graph">
             <header class="graph-header" id="bar-graph-header">
                 <div class="generalHeader bargraphHeader">
-                    Correlations
+                    Please wait...
                 </div>
                 <div class="icon-question-sign icon-large questionMark"
                      title="This is the list of variables in order of their correlation with your examined variable."></div>
