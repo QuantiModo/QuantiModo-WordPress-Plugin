@@ -720,7 +720,7 @@ AnalyzeChart = function () {
         scatterplotChart = new Highcharts.Chart({
             chart: {renderTo: 'graph-scatterplot', type: 'scatter', zoomType: 'xy'},
             title: {text: 'The squirrels are currently retrieving your data.'},
-            subtitle: {text: 'Correlation Scatterplot'},
+            subtitle: {text: 'Scatterplot'},
             xAxis: {
                 title: {text: 'Data loading...', style: {color: outputColor}},
                 labels: {

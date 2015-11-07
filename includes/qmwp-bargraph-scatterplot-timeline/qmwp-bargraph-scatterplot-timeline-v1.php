@@ -134,7 +134,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
             <div class="inner">
                 <header class="graph-header" id="correlation-gauge-header">
                     <div class="generalHeader correlationHeader">
-                        Correlation Scatterplot
+                        Scatterplot
                     </div>
                     <!--  <div id="gauge-correlation-settingsicon" data-dropdown="#dropdown-gauge-settings" class="gear-icon"></div>
                       <div class="icon-question-sign icon-large questionMark"></div> -->
@@ -190,7 +190,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
             <div class="inner">
                 <header class="graph-header" id="scatterplot-graph-header">
                     <!-- <div class="generalHeader scatterplotHeader">
-                         Correlation Scatterplot
+                         Scatterplot
                      </div>-->
                     <div class="keepInline">
                         <div id="graph-scatterplot-settingsicon" data-dropdown="#dropdown-scatterplot-settings"
