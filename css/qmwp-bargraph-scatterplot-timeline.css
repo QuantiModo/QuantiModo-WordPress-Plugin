@@ -31,7 +31,7 @@
     display: block;
     font-size: 1.2em;
     text-indent: 12px;
-    background: #29bdca;
+    background: #4387FD;
     border-bottom: solid 3px #229DA5;
     margin-top: 12px;
 }
@@ -66,7 +66,7 @@
 /* Date Range */
 /**************/
 #accordion-date-header {
-    background: #29bdca;
+    background: #4387FD;
     border-bottom: solid 3px #409caf;
 }
 
@@ -74,7 +74,7 @@
 /* Output variable*/
 /******************/
 #accordion-output-header {
-    background: #29bdca;
+    background: #4387FD;
     border-bottom: solid 3px #409caf;
 }
 

@@ -906,7 +906,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                         selectedBargraphRowIndex.attr('fill', this.options.color);
                         selectedVarNameOnBargraphRow.attr('style', '');
                     }
-                    this.svgElem.attr('fill', '#29bdca');
+                    this.svgElem.attr('fill', '#4387FD');
                     selectedBargraphRowIndex = this.svgElem;
                     selectedVarNameOnBargraphRow = jQuery("div[data-row=\'" + escape(this.axis.categories[this.options.from + 0.5].originalName) + "\']");
                     selectedVarNameOnBargraphRow.attr('style', 'color:#FFF;');
@@ -921,7 +921,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                     if (leaveBargraphRowIndex != null && leaveBargraphRowIndex != overBargraphRowIndex && settingsIconsOnBargraphRow != null) {
                         settingsIconsOnBargraphRow.attr('style', '');
                     }
-                    this.svgElem.attr('fill', '#29bdca');
+                    this.svgElem.attr('fill', '#4387FD');
                     overVarNameOnBargraphRow.attr('style', 'color:#FFF;');
                     settingsIconsOnBargraphRow = jQuery("div[data-row=\'" + escape(this.axis.categories[this.options.from + 0.5].originalName) + "\'] .setButton");
                     settingsIconsOnBargraphRow.attr('style', 'opacity:1;');
@@ -1003,7 +1003,7 @@ function highlightBargraphRow() {
         selectedBargraphRowIndex.attr('fill', '#FFF');
         selectedVarNameOnBargraphRow.attr('style', '');
     }
-    overBargraphRowIndex.attr('fill', '#29bdca');
+    overBargraphRowIndex.attr('fill', '#4387FD');
     selectedBargraphRowIndex = overBargraphRowIndex;
     selectedVarNameOnBargraphRow = overVarNameOnBargraphRow;
 }

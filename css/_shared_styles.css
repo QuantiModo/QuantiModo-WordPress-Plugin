@@ -36,7 +36,7 @@
 /*Var Settings*/
 /**************/
 #accordion-settings-header {
-    color: #29bdca;
+    color: #4387FD;
     background: #fff;
     border-bottom: solid 3px #229DA5;
     cursor: auto;
@@ -50,7 +50,7 @@
 #accordion-settings-content b {
     font-size: 1.05em;
     display: block;
-    color: #29bdca;
+    color: #4387FD;
 }
 
 #accordion-settings-content table {
@@ -213,7 +213,7 @@
 }
 
 #joinedVariablesList li:hover {
-    color: #29bdca;
+    color: #4387FD;
 }
 
 #joinedVariablesList li:hover div {
@@ -251,7 +251,7 @@
 
 #deletemeasurement-dialog-header {
     color: #fff;
-    background: #29bdca;
+    background: #4387FD;
     border-bottom: solid 3px #229DA5;
     cursor: auto;
 }
@@ -355,7 +355,7 @@
 
 #module-addmeasurement-dialog-header {
     color: #fff;
-    background: #29bdca;
+    background: #4387FD;
     border-bottom: solid 3px #229DA5;
     cursor: auto;
 }
@@ -363,7 +363,7 @@
 #module-addmeasurement-dialog-content b {
     font-size: 1.05em;
     display: block;
-    color: #29bdca;
+    color: #4387FD;
 }
 
 #module-addmeasurement-dialog-content table {
