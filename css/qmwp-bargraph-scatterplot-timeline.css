@@ -67,7 +67,7 @@
 /**************/
 #accordion-date-header {
     background: #4387FD;
-    border-bottom: solid 3px #409caf;
+    border-bottom: solid 3px #4387FD;
 }
 
 /******************/
@@ -75,7 +75,7 @@
 /******************/
 #accordion-output-header {
     background: #4387FD;
-    border-bottom: solid 3px #409caf;
+    border-bottom: solid 3px #4387FD;
 }
 
 #accordion-output-content {
