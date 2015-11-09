@@ -1416,6 +1416,7 @@ Class QMWP
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'outcomes',
+            'allow_user_change_variable' => 'false',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
@@ -1434,7 +1435,8 @@ Class QMWP
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes
+                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                    'qmwpShowVariableSelectors' => $attributes['allow_user_change_variable']
                 ));
         }
 
@@ -1744,6 +1746,16 @@ Class QMWP
                         'options' => array(
                             'predictors' => 'Predictors',
                             'outcomes' => 'Outcomes',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Allow user to select variable',
+                        'attr' => 'allow_user_change_variable',
+                        'type' => 'select',
+                        'options' => array(
+                            'true' => 'True',
+                            'false' => 'False',
                         ),
                     ),
 

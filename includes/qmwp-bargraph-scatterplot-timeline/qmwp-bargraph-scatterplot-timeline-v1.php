@@ -74,7 +74,8 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
             <div class="accordion-content closed" id="accordion-output-content">
                 <div class="inner">
                     <select id="selectOutputCategory"></select>
-                    <select id="selectOutputVariable"></select>
+                    <!--<select id="selectOutputVariable"></select>-->
+                    <input type="text" id="selectOutputVariable">
                     <select id="selectOutputAsType">
                         <option value="effect">As Effect</option>
                         <option value="cause">As Cause</option>
