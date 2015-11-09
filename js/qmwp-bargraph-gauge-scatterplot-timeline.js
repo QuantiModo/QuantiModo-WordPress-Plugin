@@ -57,14 +57,49 @@ var AnalyzePage = function () {
 
     var initVariableSelectors = function () {
 
-        /*jQuery('#selectOutputCategory').change(outputCategoryUpdated);
-         jQuery('#selectOutputVariable').change(function () {
-         outputVariableUpdated();
-         getBargraph();
-         });
-         jQuery('#selectOutputAsType').change(function () {
-         getBargraph(true);
-         });*/
+        if (qmwpShowVariableSelectors === 'true') {
+
+            var variableSelector = jQuery('#selectOutputVariable');
+            var typeSelector = jQuery('#selectOutputAsType');
+
+
+            variableSelector.autocomplete({
+                source: function (req, resp) {
+
+                    Quantimodo.searchVariables(variableSelector.val(), function (data) {
+
+                        variables = data;
+                        resp(jQuery.map(data, function (variable) {
+                            return {
+                                label: variable.name,
+                                value: variable.name,
+                                variable: variable
+                            };
+                        }));
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+
+                    var variable = ui.item.variable;
+
+                    outputVariableUpdated();
+                    getBargraph(false, variable.name);
+
+                }
+            });
+
+            typeSelector.change(function () {
+                getBargraph(true);
+            });
+
+            variableSelector.val(qmwpShortCodeDefinedVariable);
+            typeSelector.val(qmwpShortCodeDefinedVariableAs);
+
+            typeSelector.show();
+            variableSelector.show();
+
+        }
 
     };
 
@@ -464,7 +499,14 @@ var AnalyzePage = function () {
             return AnalyzePage.getVariableFromOriginalName(AnalyzePage.selectedInputVariableName);
         },
         getOutputVariable: function (callback) {
-            Quantimodo.getVariableByName(qmwpShortCodeDefinedVariable, function (variable) {
+
+            var variableName = jQuery('#selectOutputVariable').val();
+
+            if (!variableName) {
+                variableName = qmwpShortCodeDefinedVariable;
+            }
+
+            Quantimodo.getVariableByName(variableName, function (variable) {
                 callback(variable);
             });
         },
@@ -775,7 +817,7 @@ function jsonCallback(data) {
     }
 }
 
-function getBargraph(bUseCache) {
+function getBargraph(bUseCache, variable) {
     jQuery('#graph-bar').bind('mouseenter', function (event) {
         jQuery('#graph-bar').css('cursor', 'pointer');
     });
@@ -792,7 +834,13 @@ function getBargraph(bUseCache) {
 
     jQuery('#graph-bar').hide();
     jQuery('.barloading').show();
-    var val = qmwpShortCodeDefinedVariable;
+
+    var val = variable;
+
+    if (!val) {
+        val = qmwpShortCodeDefinedVariable;
+    }
+
     var url = Quantimodo.url + 'correlations';
 
     //var valAs = jQuery('#selectOutputAsType').val();
@@ -842,8 +890,8 @@ function getBargraph(bUseCache) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
             /*if (mashapeKey) {
-                xhr.setRequestHeader('X-Mashape-Key', mashapeKey);
-            }*/
+             xhr.setRequestHeader('X-Mashape-Key', mashapeKey);
+             }*/
         }
     }).done(function (data) {
         if (valAs == 'cause') {
@@ -869,7 +917,11 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
 
     selectedVariableName = sortedByCorrelation[0].label;
 
-    var varName = qmwpShortCodeDefinedVariable;
+    var varName = jQuery('#selectOutputVariable').val();
+
+    if (!varName) {
+        varName = qmwpShortCodeDefinedVariable;
+    }
     //var valAs = jQuery('#selectOutputAsType').val();
     var valAs = qmwpShortCodeDefinedVariableAs;
     var headerText = "Predictors of ";

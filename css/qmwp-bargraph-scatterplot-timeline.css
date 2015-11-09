@@ -101,7 +101,7 @@
 /*******************/
 #correlation-gauge {
     font-size: 1.15em;
-/ / padding-left : 12 px;
+/ / padding-left: 12 px;
     width: 0px;
     float: left;
 }
@@ -123,7 +123,7 @@
 /* Scatterplot card*/
 /*******************/
 #scatterplot-graph {
-/ / padding-left : 12 px;
+/ / padding-left: 12 px;
     overflow: hidden;
 }
 
@@ -345,6 +345,10 @@
 
 #selectOutputCategory, #selectOutputVariable, #selectOutputAsType {
     display: none;
+}
+
+#selectOutputVariable {
+    width: 100%;
 }
 
 #please-wait {
