@@ -366,11 +366,13 @@ $cc_ux = qmwp_cc_ux();
                                         <li>
                                             show_predictors_or_outcomes
                                         </li>
+                                        <li>
+                                            allow_user_change_variable
+                                        </li>
                                     </ul>
                                     <p>
                                         Specify variable and how it should be considered (cause or effect)
                                     </p>
-
                                     <p>
                                         Example: <br>
                                         [qmwp_bargraph_scatterplot_timeline examined_variable_name="Sleep Quality"
