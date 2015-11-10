@@ -30,7 +30,6 @@ quantimodoSearch.config(function ($httpProvider) {
 quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'QuantimodoSearchService', '$uibModal', 'correlationsVoteHelper',
     function ($scope, QuantimodoSearchService, $uibModal, correlationsVoteHelper) {
         $scope.correlations = [];
-        $scope.totalCorrelations = [];
         $scope.maxSize = 10;
         $scope.itemsPerPage = 10;
         $scope.autoLoad = false;
@@ -61,11 +60,16 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
         };
 
         $scope.hasMoreThanTen = function () {
-            return $scope.totalCorrelations.length > 10;
+            if ($scope.totalCorrelations) {
+                return $scope.totalCorrelations.length > 10;
+            } else {
+                return false;
+            }
+
         };
 
-        $scope.isNotEmpty = function () {
-            return $scope.totalCorrelations.length > 0;
+        $scope.isNotEmpty = function (correlations) {
+            return correlations.length > 0;
         };
 
         $scope.showCorrelations = function (variable) {
@@ -180,37 +184,43 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
             QuantimodoSearchService.getVariableByName(variable, function (varDetails) {
                 console.log(varDetails);
 
-                var modalInstance = $uibModal.open({
-                    templateUrl: qmwpPluginUrl + '/templates/search-correlations/add-measurement-modal.html',
-                    controller: 'addMeasurementModalInstanceController',
-                    resolve: {
-                        variable: function () {
-                            return varDetails;
+                QuantimodoSearchService.getUnits(function (units) {
+
+                    var modalInstance = $uibModal.open({
+                        templateUrl: qmwpPluginUrl + '/templates/search-correlations/add-measurement-modal.html',
+                        controller: 'addMeasurementModalInstanceController',
+                        resolve: {
+                            variable: function () {
+                                return varDetails;
+                            },
+                            units: function () {
+                                return units;
+                            }
                         }
-                    }
-                });
+                    });
 
-                modalInstance.result.then(function (measurement) {
-                    //confirmed
-                    QuantimodoSearchService.addMeasurement(
-                        [{
-                            measurements: [{
-                                value: measurement.value,
-                                timestamp: moment(new Date(measurement.date)).unix()
+                    modalInstance.result.then(function (measurement) {
+                        //confirmed
+                        QuantimodoSearchService.addMeasurement(
+                            [{
+                                measurements: [{
+                                    value: measurement.value,
+                                    timestamp: moment(new Date(measurement.date)).unix()
+                                }],
+                                name: measurement.variable.name,
+                                source: 'QuantiModo',
+                                category: measurement.variable.category,
+                                combinationOperation: measurement.variable.combinationOperation,
+                                unit: measurement.variable.abbreviatedUnitName
                             }],
-                            name: measurement.variable.name,
-                            source: 'QuantiModo',
-                            category: measurement.variable.category,
-                            combinationOperation: measurement.variable.combinationOperation,
-                            unit: measurement.variable.abbreviatedUnitName
-                        }],
-                        function (result) {
-                            console.log(result);
-                        });
-                }, function () {
-                    console.debug('dismissed');
-                });
+                            function (result) {
+                                console.log(result);
+                            });
+                    }, function () {
+                        console.debug('dismissed');
+                    });
 
+                });
             });
         };
 
@@ -252,6 +262,27 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
 
         };
 
+        $scope.getToolTipText = function (toolTipFor, correlation) {
+
+            var message = 'Help us improve our algorithms! ';
+
+            if (toolTipFor === 'thumbUp') {
+
+                message += "Give this a thumbs up if you think it's plausible " +
+                    "that " + correlation.cause +
+                    "could affect " + correlation.effect;
+
+            } else if (toolTipFor === 'thumbDown') {
+
+                message += "Give this a thumbs down if you don't think it's plausible " +
+                    "that" + correlation.cause + " could affect " + correlation.effect;
+
+            }
+
+            return message;
+
+        };
+
         if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
             console.log('Variable: ' + QuantimodoSearchConstants.predefinedVariable);
             console.log('Variable as: ' + QuantimodoSearchConstants.predefinedVariableAs);
@@ -281,9 +312,10 @@ quantimodoSearch.controller('voteModalInstanceController', function ($scope, $ui
 
 });
 
-quantimodoSearch.controller('addMeasurementModalInstanceController', function ($scope, $uibModalInstance, variable) {
+quantimodoSearch.controller('addMeasurementModalInstanceController', function ($scope, $uibModalInstance, variable, units) {
 
     $scope.variable = variable;
+    $scope.units = units;
 
     $scope.mgmtVal = variable.mostCommonValue;
 
@@ -380,13 +412,19 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
         $http.post(QuantimodoSearchConstants.sourceURL + 'measurements/v2', measurement, function (result) {
             callback(result);
         });
-    }
+    };
 
     this.getUnitsForVariableByName = function (variableName, callback) {
         $http.get(QuantimodoSearchConstants.sourceURL + 'v1/unitsVariable?variable=' + variableName)
             .then(function (response) {
                 callback(response);
             });
+    };
+
+    this.getUnits = function (callback) {
+        $http.get(QuantimodoSearchConstants.sourceURL + 'v1/units').then(function (response) {
+            callback(response.data);
+        })
     };
 
     this.setVariableSettings = function (variableSettings, callback) {

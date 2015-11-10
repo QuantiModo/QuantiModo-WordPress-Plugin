@@ -697,13 +697,24 @@ function resetHighlightStuff() {
     leaveVarNameOnBargraphRow = null;
 }
 
-function jsonCallback(data) {
+function processDataAndCreateBargraph(data) {
 
     if (data.length == 0) {
         jQuery('.no-data').show();
         jQuery('#graph-bar').hide();
         jQuery('.barloading').hide();
+        jQuery('#bar-graph-header .bargraphHeader').html('No correlations');
         bargraphData = null;
+        swal({
+            title: 'Not enough data',
+            text: "Hi!  We don't have enough data yet to determine your top predictors.  " +
+            "Please connect to some data sources on the Import Data page or start using one " +
+            "of the great tracking apps and devices at " +
+            "<a target='_blank' href='https://quantimo.do/data-sources'>https://quantimo.do/data-sources</a>",
+            type: "warning",
+            html: true,
+            confirmButtonColor: '#4387FD'
+        });
     }
     else {
         jQuery('.no-data').hide();
@@ -864,11 +875,11 @@ function getBargraph(bUseCache, variable) {
     }
     if (bUseCache == true) {
         if (valAs == 'effect' && typeof bargraphDataAsEffect !== 'undefined' && bargraphDataAsEffect.length > 0) {
-            jsonCallback(bargraphDataAsEffect);
+            processDataAndCreateBargraph(bargraphDataAsEffect);
             return;
         }
         if (valAs == 'cause' && typeof bargraphDataAsCause !== 'undefined' && bargraphDataAsCause.length > 0) {
-            jsonCallback(bargraphDataAsCause);
+            processDataAndCreateBargraph(bargraphDataAsCause);
             return;
         }
     }
@@ -878,7 +889,7 @@ function getBargraph(bUseCache, variable) {
      bargraphDataAsCause = data;
      else
      bargraphDataAsEffect = data;
-     jsonCallback(data);
+     processDataAndCreateBargraph(data);
      })*/
     console.debug('getBargraph API call')
     jQuery.ajax({
@@ -899,7 +910,7 @@ function getBargraph(bUseCache, variable) {
         } else {
             bargraphDataAsEffect = data;
         }
-        jsonCallback(data);
+        processDataAndCreateBargraph(data);
     })
 }
 function resetBarGraph() {

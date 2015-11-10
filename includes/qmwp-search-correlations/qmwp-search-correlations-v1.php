@@ -29,17 +29,23 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
     <div class="searchFormByDefault" ng-show='homeShown'>
         <div>
             <div class="fieldsContainer">
-                <div>
-                    <input auto-complete ui-items="names" ng-model="searchVariable" class="searchVariable" type="text"
+                <div class="input-group">
+                    <input auto-complete ui-items="names"
+                           ng-model="searchVariable"
+                           class="form-control searchVariable" type="text"
                            placeholder="Enter a medication, food supplement or anything else..."/>
+                    <span class="input-group-addon inline-search" ng-click="showCorrelations(searchVariable)">
+                        <i class="fa fa-search"></i>
+                    </span>
                 </div>
                 <div>
-                    <input class="searchsubmit" type="button" value="Ask QuantiModo"
-                           ng-click="showCorrelations(searchVariable)"/>
+                    <!--<input class="searchsubmit" type="button" value="Ask QuantiModo"
+                           ng-click="showCorrelations(searchVariable)"/>-->
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- search area with result -->
     <div id="searchResultRegion" ng-show="!homeShown" ng-cloak>
@@ -48,69 +54,78 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 <option value="effect">Predictive of...</option>
                 <option value="cause">Predicted by...</option>
             </select>
-            <input auto-complete ui-items="names" class="searchVariable" ng-model="searchVariable" type="text"
-                   placeholder="Enter a medication, food supplement or anything else...">
-            <input class="searchsubmit" type="button" value="Ask QuantiModo"
-                   ng-click="showCorrelations(searchVariable)">
+
+            <div class="input-group">
+                <input auto-complete ui-items="names"
+                       class="form-control"
+                       ng-model="searchVariable"
+                       type="text"
+                       placeholder="Enter a medication, food supplement or anything else...">
+                <span class="input-group-addon inline-search" ng-click="showCorrelations(searchVariable)">
+                    <i class="fa fa-search"></i>
+                </span>
+            </div>
+            <!--<input class="searchsubmit" type="button" value="Ask QuantiModo"
+                   ng-click="showCorrelations(searchVariable)">-->
         </div>
 
-        <p class="predictor">{{resultTitle}}</p>
+        <div ng-if="totalCorrelations.length > 0">
+            <p class="predictor">{{resultTitle}}</p>
 
-        <p ng-show="isNotEmpty(correlations)">{{countAndTime}}</p>
+            <p ng-show="isNotEmpty(correlations)">{{countAndTime}}</p>
 
-        <div id="searchResultList">
+            <div id="searchResultList">
 
-            <div class="row search-result" ng-repeat="c in correlations">
+                <div class="row search-result" ng-repeat="c in correlations">
 
-                <h4>
-                    <a target="_blank"
-                       href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20">
-                        {{c.variable}}
-                    </a>
-                    <small>({{c.category}})</small>
+                    <h4>
+                        <a target="_blank"
+                           href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20">
+                            {{c.variable}}
+                        </a>
+                        <small>({{c.category}})</small>
 
-                </h4>
+                    </h4>
 
-                <div class="details-and-controls">
-                    <div class="col-md-8">
+                    <div class="details-and-controls">
+                        <div class="col-md-8">
 
-                        <p ng-if="c.originalCorrelation.predictorExplanation">
-                            {{c.originalCorrelation.predictorExplanation}}</p>
+                            <p ng-if="c.originalCorrelation.predictorExplanation">
+                                {{c.originalCorrelation.predictorExplanation}}</p>
 
-                        <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
-                            {{c.originalCorrelation.valuePredictingHighOutcomeExplanation}}
-                        </p>
+                            <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
+                                {{c.originalCorrelation.valuePredictingHighOutcomeExplanation}}
+                            </p>
 
-                        <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
-                            {{c.originalCorrelation.valuePredictingLowOutcomeExplanation}}
-                        </p>
+                            <p ng-if="c.originalCorrelation.valuePredictingHighOutcomeExplanation">
+                                {{c.originalCorrelation.valuePredictingLowOutcomeExplanation}}
+                            </p>
 
-                    </div>
+                        </div>
 
-                    <div class="col-md-4 controls">
+                        <div class="col-md-4 controls">
 
                     <span class="fa fa-thumbs-o-up vote-thumb up"
-                          uib-tooltip="Give it a thumbs up if this helped you before!"
+                          uib-tooltip="{{getToolTipText('thumbUp', c.originalCorrelation)}}"
                           tooltip-class="qmwp-tooltip"
                           ng-class="{'voted fa-thumbs-up': c.originalCorrelation.userVote==1}"
                           ng-click="vote(c, 1)"></span>
 
                     <span class="fa fa-thumbs-o-down vote-thumb down"
-                          uib-tooltip="Does this result look wrong to you? Help us improve our algorithms
-                          by giving it a thumbs down"
+                          uib-tooltip="{{getToolTipText('thumbDown', c.originalCorrelation)}}"
                           tooltip-class="qmwp-tooltip"
                           ng-class="{'voted fa-thumbs-down': c.originalCorrelation.userVote==0}"
                           ng-click="vote(c, 0)"></span>
 
 
-                        <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
-                           class="shop-cart" target="_blank">
+                            <a href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords={{c.variable}}&linkCode=ur2&tag=quant08-20"
+                               class="shop-cart" target="_blank">
                             <span class="fa fa-shopping-cart"
                                   tooltip-class="qmwp-tooltip"
                                   uib-tooltip="Buy it here">
 
                             </span>
-                        </a>
+                            </a>
 
                         <span class="fa fa-cog"
                               uib-tooltip="Improve our algorithms by optimizing the variable settings"
@@ -118,26 +133,38 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                               ng-click="openVarSettingsModal(c.originalCorrelation)">
 
                         </span>
-
                         <span class="fa fa-plus"
                               uib-tooltip="Add measurement for variable"
                               tooltip-class="qmwp-tooltip"
                               ng-click="addMeasurement(c.originalCorrelation)">
 
                         </span>
-
-
+                        </div>
                     </div>
-                </div>
 
+                </div>
 
             </div>
         </div>
+
+        <div ng-if="totalCorrelations.length == 0">
+            <p class="no-correlations-message">
+                Hi! We don't have enough data yet to determine your top predictors.
+                Please connect to some data sources on the Import Data page or
+                start using one of the great tracking apps and devices at
+                <a href="https://quantimo.do/data-sources">https://quantimo.do/data-sources</a>
+            </p>
+        </div>
+
+        <div id="paginationSearchResultList" ng-show="hasMoreThanTen()">
+            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                            class="pagination-sm"
+                            ng-change="pageChanged()" previous-text="<" next-text=">"></uib-pagination>
+        </div>
+
     </div>
-    <div id="paginationSearchResultList" ng-show="hasMoreThanTen()">
-        <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
-                        ng-change="pageChanged()" previous-text="<" next-text=">"></uib-pagination>
-    </div>
+
+
 </div>
 
 </div>

@@ -164,7 +164,7 @@
 
 #paginationSearchResultList {
     font-size: 0;
-    width: 50%;
+    width: 62%;
     margin: 0 auto;
 }
 
@@ -291,7 +291,7 @@
 #searchResultList a {
     color: #1A0DAB;
     font-size: 24px;
-    font-family: arial,sans-serif;
+    font-family: arial, sans-serif;
 }
 
 #searchResultList h4 {
@@ -335,4 +335,14 @@
 
 .qmwp-tooltip {
     font-size: small;
+}
+
+.no-correlations-message {
+    text-align: center;
+}
+
+.inline-search {
+    cursor: pointer;
+    background: #F16645;
+    color: #fff;
 }
