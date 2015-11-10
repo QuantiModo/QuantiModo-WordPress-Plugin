@@ -30,7 +30,6 @@ quantimodoSearch.config(function ($httpProvider) {
 quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'QuantimodoSearchService', '$uibModal', 'correlationsVoteHelper',
     function ($scope, QuantimodoSearchService, $uibModal, correlationsVoteHelper) {
         $scope.correlations = [];
-        $scope.totalCorrelations = [];
         $scope.maxSize = 10;
         $scope.itemsPerPage = 10;
         $scope.autoLoad = false;
@@ -64,8 +63,8 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
             return $scope.totalCorrelations.length > 10;
         };
 
-        $scope.isNotEmpty = function () {
-            return $scope.totalCorrelations.length > 0;
+        $scope.isNotEmpty = function (correlations) {
+            return correlations.length > 0;
         };
 
         $scope.showCorrelations = function (variable) {
