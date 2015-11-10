@@ -12,6 +12,7 @@ wp_enqueue_style("jquery-tip", plugins_url('../../', __FILE__) . "css/simpletip.
 wp_enqueue_style("jquery-datetimepicker", plugins_url('../../', __FILE__) . "css/jquery.datetimepicker.css");
 wp_enqueue_style("jquery-fancybox", plugins_url('../../', __FILE__) . "js/libs/fancybox/jquery.fancybox.css");
 wp_enqueue_style("font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css");
+wp_enqueue_style("sweet-alert", plugins_url('../../', __FILE__) . "css/sweetalert.css");
 
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("jquery-ui-core");
@@ -52,6 +53,7 @@ wp_enqueue_script("refresh-shared", plugins_url('../../', __FILE__) . "js/_data_
 wp_enqueue_script("correlate", plugins_url('../../', __FILE__) . "js/qmwp-bargraph-gauge-scatterplot-timeline.js", array("correlate-charts", "jquery-ui-datepicker", "jquery-ui-button"), false, true);
 
 wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
+wp_enqueue_script("sweet-alert", plugins_url('../../', __FILE__) . "js/libs/sweetalert.min.js");
 
 ?>
 
