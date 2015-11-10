@@ -98,7 +98,9 @@ wp_enqueue_script("sweet-alert", plugins_url('../../', __FILE__) . "js/libs/swee
             <div class="graph-content" style="height: 596px; overflow-y: scroll;">
                 <img src="https://i.imgur.com/73BFcje.gif" class="barloading"
                      style="margin-left: 4%; margin-top: 20%; display:none"/>
-                <span class="no-data" style="display:none"> <br/>  <center> No data found</center> <br/><br/></span>
+                <span class="no-data" style="display:none"> <br/>  <center><h2>Hi!</h2>
+                        <h2>We don't have enough data to determine your top predictors and outcomes. &nbsp;:(</h2>
+                        <h2>Please check out the <a href="/getting-started" target="_blank">Getting Started</a> page to see how to add more data!</h2></center><br/><br/></span>
 
                 <div id="graph-bar" class="graph-content">
                 </div>
