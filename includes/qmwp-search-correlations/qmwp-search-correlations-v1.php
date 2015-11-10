@@ -90,14 +90,13 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                     <div class="col-md-4 controls">
 
                     <span class="fa fa-thumbs-o-up vote-thumb up"
-                          uib-tooltip="Give it a thumbs up if this helped you before!"
+                          uib-tooltip="{{getToolTipText('thumbUp', c.originalCorrelation)}}"
                           tooltip-class="qmwp-tooltip"
                           ng-class="{'voted fa-thumbs-up': c.originalCorrelation.userVote==1}"
                           ng-click="vote(c, 1)"></span>
 
                     <span class="fa fa-thumbs-o-down vote-thumb down"
-                          uib-tooltip="Does this result look wrong to you? Help us improve our algorithms
-                          by giving it a thumbs down"
+                          uib-tooltip="{{getToolTipText('thumbDown', c.originalCorrelation)}}"
                           tooltip-class="qmwp-tooltip"
                           ng-class="{'voted fa-thumbs-down': c.originalCorrelation.userVote==0}"
                           ng-click="vote(c, 0)"></span>

@@ -252,6 +252,27 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
 
         };
 
+        $scope.getToolTipText = function (toolTipFor, correlation) {
+
+            var message = 'Help us improve our algorithms! ';
+
+            if (toolTipFor === 'thumbUp') {
+
+                message += "Give this a thumbs up if you think it's plausible " +
+                    "that " + correlation.cause +
+                    "could affect " + correlation.effect;
+
+            } else if (toolTipFor === 'thumbDown') {
+
+                message += "Give this a thumbs down if you don't think it's plausible " +
+                    "that" + correlation.cause + " could affect " + correlation.effect;
+
+            }
+
+            return message;
+
+        };
+
         if (QuantimodoSearchConstants.predefinedVariable && QuantimodoSearchConstants.predefinedVariableAs) {
             console.log('Variable: ' + QuantimodoSearchConstants.predefinedVariable);
             console.log('Variable as: ' + QuantimodoSearchConstants.predefinedVariableAs);
