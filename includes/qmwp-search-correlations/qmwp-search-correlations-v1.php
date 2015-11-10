@@ -29,13 +29,18 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
     <div class="searchFormByDefault" ng-show='homeShown'>
         <div>
             <div class="fieldsContainer">
-                <div>
-                    <input auto-complete ui-items="names" ng-model="searchVariable" class="searchVariable" type="text"
+                <div class="input-group">
+                    <input auto-complete ui-items="names"
+                           ng-model="searchVariable"
+                           class="form-control searchVariable" type="text"
                            placeholder="Enter a medication, food supplement or anything else..."/>
+                    <span class="input-group-addon inline-search" ng-click="showCorrelations(searchVariable)">
+                        <i class="fa fa-search"></i>
+                    </span>
                 </div>
                 <div>
-                    <input class="searchsubmit" type="button" value="Ask QuantiModo"
-                           ng-click="showCorrelations(searchVariable)"/>
+                    <!--<input class="searchsubmit" type="button" value="Ask QuantiModo"
+                           ng-click="showCorrelations(searchVariable)"/>-->
                 </div>
             </div>
         </div>
@@ -49,10 +54,19 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 <option value="effect">Predictive of...</option>
                 <option value="cause">Predicted by...</option>
             </select>
-            <input auto-complete ui-items="names" class="searchVariable" ng-model="searchVariable" type="text"
-                   placeholder="Enter a medication, food supplement or anything else...">
-            <input class="searchsubmit" type="button" value="Ask QuantiModo"
-                   ng-click="showCorrelations(searchVariable)">
+
+            <div class="input-group">
+                <input auto-complete ui-items="names"
+                       class="form-control"
+                       ng-model="searchVariable"
+                       type="text"
+                       placeholder="Enter a medication, food supplement or anything else...">
+                <span class="input-group-addon inline-search" ng-click="showCorrelations(searchVariable)">
+                    <i class="fa fa-search"></i>
+                </span>
+            </div>
+            <!--<input class="searchsubmit" type="button" value="Ask QuantiModo"
+                   ng-click="showCorrelations(searchVariable)">-->
         </div>
 
         <div ng-if="totalCorrelations.length > 0">
@@ -131,12 +145,6 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 </div>
 
             </div>
-
-            <div id="paginationSearchResultList" ng-show="hasMoreThanTen()">
-                <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
-                                class="pagination-sm"
-                                ng-change="pageChanged()" previous-text="<" next-text=">"></uib-pagination>
-            </div>
         </div>
 
         <div ng-if="totalCorrelations.length == 0">
@@ -146,6 +154,12 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                 start using one of the great tracking apps and devices at
                 <a href="https://quantimo.do/data-sources">https://quantimo.do/data-sources</a>
             </p>
+        </div>
+
+        <div id="paginationSearchResultList" ng-show="hasMoreThanTen()">
+            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                            class="pagination-sm"
+                            ng-change="pageChanged()" previous-text="<" next-text=">"></uib-pagination>
         </div>
 
     </div>

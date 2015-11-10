@@ -340,3 +340,9 @@
 .no-correlations-message {
     text-align: center;
 }
+
+.inline-search {
+    cursor: pointer;
+    background: #F16645;
+    color: #fff;
+}

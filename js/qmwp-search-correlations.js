@@ -60,7 +60,12 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
         };
 
         $scope.hasMoreThanTen = function () {
-            return $scope.totalCorrelations.length > 10;
+            if ($scope.totalCorrelations) {
+                return $scope.totalCorrelations.length > 10;
+            } else {
+                return false;
+            }
+
         };
 
         $scope.isNotEmpty = function (correlations) {
