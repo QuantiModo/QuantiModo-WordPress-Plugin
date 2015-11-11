@@ -296,7 +296,7 @@
 
 #searchResultList h4 {
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     font-weight: 700;
 }
 
@@ -309,8 +309,16 @@
     align-items: center;
 }
 
+.details-and-controls > div:first-child {
+    padding-left: 0px;
+}
+
+.details-and-controls p {
+    margin: .10em 0;
+}
+
 .controls > * {
-    font-size: 32px;
+    font-size: 25px;
     cursor: pointer;
     opacity: 0.5;
 }

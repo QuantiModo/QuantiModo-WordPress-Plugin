@@ -1043,6 +1043,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
         series: [{data: dataOfSerie}],
         tooltip: {
             shared: false,
+            useHTML: true,
             formatter: function () {
                 var vax = this.series.options.data;
                 //for (var i in vax) {
@@ -1050,13 +1051,13 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
 
                 var serie = this.series;
                 //	var s = '<b>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b><br>';
-                var s = '<span style="color:' + serie.color + '">' + rex.name + '</span>: <b>' + this.y + '</b><br/>';
+                var s = '<div class="tooltip-wrap"><span style="color:' + serie.color + '">' + rex.name + '</span>: <b>' + this.y + '</b><br/>';
                 jQuery.each(rex.composition, function (name, value) {
                     s += '<b>' + name + ':</b> ' + value + '<br>';
                 });
-                return s;
+                return s + '</div>';
             },
-            backgroundColor: '#FFF'
+            backgroundColor: 'rgba(255,255,255,1)'
         }
     });
 }
