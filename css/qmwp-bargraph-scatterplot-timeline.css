@@ -382,3 +382,13 @@
     top: 50%;
     right: 40%;
 }
+
+.highcharts-tooltip > span {
+    z-index: 99 !important;
+    background-color: #FFF;
+    margin-left: -7px !important;
+}
+
+.highcharts-tooltip .tooltip-wrap {
+    padding-left: 7px;
+}
