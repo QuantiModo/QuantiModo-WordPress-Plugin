@@ -84,7 +84,7 @@ var refreshInputData = function () {
                 AnalyzePage.inputMeasurements = measurements;
                 AnalyzeChart.setInputData(variable, measurements);
             });
-        })
+        });
     }
 
 };
