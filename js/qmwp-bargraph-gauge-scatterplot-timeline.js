@@ -1126,6 +1126,19 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
             backgroundColor: 'rgba(255,255,255,1)'
         }
     });
+
+    var lastInputVariableName = localStorage.getItem('lastInputVariableName');
+
+    if (!lastInputVariableName) {
+
+        var barchartItems = document.getElementsByClassName('variableRowInBarGraph');
+
+        if (barchartItems.length) {
+            setInputVariable(barchartItems[0].textContent);
+        }
+
+    }
+
 }
 
 function highlightBargraphRow() {
