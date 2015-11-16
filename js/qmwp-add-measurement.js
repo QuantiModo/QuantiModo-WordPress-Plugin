@@ -557,7 +557,7 @@ jQuery(document).ready(function () {
                     Quantimodo.getUnits(null, function (units) {
                         var definedUnit = _.findWhere(units, {id: categoryUnitId});
                         console.log(definedUnit);
-                    })
+                    });
                     console.log(definedCategory);
                 });
             }
