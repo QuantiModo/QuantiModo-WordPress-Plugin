@@ -77,6 +77,8 @@ var setBlockHideShow = function () {
         jQuery("#signup_block").show();
     }
 
+    jQuery('#addmeasurement-dialog-content').show();
+
 
 }
 
@@ -548,6 +550,22 @@ jQuery(document).ready(function () {
             var variableValue = '';
             var lastMeasurementForVariable = localCache.getSubmittedMeasurement(variable.name);
 
+            if (qmwpShortCodeDefinedCategory) {
+                Quantimodo.getVariableCategories(null, function (categories) {
+                    var definedCategory = _.findWhere(categories, {name: qmwpShortCodeDefinedCategory});
+                    var categoryUnitId = definedCategory.defaultUnitId;
+                    Quantimodo.getUnits(null, function (units) {
+                        var definedUnit = _.findWhere(units, {id: categoryUnitId});
+                        console.log(definedUnit);
+                    })
+                    console.log(definedCategory);
+                });
+            }
+
+
+            /*if (defaultCategoryUnit) {
+
+             }*/
             if (lastMeasurementForVariable) {
 
                 variableUnit = getUnitWithAbbriatedName(lastMeasurementForVariable.unit);
