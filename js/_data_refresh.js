@@ -68,22 +68,25 @@ var refreshVariables = function (variables, callback) {
 };
 
 var refreshInputData = function () {
-    var variable = AnalyzePage.getInputVariable();
-    if (variable == null) {
-        return;
+
+    if (AnalyzePage.selectedInputVariableName) {
+        Quantimodo.getVariableByName(AnalyzePage.selectedInputVariableName, function (variable) {
+
+            jQuery('#please-wait').show();
+            Quantimodo.getDailyMeasurements({
+                'variableName': variable.originalName,
+                'startTime': AnalyzePage.getStartTime(),
+                'endTime': AnalyzePage.getEndTime(),
+                //'groupingWidth': AnalyzePage.getPeriod(),
+                'groupingTimezone': AnalyzePage.getTimezone()
+            }, function (measurements) {
+                jQuery('#please-wait').hide();
+                AnalyzePage.inputMeasurements = measurements;
+                AnalyzeChart.setInputData(variable, measurements);
+            });
+        });
     }
-    jQuery('#please-wait').show();
-    Quantimodo.getDailyMeasurements({
-        'variableName': variable.originalName,
-        'startTime': AnalyzePage.getStartTime(),
-        'endTime': AnalyzePage.getEndTime(),
-        //'groupingWidth': AnalyzePage.getPeriod(),
-        'groupingTimezone': AnalyzePage.getTimezone()
-    }, function (measurements) {
-        jQuery('#please-wait').hide();
-        AnalyzePage.inputMeasurements = measurements;
-        AnalyzeChart.setInputData(variable, measurements);
-    });
+
 };
 
 var refreshOutputData = function () {

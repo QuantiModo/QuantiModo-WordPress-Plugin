@@ -7,6 +7,7 @@ wp_enqueue_style("bootstrap", plugins_url('../../', __FILE__) . "css/bootstrap.m
 
 
 wp_enqueue_script("jquery", true);
+wp_enqueue_script("underscore", true);
 wp_enqueue_script("jquery-ui-core");
 wp_enqueue_script("jquery-ui-autocomplete");
 wp_enqueue_script("jquery-datetimepicker",

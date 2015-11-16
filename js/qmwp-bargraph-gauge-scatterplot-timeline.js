@@ -174,12 +174,12 @@ var AnalyzePage = function () {
 
     var lastInputVariable = null;
     var inputVariableUpdated = function () {
-        var newInputVariable = AnalyzePage.getInputVariable();
+        var newInputVariable = AnalyzePage.selectedInputVariableName;
         if (newInputVariable !== AnalyzePage.lastInputVariable) {
             refreshInputData();
             AnalyzePage.lastInputVariable = newInputVariable;
-            saveSetting('lastInputVariableName', AnalyzePage.lastInputVariable.originalName);
-            AnalyzePage.selectedInputVariableName = AnalyzePage.lastInputVariable.originalName;
+            saveSetting('lastInputVariableName', AnalyzePage.lastInputVariable);
+            AnalyzePage.selectedInputVariableName = AnalyzePage.lastInputVariable;
         }
     };
 
@@ -189,24 +189,14 @@ var AnalyzePage = function () {
 
         jQuery('#selectOutputVariable').empty();
         jQuery.each(AnalyzePage.quantimodoVariables[newOutputCategory], function (_, variable) {
-            //	if (variable.name == variable.originalName)
-            // 	{
+
             if (AnalyzePage.lastOutputVariable != null && AnalyzePage.lastOutputVariable.originalName == variable.originalName) {
                 jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('selected', 'selected').attr('value', variable.originalName).text(variable.name));
             }
             else {
                 jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('value', variable.originalName).text(variable.name));
             }
-            //	}
 
-            // if (variable.name == variable.originalName)
-            // {
-            // 	jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('value', variable.name).text(variable.name));
-            // }
-            // else
-            // {
-            // 	jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('value', variable.name).text(variable.name + " (" + variable.originalName + ")"));
-            // }
 
         });
         lastOutputCategory = newOutputCategory;
@@ -438,6 +428,54 @@ var AnalyzePage = function () {
         });
     };
 
+    var fetchAndSetVariables = function (inputVariableName, outputVariableName, callback) {
+
+        function getVariableDetails(name) {
+
+            var def = jQuery.Deferred();
+
+            if (name) {
+                Quantimodo.getVariableByName(name, function (variable) {
+
+                    def.resolve(variable);
+
+                });
+            } else {
+
+                def.resolve(null);
+
+            }
+
+            return def.promise();
+
+        }
+
+        jQuery
+            .when(getVariableDetails(inputVariableName), getVariableDetails(outputVariableName))
+            .done(function (inputVariableDetails, outputVariableDetails) {
+
+                if (inputVariableDetails) {
+
+                    AnalyzePage.lastInputVariable = inputVariableDetails;
+                    AnalyzePage.quantimodoVariables [inputVariableDetails.category] = [inputVariableDetails];
+
+                } else if (outputVariableDetails) {
+
+                    AnalyzePage.lastOutputVariable = outputVariableDetails;
+
+                    if (outputVariableDetails.category in AnalyzePage.quantimodoVariables) {
+                        AnalyzePage.quantimodoVariables.push(outputVariableDetails);
+                    } else {
+                        AnalyzePage.quantimodoVariables [outputVariableDetails.category] = [outputVariableDetails];
+                    }
+                }
+
+                callback();
+
+            });
+
+    };
+
     return {
         lastInputVariable: lastInputVariable,
         lastOutputVariable: lastOutputVariable,
@@ -480,6 +518,7 @@ var AnalyzePage = function () {
             return null;
         },
         getVariableFromOriginalName: function (originalVariableName) {
+
             var selectedVariable;
             var categories = Object.keys(AnalyzePage.quantimodoVariables);
             var currentCategory, currentVariable;
@@ -495,7 +534,22 @@ var AnalyzePage = function () {
             }
             return null;
         },
-        getInputVariable: function () {
+
+        getVariableFromOriginalNameAsync: function (originalVariableName, callback) {
+
+            if (originalVariableName) {
+
+                Quantimodo.getVariableByName(originalVariableName, function (variable) {
+                    callback(variable);
+                });
+
+            } else {
+                callback(null);
+            }
+
+        },
+
+        getInputVariable: function (callback) {
             return AnalyzePage.getVariableFromOriginalName(AnalyzePage.selectedInputVariableName);
         },
         getOutputVariable: function (callback) {
@@ -510,6 +564,20 @@ var AnalyzePage = function () {
                 callback(variable);
             });
         },
+
+        getInputVariableName: function (callback) {
+            return AnalyzePage.getVariableFromOriginalName(AnalyzePage.selectedInputVariableName);
+        },
+
+        getOutputVariableName: function () {
+            var variableName = jQuery('#selectOutputVariable').val();
+
+            if (!variableName) {
+                variableName = qmwpShortCodeDefinedVariable;
+            }
+            return variableName;
+        },
+
         setInputVariable: function (originalVariableName) {
             AnalyzePage.selectedInputVariableName = originalVariableName;
             inputVariableUpdated();
@@ -538,12 +606,23 @@ var AnalyzePage = function () {
                 window.location.href = "?connect=quantimodo";
             } else {
                 refreshMeasurementsRange(function () {
-                    refreshVariables([], function () {
+
+                    /*                    refreshVariables([], function () {
+                     categoryListUpdated();
+                     outputCategoryUpdated();
+                     getBargraph();
+                     refreshInputData();
+                     });*/
+
+                    fetchAndSetVariables(AnalyzePage.getInputVariableName(), AnalyzePage.getOutputVariableName(), function () {
+
                         categoryListUpdated();
                         outputCategoryUpdated();
                         getBargraph();
                         refreshInputData();
+
                     });
+
                 });
                 refreshUnits(function () {
                     unitListUpdated();
@@ -592,7 +671,9 @@ var AnalyzePage = function () {
             }
         },
         showSettingsForVariableFromGraph: function (variableName) {
-            variableSettings.show(AnalyzePage.getVariableFromOriginalName(variableName));
+            AnalyzePage.getVariableFromOriginalNameAsync(variableName, function (variable) {
+                variableSettings.show(variable);
+            });
         },
         getVariableSelectedFromBarGraph: function (variableName) {
             return variableSelectedFromBarGraph(variableName);
@@ -635,10 +716,15 @@ var AnalyzePage = function () {
 
             if (variableName != null && variableName !== undefined) {
                 variableName = unescape(variableName);
-                var variable = AnalyzePage.getVariableFromOriginalName(variableName);
-                jQuery("#module-addmeasurementvariable-name").val(variable.name);
-                jQuery("#module-addmeasurementvariable-original-name").val(variable.originalName);
-                selectVariableName(variable.name);
+
+                AnalyzePage.getVariableFromOriginalNameAsync(variableName, function (variable) {
+
+                    jQuery("#module-addmeasurementvariable-name").val(variable.name);
+                    jQuery("#module-addmeasurementvariable-original-name").val(variable.originalName);
+                    selectVariableName(variable.name);
+
+                });
+
             } else {
                 selectVariableName('');
             }
@@ -664,10 +750,9 @@ function getSettingsForm(variableName) {
 }
 
 function setInputVariable(variableName) {
-    var variable = AnalyzePage.getVariableFromOriginalName(unescape(variableName));
-    if (variable) {
-        AnalyzePage.setInputVariable(variable.originalName);
-    }
+
+    AnalyzePage.setInputVariable(unescape(variableName));
+
 }
 
 
@@ -860,15 +945,6 @@ function getBargraph(bUseCache, variable) {
     if (valAs == 'cause')
         jsonParam = {cause: val};
 
-    /*	if (valAs == 'effect' &&  AnalyzePage.getVariableFromOriginalName(val).causeOnly == 1)
-     {
-     jQuery('.no-data').show();
-     jQuery('#graph-bar').hide();
-     jQuery('.barloading').hide();
-     bargraphData = null;
-     return;
-     }*/
-
     if (bUseCache === undefined) {
         bUseCache = false;
         bargraphDataAsEffect = bargraphDataAsCause = undefined;
@@ -884,13 +960,6 @@ function getBargraph(bUseCache, variable) {
         }
     }
 
-    /*    jQuery.get(url, jsonParam).done(function (data) {
-     if (valAs == 'cause')
-     bargraphDataAsCause = data;
-     else
-     bargraphDataAsEffect = data;
-     processDataAndCreateBargraph(data);
-     })*/
     console.debug('getBargraph API call')
     jQuery.ajax({
         data: jsonParam,
@@ -900,9 +969,6 @@ function getBargraph(bUseCache, variable) {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-            /*if (mashapeKey) {
-             xhr.setRequestHeader('X-Mashape-Key', mashapeKey);
-             }*/
         }
     }).done(function (data) {
         if (valAs == 'cause') {
@@ -1060,6 +1126,19 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
             backgroundColor: 'rgba(255,255,255,1)'
         }
     });
+
+    var lastInputVariableName = localStorage.getItem('lastInputVariableName');
+
+    if (!lastInputVariableName) {
+
+        var barchartItems = document.getElementsByClassName('variableRowInBarGraph');
+
+        if (barchartItems.length) {
+            setInputVariable(barchartItems[0].textContent);
+        }
+
+    }
+
 }
 
 function highlightBargraphRow() {
