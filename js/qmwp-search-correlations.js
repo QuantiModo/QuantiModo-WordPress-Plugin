@@ -270,12 +270,12 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
 
                 message += "Give this a thumbs up if you think it's plausible " +
                     "that " + correlation.cause +
-                    "could affect " + correlation.effect;
+                    " could affect " + correlation.effect + ".";
 
             } else if (toolTipFor === 'thumbDown') {
 
                 message += "Give this a thumbs down if you don't think it's plausible " +
-                    "that" + correlation.cause + " could affect " + correlation.effect;
+                    "that " + correlation.cause + " could affect " + correlation.effect + ".";
 
             }
 
