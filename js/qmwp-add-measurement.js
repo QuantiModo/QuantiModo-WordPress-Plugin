@@ -550,26 +550,26 @@ jQuery(document).ready(function () {
             var variableValue = '';
             var lastMeasurementForVariable = localCache.getSubmittedMeasurement(variable.name);
 
-            if (qmwpShortCodeDefinedCategory) {
-                Quantimodo.getVariableCategories(null, function (categories) {
-                    var definedCategory = _.findWhere(categories, {name: qmwpShortCodeDefinedCategory});
-                    var categoryUnitId = definedCategory.defaultUnitId;
-                    Quantimodo.getUnits(null, function (units) {
-                        var definedUnit = _.findWhere(units, {id: categoryUnitId});
-                        console.log(definedUnit);
-                    });
-                    console.log(definedCategory);
-                });
-            }
 
-
-            /*if (defaultCategoryUnit) {
-
-             }*/
             if (lastMeasurementForVariable) {
 
                 variableUnit = getUnitWithAbbriatedName(lastMeasurementForVariable.unit);
                 variableValue = lastMeasurementForVariable.value;
+
+                setInputValues(variableUnit, variableValue);
+
+            } else if (!lastMeasurementForVariable && qmwpShortCodeDefinedCategory) {
+
+                Quantimodo.getVariableCategories(null, function (categories) {
+                    var definedCategory = _.findWhere(categories, {name: qmwpShortCodeDefinedCategory});
+                    var categoryUnitId = definedCategory.defaultUnitId;
+                    Quantimodo.getUnits(null, function (units) {
+                        variableUnit = _.findWhere(units, {id: categoryUnitId});
+
+                        setInputValues(variableUnit, variableValue);
+
+                    });
+                });
 
             } else {
 
@@ -583,14 +583,18 @@ jQuery(document).ready(function () {
                     variableValue = variable.mostCommonValue;
                 }
 
+                setInputValues(variableUnit, variableValue);
+
             }
 
-            if (variableUnit === null) {
-                return;
+
+            function setInputValues(unit, value) {
+
+                jQuery('#addmeasurement-variable-unitCategory').val(unit.category).trigger('change');
+                jQuery('#addmeasurement-variable-unit').val(unit.abbreviatedName);
+                jQuery('#addmeasurement-variable-value').val(value);
+
             }
-            jQuery('#addmeasurement-variable-unitCategory').val(variableUnit.category).trigger('change');
-            jQuery('#addmeasurement-variable-unit').val(variableUnit.abbreviatedName);
-            jQuery('#addmeasurement-variable-value').val(variableValue);
 
         }
     });
