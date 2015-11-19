@@ -157,14 +157,25 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                     likeValue = 'null';
                 }
 
-                QuantimodoSearchService.vote(correlationSet.originalCorrelation, likeValue, function (resp) {
-                    console.log(resp);
+                if (likeValue !== 'null') {
+                    QuantimodoSearchService.vote(correlationSet.originalCorrelation, likeValue, function (resp) {
+                        console.log(resp);
 
-                    correlationsVoteHelper.saveVotedCorrelation(correlationSet.originalCorrelation, likeValue);
+                        correlationsVoteHelper.saveVotedCorrelation(correlationSet.originalCorrelation, likeValue);
 
-                    correlationSet.originalCorrelation.userVote = likeValue;
+                        correlationSet.originalCorrelation.userVote = likeValue;
 
-                })
+                    });
+                } else {
+                    QuantimodoSearchService.deleteVote(correlationSet.originalCorrelation, function (resp) {
+                        console.log(resp);
+
+                        correlationsVoteHelper.saveVotedCorrelation(correlationSet.originalCorrelation, likeValue);
+
+                        correlationSet.originalCorrelation.userVote = likeValue;
+
+                    });
+                }
 
             }, function () {
                 console.debug('dismissed');
@@ -397,6 +408,15 @@ quantimodoSearch.service('QuantimodoSearchService', function ($http) {
         }).then(function (response) {
             callback(response.data);
         });
+    };
+
+    this.deleteVote = function (correlation, callback) {
+        $http.post(QuantimodoSearchConstants.sourceURL + 'v1/votes/delete', {
+            cause: correlation.cause,
+            effect: correlation.effect
+        }).then(function (response) {
+            callback(response.data);
+        })
     };
 
     this.getVariableByName = function (varName, callback) {
