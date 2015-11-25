@@ -1415,7 +1415,7 @@ Class QMWP
         $attributes = shortcode_atts(array(
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
-            'show_predictors_or_outcomes' => 'outcomes',
+            'show_predictors_or_outcomes' => 'predictors',
             'allow_user_change_variable' => 'false',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
