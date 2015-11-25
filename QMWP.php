@@ -123,7 +123,7 @@ Class QMWP
             'Mood Over Time' => '[qmwp_timeline examined_variable_names="overall mood"]',
             'Timeline Chart' => '[qmwp_timeline]',
             'Track Anything' => '[qmwp_add_measurement]',
-            'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
+            'Track Emotions' => '[qmwp_add_measurement category="Emotions"]',
             //'Track Physique' => '[qmwp_add_measurement category="Physique"]',
             'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
             //'Track Location' => '[qmwp_add_measurement category="Location"]',
