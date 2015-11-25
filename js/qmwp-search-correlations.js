@@ -66,7 +66,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                                     variableCategory: correlation.causeCategory,
                                     explanation: correlation.predictorExplanation,  //TODO do predictor always here?
                                     correlation: correlation
-                                }
+                                };
 
                             });
 
@@ -80,7 +80,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                                     variableCategory: correlation.effectCategory,
                                     explanation: correlation.predictorExplanation,  //TODO do predictor always here?
                                     correlation: correlation
-                                }
+                                };
 
                             });
 
@@ -94,7 +94,7 @@ quantimodoSearch.controller('QuantimodoSearchController', ['$scope', 'Quantimodo
                                     variableCategory: correlation.causeCategory,
                                     explanation: correlation.causeExplanation,  //TODO do predictor always here?
                                     correlation: correlation
-                                }
+                                };
 
                             });
 
