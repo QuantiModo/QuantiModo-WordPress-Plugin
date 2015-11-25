@@ -150,9 +150,9 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         <div ng-if="totalCorrelations.length == 0">
             <p class="no-correlations-message">
                 Hi! We don't have enough data yet to determine your top predictors.
-                Please connect to some data sources on the Import Data page or
-                start using one of the great tracking apps and devices at
-                <a href="https://quantimo.do/data-sources">https://quantimo.do/data-sources</a>
+                "Please connect to some data sources on the <a target='_blank' href='/import-data'>Import Data</a> page or start using one " +
+                "of the great tracking apps and devices on the " +
+                "<a target='_blank' href='/data-sources'>Data Sources</a> page."
             </p>
         </div>
 
