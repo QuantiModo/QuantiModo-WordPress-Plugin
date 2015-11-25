@@ -116,14 +116,14 @@ Class QMWP
         'qmwp_add_login_logout_nav_items' => 0,
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
-            'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
+            'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations effect="Overall Mood"]',
             'Track Mood (Faces)' => '[qmwp_rating_faces tracked_variable_name="Overall Mood" negative="false"]',
             'Import Data' => '[qmwp_connectors]',
             'Predictors/Outcomes Analysis Charts' => '[qmwp_bargraph_scatterplot_timeline]',
             'Mood Over Time' => '[qmwp_timeline examined_variable_names="overall mood"]',
             'Timeline Chart' => '[qmwp_timeline]',
             'Track Anything' => '[qmwp_add_measurement]',
-            'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
+            'Track Emotions' => '[qmwp_add_measurement category="Emotions"]',
             //'Track Physique' => '[qmwp_add_measurement category="Physique"]',
             'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
             //'Track Location' => '[qmwp_add_measurement category="Location"]',
@@ -1484,8 +1484,8 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
-            'show_predictors_or_outcomes' => 'outcomes',
+            'outcome' => get_option('qmwp_default_outcome_variable'),
+            'predictor' => null,
             'common_or_user' => 'common'
         ), $attributes, 'qmwp_search_correlations');
 
@@ -1493,18 +1493,10 @@ Class QMWP
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
 
-        $variable = $attributes['examined_variable_name'];
-
-        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
-            $showPredictorsOrOutcomes = 'cause';
-        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
-            $showPredictorsOrOutcomes = 'effect';
-        }
-
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
             array(
-                'qmwpShortCodeDefinedVariable' => $variable,
-                'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPredictor' => $attributes['predictor'],
+                'qmwpOutcome' => $attributes['outcome'],
                 'qmwpPluginUrl' => plugins_url('/', __FILE__),
                 'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
@@ -1792,23 +1784,24 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'label' => 'Predictor',
+                        'attr' => 'predictor',
                         'type' => 'text',
                         'meta' => array(
-                            'placeholder' => 'Type variable name',
+                            'placeholder' => 'Type default predictor',
                         ),
                     ),
 
                     array(
-                        'label' => 'Show predictors or outcomes',
-                        'attr' => 'show_predictors_or_outcomes',
-                        'type' => 'select',
-                        'options' => array(
-                            'predictors' => 'Predictors',
-                            'outcomes' => 'Outcomes',
+                        'label' => 'Outcome',
+                        'attr' => 'outcome',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type default outcome',
                         ),
                     ),
+
+
 
                     array(
                         'label' => 'Common or user measurements',
@@ -1832,13 +1825,24 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'label' => 'Predictor',
+                        'attr' => 'predictor',
                         'type' => 'text',
                         'meta' => array(
-                            'placeholder' => 'Type variable name',
+                            'placeholder' => 'Type default predictor',
                         ),
                     ),
+
+                    array(
+                        'label' => 'Outcome',
+                        'attr' => 'outcome',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type default outcome',
+                        ),
+                    ),
+
+
 
                     array(
                         'label' => 'Common or user measurements',
@@ -1862,13 +1866,24 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'label' => 'Predictor',
+                        'attr' => 'predictor',
                         'type' => 'text',
                         'meta' => array(
-                            'placeholder' => 'Type variable name',
+                            'placeholder' => 'Type default predictor',
                         ),
                     ),
+
+                    array(
+                        'label' => 'Outcome',
+                        'attr' => 'outcome',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type default outcome',
+                        ),
+                    ),
+
+
 
                     array(
                         'label' => 'Common or user measurements',
