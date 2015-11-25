@@ -793,9 +793,9 @@ function processDataAndCreateBargraph(data) {
         swal({
             title: 'Not enough data',
             text: "Hi!  We don't have enough data yet to determine your top predictors.  " +
-            "Please connect to some data sources on the Import Data page or start using one " +
-            "of the great tracking apps and devices at " +
-            "<a target='_blank' href='https://quantimo.do/data-sources'>https://quantimo.do/data-sources</a>",
+            "Please connect to some data sources on the <a target='_blank' href='/import-data'>Import Data</a> page or start using one " +
+            "of the great tracking apps and devices on the " +
+            "<a target='_blank' href='/data-sources'>Data Sources</a> page.",
             type: "warning",
             html: true,
             confirmButtonColor: '#4387FD'
