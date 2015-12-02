@@ -1075,18 +1075,13 @@ $cc_ux = qmwp_cc_ux();
                         <p>
                             <strong>Instructions:</strong>
                         <ol>
-                            <li>Visit the QuantiModo website for developers <a
-                                    href='https://developer.quantimo.do' target="_blank">developer.quantimo.do</a>.
+                            <li>Visit the QuantiModo developer dashboard at <a
+                                    href='https://admin.quantimo.do' target="_blank">admin.quantimo.do</a>.
                             </li>
-                            <li>Create a new app on Mashape and enable the QuantiModo API. This will enable
-                                your site to access the QuantiModo API.
+                            <li>Create a new app your site to access the QuantiModo API.
                             </li>
                             <li>At QuantiModo, provide your site's homepage URL (<?php echo $blog_url; ?>) for the new
-                                Project's Redirect URI. Don't forget the trailing slash!
-                            </li>
-                            <li>At QuantiModo, you must also configure the Consent Screen with your Email Address and
-                                Product Name. This is what QuantiModo will display to users when they are asked to grant
-                                access to your site/app.
+                                app's Redirect URI field. Don't forget the trailing slash!
                             </li>
                             <li>Paste your Client ID/Secret provided by QuantiModo into the fields above, then click the
                                 Save all settings button.
