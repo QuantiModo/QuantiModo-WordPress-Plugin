@@ -1896,7 +1896,7 @@ Class QMWP
                         'attr' => 'category',
                         'type' => 'select',
                         'options' => array(
-                            'Mood' => 'Emotions',
+                            'Emotions' => 'Emotions',
                             'Physique' => 'Physique',
                             'Physical Activity' => 'Physical Activity',
                             'Location' => 'Location',
