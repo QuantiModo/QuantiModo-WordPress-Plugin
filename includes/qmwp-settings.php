@@ -467,6 +467,23 @@ $cc_ux = qmwp_cc_ux();
                                     Put functionality of QuantiModo ionic application to any page
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="shortcode">[qm_embed]</td>
+                                <td>
+                                    <ul>
+                                        <li>plugin</li>
+                                        <li>frame_class</li>
+                                        <li>width</li>
+                                        <li>height</li>
+                                        <li>common_or_user</li>
+                                        <li>outcome</li>
+                                        <li>predictor</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Embed QuantiModo functionality via iframe
+                                </td>
+                            </tr>
                             </tbody>
 
                         </table>

@@ -154,6 +154,7 @@ Class QMWP
             'Search for Outcomes' => '[qmwp_search_for_outcomes]',
             'Outcomes Of Steps' => '[qmwp_search_for_outcomes examined_variable_name="Steps"]',
             'Quantimodo Ionic Application' => '[qm_ionic_app]',
+            'Quantimodo Embed Plugin Example'   =>  '[qm_embed plugin="search-relationships" width="100%" height="777" frame_class="qm-relationships" outcome="Overall Mood" common_or_user="common"]',
         )
     );
 
@@ -193,6 +194,7 @@ Class QMWP
         add_shortcode('qmwp_add_measurement', array($this, 'qmwp_add_measurement'));
         add_shortcode('qm_numbers_rating', array($this, 'qm_numbers_rating'));
         add_shortcode('qm_ionic_app', array($this, 'qm_ionic_app'));
+        add_shortcode('qm_embed', array($this, 'qm_embed'));
 
         //add shortcake plugin features to qmwp shortcodes (if plugin is installed)
         $this->add_shortcake_ui_features();
@@ -1209,7 +1211,7 @@ Class QMWP
      * @param $version - template version to load
      * @return string - rendered template HTML string
      */
-    private function get_plugin_template_html($shortCodeName, $version)
+    private function get_plugin_template_html($shortCodeName, $version, $params)
     {
         ob_start();
         include('includes/' . $shortCodeName . '/' . $shortCodeName . '-v' . $version . '.php');
@@ -1660,6 +1662,54 @@ Class QMWP
     }
 
 
+    /**
+     * Return rendered html string with plugin content!
+     * @param $attributes
+     * @return string
+     */
+    function qm_embed($attributes)
+    {
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'frame_class' => null,
+            'width' => '100%',
+            'height' => '777',
+            'plugin' => 'search-relationships',
+            'common_or_user' => 'common',
+            'access_token' => $this->access_token(),
+            'outcome' => null,
+            'predictor' => null,
+        ), $attributes, 'qm_embed');
+
+        $getParams = array(
+            'plugin' => $attributes['plugin'],
+            'outcome' => (array_key_exists('outcome', $attributes)) ? $attributes['outcome'] : null,
+            'predictor' => (array_key_exists('predictor', $attributes)) ? $attributes['predictor'] : null,
+            'common_or_user' => (array_key_exists('common_or_user', $attributes)) ? $attributes['common_or_user'] : null,
+            'access_token' => $attributes['access_token']
+        );
+
+        $iFrameParams = array(
+            'width' => $attributes['width'],
+            'height' => $attributes['height'],
+            'class' => 'qm-frame ' . $attributes['frame_class'],
+        );
+
+        $version = $attributes['version'];
+
+        $pluginContentHTML = $this->get_plugin_template_html('qm-embed', $version, array(
+            'getParams' => $getParams,
+            'iFrameParams' => $iFrameParams,
+        ));
+
+        $templateContent = $this->process_template($pluginContentHTML);
+
+        return $templateContent;
+
+
+    }
+
+
     // ====================
     // Shortcake UI additions
     // ====================
@@ -1802,7 +1852,6 @@ Class QMWP
                     ),
 
 
-
                     array(
                         'label' => 'Common or user measurements',
                         'attr' => 'common_or_user',
@@ -1843,7 +1892,6 @@ Class QMWP
                     ),
 
 
-
                     array(
                         'label' => 'Common or user measurements',
                         'attr' => 'common_or_user',
@@ -1882,7 +1930,6 @@ Class QMWP
                             'placeholder' => 'Type default outcome',
                         ),
                     ),
-
 
 
                     array(
