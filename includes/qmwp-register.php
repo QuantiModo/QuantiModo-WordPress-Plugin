@@ -66,13 +66,13 @@ class QMWPUserReg
         $update_role_result = wp_update_user(array('ID' => $user_id, 'role' => $role));
 
 // proceed if no errors were detected:
-        if ($update_username_result == false) {
+//        if ($update_username_result == false) {
             // there was an error during registration, redirect and notify the user:
-            $this->qmwp->qmwp_end_login("Could not rename the username during registration. Please create a ticket at https://help.quantimo.do", true);
-        } elseif ($update_role_result == false) {
+//            $this->qmwp->qmwp_end_login("Could not rename the username during registration. Please create a ticket at https://help.quantimo.do", true);
+//        } elseif ($update_role_result == false) {
             // there was an error during registration, redirect and notify the user:
-            $this->qmwp->qmwp_end_login("Could not assign default user role during registration. Please create a ticket at https://help.quantimo.do", true);
-        } else {
+//            $this->qmwp->qmwp_end_login("Could not assign default user role during registration. Please create a ticket at https://help.quantimo.do", true);
+//        } else {
             // registration was successful, the user account was created, proceed to login the user automatically...
             // associate the wordpress user account with the now-authenticated third party account:
             $this->qmwp->qmwp_link_account($user_id);
@@ -89,7 +89,7 @@ class QMWPUserReg
             $this->qmwp->update_user_tokens($user_id);
             $this->qmwp->qmwp_end_login("Logged in successfully!");
 
-        }
+//        }
     }
 }
 
