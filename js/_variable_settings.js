@@ -151,7 +151,7 @@ var variableSettings = {
         jQuery("#variableFillingValueSetting").val('');
         jQuery("#assumeValue").prop("checked", false);
         jQuery("#assumeMissing").prop("checked", false);
-        if (variableSettings.current.fillingValue != null) {
+        if (variableSettings.current.fillingValue !== null) {
             jQuery("#variableFillingValueSetting").val(variableSettings.current.fillingValue);
             jQuery("#assumeValue").prop("checked", true);
         }
