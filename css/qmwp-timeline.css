@@ -9,9 +9,10 @@
 }
 
 #selectedVariables {
-    margin-left: 16px;
+    margin-left: 0;
     margin-bottom: 0;
     list-style: none;
+    padding-left: 13px;
 }
 
 #selectedVariables li:first-child {

@@ -64,7 +64,7 @@ var variableSettings = {
         jQuery('#variableDurationOfActionValueSetting').val(Math.round(variableSettings.current.durationOfAction / 3600));
 
         // Fill unit selector
-        jQuery('#selectVariableUnitSetting').empty();
+        //jQuery('#selectVariableUnitSetting').empty();
         var categories = Object.keys(AnalyzePage.quantimodoUnits);
         var currentCategory, currentUnit;
         var foundUnit = false;
@@ -77,7 +77,7 @@ var variableSettings = {
                 currentUnit = currentCategory[n];
                 if (foundUnit)	// If foundUnit = true we're in the right category, so start adding values
                 {
-                    jQuery('#selectVariableUnitSetting').append(jQuery('<option/>').attr('value', currentUnit.abbreviatedName).text(currentUnit.name));
+                    //jQuery('#selectVariableUnitSetting').append(jQuery('<option/>').attr('value', currentUnit.abbreviatedName).text(currentUnit.name));
                 }
                 else if (currentUnit.abbreviatedName == variableSettings.current.abbreviatedUnitName) {
                     foundUnit = true;
@@ -126,11 +126,11 @@ var variableSettings = {
         }
 
         // Set current values
-        jQuery("#input-variable-name").val(variableSettings.current.name);
+        jQuery("#input-variable-name").text(variableSettings.current.name);
         jQuery("#input-variable-id").val(variableSettings.current.id);
         //jQuery("#input-variable-name").attr('placeholder', variableSettings.current.name);
-        jQuery("#selectVariableUnitSetting").val(variableSettings.current.abbreviatedUnitName);
-        jQuery("#selectVariableCategorySetting").val(variableSettings.current.category);
+        jQuery("#selectVariableUnitSetting").text(variableSettings.current.abbreviatedUnitName);
+        jQuery("#selectVariableCategorySetting").text(variableSettings.current.category);
 
         jQuery('#unitForMinValue').text(variableSettings.current.unit);
         if (variableSettings.current.minimumValue == -Infinity) {
@@ -181,7 +181,7 @@ var variableSettings = {
             var allNewSettings = []; // Holds settings for all variables that are changed this "session"
             var newSettings = {"variable": variableSettings.current.originalName};
 
-            var newUnit = jQuery("#selectVariableUnitSetting").val();
+            var newUnit = jQuery("#selectVariableUnitSetting").text();
             if (newUnit != variableSettings.current.unit) {
                 newSettings['unit'] = newUnit;
             }
