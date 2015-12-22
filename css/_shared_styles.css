@@ -71,10 +71,10 @@
 }
 
 #accordion-settings-content td:last-child {
-    float: right;
     height: 40px;
     line-height: 20px;
     width: 150px;
+    padding-left: 5px;
 }
 
 #accordion-settings-content div {
@@ -556,5 +556,30 @@
 }
 
 .highcharts-contextmenu hr {
-    margin-bottom: 0; !important;
+    margin-bottom: 0;
+!important;
+}
+
+.assume-option-holder {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.assume-option-holder input[type="radio"] {
+    margin: 0 !important;
+}
+
+.assume-option-holder label {
+    margin: 0;
+}
+
+#section-configure-settings input[type="text"] {
+    margin-bottom: 0;
+}
+
+.assume-value-label {
+    display: flex;
+    align-items: center;
+    align-content: center;
 }

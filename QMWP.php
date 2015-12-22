@@ -1211,7 +1211,7 @@ Class QMWP
      * @param $version - template version to load
      * @return string - rendered template HTML string
      */
-    private function get_plugin_template_html($shortCodeName, $version, $params)
+    private function get_plugin_template_html($shortCodeName, $version, $params = null)
     {
         ob_start();
         include('includes/' . $shortCodeName . '/' . $shortCodeName . '-v' . $version . '.php');
