@@ -1989,13 +1989,6 @@ Class QMWP
     }
 
     function qm_timeline_admin_page(){
-        ?>
-        <div class="wrap">
-            <h2>Welcome To The QM Timeline</h2>
-        </div>
-
-        <?php
-
         include_once 'includes/qmwp-timeline/qmwp-timeline-v1.php';
     }
 
