@@ -1,0 +1,89 @@
+<div class="modal-content variable-settings-modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{variable.name}} Variable Settings</h4>
+    </div>
+    <div class="modal-body">
+
+        <form>
+
+            <div class="form-group">
+                <label for="var-name">Name</label>
+                <input ng-model="variable.name" type="text" class="form-control" id="var-name" required
+                       readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="var-unit">Unit</label>
+
+                <select ng-if="varUnits && varUnits.length > 0"
+                        ng-model="variable.abbreviatedUnitName"
+                        type="text"
+                        class="form-control"
+                        id="var-unit"
+                        required>
+                    <option ng-repeat="unit in varUnits track by unit.abbreviatedName" value="{{unit.abbreviatedName}}">
+                        {{unit.name}}
+                    </option>
+                </select>
+
+                <input ng-if="!varUnits || varUnits.length < 1" ng-model="variable.abbreviatedUnitName"
+                       type="text" class="form-control" readonly>
+
+            </div>
+
+            <div class="form-group">
+                <label for="var-category">Variable Category</label>
+                <input ng-model="variable.category" type="text" class="form-control" id="var-category" required
+                       readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="var-min">Minimum Value</label>
+                <input ng-model="variable.minimumAllowedValue" type="text" class="form-control" id="var-min" required>
+            </div>
+
+            <div class="form-group">
+                <label for="var-max">Maximum Value</label>
+                <input ng-model="variable.maximumAllowedValue" type="text" class="form-control" id="var-max" required>
+            </div>
+
+            <div class="form-group">
+                <label for="var-delay">Onset Delay (seconds)</label>
+                <input ng-model="variable.onsetDelay" type="number" class="form-control" id="var-delay" required>
+            </div>
+
+            <div class="form-group">
+                <label for="var-duration">Duration of Action (seconds)</label>
+                <input ng-model="variable.durationOfAction" type="number" class="form-control" id="var-duration"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>When there's no data:</label>
+
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" ng-model="assumeMissing" value="true" checked>
+                        Assume data is missing
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" ng-model="assumeMissing" value="false">
+                        Fill with: <input type="text" ng-model="variable.fillingValue" class="form-control">
+                    </label>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="ok()">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
+<!-- /.modal-content -->
+

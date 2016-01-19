@@ -63,7 +63,6 @@
 }
 
 #searchResultRegion {
-    margin-left: 100px;
     margin-top: 10px;
 }
 
@@ -164,7 +163,7 @@
 
 #paginationSearchResultList {
     font-size: 0;
-    width: 50%;
+    width: 62%;
     margin: 0 auto;
 }
 
@@ -288,29 +287,69 @@
     margin-bottom: 10px;
 }
 
+#searchResultList a {
+    color: #1A0DAB;
+    font-size: 24px;
+    font-family: arial, sans-serif;
+}
+
 #searchResultList h4 {
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+    font-weight: 700;
 }
 
 #searchResultList .search-result {
-    display: flex;
-    align-items: center;
     margin: 7px 0;
 }
 
-.vote-thumb {
+.details-and-controls {
+    display: flex;
+    align-items: center;
+}
+
+.details-and-controls > div:first-child {
+    padding-left: 0px;
+}
+
+.details-and-controls p {
+    margin: .10em 0;
+}
+
+.controls > * {
+    font-size: 25px;
     cursor: pointer;
+    opacity: 0.5;
 }
 
-.up.voted {
-    color: #337AB7;
-}
-
-.down.voted {
-    color: red;
+.controls > *:hover {
+    opacity: 1;
 }
 
 #searchResultRegion .controls a {
     text-decoration: none;
+    color: inherit;
+}
+
+.variable-settings-modal .modal-body {
+    max-height: 333px;
+    overflow-y: scroll;
+}
+
+.modal-dialog {
+    margin-top: 77px;
+}
+
+.qmwp-tooltip {
+    font-size: small;
+}
+
+.no-correlations-message {
+    text-align: center;
+}
+
+.inline-search {
+    cursor: pointer;
+    background: #F16645;
+    color: #fff;
 }

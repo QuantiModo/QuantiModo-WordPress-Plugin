@@ -1,24 +1,24 @@
 
 #signup_block {
-    margin:6px;
+    margin: 6px;
 }
 
 #record_a_measurement_block {
-    margin-top:-6px;
-    margin-left:10px;
-    margin-right:4px;
+    margin-top: -6px;
+    margin-left: 10px;
+    margin-right: 4px;
 }
 
 #edt_record_a_measurement_block {
-    margin-top:0px;
-    margin-left:10px;
-    margin-right:4px;
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 4px;
 }
 
 #add_record_a_measurement_block {
-    margin-top:0px;
-    margin-left:10px;
-    margin-right:4px;
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 4px;
 }
 
 .inputContainer {
@@ -32,7 +32,7 @@
     padding-top: 12px;
     padding-left: 8px;
     font-size: 100%;
-    color: #29bdca;
+    color: #4387FD;
     border-bottom: 1px solid;
 }
 
@@ -80,6 +80,8 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
+    display: none;
+    padding-top: 10px;
 }
 
 #addmeasurement-dialog-content table input[type=text] {
@@ -119,7 +121,7 @@ button {
 	-moz-transition: background-color 0.2s;
 	-o-transition: background-color 0.2s;
 	transition: background-color 0.2s;
-	background-color: #29bdca;
+	background-color: #4387FD;
 	border: none;
 	color: white !important;
 	line-height: 20px;

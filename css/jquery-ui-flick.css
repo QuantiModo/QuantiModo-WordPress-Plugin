@@ -968,8 +968,8 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-    border: 1px solid #29bdca;
-    background: #29bdca;
+    border: 1px solid #4387FD;
+    background: #4387FD;
     font-weight: bold;
     color: #ffffff;
 }
@@ -988,7 +988,7 @@ body .ui-tooltip {
     border: 1px solid #dddddd;
     background: #ffffff;
     font-weight: bold;
-    color: #229DA5;
+    color: #4387FD;
 }
 
 .ui-state-active a,

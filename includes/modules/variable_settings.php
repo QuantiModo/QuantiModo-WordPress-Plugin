@@ -17,21 +17,20 @@
                 <b style="margin-top: 12px;">Properties</b>
                 <table border="0" cellspacing="0">
                     <tr>
-                        <td>Variable name</td>
-                        <td><input id="input-variable-name" type="text" placeholder=""></td>
+                        <td>Variable name:</td>
+                        <td><span id="input-variable-name"></span></td>
                     </tr>
                     <tr>
-                        <td>Unit</td>
+                        <td>Unit:</td>
                         <td>
-                            <select id="selectVariableUnitSetting">
-                            </select>
+                            <span id="selectVariableUnitSetting"></span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Category</td>
+                        <td>Category:</td>
                         <td>
-                            <select disabled id="selectVariableCategorySetting">
-                            </select>
+                            <span id="selectVariableCategorySetting">
+                            </span>
                         </td>
                     </tr>
                 </table>
@@ -62,15 +61,19 @@
                 </table>
                 <div>
                     When there's no data:
-                    <div>
+                    <div class="assume-option-holder">
                         <input type="radio" name="missingAssumptionGroup" id="assumeMissing" checked="true">
-                        <label>Assume data is missing</label>
+                        <label for="assumeMissing">Assume data is missing</label>
                     </div>
-                    <div>
+                    <div class="assume-option-holder">
                         <input type="radio" name="missingAssumptionGroup" id="assumeValue">
-                        <label>Assume <input id="variableFillingValueSetting"
-                                             style="text-align: center; width: 50px; height: 26px;" type="text"
-                                             id="inputVariableMaximumValueSetting" placeholder=""> for that time</label>
+                        <label for="assumeValue" class="assume-value-label">
+                            <span>Assume&nbsp;</span>
+                            <input id="variableFillingValueSetting"
+                                   style="text-align: center; width: 50px; height: 26px;" type="text"
+                                   id="inputVariableMaximumValueSetting" placeholder="">
+                            <span>&nbsp;for that time</span>
+                        </label>
                     </div>
                 </div>
 

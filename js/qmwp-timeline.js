@@ -254,7 +254,7 @@ var AnalyzePage = function () {
     var unitListUpdated = function () {
         jQuery('#selectVariableUnitSetting').empty();
         jQuery.each(AnalyzePage.quantimodoUnits, function (index, category) {
-            jQuery('#selectVariableUnitSetting').append(jQuery('<option disabled/>').attr('style', 'color:#29bdca;font-styl;').text(category[0].category));
+            jQuery('#selectVariableUnitSetting').append(jQuery('<option disabled/>').attr('style', 'color:#4387FD;font-styl;').text(category[0].category));
             jQuery.each(category, function (index, unit) {
                 jQuery('#selectVariableUnitSetting').append(jQuery('<option/>').attr('value', unit.abbreviatedName).text(unit.name));
             });

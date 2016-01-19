@@ -1,0 +1,36 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add measurement for {{variable.name}}</h4>
+    </div>
+    <div class="modal-body">
+
+        <form>
+            <div class="form-group">
+                <label for="var-value">Value</label>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <input ng-model="mgmtVal" type="text" class="form-control" id="var-value" required>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model="variable.abbreviatedUnitName">
+                            <option ng-repeat="unit in units" value="{{unit.abbreviatedName}}">{{unit.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="var-date">Date</label>
+                <input type="text" ng-model="mgmtDate" date-time-picker class="form-control" id="var-date" required>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="ok()">Add Measurement</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
+<!-- /.modal-content -->
+

@@ -116,14 +116,14 @@ Class QMWP
         'qmwp_add_login_logout_nav_items' => 0,
         'qmwp_plugin_pages' => array(
             'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
-            'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations examined_variable_name="Overall Mood" show_predictors_or_outcomes="predictors"]',
+            'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations effect="Overall Mood"]',
             'Track Mood (Faces)' => '[qmwp_rating_faces tracked_variable_name="Overall Mood" negative="false"]',
             'Import Data' => '[qmwp_connectors]',
             'Predictors/Outcomes Analysis Charts' => '[qmwp_bargraph_scatterplot_timeline]',
             'Mood Over Time' => '[qmwp_timeline examined_variable_names="overall mood"]',
             'Timeline Chart' => '[qmwp_timeline]',
             'Track Anything' => '[qmwp_add_measurement]',
-            'Track Emotions' => '[qmwp_add_measurement category="Mood"]',
+            'Track Emotions' => '[qmwp_add_measurement category="Emotions"]',
             //'Track Physique' => '[qmwp_add_measurement category="Physique"]',
             'Track Physical Activity' => '[qmwp_add_measurement category="Physical Activity"]',
             //'Track Location' => '[qmwp_add_measurement category="Location"]',
@@ -154,6 +154,7 @@ Class QMWP
             'Search for Outcomes' => '[qmwp_search_for_outcomes]',
             'Outcomes Of Steps' => '[qmwp_search_for_outcomes examined_variable_name="Steps"]',
             'Quantimodo Ionic Application' => '[qm_ionic_app]',
+            'Quantimodo Embed Plugin Example' => '[qm_embed plugin="search-relationships" width="100%" height="777" frame_class="qm-relationships" outcome="Overall Mood" common_or_user="common"]',
         )
     );
 
@@ -193,6 +194,7 @@ Class QMWP
         add_shortcode('qmwp_add_measurement', array($this, 'qmwp_add_measurement'));
         add_shortcode('qm_numbers_rating', array($this, 'qm_numbers_rating'));
         add_shortcode('qm_ionic_app', array($this, 'qm_ionic_app'));
+        add_shortcode('qm_embed', array($this, 'qm_embed'));
 
         //add shortcake plugin features to qmwp shortcodes (if plugin is installed)
         $this->add_shortcake_ui_features();
@@ -211,6 +213,12 @@ Class QMWP
         add_action('admin_enqueue_scripts', array($this, 'qmwp_init_backend_scripts_styles'));
         add_action('admin_menu', array($this, 'qmwp_settings_page'));
         add_action('admin_init', array($this, 'qmwp_register_settings'));
+
+        add_action( 'admin_menu', array($this, 'qm_admin_menu'));
+
+
+
+
         $plugin = plugin_basename(__FILE__);
         add_filter("plugin_action_links_$plugin", array($this, 'qmwp_settings_link'));
         // hook scripts and styles for login page:
@@ -243,7 +251,7 @@ Class QMWP
     {
         if (get_option('qmwp_add_login_logout_nav_items')) {
             if (!is_user_logged_in()) {
-                $menuItem = "<li><a id='login-with-qm' class='qmwp-login-button' href='/?connect=quantimodo'>Login with QuantiModo</a></li>";
+                $menuItem = "<li><a id='login-with-qm' class='qmwp-login-button' href='/?connect=quantimodo'>Login</a></li>";
                 return $menu . $menuItem;
             } else {
                 $menuItem = "<li><a id='logout-with-qm' href='" . wp_logout_url() . "'>Logout</a></li>";
@@ -766,20 +774,32 @@ Class QMWP
      */
     function access_token()
     {
-        $user_id = get_current_user_id();
-        $tokenValidityTime = get_user_meta($user_id, 'qmwp_token_expires_at', true);
+        $authenticator = new QMWPAuth();
 
-        if ($tokenValidityTime != "" && time() < $tokenValidityTime) {
-            return get_user_meta($user_id, 'qmwp_access_token', true);
-        } elseif ($tokenValidityTime != "" && time() >= $tokenValidityTime) {
-            $refreshToken = get_user_meta($user_id, 'qmwp_refresh_token', true);
-            $authenticator = new QMWPAuth();
-            $authenticator->refresh_oauth_token($this, $refreshToken);
-            $this->update_user_tokens($user_id);
-            return get_user_meta($user_id, 'qmwp_access_token', true);
+        $token = $authenticator->get_credentials();
+
+        if ($token) {
+
+            return $token;
         } else {
-            return null;
+
+            $user_id = get_current_user_id();
+            $tokenValidityTime = get_user_meta($user_id, 'qmwp_token_expires_at', true);
+
+            if ($tokenValidityTime != "" && time() < $tokenValidityTime) {
+                return get_user_meta($user_id, 'qmwp_access_token', true);
+            } elseif ($tokenValidityTime != "" && time() >= $tokenValidityTime) {
+                $refreshToken = get_user_meta($user_id, 'qmwp_refresh_token', true);
+                $authenticator->refresh_oauth_token($this, $refreshToken);
+                $this->update_user_tokens($user_id);
+                return get_user_meta($user_id, 'qmwp_access_token', true);
+            } else {
+                return null;
+            }
+
         }
+
+
     }
 
     /**
@@ -1209,7 +1229,7 @@ Class QMWP
      * @param $version - template version to load
      * @return string - rendered template HTML string
      */
-    private function get_plugin_template_html($shortCodeName, $version)
+    private function get_plugin_template_html($shortCodeName, $version, $params = null)
     {
         ob_start();
         include('includes/' . $shortCodeName . '/' . $shortCodeName . '-v' . $version . '.php');
@@ -1415,7 +1435,8 @@ Class QMWP
         $attributes = shortcode_atts(array(
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
-            'show_predictors_or_outcomes' => 'outcomes',
+            'show_predictors_or_outcomes' => 'predictors',
+            'allow_user_change_variable' => 'false',
         ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
 
         $version = $attributes['version'];
@@ -1434,7 +1455,8 @@ Class QMWP
             $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
                 array(
                     'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes
+                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                    'qmwpShowVariableSelectors' => $attributes['allow_user_change_variable']
                 ));
         }
 
@@ -1482,27 +1504,21 @@ Class QMWP
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
-            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
-            'show_predictors_or_outcomes' => 'outcomes',
+            'outcome' => get_option('qmwp_default_outcome_variable'),
+            'predictor' => null,
+            'common_or_user' => 'common'
         ), $attributes, 'qmwp_search_correlations');
 
         $version = $attributes['version'];
 
         $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
 
-        $variable = $attributes['examined_variable_name'];
-
-        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
-            $showPredictorsOrOutcomes = 'cause';
-        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
-            $showPredictorsOrOutcomes = 'effect';
-        }
-
         $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
             array(
-                'qmwpShortCodeDefinedVariable' => $variable,
-                'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPredictor' => $attributes['predictor'],
+                'qmwpOutcome' => $attributes['outcome'],
                 'qmwpPluginUrl' => plugins_url('/', __FILE__),
+                'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1521,6 +1537,7 @@ Class QMWP
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'predictors',
+            'common_or_user' => 'common'
         ), $attributes, 'qmwp_search_for_predictors');
 
         $version = $attributes['version'];
@@ -1539,6 +1556,8 @@ Class QMWP
             array(
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPluginUrl' => plugins_url('/', __FILE__),
+                'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
 
         $template_content = $this->process_template($pluginContentHTML);
@@ -1557,6 +1576,7 @@ Class QMWP
             'version' => 1,
             'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
             'show_predictors_or_outcomes' => 'outcomes',
+            'common_or_user' => 'common'
         ), $attributes, 'qmwp_search_for_outcomes');
 
         $version = $attributes['version'];
@@ -1576,6 +1596,8 @@ Class QMWP
             array(
                 'qmwpShortCodeDefinedVariable' => $variable,
                 'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
+                'qmwpPluginUrl' => plugins_url('/', __FILE__),
+                'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
 
 
@@ -1655,6 +1677,54 @@ Class QMWP
         $templateContent = $this->process_template($pluginContentHTML);
 
         return $templateContent;
+    }
+
+
+    /**
+     * Return rendered html string with plugin content!
+     * @param $attributes
+     * @return string
+     */
+    function qm_embed($attributes)
+    {
+        $attributes = shortcode_atts(array(
+            'version' => 1,
+            'frame_class' => null,
+            'width' => '100%',
+            'height' => '777',
+            'plugin' => 'search-relationships',
+            'common_or_user' => 'common',
+            'access_token' => $this->access_token(),
+            'outcome' => null,
+            'predictor' => null,
+        ), $attributes, 'qm_embed');
+
+        $getParams = array(
+            'plugin' => $attributes['plugin'],
+            'outcome' => (array_key_exists('outcome', $attributes)) ? $attributes['outcome'] : null,
+            'predictor' => (array_key_exists('predictor', $attributes)) ? $attributes['predictor'] : null,
+            'common_or_user' => (array_key_exists('common_or_user', $attributes)) ? $attributes['common_or_user'] : null,
+            'access_token' => $attributes['access_token']
+        );
+
+        $iFrameParams = array(
+            'width' => $attributes['width'],
+            'height' => $attributes['height'],
+            'class' => 'qm-frame ' . $attributes['frame_class'],
+        );
+
+        $version = $attributes['version'];
+
+        $pluginContentHTML = $this->get_plugin_template_html('qm-embed', $version, array(
+            'getParams' => $getParams,
+            'iFrameParams' => $iFrameParams,
+        ));
+
+        $templateContent = $this->process_template($pluginContentHTML);
+
+        return $templateContent;
+
+
     }
 
 
@@ -1739,6 +1809,16 @@ Class QMWP
                         ),
                     ),
 
+                    array(
+                        'label' => 'Allow user to select variable',
+                        'attr' => 'allow_user_change_variable',
+                        'type' => 'select',
+                        'options' => array(
+                            'true' => 'True',
+                            'false' => 'False',
+                        ),
+                    ),
+
                 ),
             )
         );
@@ -1772,21 +1852,31 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'label' => 'Predictor',
+                        'attr' => 'predictor',
                         'type' => 'text',
                         'meta' => array(
-                            'placeholder' => 'Type variable name',
+                            'placeholder' => 'Type default predictor',
                         ),
                     ),
 
                     array(
-                        'label' => 'Show predictors or outcomes',
-                        'attr' => 'show_predictors_or_outcomes',
+                        'label' => 'Outcome',
+                        'attr' => 'outcome',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type default outcome',
+                        ),
+                    ),
+
+
+                    array(
+                        'label' => 'Common or user measurements',
+                        'attr' => 'common_or_user',
                         'type' => 'select',
                         'options' => array(
-                            'predictors' => 'Predictors',
-                            'outcomes' => 'Outcomes',
+                            'common' => 'Common',
+                            'user' => 'User',
                         ),
                     ),
                 ),
@@ -1802,11 +1892,31 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'label' => 'Predictor',
+                        'attr' => 'predictor',
                         'type' => 'text',
                         'meta' => array(
-                            'placeholder' => 'Type variable name',
+                            'placeholder' => 'Type default predictor',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Outcome',
+                        'attr' => 'outcome',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type default outcome',
+                        ),
+                    ),
+
+
+                    array(
+                        'label' => 'Common or user measurements',
+                        'attr' => 'common_or_user',
+                        'type' => 'select',
+                        'options' => array(
+                            'common' => 'Common',
+                            'user' => 'User',
                         ),
                     ),
                 ),
@@ -1822,11 +1932,31 @@ Class QMWP
                 'attrs' => array(
 
                     array(
-                        'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
+                        'label' => 'Predictor',
+                        'attr' => 'predictor',
                         'type' => 'text',
                         'meta' => array(
-                            'placeholder' => 'Type variable name',
+                            'placeholder' => 'Type default predictor',
+                        ),
+                    ),
+
+                    array(
+                        'label' => 'Outcome',
+                        'attr' => 'outcome',
+                        'type' => 'text',
+                        'meta' => array(
+                            'placeholder' => 'Type default outcome',
+                        ),
+                    ),
+
+
+                    array(
+                        'label' => 'Common or user measurements',
+                        'attr' => 'common_or_user',
+                        'type' => 'select',
+                        'options' => array(
+                            'common' => 'Common',
+                            'user' => 'User',
                         ),
                     ),
                 ),
@@ -1846,7 +1976,7 @@ Class QMWP
                         'attr' => 'category',
                         'type' => 'select',
                         'options' => array(
-                            'Mood' => 'Emotions',
+                            'Emotions' => 'Emotions',
                             'Physique' => 'Physique',
                             'Physical Activity' => 'Physical Activity',
                             'Location' => 'Location',
@@ -1864,6 +1994,14 @@ Class QMWP
                 ),
             )
         );
+    }
+
+    function qm_admin_menu() {
+        add_menu_page( 'Graph Variables Over Time', 'Timeline', 'read', 'quantimodo/includes/qmwp-timeline/qmwp-timeline-v1.php', array($this, 'qm_timeline_admin_page'), 'dashicons-chart-line', 6  );
+    }
+
+    function qm_timeline_admin_page(){
+        include_once 'includes/qmwp-timeline/qmwp-timeline-v1.php';
     }
 
     function add_shortcake_to_numbers_rating()

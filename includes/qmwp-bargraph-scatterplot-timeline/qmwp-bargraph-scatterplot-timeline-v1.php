@@ -12,6 +12,7 @@ wp_enqueue_style("jquery-tip", plugins_url('../../', __FILE__) . "css/simpletip.
 wp_enqueue_style("jquery-datetimepicker", plugins_url('../../', __FILE__) . "css/jquery.datetimepicker.css");
 wp_enqueue_style("jquery-fancybox", plugins_url('../../', __FILE__) . "js/libs/fancybox/jquery.fancybox.css");
 wp_enqueue_style("font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css");
+wp_enqueue_style("sweet-alert", plugins_url('../../', __FILE__) . "css/sweetalert.css");
 
 wp_enqueue_script("jquery", true);
 wp_enqueue_script("jquery-ui-core");
@@ -52,6 +53,7 @@ wp_enqueue_script("refresh-shared", plugins_url('../../', __FILE__) . "js/_data_
 wp_enqueue_script("correlate", plugins_url('../../', __FILE__) . "js/qmwp-bargraph-gauge-scatterplot-timeline.js", array("correlate-charts", "jquery-ui-datepicker", "jquery-ui-button"), false, true);
 
 wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
+wp_enqueue_script("sweet-alert", plugins_url('../../', __FILE__) . "js/libs/sweetalert.min.js");
 
 ?>
 
@@ -74,10 +76,11 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
             <div class="accordion-content closed" id="accordion-output-content">
                 <div class="inner">
                     <select id="selectOutputCategory"></select>
-                    <select id="selectOutputVariable"></select>
+                    <!--<select id="selectOutputVariable"></select>-->
+                    <input type="text" id="selectOutputVariable">
                     <select id="selectOutputAsType">
-                        <option value="effect">As Effect</option>
-                        <option value="cause">As Cause</option>
+                        <option value="effect">List Predictors</option>
+                        <option value="cause">List Outcomes</option>
                     </select>
                     <button id="button-output-varsettings">Settings</button>
                 </div>
@@ -87,7 +90,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         <div id="bar-graph">
             <header class="graph-header" id="bar-graph-header">
                 <div class="generalHeader bargraphHeader">
-                    Correlations
+                    Please wait...
                 </div>
                 <div class="icon-question-sign icon-large questionMark"
                      title="This is the list of variables in order of their correlation with your examined variable."></div>
@@ -95,7 +98,12 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
             <div class="graph-content" style="height: 596px; overflow-y: scroll;">
                 <img src="https://i.imgur.com/73BFcje.gif" class="barloading"
                      style="margin-left: 4%; margin-top: 20%; display:none"/>
-                <span class="no-data" style="display:none"> <br/>  <center> No data found</center> <br/><br/></span>
+                <span class="no-data" style="display:none"> <br/>  <center><h2>Hi!</h2>
+
+                        <h2>We don't have enough data to determine your top predictors and outcomes. &nbsp;:(</h2>
+
+                        <h2>Please check out the <a href="/getting-started" target="_blank">Getting Started</a> page to
+                            see how to add more data!</h2></center><br/><br/></span>
 
                 <div id="graph-bar" class="graph-content">
                 </div>
@@ -134,7 +142,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
             <div class="inner">
                 <header class="graph-header" id="correlation-gauge-header">
                     <div class="generalHeader correlationHeader">
-                        Correlation Scatterplot
+                        Scatterplot
                     </div>
                     <!--  <div id="gauge-correlation-settingsicon" data-dropdown="#dropdown-gauge-settings" class="gear-icon"></div>
                       <div class="icon-question-sign icon-large questionMark"></div> -->
@@ -190,7 +198,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
             <div class="inner">
                 <header class="graph-header" id="scatterplot-graph-header">
                     <!-- <div class="generalHeader scatterplotHeader">
-                         Correlation Scatterplot
+                         Scatterplot
                      </div>-->
                     <div class="keepInline">
                         <div id="graph-scatterplot-settingsicon" data-dropdown="#dropdown-scatterplot-settings"

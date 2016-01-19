@@ -57,14 +57,49 @@ var AnalyzePage = function () {
 
     var initVariableSelectors = function () {
 
-        /*jQuery('#selectOutputCategory').change(outputCategoryUpdated);
-         jQuery('#selectOutputVariable').change(function () {
-         outputVariableUpdated();
-         getBargraph();
-         });
-         jQuery('#selectOutputAsType').change(function () {
-         getBargraph(true);
-         });*/
+        if (qmwpShowVariableSelectors === 'true') {
+
+            var variableSelector = jQuery('#selectOutputVariable');
+            var typeSelector = jQuery('#selectOutputAsType');
+
+
+            variableSelector.autocomplete({
+                source: function (req, resp) {
+
+                    Quantimodo.searchVariables(variableSelector.val(), function (data) {
+
+                        variables = data;
+                        resp(jQuery.map(data, function (variable) {
+                            return {
+                                label: variable.name,
+                                value: variable.name,
+                                variable: variable
+                            };
+                        }));
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+
+                    var variable = ui.item.variable;
+
+                    outputVariableUpdated();
+                    getBargraph(false, variable.name);
+
+                }
+            });
+
+            typeSelector.change(function (e) {
+                getBargraph(false, null, e.currentTarget.value);
+            });
+
+            variableSelector.val(qmwpShortCodeDefinedVariable);
+            typeSelector.val(qmwpShortCodeDefinedVariableAs);
+
+            typeSelector.show();
+            variableSelector.show();
+
+        }
 
     };
 
@@ -139,12 +174,12 @@ var AnalyzePage = function () {
 
     var lastInputVariable = null;
     var inputVariableUpdated = function () {
-        var newInputVariable = AnalyzePage.getInputVariable();
+        var newInputVariable = AnalyzePage.selectedInputVariableName;
         if (newInputVariable !== AnalyzePage.lastInputVariable) {
             refreshInputData();
             AnalyzePage.lastInputVariable = newInputVariable;
-            saveSetting('lastInputVariableName', AnalyzePage.lastInputVariable.originalName);
-            AnalyzePage.selectedInputVariableName = AnalyzePage.lastInputVariable.originalName;
+            saveSetting('lastInputVariableName', AnalyzePage.lastInputVariable);
+            AnalyzePage.selectedInputVariableName = AnalyzePage.lastInputVariable;
         }
     };
 
@@ -154,24 +189,14 @@ var AnalyzePage = function () {
 
         jQuery('#selectOutputVariable').empty();
         jQuery.each(AnalyzePage.quantimodoVariables[newOutputCategory], function (_, variable) {
-            //	if (variable.name == variable.originalName)
-            // 	{
+
             if (AnalyzePage.lastOutputVariable != null && AnalyzePage.lastOutputVariable.originalName == variable.originalName) {
                 jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('selected', 'selected').attr('value', variable.originalName).text(variable.name));
             }
             else {
                 jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('value', variable.originalName).text(variable.name));
             }
-            //	}
 
-            // if (variable.name == variable.originalName)
-            // {
-            // 	jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('value', variable.name).text(variable.name));
-            // }
-            // else
-            // {
-            // 	jQuery('#selectOutputVariable').append(jQuery('<option/>').attr('value', variable.name).text(variable.name + " (" + variable.originalName + ")"));
-            // }
 
         });
         lastOutputCategory = newOutputCategory;
@@ -403,6 +428,54 @@ var AnalyzePage = function () {
         });
     };
 
+    var fetchAndSetVariables = function (inputVariableName, outputVariableName, callback) {
+
+        function getVariableDetails(name) {
+
+            var def = jQuery.Deferred();
+
+            if (name) {
+                Quantimodo.getVariableByName(name, function (variable) {
+
+                    def.resolve(variable);
+
+                });
+            } else {
+
+                def.resolve(null);
+
+            }
+
+            return def.promise();
+
+        }
+
+        jQuery
+            .when(getVariableDetails(inputVariableName), getVariableDetails(outputVariableName))
+            .done(function (inputVariableDetails, outputVariableDetails) {
+
+                if (inputVariableDetails) {
+
+                    AnalyzePage.lastInputVariable = inputVariableDetails;
+                    AnalyzePage.quantimodoVariables [inputVariableDetails.category] = [inputVariableDetails];
+
+                } else if (outputVariableDetails) {
+
+                    AnalyzePage.lastOutputVariable = outputVariableDetails;
+
+                    if (outputVariableDetails.category in AnalyzePage.quantimodoVariables) {
+                        AnalyzePage.quantimodoVariables.push(outputVariableDetails);
+                    } else {
+                        AnalyzePage.quantimodoVariables [outputVariableDetails.category] = [outputVariableDetails];
+                    }
+                }
+
+                callback();
+
+            });
+
+    };
+
     return {
         lastInputVariable: lastInputVariable,
         lastOutputVariable: lastOutputVariable,
@@ -445,6 +518,7 @@ var AnalyzePage = function () {
             return null;
         },
         getVariableFromOriginalName: function (originalVariableName) {
+
             var selectedVariable;
             var categories = Object.keys(AnalyzePage.quantimodoVariables);
             var currentCategory, currentVariable;
@@ -460,14 +534,50 @@ var AnalyzePage = function () {
             }
             return null;
         },
-        getInputVariable: function () {
+
+        getVariableFromOriginalNameAsync: function (originalVariableName, callback) {
+
+            if (originalVariableName) {
+
+                Quantimodo.getVariableByName(originalVariableName, function (variable) {
+                    callback(variable);
+                });
+
+            } else {
+                callback(null);
+            }
+
+        },
+
+        getInputVariable: function (callback) {
             return AnalyzePage.getVariableFromOriginalName(AnalyzePage.selectedInputVariableName);
         },
         getOutputVariable: function (callback) {
-            Quantimodo.getVariableByName(qmwpShortCodeDefinedVariable, function (variable) {
+
+            var variableName = jQuery('#selectOutputVariable').val();
+
+            if (!variableName) {
+                variableName = qmwpShortCodeDefinedVariable;
+            }
+
+            Quantimodo.getVariableByName(variableName, function (variable) {
                 callback(variable);
             });
         },
+
+        getInputVariableName: function (callback) {
+            return AnalyzePage.getVariableFromOriginalName(AnalyzePage.selectedInputVariableName);
+        },
+
+        getOutputVariableName: function () {
+            var variableName = jQuery('#selectOutputVariable').val();
+
+            if (!variableName) {
+                variableName = qmwpShortCodeDefinedVariable;
+            }
+            return variableName;
+        },
+
         setInputVariable: function (originalVariableName) {
             AnalyzePage.selectedInputVariableName = originalVariableName;
             inputVariableUpdated();
@@ -496,12 +606,23 @@ var AnalyzePage = function () {
                 window.location.href = "?connect=quantimodo";
             } else {
                 refreshMeasurementsRange(function () {
-                    refreshVariables([], function () {
+
+                    /*                    refreshVariables([], function () {
+                     categoryListUpdated();
+                     outputCategoryUpdated();
+                     getBargraph();
+                     refreshInputData();
+                     });*/
+
+                    fetchAndSetVariables(AnalyzePage.getInputVariableName(), AnalyzePage.getOutputVariableName(), function () {
+
                         categoryListUpdated();
                         outputCategoryUpdated();
                         getBargraph();
                         refreshInputData();
+
                     });
+
                 });
                 refreshUnits(function () {
                     unitListUpdated();
@@ -550,7 +671,9 @@ var AnalyzePage = function () {
             }
         },
         showSettingsForVariableFromGraph: function (variableName) {
-            variableSettings.show(AnalyzePage.getVariableFromOriginalName(variableName));
+            AnalyzePage.getVariableFromOriginalNameAsync(variableName, function (variable) {
+                variableSettings.show(variable);
+            });
         },
         getVariableSelectedFromBarGraph: function (variableName) {
             return variableSelectedFromBarGraph(variableName);
@@ -593,10 +716,15 @@ var AnalyzePage = function () {
 
             if (variableName != null && variableName !== undefined) {
                 variableName = unescape(variableName);
-                var variable = AnalyzePage.getVariableFromOriginalName(variableName);
-                jQuery("#module-addmeasurementvariable-name").val(variable.name);
-                jQuery("#module-addmeasurementvariable-original-name").val(variable.originalName);
-                selectVariableName(variable.name);
+
+                AnalyzePage.getVariableFromOriginalNameAsync(variableName, function (variable) {
+
+                    jQuery("#module-addmeasurementvariable-name").val(variable.name);
+                    jQuery("#module-addmeasurementvariable-original-name").val(variable.originalName);
+                    selectVariableName(variable.name);
+
+                });
+
             } else {
                 selectVariableName('');
             }
@@ -622,10 +750,9 @@ function getSettingsForm(variableName) {
 }
 
 function setInputVariable(variableName) {
-    var variable = AnalyzePage.getVariableFromOriginalName(unescape(variableName));
-    if (variable) {
-        AnalyzePage.setInputVariable(variable.originalName);
-    }
+
+    AnalyzePage.setInputVariable(unescape(variableName));
+
 }
 
 
@@ -655,13 +782,24 @@ function resetHighlightStuff() {
     leaveVarNameOnBargraphRow = null;
 }
 
-function jsonCallback(data) {
+function processDataAndCreateBargraph(data) {
 
     if (data.length == 0) {
         jQuery('.no-data').show();
         jQuery('#graph-bar').hide();
         jQuery('.barloading').hide();
+        jQuery('#bar-graph-header .bargraphHeader').html('No correlations');
         bargraphData = null;
+        swal({
+            title: 'Not enough data',
+            text: "Hi!  We don't have enough data yet to determine your top predictors.  " +
+            "Please connect to some data sources on the <a target='_blank' href='/import-data'>Import Data</a> page or start using one " +
+            "of the great tracking apps and devices on the " +
+            "<a target='_blank' href='/data-sources'>Data Sources</a> page.",
+            type: "warning",
+            html: true,
+            confirmButtonColor: '#4387FD'
+        });
     }
     else {
         jQuery('.no-data').hide();
@@ -672,7 +810,7 @@ function jsonCallback(data) {
         sortedByCausality = new Array();
 
         //var valAs = jQuery('#selectOutputAsType').val();
-        var valAs = qmwpShortCodeDefinedVariableAs;
+        var valAs = jQuery('#selectOutputAsType').val() || qmwpShortCodeDefinedVariableAs;
 
         for (var i in data) {
             dataArray[i] = ((valAs === 'cause') ? {
@@ -775,7 +913,7 @@ function jsonCallback(data) {
     }
 }
 
-function getBargraph(bUseCache) {
+function getBargraph(bUseCache, variable, variableAs) {
     jQuery('#graph-bar').bind('mouseenter', function (event) {
         jQuery('#graph-bar').css('cursor', 'pointer');
     });
@@ -792,23 +930,20 @@ function getBargraph(bUseCache) {
 
     jQuery('#graph-bar').hide();
     jQuery('.barloading').show();
-    var val = qmwpShortCodeDefinedVariable;
+
+    var val = variable;
+
+    if (!val) {
+        val = qmwpShortCodeDefinedVariable;
+    }
+
     var url = Quantimodo.url + 'correlations';
 
     //var valAs = jQuery('#selectOutputAsType').val();
-    var valAs = qmwpShortCodeDefinedVariableAs;
+    var valAs = variableAs || qmwpShortCodeDefinedVariableAs;
     var jsonParam = {effect: val};
     if (valAs == 'cause')
         jsonParam = {cause: val};
-
-    /*	if (valAs == 'effect' &&  AnalyzePage.getVariableFromOriginalName(val).causeOnly == 1)
-     {
-     jQuery('.no-data').show();
-     jQuery('#graph-bar').hide();
-     jQuery('.barloading').hide();
-     bargraphData = null;
-     return;
-     }*/
 
     if (bUseCache === undefined) {
         bUseCache = false;
@@ -816,22 +951,15 @@ function getBargraph(bUseCache) {
     }
     if (bUseCache == true) {
         if (valAs == 'effect' && typeof bargraphDataAsEffect !== 'undefined' && bargraphDataAsEffect.length > 0) {
-            jsonCallback(bargraphDataAsEffect);
+            processDataAndCreateBargraph(bargraphDataAsEffect);
             return;
         }
         if (valAs == 'cause' && typeof bargraphDataAsCause !== 'undefined' && bargraphDataAsCause.length > 0) {
-            jsonCallback(bargraphDataAsCause);
+            processDataAndCreateBargraph(bargraphDataAsCause);
             return;
         }
     }
 
-    /*    jQuery.get(url, jsonParam).done(function (data) {
-     if (valAs == 'cause')
-     bargraphDataAsCause = data;
-     else
-     bargraphDataAsEffect = data;
-     jsonCallback(data);
-     })*/
     console.debug('getBargraph API call')
     jQuery.ajax({
         data: jsonParam,
@@ -841,9 +969,6 @@ function getBargraph(bUseCache) {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-            /*if (mashapeKey) {
-                xhr.setRequestHeader('X-Mashape-Key', mashapeKey);
-            }*/
         }
     }).done(function (data) {
         if (valAs == 'cause') {
@@ -851,7 +976,7 @@ function getBargraph(bUseCache) {
         } else {
             bargraphDataAsEffect = data;
         }
-        jsonCallback(data);
+        processDataAndCreateBargraph(data);
     })
 }
 function resetBarGraph() {
@@ -869,9 +994,13 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
 
     selectedVariableName = sortedByCorrelation[0].label;
 
-    var varName = qmwpShortCodeDefinedVariable;
+    var varName = jQuery('#selectOutputVariable').val();
+
+    if (!varName) {
+        varName = qmwpShortCodeDefinedVariable;
+    }
     //var valAs = jQuery('#selectOutputAsType').val();
-    var valAs = qmwpShortCodeDefinedVariableAs;
+    var valAs = jQuery('#selectOutputAsType').val() || qmwpShortCodeDefinedVariableAs;
     var headerText = "Predictors of ";
     if (valAs == 'cause')
         headerText = "Predicted by ";
@@ -906,7 +1035,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                         selectedBargraphRowIndex.attr('fill', this.options.color);
                         selectedVarNameOnBargraphRow.attr('style', '');
                     }
-                    this.svgElem.attr('fill', '#29bdca');
+                    this.svgElem.attr('fill', '#4387FD');
                     selectedBargraphRowIndex = this.svgElem;
                     selectedVarNameOnBargraphRow = jQuery("div[data-row=\'" + escape(this.axis.categories[this.options.from + 0.5].originalName) + "\']");
                     selectedVarNameOnBargraphRow.attr('style', 'color:#FFF;');
@@ -921,7 +1050,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
                     if (leaveBargraphRowIndex != null && leaveBargraphRowIndex != overBargraphRowIndex && settingsIconsOnBargraphRow != null) {
                         settingsIconsOnBargraphRow.attr('style', '');
                     }
-                    this.svgElem.attr('fill', '#29bdca');
+                    this.svgElem.attr('fill', '#4387FD');
                     overVarNameOnBargraphRow.attr('style', 'color:#FFF;');
                     settingsIconsOnBargraphRow = jQuery("div[data-row=\'" + escape(this.axis.categories[this.options.from + 0.5].originalName) + "\'] .setButton");
                     settingsIconsOnBargraphRow.attr('style', 'opacity:1;');
@@ -980,6 +1109,7 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
         series: [{data: dataOfSerie}],
         tooltip: {
             shared: false,
+            useHTML: true,
             formatter: function () {
                 var vax = this.series.options.data;
                 //for (var i in vax) {
@@ -987,15 +1117,28 @@ function constructBarGraph(count, dataOfSerie, dataSeries) {
 
                 var serie = this.series;
                 //	var s = '<b>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b><br>';
-                var s = '<span style="color:' + serie.color + '">' + rex.name + '</span>: <b>' + this.y + '</b><br/>';
+                var s = '<div class="tooltip-wrap"><span style="color:' + serie.color + '">' + rex.name + '</span>: <b>' + this.y + '</b><br/>';
                 jQuery.each(rex.composition, function (name, value) {
                     s += '<b>' + name + ':</b> ' + value + '<br>';
                 });
-                return s;
+                return s + '</div>';
             },
-            backgroundColor: '#FFF'
+            backgroundColor: 'rgba(255,255,255,1)'
         }
     });
+
+    var lastInputVariableName = localStorage.getItem('lastInputVariableName');
+
+    if (!lastInputVariableName) {
+
+        var barchartItems = document.getElementsByClassName('variableRowInBarGraph');
+
+        if (barchartItems.length) {
+            setInputVariable(barchartItems[0].textContent);
+        }
+
+    }
+
 }
 
 function highlightBargraphRow() {
@@ -1003,7 +1146,7 @@ function highlightBargraphRow() {
         selectedBargraphRowIndex.attr('fill', '#FFF');
         selectedVarNameOnBargraphRow.attr('style', '');
     }
-    overBargraphRowIndex.attr('fill', '#29bdca');
+    overBargraphRowIndex.attr('fill', '#4387FD');
     selectedBargraphRowIndex = overBargraphRowIndex;
     selectedVarNameOnBargraphRow = overVarNameOnBargraphRow;
 }

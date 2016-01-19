@@ -366,11 +366,13 @@ $cc_ux = qmwp_cc_ux();
                                         <li>
                                             show_predictors_or_outcomes
                                         </li>
+                                        <li>
+                                            allow_user_change_variable
+                                        </li>
                                     </ul>
                                     <p>
                                         Specify variable and how it should be considered (cause or effect)
                                     </p>
-
                                     <p>
                                         Example: <br>
                                         [qmwp_bargraph_scatterplot_timeline examined_variable_name="Sleep Quality"
@@ -463,6 +465,23 @@ $cc_ux = qmwp_cc_ux();
                                 </td>
                                 <td>
                                     Put functionality of QuantiModo ionic application to any page
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="shortcode">[qm_embed]</td>
+                                <td>
+                                    <ul>
+                                        <li>plugin</li>
+                                        <li>frame_class</li>
+                                        <li>width</li>
+                                        <li>height</li>
+                                        <li>common_or_user</li>
+                                        <li>outcome</li>
+                                        <li>predictor</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Embed QuantiModo functionality via iframe
                                 </td>
                             </tr>
                             </tbody>
@@ -1073,18 +1092,13 @@ $cc_ux = qmwp_cc_ux();
                         <p>
                             <strong>Instructions:</strong>
                         <ol>
-                            <li>Visit the QuantiModo website for developers <a
-                                    href='https://developer.quantimo.do' target="_blank">developer.quantimo.do</a>.
+                            <li>Visit the QuantiModo developer dashboard at <a
+                                    href='https://admin.quantimo.do' target="_blank">admin.quantimo.do</a>.
                             </li>
-                            <li>Create a new app on Mashape and enable the QuantiModo API. This will enable
-                                your site to access the QuantiModo API.
+                            <li>Create a new app your site to access the QuantiModo API.
                             </li>
                             <li>At QuantiModo, provide your site's homepage URL (<?php echo $blog_url; ?>) for the new
-                                Project's Redirect URI. Don't forget the trailing slash!
-                            </li>
-                            <li>At QuantiModo, you must also configure the Consent Screen with your Email Address and
-                                Product Name. This is what QuantiModo will display to users when they are asked to grant
-                                access to your site/app.
+                                app's Redirect URI field. Don't forget the trailing slash!
                             </li>
                             <li>Paste your Client ID/Secret provided by QuantiModo into the fields above, then click the
                                 Save all settings button.
