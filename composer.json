@@ -19,7 +19,7 @@
   ],
   "require": {
     "php": ">=5.4",
-    "quantimodo/quantimodo-sdk-javascript": "dev-master"
+    "quantimodo/quantimodo-sdk-javascript": "1.2.1"
   },
   "require-dev": {
     "phing/phing": "dev-master",
