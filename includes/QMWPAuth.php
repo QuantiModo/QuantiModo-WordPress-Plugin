@@ -207,15 +207,47 @@ class QMWPAuth
         $oauth_identity['id'] = $result_obj['id']; // PROVIDER SPECIFIC: QuantiModo returns the user's OAuth identity as id
         $oauth_identity['email'] = $result_obj['email'];
         $oauth_identity['displayName'] = $result_obj['displayName'];
-        $oauth_identity['loginName'] =   $result_obj['loginName'];
+        $oauth_identity['loginName'] = $result_obj['loginName'];
         if (!$oauth_identity['id']) {
             $qmwp->qmwp_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.", true);
         }
         return $oauth_identity;
     }
 
+    public function get_credentials()
+    {
+
+        switch (strtolower($this->httpUtil)) {
+            case 'curl':
+                $url = $this->urlUser;
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+                $result = curl_exec($curl);
+                $result_obj = json_decode($result, true);
+                break;
+            case 'stream-context':
+                $url = rtrim($this->urlUser, "?");
+                $opts = array('http' =>
+                    array(
+                        'method' => 'GET',
+                    )
+                );
+                $context = $context = stream_context_create($opts);
+                $result = @file_get_contents($url, false, $context);
+                $result_obj = json_decode($result, true);
+                break;
+        }
+
+        $token = isset($result_obj['token']) ? explode('|', $result_obj['token'])[2] : null;
+
+        return $token;
+
+    }
+
     /**
-     * Pareses repsonse values and populates session variables with them
+     * Parses response values and populates session variables with them
      * Returns false when argument does not contain needed values
      *
      * @param $values
