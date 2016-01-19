@@ -154,7 +154,7 @@ Class QMWP
             'Search for Outcomes' => '[qmwp_search_for_outcomes]',
             'Outcomes Of Steps' => '[qmwp_search_for_outcomes examined_variable_name="Steps"]',
             'Quantimodo Ionic Application' => '[qm_ionic_app]',
-            'Quantimodo Embed Plugin Example'   =>  '[qm_embed plugin="search-relationships" width="100%" height="777" frame_class="qm-relationships" outcome="Overall Mood" common_or_user="common"]',
+            'Quantimodo Embed Plugin Example' => '[qm_embed plugin="search-relationships" width="100%" height="777" frame_class="qm-relationships" outcome="Overall Mood" common_or_user="common"]',
         )
     );
 
@@ -774,20 +774,32 @@ Class QMWP
      */
     function access_token()
     {
-        $user_id = get_current_user_id();
-        $tokenValidityTime = get_user_meta($user_id, 'qmwp_token_expires_at', true);
+        $authenticator = new QMWPAuth();
 
-        if ($tokenValidityTime != "" && time() < $tokenValidityTime) {
-            return get_user_meta($user_id, 'qmwp_access_token', true);
-        } elseif ($tokenValidityTime != "" && time() >= $tokenValidityTime) {
-            $refreshToken = get_user_meta($user_id, 'qmwp_refresh_token', true);
-            $authenticator = new QMWPAuth();
-            $authenticator->refresh_oauth_token($this, $refreshToken);
-            $this->update_user_tokens($user_id);
-            return get_user_meta($user_id, 'qmwp_access_token', true);
+        $token = $authenticator->get_credentials();
+
+        if ($token) {
+
+            return $token;
         } else {
-            return null;
+
+            $user_id = get_current_user_id();
+            $tokenValidityTime = get_user_meta($user_id, 'qmwp_token_expires_at', true);
+
+            if ($tokenValidityTime != "" && time() < $tokenValidityTime) {
+                return get_user_meta($user_id, 'qmwp_access_token', true);
+            } elseif ($tokenValidityTime != "" && time() >= $tokenValidityTime) {
+                $refreshToken = get_user_meta($user_id, 'qmwp_refresh_token', true);
+                $authenticator->refresh_oauth_token($this, $refreshToken);
+                $this->update_user_tokens($user_id);
+                return get_user_meta($user_id, 'qmwp_access_token', true);
+            } else {
+                return null;
+            }
+
         }
+
+
     }
 
     /**
