@@ -213,6 +213,12 @@ Class QMWP
         add_action('admin_enqueue_scripts', array($this, 'qmwp_init_backend_scripts_styles'));
         add_action('admin_menu', array($this, 'qmwp_settings_page'));
         add_action('admin_init', array($this, 'qmwp_register_settings'));
+
+        add_action( 'admin_menu', array($this, 'qm_admin_menu'));
+
+
+
+
         $plugin = plugin_basename(__FILE__);
         add_filter("plugin_action_links_$plugin", array($this, 'qmwp_settings_link'));
         // hook scripts and styles for login page:
@@ -1976,6 +1982,14 @@ Class QMWP
                 ),
             )
         );
+    }
+
+    function qm_admin_menu() {
+        add_menu_page( 'Graph Variables Over Time', 'Timeline', 'read', 'quantimodo/includes/qmwp-timeline/qmwp-timeline-v1.php', array($this, 'qm_timeline_admin_page'), 'dashicons-chart-line', 6  );
+    }
+
+    function qm_timeline_admin_page(){
+        include_once 'includes/qmwp-timeline/qmwp-timeline-v1.php';
     }
 
     function add_shortcake_to_numbers_rating()
