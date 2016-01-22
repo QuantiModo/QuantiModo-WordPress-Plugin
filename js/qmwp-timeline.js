@@ -411,83 +411,70 @@ var AnalyzePage = function () {
             }
         },
         init: function () {
-            if (accessToken) {
+            refreshMeasurementsRange(function () {
 
-                refreshMeasurementsRange(function () {
+                //setup autocomplete functionality
+                var variableInput = jQuery('#variable-selector');
+                variableInput.autocomplete({
 
-                    //setup autocomplete functionality
-                    var variableInput = jQuery('#variable-selector');
-                    variableInput.autocomplete({
+                    source: function (request, response) {
+                        //fetch variables using quantimodo-api
+                        Quantimodo.searchVariables(jQuery('#variable-selector').val(), function (data) {
 
-                        source: function (request, response) {
-                            //fetch variables using quantimodo-api
-                            Quantimodo.searchVariables(jQuery('#variable-selector').val(), function (data) {
+                            var results = [];
 
-                                var results = [];
+                            filterFoundVariables:
+                                for (var i = 0; i < data.length; i++) {
+                                    results.push({
+                                        label: data[i].name,
+                                        value: data[i].name,
+                                        variable: data[i]
+                                    });
+                                }
+                            //passing filtered variables to the autocomplete for displaying
+                            response(results);
 
-                                filterFoundVariables:
-                                    for (var i = 0; i < data.length; i++) {
-                                        for (var j = 0; j < AnalyzePage.selectedVariables.length; j++) {
-                                            if (data[i].id == AnalyzePage.selectedVariables[j].id) {
-                                                //if variable with such ID is already selected
-                                                //we are skipping it
-                                                continue filterFoundVariables;
-                                            }
-                                        }
-                                        results.push({
-                                            label: data[i].name,
-                                            value: data[i].name,
-                                            variable: data[i]
-                                        });
-                                    }
-                                //passing filtered variables to the autocomplete for displaying
-                                response(results);
-
-                            });
-                        },
-                        minLength: 2,
-                        select: function (event, ui) {
-                            //get selected item
-                            var selectedVariable = ui.item.variable;
-                            console.debug('Variable Selected:');
-                            console.debug(selectedVariable);
-                            //pass it for processing
-                            newVariableSelected(ui.item.variable);
-                            //blank variable searcher
-                            jQuery('#variable-selector').val('');
-                            return false;
-                        }
-                    });
-
-                    initPreselectedVariables();
-                    restoreChart();
-
-                });
-
-                refreshUnits(function () {
-                    unitListUpdated();
-                });
-
-                retrieveSettings();
-                initVariableCard();
-
-                variableSettings.init({
-                    saveCallback: function () {
-                        refreshVariables([], function () {
-                            /*categoryListUpdated();*/
-                            restoreChart();
-                        });	//TODO replace this with something that updates the variables locally, since this triggers
+                        });
+                    },
+                    minLength: 2,
+                    select: function (event, ui) {
+                        //get selected item
+                        var selectedVariable = ui.item.variable;
+                        console.debug('Variable Selected:');
+                        console.debug(selectedVariable);
+                        //pass it for processing
+                        newVariableSelected(ui.item.variable);
+                        //blank variable searcher
+                        jQuery('#variable-selector').val('');
+                        return false;
                     }
                 });
 
-                initDateRangeSelector();
-                initSharing();
-                initDeleteMeasurements();
+                initPreselectedVariables();
+                restoreChart();
 
-            } else {
-                console.warn('No access token. Now will try to authenticate and to get it');
-                window.location.href = '?connect=quantimodo';
-            }
+            });
+
+            refreshUnits(function () {
+                unitListUpdated();
+            });
+
+            retrieveSettings();
+            initVariableCard();
+
+            variableSettings.init({
+                saveCallback: function () {
+                    refreshVariables([], function () {
+                        /*categoryListUpdated();*/
+                        restoreChart();
+                    });	//TODO replace this with something that updates the variables locally, since this triggers
+                }
+            });
+
+            initDateRangeSelector();
+            initSharing();
+            initDeleteMeasurements();
+
 
         }
     };

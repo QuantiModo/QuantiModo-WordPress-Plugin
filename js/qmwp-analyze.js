@@ -170,10 +170,10 @@ var AnalyzePage = function () {
             'groupingTimezone': AnalyzePage.getTimezone()
         }
         /*
-        if (variable.source != null && variable.source.length != 0) {
-            filters.source = variable.source;
-        }
-        */
+         if (variable.source != null && variable.source.length != 0) {
+         filters.source = variable.source;
+         }
+         */
         if (variable.color == null) {
             variable.color = getRandomColor();
         }
@@ -487,99 +487,93 @@ var AnalyzePage = function () {
             }
         },
         init: function () {
-            if (accessToken) {
 
-                refreshMeasurementsRange(function () {
+            refreshMeasurementsRange(function () {
 
-                    //get variable input
-                    var variableInput = jQuery('#variable-selector');
-                    //set it disabled while variables are not loaded
-                    variableInput.prop('disabled', true);
-                    variableInput.val('Loading. Please wait...');
+                //get variable input
+                var variableInput = jQuery('#variable-selector');
+                //set it disabled while variables are not loaded
+                variableInput.prop('disabled', true);
+                variableInput.val('Loading. Please wait...');
 
-                    refreshVariables([], function () {
+                refreshVariables([], function () {
 
-                        //once variables are ready - enable variable searcher
-                        variableInput.val('');
-                        variableInput.prop('disabled', false);
-                        //setup autocomplete functionality
-                        variableInput.autocomplete({
+                    //once variables are ready - enable variable searcher
+                    variableInput.val('');
+                    variableInput.prop('disabled', false);
+                    //setup autocomplete functionality
+                    variableInput.autocomplete({
 
-                            source: function (request, response) {
-                                //fetch variables using quantimodo-api
-                                Quantimodo.searchVariables(jQuery("#variable-selector").val(), function (data) {
+                        source: function (request, response) {
+                            //fetch variables using quantimodo-api
+                            Quantimodo.searchVariables(jQuery("#variable-selector").val(), function (data) {
 
-                                    var results = [];
+                                var results = [];
 
-                                    filterFoundVariables:
-                                        for (var i = 0; i < data.length; i++) {
-                                            for (var j = 0; j < AnalyzePage.selectedVariables.length; j++) {
-                                                if (data[i].id == AnalyzePage.selectedVariables[j].id) {
-                                                    //if variable with such ID is already selected
-                                                    //we are skipping it
-                                                    continue filterFoundVariables;
-                                                }
+                                filterFoundVariables:
+                                    for (var i = 0; i < data.length; i++) {
+                                        for (var j = 0; j < AnalyzePage.selectedVariables.length; j++) {
+                                            if (data[i].id == AnalyzePage.selectedVariables[j].id) {
+                                                //if variable with such ID is already selected
+                                                //we are skipping it
+                                                continue filterFoundVariables;
                                             }
-                                            results.push({
-                                                label: data[i].name,
-                                                value: data[i].name,
-                                                variable: data[i]
-                                            })
                                         }
-                                    //passing filtered variables to the autocomplete for displaying
-                                    response(results);
+                                        results.push({
+                                            label: data[i].name,
+                                            value: data[i].name,
+                                            variable: data[i]
+                                        })
+                                    }
+                                //passing filtered variables to the autocomplete for displaying
+                                response(results);
 
-                                });
-                            },
-                            minLength: 2,
-                            select: function (event, ui) {
-                                //get selected item
-                                var selectedVariable = ui.item.variable;
-                                console.debug('Variable Selected:');
-                                console.debug(selectedVariable);
-                                //pass it for processing
-                                newVariableSelected(
-                                    selectedVariable.originalName,
-                                    selectedVariable.category,
-                                    null,   //TODO source
-                                    null, false
-                                );
-                                //blank variable searcher
-                                jQuery("#variable-selector").val('');
-                                return false;
-                            }
-                        });
+                            });
+                        },
+                        minLength: 2,
+                        select: function (event, ui) {
+                            //get selected item
+                            var selectedVariable = ui.item.variable;
+                            console.debug('Variable Selected:');
+                            console.debug(selectedVariable);
+                            //pass it for processing
+                            newVariableSelected(
+                                selectedVariable.originalName,
+                                selectedVariable.category,
+                                null,   //TODO source
+                                null, false
+                            );
+                            //blank variable searcher
+                            jQuery("#variable-selector").val('');
+                            return false;
+                        }
+                    });
 
+                    categoryListUpdated();
+                    restoreChart();
+
+                });
+            });
+            refreshUnits(function () {
+                unitListUpdated();
+            });
+
+            retrieveSettings();
+            initVariableCard();
+
+            variableSettings.init({
+                saveCallback: function () {
+                    refreshVariables([], function () {
                         categoryListUpdated();
                         restoreChart();
+                    });	//TODO replace this with something that updates the variables locally, since this triggers
+                }
+            });
 
-                    });
-                });
-                refreshUnits(function () {
-                    unitListUpdated();
-                });
-
-                retrieveSettings();
-                initVariableCard();
-
-                variableSettings.init({
-                    saveCallback: function () {
-                        refreshVariables([], function () {
-                            categoryListUpdated();
-                            restoreChart();
-                        });	//TODO replace this with something that updates the variables locally, since this triggers
-                    }
-                });
-
-                initDateRangeSelector();
-                initLoginDialog();
-                initSharing();
-                initDeleteMeasurements();
-
-            } else {
-                console.warn('No access token. Now will try to authenticate and to get it');
-                window.location.href = "?connect=quantimodo";
-            }
+            initDateRangeSelector();
+            initLoginDialog();
+            initSharing();
+            initDeleteMeasurements();
 
         }
     };
