@@ -1272,10 +1272,14 @@ Class QMWP
     {
 
         $access_token = $this->access_token();
+        $apiHost = getenv('API_HOST');
+        if(!$apiHost){
+            $apiHost =  QMWPAuth::API_HOST;
+        }
 
         $template_content = $this->set_js_variables($template, array(
             'accessToken' => $access_token,
-            'apiHost' => QMWPAuth::API_HOST,
+            'apiHost' => $apiHost,
             /*'mashapeKey' => get_option('qmwp_x_mashape_key')*/    //from settings
         ));
 
