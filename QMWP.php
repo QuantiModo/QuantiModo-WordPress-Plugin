@@ -2005,7 +2005,9 @@ Class QMWP
     }
 
     function qm_timeline_admin_page(){
-        include_once 'includes/qmwp-timeline/qmwp-timeline-v1.php';
+        $htmlForPage = self::qmwp_timeline(null);
+        echo $htmlForPage;
+        //include_once 'includes/qmwp-timeline/qmwp-timeline-v1.php';
     }
 
     function add_shortcake_to_numbers_rating()
