@@ -486,7 +486,8 @@ jQuery(document).ready(function () {
 
     setBlockHideShow();
     setButtonListeners();
-    loadVariables();
+    // TODO: Why are we getting like 50,000 variables here?
+    // loadVariables();
     loadVariableCategories();
     loadVariableUnits();
     loadAddVariableUnits();
