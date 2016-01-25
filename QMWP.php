@@ -2012,15 +2012,15 @@ Class QMWP
             array($this, 'qm_analyze_admin_page'), 'dashicons-chart-bar', 2  );
 
 
-        add_menu_page( 'Relationships', 'Relationships', 'read',
+        add_menu_page( 'Variable Relationships', 'Relationships', 'read',
             'qm_relationships_parent_slug',
             array($this, 'qm_user_relationship_search_admin_page'), 'dashicons-search', 4  );
 
-        add_submenu_page('qm_relationships_parent_slug', 'Yours', 'Yours', 'read', 'qm_relationships_parent_slug',
+        add_submenu_page('qm_relationships_parent_slug', 'Your Variable Relationships', 'Yours', 'read', 'qm_relationships_parent_slug',
             'qm_user_relationship_search_admin_page');
         //add_submenu_page('qm_relationships_parent_slug', 'Yours', 'Yours', 'read',
         // 'qm_user_relationships_submenu_slug', 'qm_user_relationship_search_admin_page');
-        add_submenu_page('qm_relationships_parent_slug', 'Common', 'Common', 'read',
+        add_submenu_page('qm_relationships_parent_slug', 'Common Variable Relationships', 'Common', 'read',
             'qm_common_relationships_submenu_slug', array($this, 'qm_common_relationship_search_admin_page'));
 
         add_menu_page( 'Variables', 'Variables', 'read', 'qm_variables_slug',
