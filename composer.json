@@ -19,7 +19,7 @@
   ],
   "require": {
     "php": ">=5.4",
-    "quantimodo/quantimodo-sdk-javascript": "1.2.1"
+    "quantimodo/quantimodo-sdk-javascript": "1.2.4"
   },
   "require-dev": {
     "phing/phing": "dev-master",
@@ -46,10 +46,10 @@
   ],
   "scripts": {
     "post-install-cmd": [
-      "mv vendor/quantimodo/quantimodo-sdk-javascript/quantimodo-api.js js/libs/"
+      "cp vendor/quantimodo/quantimodo-sdk-javascript/quantimodo-api.js js/libs/"
     ],
     "post-update-cmd": [
-      "mv vendor/quantimodo/quantimodo-sdk-javascript/quantimodo-api.js js/libs/"
+      "cp vendor/quantimodo/quantimodo-sdk-javascript/quantimodo-api.js js/libs/"
     ]
   }
 }
