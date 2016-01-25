@@ -2001,14 +2001,32 @@ Class QMWP
     }
 
     function qm_admin_menu() {
-        add_menu_page( 'Graph Variables Over Time', 'Timeline', 'read', 'quantimodo/includes/qmwp-timeline/qmwp-timeline-v1.php', array($this, 'qm_timeline_admin_page'), 'dashicons-chart-line', 6  );
+        add_menu_page( 'Import Data from Other Apps and Devices', 'Import Data', 'read',
+            'quantimodo/includes/qmwp-connectors/qmwp-connectors-v3.php', array($this, 'qm_connectors_admin_page'),
+            'dashicons-upload', 1  );
+        add_menu_page( 'Graph Variables Over Time', 'Timeline', 'read',
+            'quantimodo/includes/qmwp-timeline/qmwp-timeline-v1.php', array($this, 'qm_timeline_admin_page'),
+            'dashicons-chart-line', 3 );
+        add_menu_page( 'Visually Explore Relationships Between Variables', 'Analyze', 'read',
+            'quantimodo/includes/qmwp-bargraph-scatterplot-timeline/qmwp-bargraph-scatterplot-timeline-v1.php',
+            array($this, 'qm_analyze_admin_page'), 'dashicons-chart-bar', 2  );
     }
 
     function qm_timeline_admin_page(){
         $htmlForPage = self::qmwp_timeline(null);
         echo $htmlForPage;
-        //include_once 'includes/qmwp-timeline/qmwp-timeline-v1.php';
     }
+
+    function qm_connectors_admin_page(){
+        $htmlForPage = self::qmwp_connectors(null);
+        echo $htmlForPage;
+    }
+
+    function qm_analyze_admin_page(){
+        $htmlForPage = self::qmwp_bargraph_scatterplot_timeline(null);
+        echo $htmlForPage;
+    }
+
 
     function add_shortcake_to_numbers_rating()
     {
