@@ -2010,7 +2010,17 @@ Class QMWP
         add_menu_page( 'Visually Explore Relationships Between Variables', 'Analyze', 'read',
             'quantimodo/includes/qmwp-bargraph-scatterplot-timeline/qmwp-bargraph-scatterplot-timeline-v1.php',
             array($this, 'qm_analyze_admin_page'), 'dashicons-chart-bar', 2  );
+
+
+        add_menu_page( 'Relationships', 'Relationships', 'read',
+            'qm_relationships_parent_slug',
+            array($this, 'qm_user_relationship_search_admin_page'), 'dashicons-search', 4  );
+
+        //add_submenu_page('qm_relationships_parent_slug','','','read','qm_relationships_parent_slug','qm_user_relationship_search_admin_page');
+        add_submenu_page('qm_relationships_parent_slug', 'Yours', 'Yours', 'read', 'qm_relationships_parent_slug', 'qm_user_relationship_search_admin_page');
+        add_submenu_page('qm_relationships_parent_slug', 'Common', 'Common', 'read', '2nd_real_submenu_slug', 'qm_common_relationship_search_admin_page');
     }
+
 
     function qm_timeline_admin_page(){
         $htmlForPage = self::qmwp_timeline(null);
@@ -2027,6 +2037,33 @@ Class QMWP
         echo $htmlForPage;
     }
 
+    function qm_user_relationship_search_admin_page(){
+        $attributes =
+            [
+                'plugin' => "search-relationships",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+                'outcome' => "Overall Mood",
+                'common_or_user' => "user"
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_common_relationship_search_admin_page(){
+        $attributes =
+            [
+                'plugin' => "search-relationships",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+                'outcome' => "Overall Mood",
+                'common_or_user' => "common"
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
 
     function add_shortcake_to_numbers_rating()
     {
