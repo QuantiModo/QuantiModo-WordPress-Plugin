@@ -2016,9 +2016,15 @@ Class QMWP
             'qm_relationships_parent_slug',
             array($this, 'qm_user_relationship_search_admin_page'), 'dashicons-search', 4  );
 
-        //add_submenu_page('qm_relationships_parent_slug','','','read','qm_relationships_parent_slug','qm_user_relationship_search_admin_page');
-        add_submenu_page('qm_relationships_parent_slug', 'Yours', 'Yours', 'read', 'qm_relationships_parent_slug', 'qm_user_relationship_search_admin_page');
-        add_submenu_page('qm_relationships_parent_slug', 'Common', 'Common', 'read', '2nd_real_submenu_slug', 'qm_common_relationship_search_admin_page');
+        add_submenu_page('qm_relationships_parent_slug', 'Yours', 'Yours', 'read', 'qm_relationships_parent_slug',
+            'qm_user_relationship_search_admin_page');
+        //add_submenu_page('qm_relationships_parent_slug', 'Yours', 'Yours', 'read',
+        // 'qm_user_relationships_submenu_slug', 'qm_user_relationship_search_admin_page');
+        add_submenu_page('qm_relationships_parent_slug', 'Common', 'Common', 'read',
+            'qm_common_relationships_submenu_slug', array($this, 'qm_common_relationship_search_admin_page'));
+
+        add_menu_page( 'Variables', 'Variables', 'read', 'qm_variables_slug',
+            array($this, 'qm_variables_admin_page'), 'dashicons-randomize', 5 );
     }
 
 
@@ -2046,6 +2052,18 @@ Class QMWP
                 'frame_class' => "qm-relationships",
                 'outcome' => "Overall Mood",
                 'common_or_user' => "user"
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_variables_admin_page(){
+        $attributes =
+            [
+                'plugin' => "search-variables",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships"
             ];
         $htmlForPage = self::qm_embed($attributes);
         echo $htmlForPage;
