@@ -601,33 +601,30 @@ var AnalyzePage = function () {
 
         init: function () {
             retrieveSettings();
-            if (typeof accessToken == "undefined" || !accessToken) {
-                console.warn('No access token. Now will try to authenticate and to get it');
-                window.location.href = "?connect=quantimodo";
-            } else {
-                refreshMeasurementsRange(function () {
 
-                    /*                    refreshVariables([], function () {
-                     categoryListUpdated();
-                     outputCategoryUpdated();
-                     getBargraph();
-                     refreshInputData();
-                     });*/
+            refreshMeasurementsRange(function () {
 
-                    fetchAndSetVariables(AnalyzePage.getInputVariableName(), AnalyzePage.getOutputVariableName(), function () {
+                /*                    refreshVariables([], function () {
+                 categoryListUpdated();
+                 outputCategoryUpdated();
+                 getBargraph();
+                 refreshInputData();
+                 });*/
 
-                        categoryListUpdated();
-                        outputCategoryUpdated();
-                        getBargraph();
-                        refreshInputData();
+                fetchAndSetVariables(AnalyzePage.getInputVariableName(), AnalyzePage.getOutputVariableName(), function () {
 
-                    });
+                    categoryListUpdated();
+                    outputCategoryUpdated();
+                    getBargraph();
+                    refreshInputData();
 
                 });
-                refreshUnits(function () {
-                    unitListUpdated();
-                });
-            }
+
+            });
+            refreshUnits(function () {
+                unitListUpdated();
+            });
+
             initDateRangeSelector();
             initVariableSelectors();
             variableSettings.init({

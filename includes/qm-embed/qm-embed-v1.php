@@ -6,6 +6,6 @@
 </script>
 
 <iframe class="<?= $params['iFrameParams']['class'] ?>"
-        src="https://embed.quantimo.do?<?= http_build_query($params['getParams']) ?>"
+        src="https://app.quantimo.do/embeddable/?<?= http_build_query($params['getParams']) ?>"
         width="<?= $params['iFrameParams']['width'] ?>" height="<?= $params['iFrameParams']['height'] ?>">
 </iframe>

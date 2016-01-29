@@ -19,34 +19,31 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
 <div id="content" style="margin: 0; padding: 0;">
     <div class="my-location"></div>
     <script>
-        if (accessToken) {
 
-            var loadHandler = function () {
-                console.debug('Connect JS loaded');
-                if (!executed && typeof qmSetupOnPage === 'function') {
-                    console.debug('Calling "qmSetupOnPage" function from connect.js');
-                    qmSetupOnPage('.my-location');
-                    executed = true;
-                }
-            };
+        var loadHandler = function () {
+            console.debug('Connect JS loaded');
+            if (!executed && typeof qmSetupOnPage === 'function') {
+                console.debug('Calling "qmSetupOnPage" function from connect.js');
+                qmSetupOnPage('.my-location');
+                executed = true;
+            }
+        };
 
-            var content = document.getElementById('content');
-            var connectJs = document.createElement('script');
-            connectJs.type = 'text/javascript';
-            //connectJs.src = api_host + '/api/v1/connect.js?access_token=' + access_token;
-            connectJs.src = 'https://app.quantimo.do:443/api/v1/connect.js?access_token=' + accessToken;
-
-            connectJs.onreadystatechange = loadHandler;
-            connectJs.onload = loadHandler;
-
-            var executed = false;
-
-            content.appendChild(connectJs);
-
+        var content = document.getElementById('content');
+        var connectJs = document.createElement('script');
+        connectJs.type = 'text/javascript';
+        if(accessToken) {
+            connectJs.src = apiHost + '/api/v1/connect.js?access_token=' + accessToken;
         } else {
-            console.warn('No access token. Now will try to authenticate and to get it');
-            window.location.href = "?connect=quantimodo";
+            connectJs.src = apiHost + '/api/v1/connect.js';
         }
+
+        connectJs.onreadystatechange = loadHandler;
+        connectJs.onload = loadHandler;
+
+        var executed = false;
+
+        content.appendChild(connectJs);
 
     </script>
 </div>

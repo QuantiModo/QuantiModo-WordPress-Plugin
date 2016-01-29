@@ -231,18 +231,11 @@ var onAddButtonClicked = function () {
     datetimeString = datetimeString.replace('PM', '');
     //
 
-
     //year, month, day, hours, minutes, seconds, milliseconds
     var hour = jQuery('#add-addmeasurement-variable-timeh').val();
     var min = jQuery('#add-addmeasurement-variable-timem').val();
     var ap = jQuery('#add-addmeasurement-variable-timeap').val();
     var datetime = new Date(datetimeString);
-
-    /*
-     datetime.setHours(parseInt(hour) + (ap * 12));
-     datetime.setMinutes(min);
-     datetime.setSeconds(0);
-     */
 
     if (name === '') {
         alert('Please enter the variable name.');
@@ -304,14 +297,19 @@ var onVariableNameInputUnfocussed = function () {
 };
 
 var getVariableWithName = function (variableName) {
-    var filteredVars = jQuery.grep(variables, function (variable, i) {
-        return variable.name == variableName;
-    });
-    if (filteredVars.length > 0) {
-        return filteredVars[0];
+    if (variables) {
+        var filteredVars = jQuery.grep(variables, function (variable, i) {
+            return variable.name == variableName;
+        });
+        if (filteredVars.length > 0) {
+            return filteredVars[0];
+        } else {
+            return null;
+        }
     } else {
         return null;
     }
+
 };
 
 var getUnitWithAbbriatedName = function (unitAbbr) {
@@ -486,7 +484,8 @@ jQuery(document).ready(function () {
 
     setBlockHideShow();
     setButtonListeners();
-    loadVariables();
+    // TODO: Why are we getting like 50,000 variables here?
+    // loadVariables();
     loadVariableCategories();
     loadVariableUnits();
     loadAddVariableUnits();
@@ -510,27 +509,32 @@ jQuery(document).ready(function () {
             Quantimodo.searchVariables(jQuery('#addmeasurement-variable-name').val(), function (data) {
 
                 variables = data;
-                resp(jQuery.map(data, function (variable) {
-                    //if variable category is defined in shortcode
-                    if (qmwpShortCodeDefinedCategory) {
-                        //check if current variable is from defined category
-                        if (variable.category == qmwpShortCodeDefinedCategory) {
-                            //and if so - return this variable to autocomplete
+                if (variables) {
+                    resp(jQuery.map(data, function (variable) {
+                        //if variable category is defined in shortcode
+                        if (qmwpShortCodeDefinedCategory) {
+                            //check if current variable is from defined category
+                            if (variable.category == qmwpShortCodeDefinedCategory) {
+                                //and if so - return this variable to autocomplete
+                                return {
+                                    label: variable.name,
+                                    value: variable.name,
+                                    variable: variable
+                                };
+                            }
+                        } else {    //if category is not defined at shortcode - show all variables in autocomplete
                             return {
                                 label: variable.name,
                                 value: variable.name,
                                 variable: variable
                             };
                         }
-                    } else {    //if category is not defined at shortcode - show all variables in autocomplete
-                        return {
-                            label: variable.name,
-                            value: variable.name,
-                            variable: variable
-                        };
-                    }
 
-                }));
+                    }));
+                } else {
+                    resp(null);
+                }
+
 
             });
         },
@@ -592,6 +596,7 @@ jQuery(document).ready(function () {
 
                 jQuery('#addmeasurement-variable-unitCategory').val(unit.category).trigger('change');
                 jQuery('#addmeasurement-variable-unit').val(unit.abbreviatedName);
+                jQuery('#addmeasurement-variable-unit').attr('disabled', true);
                 jQuery('#addmeasurement-variable-value').val(value);
 
             }
