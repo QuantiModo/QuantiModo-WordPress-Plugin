@@ -35,8 +35,7 @@
     "behat/mink-selenium2-driver": "*",
     "behat/mink-zombie-driver": "*",
     "facebook/webdriver": "*",
-    "respect/validation": "dev-master",
-    "satooshi/php-coveralls": "dev-master"
+    "respect/validation": "dev-master"
   },
   "repositories": [
     {
