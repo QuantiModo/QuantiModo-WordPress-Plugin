@@ -1284,14 +1284,17 @@ Class QMWP
     {
 
         $access_token = $this->access_token();
-        $apiHost = getenv('API_HOST');
-        if(!$apiHost){
-            $apiHost =  QMWPAuth::API_HOST;
+        $apiHost = getenv('API_HOST') ?: QMWPAuth::API_HOST;
+        $cookieAuth = false;
+        if(getenv('API_HOST') === get_site_url()) {
+            $cookieAuth = true;
         }
 
         $template_content = $this->set_js_variables($template, array(
             'accessToken' => $access_token,
             'apiHost' => $apiHost,
+            'cookieAuth' => $cookieAuth,
+            'siteUrl' => get_site_url()
             /*'mashapeKey' => get_option('qmwp_x_mashape_key')*/    //from settings
         ));
 

@@ -393,7 +393,6 @@ Quantimodo = function () {
 }();
 
 function extractDomain(url) {
-    var domain;
     //find & remove protocol (http, ftp, etc.) and get domain
     if (url.indexOf("://") > -1) {
         var domainWithPort = url.split('/')[2];
