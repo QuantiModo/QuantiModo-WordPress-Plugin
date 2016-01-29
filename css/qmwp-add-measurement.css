@@ -57,6 +57,7 @@
     margin-left: 2px;
     margin-top: -2px;
     transition: all 250ms;
+    max-width: 300px;
 }
 
 #edt-addmeasurement-variable-name {
@@ -67,6 +68,11 @@
     margin-left: 2px;
     margin-top: -2px;
     transition: all 250ms;
+    max-width: 300px;
+}
+
+#addmeasurement-variable-value {
+    max-width: 150px;
 }
 
 #addmeasurement-variable-name:focus {
@@ -103,6 +109,10 @@
 
 #addmeasurement-dialog-content td:first-child {
     white-space: nowrap;
+}
+
+#addmeasurement-variable-unit{
+    max-width: 250px;
 }
 
 /*
@@ -432,6 +442,7 @@ button, .button, input[type=submit] {
     width: 94%;
     padding: 5px;
     font-weight: 700;
+    max-width: 300px;
 }
 
 #addmeasurement-variable-name.error {

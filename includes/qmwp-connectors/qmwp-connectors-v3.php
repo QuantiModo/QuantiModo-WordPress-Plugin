@@ -33,7 +33,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         var connectJs = document.createElement('script');
         connectJs.type = 'text/javascript';
         if(accessToken) {
-            connectJs.src = apiHost + '/api/v1/connect.js?access_token=' + access_token;
+            connectJs.src = apiHost + '/api/v1/connect.js?access_token=' + accessToken;
         } else {
             connectJs.src = apiHost + '/api/v1/connect.js';
         }

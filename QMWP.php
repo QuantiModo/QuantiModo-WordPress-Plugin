@@ -2003,14 +2003,146 @@ Class QMWP
     function qm_admin_menu() {
         add_menu_page( 'Import Data from Other Apps and Devices', 'Import Data', 'read',
             'quantimodo/includes/qmwp-connectors/qmwp-connectors-v3.php', array($this, 'qm_connectors_admin_page'),
-            'dashicons-upload', 1  );
+            'dashicons-upload', 1 );
+
+        // Tracking Admin Pages
+        add_menu_page( 'Track Stuff', 'Track', 'read', 'qm_track_parent_slug',
+            array($this, 'qm_track_anything_admin_page'), 'dashicons-welcome-write-blog', 2  );
+        add_submenu_page('qm_track_parent_slug', 'Track Anything', 'Anything', 'read', 'qm_track_parent_slug',
+            array($this, 'qm_track_anything_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Foods', 'Foods', 'read', 'qm_track_foods_admin_page_slug', 
+            array($this, 'qm_track_foods_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Emotions', 'Emotions', 'read', 
+            'qm_track_emotions_admin_page_slug', array($this, 'qm_track_emotions_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Treatments', 'Treatments', 'read',
+            'qm_track_treatments_admin_page_slug', array($this, 'qm_track_treatments_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Symptoms', 'Symptoms', 'read',
+            'qm_track_symptoms_admin_page_slug', array($this, 'qm_track_symptoms_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Physique', 'Physique', 'read',
+            'qm_track_physique_admin_page_slug', array($this, 'qm_track_physique_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Physical Activity', 'Physical Activity', 'read',
+            'qm_track_physical_activity_admin_page_slug', array($this, 'qm_track_physical_ctivity_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Sleep', 'Sleep', 'read', 'qm_track_sleep_admin_page_slug',
+            array($this, 'qm_track_sleep_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Vital Signs', 'Vital Signs', 'read',
+            'qm_track_vital_signs_admin_page_slug', array($this, 'qm_track_vital_signs_admin_page'));
+        add_submenu_page('qm_track_parent_slug', 'Track Nutrients', 'Nutrients', 'read',
+            'qm_track_nutrients_admin_page_slug', array($this, 'qm_track_nutrients_admin_page'));
+
         add_menu_page( 'Graph Variables Over Time', 'Timeline', 'read',
             'quantimodo/includes/qmwp-timeline/qmwp-timeline-v1.php', array($this, 'qm_timeline_admin_page'),
             'dashicons-chart-line', 3 );
         add_menu_page( 'Visually Explore Relationships Between Variables', 'Analyze', 'read',
             'quantimodo/includes/qmwp-bargraph-scatterplot-timeline/qmwp-bargraph-scatterplot-timeline-v1.php',
-            array($this, 'qm_analyze_admin_page'), 'dashicons-chart-bar', 2  );
+            array($this, 'qm_analyze_admin_page'), 'dashicons-chart-bar', 3  );
+        
+        
+        // Relationship Admin Pages
+        add_menu_page( 'Variable Relationships', 'Relationships', 'read',
+            'qm_relationships_parent_slug',
+            array($this, 'qm_user_relationship_search_admin_page'), 'dashicons-search', 4  );
+        add_submenu_page('qm_relationships_parent_slug', 'Your Variable Relationships', 'Yours', 'read', 'qm_relationships_parent_slug',
+            'qm_user_relationship_search_admin_page');
+        //add_submenu_page('qm_relationships_parent_slug', 'Yours', 'Yours', 'read',
+        // 'qm_user_relationships_submenu_slug', 'qm_user_relationship_search_admin_page'));
+        add_submenu_page('qm_relationships_parent_slug', 'Common Variable Relationships', 'Common', 'read',
+            'qm_common_relationships_submenu_slug', array($this, 'qm_common_relationship_search_admin_page'));
+        
+        // Variables Search Admin Page
+        add_menu_page( 'Variables', 'Variables', 'read', 'qm_variables_slug',
+            array($this, 'qm_variables_admin_page'), 'dashicons-randomize', 5 );
+        
+
     }
+
+
+    function qm_track_anything_admin_page(){
+        $htmlForPage = self::qmwp_add_measurement(null);
+        echo $htmlForPage;
+    }
+    
+    function qm_track_foods_admin_page(){
+        $attributes =
+            [
+                'category' => "Foods"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_emotions_admin_page(){
+        $attributes =
+            [
+                'category' => "Emotions"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_physique_admin_page(){
+        $attributes =
+            [
+                'category' => "Physique"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_physical_activity_admin_page(){
+        $attributes =
+            [
+                'category' => "Physical Activity"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_treatments_admin_page(){
+        $attributes =
+            [
+                'category' => "Treatments"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_symptoms_admin_page(){
+        $attributes =
+            [
+                'category' => "Symptoms"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_vital_signs_admin_page(){
+        $attributes =
+            [
+                'category' => "Vital Signs"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_sleep_admin_page(){
+        $attributes =
+            [
+                'category' => "Sleep"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_track_nutrients_admin_page(){
+        $attributes =
+            [
+                'category' => "Nutrients"
+            ];
+        $htmlForPage = self::qmwp_add_measurement($attributes);
+        echo $htmlForPage;
+    }
+
+
 
     function qm_timeline_admin_page(){
         $htmlForPage = self::qmwp_timeline(null);
@@ -2027,6 +2159,45 @@ Class QMWP
         echo $htmlForPage;
     }
 
+    function qm_user_relationship_search_admin_page(){
+        $attributes =
+            [
+                'plugin' => "search-relationships",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+                'outcome' => "Overall Mood",
+                'common_or_user' => "user"
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_variables_admin_page(){
+        $attributes =
+            [
+                'plugin' => "search-variables",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships"
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
+    function qm_common_relationship_search_admin_page(){
+        $attributes =
+            [
+                'plugin' => "search-relationships",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+                'outcome' => "Overall Mood",
+                'common_or_user' => "common"
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
 
     function add_shortcake_to_numbers_rating()
     {
