@@ -526,7 +526,7 @@ jQuery(document).ready(function () {
                 }
 
 
-            });
+            }, {"includePublic": true});
         },
         minLength: 2,
         select: function (event, ui) {
