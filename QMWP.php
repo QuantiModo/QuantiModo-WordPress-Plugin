@@ -197,7 +197,7 @@ Class QMWP
         add_shortcode('qm_embed', array($this, 'qm_embed'));
 
         //add shortcake plugin features to qmwp shortcodes (if plugin is installed)
-        $this->add_shortcake_ui_features();
+        //$this->add_shortcake_ui_features();
 
         // restore default settings if necessary; this might get toggled by the admin or forced by a new version of the plugin:
         if (get_option("qmwp_restore_default_settings")) {
