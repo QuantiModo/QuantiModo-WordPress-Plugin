@@ -247,7 +247,7 @@ Class QMWP
         add_filter('wp_nav_menu_items', array($this, 'qm_setup_nav_menu_item'));
     }
 
-    function qm_setup_nav_menu_item($menu)
+    public function qm_setup_nav_menu_item($menu)
     {
         if (get_option('qmwp_add_login_logout_nav_items')) {
             if (!is_user_logged_in()) {
@@ -266,7 +266,7 @@ Class QMWP
     /**
      * do something during plugin activation
      */
-    function qmwp_activate()
+    public function qmwp_activate()
     {
         if ($this->check_plugin_requirements()) {
             $this->create_plugin_pages($this->settings['qmwp_plugin_pages']);
@@ -309,7 +309,7 @@ Class QMWP
     /**
      * do something during plugin deactivation
      */
-    function qmwp_deactivate()
+    public function qmwp_deactivate()
     {
 
         //$this->delete_plugin_pages($this->settings['qmwp_plugin_pages']); //no need to remove pages
@@ -319,7 +319,7 @@ Class QMWP
     /**
      * do something during plugin update
      */
-    function qmwp_update()
+    public function qmwp_update()
     {
         $plugin_version = QMWP::PLUGIN_VERSION;
         $installed_version = get_option("qmwp_plugin_version");
@@ -337,7 +337,7 @@ Class QMWP
     /**
      * indicate to the admin that the plugin has been updated
      */
-    function qmwp_update_notice()
+    public function qmwp_update_notice()
     {
         $settings_link = "<a href='options-general.php?page=QuantiModo.php'>Settings Page</a>"; // CASE SeNsItIvE filename!
         ?>
@@ -350,7 +350,7 @@ Class QMWP
     /**
      *  adds any missing settings and their default values
      */
-    function qmwp_add_missing_settings()
+    public function qmwp_add_missing_settings()
     {
         foreach ($this->settings as $setting_name => $default_value) {
             // call add_option() which ensures that we only add NEW options that don't exist:
@@ -364,7 +364,7 @@ Class QMWP
     /**
      * restores the default plugin settings
      */
-    function qmwp_restore_default_settings()
+    public function qmwp_restore_default_settings()
     {
         foreach ($this->settings as $setting_name => $default_value) {
             // call update_option() which ensures that we update the setting's value:
@@ -379,7 +379,7 @@ Class QMWP
     /**
      *  indicate to the admin that the plugin has been updated
      */
-    function qmwp_restore_default_settings_notice()
+    public function qmwp_restore_default_settings_notice()
     {
         $settings_link = "<a href='options-general.php?page=QuantiModo.php'>Settings Page</a>"; // CASE SeNsItIvE filename!
         ?>
@@ -392,7 +392,7 @@ Class QMWP
     /**
      *  init scripts and styles for use on FRONTEND PAGES
      */
-    function qmwp_init_frontend_scripts_styles()
+    public function qmwp_init_frontend_scripts_styles()
     {
         // here we "localize" php variables, making them available as a js variable in the browser:
         $qmwp_cvars = array(
@@ -421,7 +421,7 @@ Class QMWP
     /**
      *  init scripts and styles for use on BACKEND PAGES
      */
-    function qmwp_init_backend_scripts_styles()
+    public function qmwp_init_backend_scripts_styles()
     {
         // here we "localize" php variables, making them available as a js variable in the browser:
         $qmwp_cvars = array(
@@ -449,7 +449,7 @@ Class QMWP
     }
 
     // init scripts and styles for use on the LOGIN PAGE:
-    function qmwp_init_login_scripts_styles()
+    public function qmwp_init_login_scripts_styles()
     {
         // here we "localize" php variables, making them available as a js variable in the browser:
         $qmwp_cvars = array(
@@ -479,7 +479,7 @@ Class QMWP
     }
 
     // add a settings link to the plugins page:
-    function qmwp_settings_link($links)
+    public function qmwp_settings_link($links)
     {
         $qmwp_settings_links = array(
             'settings' => "<a href='options-general.php?page=QuantiModo.php'>Settings</a>",
@@ -496,7 +496,7 @@ Class QMWP
      * @param $vars
      * @return array
      */
-    function qmwp_qvar_triggers($vars)
+    public function qmwp_qvar_triggers($vars)
     {
         $vars[] = 'connect';
         $vars[] = 'code';
@@ -508,7 +508,7 @@ Class QMWP
     /**
      *  handle the querystring triggers
      */
-    function qmwp_qvar_handlers()
+    public function qmwp_qvar_handlers()
     {
         if (get_query_var('connect')) {
             $provider = get_query_var('connect');
@@ -526,7 +526,7 @@ Class QMWP
      * load the provider script that is being requested by the user or being called back after authentication
      * @param $provider
      */
-    function qmwp_include_connector($provider)
+    public function qmwp_include_connector($provider)
     {
         // normalize the provider name (no caps, no spaces):
         $provider = strtolower($provider);
@@ -546,7 +546,7 @@ Class QMWP
      * @param $oauth_identity
      * @return bool|WP_User
      */
-    function qmwp_match_wordpress_user($oauth_identity)
+    public function qmwp_match_wordpress_user($oauth_identity)
     {
         // attempt to get a wordpress user id from the database that matches the $oauth_identity['id'] value:
         global $wpdb;
@@ -558,7 +558,7 @@ Class QMWP
         return $user;
     }
 
-    function qmwp_get_local_user_by_email($identity)
+    public function qmwp_get_local_user_by_email($identity)
     {
         global $wpdb;
         $usermeta_table = $wpdb->usermeta;
@@ -569,7 +569,7 @@ Class QMWP
      *
      * @param $oauth_identity
      */
-    function qmwp_login_user($oauth_identity)
+    public function qmwp_login_user($oauth_identity)
     {
         // store the user info in the user session so we can grab it later if we need to register the user:
         $_SESSION["QMWP"]["USER_ID"] = $oauth_identity["id"];
@@ -627,7 +627,7 @@ Class QMWP
      * @param $msg
      * @param bool $shouldDie
      */
-    function qmwp_end_login($msg, $shouldDie = false)
+    public function qmwp_end_login($msg, $shouldDie = false)
     {
         $last_url = isset($_SESSION["QMWP"]["LAST_URL"]) ? $_SESSION["QMWP"]["LAST_URL"] : null;
         unset($_SESSION["QMWP"]["LAST_URL"]);
@@ -674,7 +674,7 @@ Class QMWP
      * logout the wordpress user
      *
      */
-    function qmwp_logout_user()
+    public function qmwp_logout_user()
     {
         //TODO: this is usually called from a custom logout button, but we could have the button call /wp-logout.php?action=logout for more consistency...
         // logout the user:
@@ -687,7 +687,7 @@ Class QMWP
      * ends the logout request by redirecting the user to the desired page
      * @return bool
      */
-    function qmwp_end_logout()
+    public function qmwp_end_logout()
     {
         $_SESSION["QMWP"]["RESULT"] = 'Logged out successfully.';
         if (is_user_logged_in()) {
@@ -732,7 +732,7 @@ Class QMWP
      * links a third-party account to an existing wordpress user account
      * @param $user_id
      */
-    function qmwp_link_account($user_id)
+    public function qmwp_link_account($user_id)
     {
         if ($_SESSION['QMWP']['USER_ID'] != '') {
             add_user_meta($user_id, 'qmwp_identity', $_SESSION['QMWP']['PROVIDER'] . '|' . $_SESSION['QMWP']['USER_ID'] . '|' . time());
@@ -745,7 +745,7 @@ Class QMWP
     /**
      *  unlinks a third-party provider from an existing wordpress user account
      */
-    function qmwp_unlink_account()
+    public function qmwp_unlink_account()
     {
         // get qmwp_identity row index that the user wishes to unlink:
         $qmwp_identity_row = $_POST['qmwp_identity_row']; // SANITIZED via $wpdb->prepare()
@@ -805,7 +805,7 @@ Class QMWP
     /**
      *  pushes login messages into the dom where they can be extracted by javascript
      */
-    function qmwp_push_login_messages()
+    public function qmwp_push_login_messages()
     {
         $result = isset($_SESSION['QMWP']['RESULT']) ? $_SESSION['QMWP']['RESULT'] : null;
         $_SESSION['QMWP']['RESULT'] = '';
@@ -815,7 +815,7 @@ Class QMWP
     /**
      *  clears the login state
      */
-    function qmwp_clear_login_state()
+    public function qmwp_clear_login_state()
     {
         unset($_SESSION["QMWP"]["USER_ID"]);
         unset($_SESSION["QMWP"]["USER_EMAIL"]);
@@ -834,15 +834,19 @@ Class QMWP
      * force the login screen logo to point to the site instead of wordpress.org
      * @return string|void
      */
-    function qmwp_logo_link()
+    public function qmwp_logo_link()
     {
         return get_bloginfo('url');
     }
 
     /**
      *  show a custom login form on the default login screen
+     *
+     * @param $message
+     *
+     * @return string
      */
-    function qmwp_customize_login_screen($message)
+    public function qmwp_customize_login_screen($message)
     {
         if (empty($message)) {
             $html = "";
@@ -863,7 +867,7 @@ Class QMWP
      * @param $fields
      * @return mixed
      */
-    function qmwp_customize_comment_form_fields($fields)
+    public function qmwp_customize_comment_form_fields($fields)
     {
         $html = "";
         $design = get_option('qmwp_login_form_show_comments_section');
@@ -878,7 +882,7 @@ Class QMWP
     /**
      *  show a custom login form at the top of the default comment form
      */
-    function qmwp_customize_comment_form()
+    public function qmwp_customize_comment_form()
     {
         $html = "";
         $design = get_option('qmwp_login_form_show_comments_section');
@@ -898,7 +902,7 @@ Class QMWP
      * @param $atts
      * @return string
      */
-    function qmwp_login_form($atts)
+    public function qmwp_login_form($atts)
     {
         $a = shortcode_atts(array(
             'design' => '',
@@ -942,7 +946,7 @@ Class QMWP
      * @param string $class
      * @return string
      */
-    function qmwp_login_form_content($design = '', $icon_set = 'icon_set', $layout = 'links-column', $button_prefix = '', $align = 'left', $show_login = 'conditional', $show_logout = 'conditional', $logged_out_title = 'Please login:', $logged_in_title = 'You are already logged in.', $logging_in_title = 'Logging in...', $logging_out_title = 'Logging out...', $style = '', $class = '')
+    public function qmwp_login_form_content($design = '', $icon_set = 'icon_set', $layout = 'links-column', $button_prefix = '', $align = 'left', $show_login = 'conditional', $show_logout = 'conditional', $logged_out_title = 'Please login:', $logged_in_title = 'You are already logged in.', $logging_in_title = 'Logging in...', $logging_out_title = 'Logging out...', $style = '', $class = '')
     { // even though qmwp_login_form() will pass a default, we might call this function from another method so it's important to re-specify the default values
         // if a design was specified and that design exists, load the shortcode attributes from that design:
         if ($design != '' && QMWP::qmwp_login_form_design_exists($design)) { // TODO: remove first condition not needed
@@ -1001,7 +1005,7 @@ Class QMWP
      * @param $button_prefix
      * @return string
      */
-    function qmwp_login_buttons($icon_set, $button_prefix)
+    public function qmwp_login_buttons($icon_set, $button_prefix)
     {
         // generate the atts once (cache them), so we can use it for all buttons without computing them each time:
         $site_url = get_bloginfo('url');
@@ -1044,7 +1048,7 @@ Class QMWP
      * @param $atts
      * @return string
      */
-    function qmwp_login_button($provider, $display_name, $atts)
+    public function qmwp_login_button($provider, $display_name, $atts)
     {
         $html = "";
         if (get_option("qmwp_" . $provider . "_api_enabled")) {
@@ -1065,7 +1069,7 @@ Class QMWP
      * @param bool|false $master
      * @return string
      */
-    function qmwp_login_form_designs_selector($id = '', $master = false)
+    public function qmwp_login_form_designs_selector($id = '', $master = false)
     {
         $html = "";
         $designs_json = get_option('qmwp_login_form_designs');
@@ -1094,7 +1098,7 @@ Class QMWP
      * @param bool|false $as_string
      * @return mixed|string|void
      */
-    function qmwp_get_login_form_design($design_name, $as_string = false)
+    public function qmwp_get_login_form_design($design_name, $as_string = false)
     {
         $designs_json = get_option('qmwp_login_form_designs');
         $designs_array = json_decode($designs_json, true);
@@ -1120,7 +1124,7 @@ Class QMWP
      * @param $design_name
      * @return bool
      */
-    function qmwp_login_form_design_exists($design_name)
+    public function qmwp_login_form_design_exists($design_name)
     {
         $designs_json = get_option('qmwp_login_form_designs');
         $designs_array = json_decode($designs_json, true);
@@ -1140,7 +1144,7 @@ Class QMWP
     /**
      *  shows the user's linked providers, used on the 'Your Profile' page
      */
-    function qmwp_linked_accounts()
+    public function qmwp_linked_accounts()
     {
         include_once('includes/modules/linked-accounts.php');
     }
@@ -1152,7 +1156,7 @@ Class QMWP
     /**
      *  registers all settings that have been defined at the top of the plugin
      */
-    function qmwp_register_settings()
+    public function qmwp_register_settings()
     {
         foreach ($this->settings as $setting_name => $default_value) {
             register_setting('qmwp_settings', $setting_name);
@@ -1162,7 +1166,7 @@ Class QMWP
     /**
      *  add the main settings page
      */
-    function qmwp_settings_page()
+    public function qmwp_settings_page()
     {
         add_options_page('QuantiModo Options', 'QuantiModo', 'manage_options', 'QuantiModo', array($this, 'qmwp_settings_page_content'));
     }
@@ -1170,7 +1174,7 @@ Class QMWP
     /**
      *  render the main settings page content
      */
-    function qmwp_settings_page_content()
+    public function qmwp_settings_page_content()
     {
         if (!current_user_can('manage_options')) {
             wp_die(__('You do not have sufficient permissions to access this page.'));
@@ -1225,8 +1229,11 @@ Class QMWP
 
     /**
      * Picks up plugin content template, renders it and return string with HTML
+     *
      * @param $shortCodeName - shortCode name
      * @param $version - template version to load
+     * @param null $params
+     *
      * @return string - rendered template HTML string
      */
     private function get_plugin_template_html($shortCodeName, $version, $params = null)
@@ -1244,6 +1251,11 @@ Class QMWP
      *
      * call: add_null_variable_alert(array(false => 'Ops!'), '<div></div>');
      * will return: <div><script>alert("Ops!");</script></div>
+     *
+     * @param $variables
+     * @param $templateContent
+     *
+     * @return string
      */
     private function add_null_global_variable_alerts($variables, $templateContent)
     {
@@ -1272,14 +1284,17 @@ Class QMWP
     {
 
         $access_token = $this->access_token();
-        $apiHost = getenv('API_HOST');
-        if(!$apiHost){
-            $apiHost =  QMWPAuth::API_HOST;
+        $apiHost = getenv('API_HOST') ?: QMWPAuth::API_HOST;
+        $cookieAuth = false;
+        if(getenv('API_HOST') === get_site_url()) {
+            $cookieAuth = true;
         }
 
         $template_content = $this->set_js_variables($template, array(
             'accessToken' => $access_token,
             'apiHost' => $apiHost,
+            'cookieAuth' => $cookieAuth,
+            'siteUrl' => get_site_url()
             /*'mashapeKey' => get_option('qmwp_x_mashape_key')*/    //from settings
         ));
 
@@ -1368,7 +1383,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_rating_faces($attributes)
+    public function qmwp_rating_faces($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1397,7 +1412,7 @@ Class QMWP
      * @param $attributes - short code attributes
      * @return string
      */
-    function qmwp_connectors($attributes)
+    public function qmwp_connectors($attributes)
     {
         $attributes = shortcode_atts(array('version' => 3), $attributes, 'qmwp_connectors');
 
@@ -1416,7 +1431,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_manage_accounts($attributes)
+    public function qmwp_manage_accounts($attributes)
     {
         $attributes = shortcode_atts(array('version' => 2), $attributes, 'qmwp_manage_accounts');
 
@@ -1434,7 +1449,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_bargraph_scatterplot_timeline($attributes)
+    public function qmwp_bargraph_scatterplot_timeline($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1475,7 +1490,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_timeline($attributes)
+    public function qmwp_timeline($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1504,7 +1519,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_search_correlations($attributes)
+    public function qmwp_search_correlations($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1535,7 +1550,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_search_for_predictors($attributes)
+    public function qmwp_search_for_predictors($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1574,7 +1589,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_search_for_outcomes($attributes)
+    public function qmwp_search_for_outcomes($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1615,7 +1630,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qmwp_add_measurement($attributes)
+    public function qmwp_add_measurement($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1639,7 +1654,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qm_numbers_rating($attributes)
+    public function qm_numbers_rating($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1668,7 +1683,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qm_ionic_app($attributes)
+    public function qm_ionic_app($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1689,7 +1704,7 @@ Class QMWP
      * @param $attributes
      * @return string
      */
-    function qm_embed($attributes)
+    public function qm_embed($attributes)
     {
         $attributes = shortcode_atts(array(
             'version' => 1,
@@ -1739,7 +1754,7 @@ Class QMWP
     /**
      *  Will check if shortcake plugin is installed and add it's features to a qmwp shortcodes
      */
-    function add_shortcake_ui_features()
+    public function qm_add_shortcake_ui_features()
     {
         if (function_exists('shortcode_ui_register_for_shortcode')) {
 
@@ -1756,7 +1771,7 @@ Class QMWP
 
     }
 
-    function add_shortcake_to_faces_tracker()
+    public function qm_add_shortcake_to_faces_tracker()
     {
         shortcode_ui_register_for_shortcode(
             'qmwp_rating_faces', array(
@@ -1787,7 +1802,7 @@ Class QMWP
         );
     }
 
-    function add_shortcake_to_bargraph_scatterplot()
+    public function qm_add_shortcake_to_bargraph_scatterplot()
     {
         shortcode_ui_register_for_shortcode(
             'qmwp_bargraph_scatterplot_timeline', array(
@@ -1828,7 +1843,7 @@ Class QMWP
         );
     }
 
-    function add_shortcake_to_timeline()
+    public function qm_add_shortcake_to_timeline()
     {
         shortcode_ui_register_for_shortcode(
             'qmwp_timeline', array(
@@ -1848,7 +1863,7 @@ Class QMWP
         );
     }
 
-    function add_shortcake_to_search_correlations()
+    public function qm_add_shortcake_to_search_correlations()
     {
         shortcode_ui_register_for_shortcode(
             'qmwp_search_correlations', array(
@@ -1888,7 +1903,7 @@ Class QMWP
         );
     }
 
-    function add_shortcake_to_search_predictors()
+    public function qm_add_shortcake_to_search_predictors()
     {
         shortcode_ui_register_for_shortcode(
             'qmwp_search_for_predictors', array(
@@ -1928,7 +1943,7 @@ Class QMWP
         );
     }
 
-    function add_shortcake_to_search_outcomes()
+    public function qm_add_shortcake_to_search_outcomes()
     {
         shortcode_ui_register_for_shortcode(
             'qmwp_search_for_outcomes', array(
@@ -1968,7 +1983,7 @@ Class QMWP
         );
     }
 
-    function add_shortcake_to_add_measurement()
+    public function qm_add_shortcake_to_add_measurement()
     {
         shortcode_ui_register_for_shortcode(
             'qmwp_add_measurement', array(
@@ -2000,7 +2015,7 @@ Class QMWP
         );
     }
 
-    function qm_admin_menu() {
+    public function qm_admin_menu() {
         add_menu_page( 'Import Data from Other Apps and Devices', 'Import Data', 'read',
             'quantimodo/includes/qmwp-connectors/qmwp-connectors-v3.php', array($this, 'qm_connectors_admin_page'),
             'dashicons-upload', 1 );
@@ -2056,12 +2071,12 @@ Class QMWP
     }
 
 
-    function qm_track_anything_admin_page(){
+    public function qm_track_anything_admin_page(){
         $htmlForPage = self::qmwp_add_measurement(null);
         echo $htmlForPage;
     }
     
-    function qm_track_foods_admin_page(){
+    public function qm_track_foods_admin_page(){
         $attributes =
             [
                 'category' => "Foods"
@@ -2070,7 +2085,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_emotions_admin_page(){
+    public function qm_track_emotions_admin_page(){
         $attributes =
             [
                 'category' => "Emotions"
@@ -2079,7 +2094,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_physique_admin_page(){
+    public function qm_track_physique_admin_page(){
         $attributes =
             [
                 'category' => "Physique"
@@ -2088,7 +2103,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_physical_activity_admin_page(){
+    public function qm_track_physical_activity_admin_page(){
         $attributes =
             [
                 'category' => "Physical Activity"
@@ -2097,7 +2112,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_treatments_admin_page(){
+    public function qm_track_treatments_admin_page(){
         $attributes =
             [
                 'category' => "Treatments"
@@ -2106,7 +2121,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_symptoms_admin_page(){
+    public function qm_track_symptoms_admin_page(){
         $attributes =
             [
                 'category' => "Symptoms"
@@ -2115,7 +2130,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_vital_signs_admin_page(){
+    public function qm_track_vital_signs_admin_page(){
         $attributes =
             [
                 'category' => "Vital Signs"
@@ -2124,7 +2139,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_sleep_admin_page(){
+    public function qm_track_sleep_admin_page(){
         $attributes =
             [
                 'category' => "Sleep"
@@ -2133,7 +2148,10 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_track_nutrients_admin_page(){
+	/**
+     *
+     */
+    public function qm_track_nutrients_admin_page(){
         $attributes =
             [
                 'category' => "Nutrients"
@@ -2144,22 +2162,22 @@ Class QMWP
 
 
 
-    function qm_timeline_admin_page(){
+    public function qm_timeline_admin_page(){
         $htmlForPage = self::qmwp_timeline(null);
         echo $htmlForPage;
     }
 
-    function qm_connectors_admin_page(){
+    public function qm_connectors_admin_page(){
         $htmlForPage = self::qmwp_connectors(null);
         echo $htmlForPage;
     }
 
-    function qm_analyze_admin_page(){
+    public function qm_analyze_admin_page(){
         $htmlForPage = self::qmwp_bargraph_scatterplot_timeline(null);
         echo $htmlForPage;
     }
 
-    function qm_user_relationship_search_admin_page(){
+    public function qm_user_relationship_search_admin_page(){
         $attributes =
             [
                 'plugin' => "search-relationships",
@@ -2173,7 +2191,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_variables_admin_page(){
+    public function qm_variables_admin_page(){
         $attributes =
             [
                 'plugin' => "search-variables",
@@ -2185,7 +2203,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function qm_common_relationship_search_admin_page(){
+    public function qm_common_relationship_search_admin_page(){
         $attributes =
             [
                 'plugin' => "search-relationships",
@@ -2199,7 +2217,7 @@ Class QMWP
         echo $htmlForPage;
     }
 
-    function add_shortcake_to_numbers_rating()
+    public function qm_add_shortcake_to_numbers_rating()
     {
         shortcode_ui_register_for_shortcode(
             'qm_numbers_rating', array(

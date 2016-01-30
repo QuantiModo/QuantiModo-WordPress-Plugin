@@ -1,11 +1,15 @@
 <script>
-    if (!accessToken) {
-        console.warn('No access token. Now will try to authenticate and to get it');
-        window.location.href = "?connect=quantimodo";
+    console.log("Api host url is " + apiHost);
+    if(!accessToken && !cookieAuth) {
+        console.warn('No access token and cookieAuth is false. Now will try to authenticate and to get it');
+        window.location.replace(siteUrl + '?connect=quantimodo');
     }
+    embedUrl= apiHost + "/embeddable/?"
+    console.log("Embed url is " + embedUrl);
+
 </script>
 
 <iframe class="<?= $params['iFrameParams']['class'] ?>"
-        src="https://app.quantimo.do/embeddable/?<?= http_build_query($params['getParams']) ?>"
+        src="<?= getenv('API_HOST') ?: QMWPAuth::API_HOST ?>/embeddable/?<?= http_build_query($params['getParams']) ?>"
         width="<?= $params['iFrameParams']['width'] ?>" height="<?= $params['iFrameParams']['height'] ?>">
 </iframe>
