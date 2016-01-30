@@ -1030,12 +1030,8 @@ Class QMWP
         $html .= $this->qmwp_login_button("facebook", "Facebook", $atts);
         $html .= $this->qmwp_login_button("linkedin", "LinkedIn", $atts);
         $html .= $this->qmwp_login_button("github", "GitHub", $atts);
-        $html .= $this->qmwp_login_button("reddit", "Reddit", $atts);
-        $html .= $this->qmwp_login_button("windowslive", "Windows Live", $atts);
-        $html .= $this->qmwp_login_button("paypal", "PayPal", $atts);
-        $html .= $this->qmwp_login_button("instagram", "Instagram", $atts);
-        $html .= $this->qmwp_login_button("battlenet", "Battlenet", $atts);
-        if ($html == '') {
+        
+        if ($html == '' && getenv('API_HOST') !== get_bloginfo('siteurl')) {
             $html .= 'Sorry, no login providers have been enabled.';
         }
         return $html;
@@ -1742,8 +1738,6 @@ Class QMWP
         $templateContent = $this->process_template($pluginContentHTML);
 
         return $templateContent;
-
-
     }
 
 
