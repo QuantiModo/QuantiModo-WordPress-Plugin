@@ -10,6 +10,6 @@
 </script>
 
 <iframe class="<?= $params['iFrameParams']['class'] ?>"
-        src="<?= getenv('API_HOST') ?: QMWPAuth::API_HOST ?>/embeddable/?<?= http_build_query($params['getParams']) ?>"
+        src="<?= getenv('QM_API_HOST') ?: QMWPAuth::QM_API_HOST ?>/embeddable/?<?= http_build_query($params['getParams']) ?>"
         width="<?= $params['iFrameParams']['width'] ?>" height="<?= $params['iFrameParams']['height'] ?>">
 </iframe>

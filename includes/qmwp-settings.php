@@ -184,7 +184,7 @@ $cc_ux = qmwp_cc_ux();
                     </div>
 
                     <p>
-                        Current API Host: <?php echo QMWPAuth::API_HOST; ?>
+                        Current API Host: <?php echo QMWPAuth::QM_API_HOST; ?>
                     </p>
                 </div>
             </div>

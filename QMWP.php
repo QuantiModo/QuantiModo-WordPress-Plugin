@@ -1030,8 +1030,8 @@ Class QMWP
         $html .= $this->qmwp_login_button("facebook", "Facebook", $atts);
         $html .= $this->qmwp_login_button("linkedin", "LinkedIn", $atts);
         $html .= $this->qmwp_login_button("github", "GitHub", $atts);
-        
-        if ($html == '' && getenv('API_HOST') !== get_bloginfo('siteurl')) {
+
+        if ($html == '' && getenv('QM_API_HOST') !== get_bloginfo('siteurl')) {
             $html .= 'Sorry, no login providers have been enabled.';
         }
         return $html;
@@ -1282,9 +1282,9 @@ Class QMWP
     {
 
         $access_token = $this->access_token();
-        $apiHost = getenv('API_HOST') ?: QMWPAuth::API_HOST;
+        $apiHost = getenv('QM_API_HOST') ?: QMWPAuth::QM_API_HOST;
         $cookieAuth = false;
-        if(getenv('API_HOST') === get_site_url()) {
+        if(getenv('QM_API_HOST') === get_site_url()) {
             $cookieAuth = true;
         }
 
