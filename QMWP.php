@@ -1726,6 +1726,10 @@ Class QMWP
             'width' => $attributes['width'],
             'height' => $attributes['height'],
             'class' => 'qm-frame ' . $attributes['frame_class'],
+            'style.backgroundColor' => "transparent",
+            'frameBorder' => "true",
+            'allowTransparency' => "true",
+            'src' => 'about: blank'
         );
 
         $version = $attributes['version'];
