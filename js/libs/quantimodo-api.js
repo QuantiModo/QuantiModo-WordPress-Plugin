@@ -42,7 +42,7 @@ Quantimodo = function () {
                 },
                 success: function (data, status, xhr) {
 
-                    if (data.constructor === Array && !disableLooping) {
+                    if (data && data.constructor === Array && !disableLooping) {
                         console.debug('Fetched: ' + data.length + ' items');
                         if (data.length > 0) {
                             results = results.concat(data);
