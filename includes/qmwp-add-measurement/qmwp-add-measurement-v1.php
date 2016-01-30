@@ -14,7 +14,7 @@ wp_enqueue_script("jquery-datetimepicker",
     plugins_url('../../', __FILE__) . "js/libs/jquery.datetimepicker.js", "jquery");
 wp_enqueue_script("moment-js", plugins_url('../../', __FILE__) . "js/libs/moment.min.js");
 wp_enqueue_script("qm-sdk",
-    plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
+    plugins_url('../../', __FILE__) . "js/libs/QuantiModo-SDK-JavaScript/quantimodo-api.js", "jquery", false, true);
 wp_enqueue_script("qmwp-add-measurement",
     plugins_url('../../', __FILE__) . "js/qmwp-add-measurement.js", array('jquery','moment-js'), false, true);
 wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));

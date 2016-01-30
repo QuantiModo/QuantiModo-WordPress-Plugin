@@ -11,7 +11,7 @@ wp_enqueue_script("jquery-ui-dialog");
 wp_enqueue_script("jquery-dropdown", plugins_url('../../', __FILE__) . "js/libs/jquery.dropdown.min.js", "jquery");
 wp_enqueue_script("mustache", plugins_url('../../', __FILE__) . "js/libs/mustache.js");
 wp_enqueue_script("moment", plugins_url('../../', __FILE__) . "js/libs/moment.min.js", "jquery", false, true);
-wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
+wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/QuantiModo-SDK-JavaScript/quantimodo-api.js", "jquery", false, true);
 
 wp_enqueue_script("manageaccounts", plugins_url('../../', __FILE__) . "js/qmwp-manage-accounts.js", "qm-sdk", false, true);
 

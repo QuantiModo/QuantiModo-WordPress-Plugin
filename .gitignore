@@ -21,4 +21,4 @@ composer.lock
 
 # Project files
 tests/wp-tests-config.php
-# js/libs/quantimodo-api.js
+# js/libs/QuantiModo-SDK-JavaScript/quantimodo-api.js
