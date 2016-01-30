@@ -197,7 +197,7 @@ Class QMWP
         add_shortcode('qm_embed', array($this, 'qm_embed'));
 
         //add shortcake plugin features to qmwp shortcodes (if plugin is installed)
-        //$this->add_shortcake_ui_features();
+        $this->qm_add_shortcake_ui_features();
 
         // restore default settings if necessary; this might get toggled by the admin or forced by a new version of the plugin:
         if (get_option("qmwp_restore_default_settings")) {
@@ -1225,6 +1225,8 @@ Class QMWP
 
             return $scriptHtmlString . $templateContent;
         }
+
+        return null;
     }
 
     /**
@@ -1269,7 +1271,7 @@ Class QMWP
         }
         $alertsHtmlString .= "</script>\n";
 
-        return $alertsHtmlString .= $templateContent;
+        return $alertsHtmlString . $templateContent;
 
     }
 
@@ -1540,9 +1542,7 @@ Class QMWP
                 'qmwpCommonOrUser' => $attributes['common_or_user']
             ));
 
-        $template_content = $this->process_template($pluginContentHTML);
-
-        return $template_content;
+        return $this->process_template($pluginContentHTML);
     }
 
     /**
@@ -1758,14 +1758,14 @@ Class QMWP
     {
         if (function_exists('shortcode_ui_register_for_shortcode')) {
 
-            $this->add_shortcake_to_faces_tracker();
-            $this->add_shortcake_to_bargraph_scatterplot();
-            $this->add_shortcake_to_timeline();
-            $this->add_shortcake_to_search_correlations();
-            $this->add_shortcake_to_search_predictors();
-            $this->add_shortcake_to_search_outcomes();
-            $this->add_shortcake_to_add_measurement();
-            $this->add_shortcake_to_numbers_rating();
+            $this->qm_add_shortcake_to_faces_tracker();
+            $this->qm_add_shortcake_to_bargraph_scatterplot();
+            $this->qm_add_shortcake_to_timeline();
+            $this->qm_add_shortcake_to_search_correlations();
+            $this->qm_add_shortcake_to_search_predictors();
+            $this->qm_add_shortcake_to_search_outcomes();
+            $this->qm_add_shortcake_to_add_measurement();
+            $this->qm_add_shortcake_to_numbers_rating();
 
         }
 
@@ -2115,7 +2115,7 @@ Class QMWP
     public function qm_track_treatments_admin_page(){
         $attributes =
             [
-                'category' => "Treatments"
+                'category' => 'Treatments'
             ];
         $htmlForPage = self::qmwp_add_measurement($attributes);
         echo $htmlForPage;
@@ -2124,7 +2124,7 @@ Class QMWP
     public function qm_track_symptoms_admin_page(){
         $attributes =
             [
-                'category' => "Symptoms"
+                'category' => 'Symptoms'
             ];
         $htmlForPage = self::qmwp_add_measurement($attributes);
         echo $htmlForPage;
