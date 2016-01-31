@@ -33,7 +33,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                class="form-control"
                ng-model="outcomeVariableName"
                type="text"
-               placeholder="Enter a medication, food supplement or anything else...">
+               placeholder="Enter a medication, food, supplement or anything else...">
     </div>
 
     <div class="form-group">
@@ -42,7 +42,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                class="form-control"
                ng-model="predictorVariableName"
                type="text"
-               placeholder="Enter a medication, food supplement or anything else...">
+               placeholder="Enter a medication, food, supplement or anything else...">
     </div>
 
     <div id="searchResultRegion" ng-cloak ng-show="showResults">
