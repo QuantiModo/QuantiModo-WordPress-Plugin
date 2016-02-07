@@ -19,7 +19,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
         </img>
     </div>
     <div id="ionic-app-holder">
-        <iframe src="https://qm-ionic.herokuapp.com" frameborder="0"></iframe>
+        <iframe id="ionic-app-frame" src="https://qm-ionic.herokuapp.com" frameborder="0"></iframe>
     </div>
 </div>
 
