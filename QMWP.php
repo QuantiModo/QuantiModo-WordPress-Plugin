@@ -1712,6 +1712,7 @@ Class QMWP
             'access_token' => $this->access_token(),
             'outcome' => null,
             'predictor' => null,
+            'url' => null,
         ), $attributes, 'qm_embed');
 
         $getParams = array(
@@ -1731,6 +1732,10 @@ Class QMWP
             'allowTransparency' => "true",
             'src' => 'about: blank'
         );
+
+        if ($attributes['url']) {
+            $iFrameParams['url'] = $attributes['url'];
+        }
 
         $version = $attributes['version'];
 
@@ -2064,7 +2069,19 @@ Class QMWP
         // Variables Search Admin Page
         add_menu_page( 'Variables', 'Variables', 'read', 'qm_variables_slug',
             array($this, 'qm_variables_admin_page'), 'dashicons-randomize', 5 );
-        
+
+        // Reminders
+        add_menu_page( 'Reminders', 'Reminders', 'read', 'qm_reminders_parent_slug',
+            array($this, 'qm_reminders_index_admin_page'), 'dashicons-megaphone', 6  );
+        add_submenu_page('qm_reminders_parent_slug', 'Inbox', 'Inbox', 'read', 'qm_reminders_parent_slug',
+            array($this, 'qm_reminders_index_admin_page'));
+        add_submenu_page('qm_reminders_parent_slug', 'Manage', 'Manage', 'read', 'qm_reminders_manage_slug',
+            array($this, 'qm_reminders_manage_admin_page'));
+
+        // Measurements history
+        add_menu_page( 'Measurements History', 'Measurements History', 'read',
+            'qm_history_parent_slug',
+            array($this, 'qm_user_measurement_history_admin_page'), 'dashicons-backup', 7  );
 
     }
 
@@ -2254,6 +2271,44 @@ Class QMWP
             )
         );
     }
+
+    public function qm_user_measurement_history_admin_page(){
+        $attributes =
+            [
+                'url' => "/ionic/Modo/www/index.html#/app/history-all?hideMenu=true",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
+
+    public function qm_reminders_index_admin_page(){
+        $attributes =
+            [
+                'url' => "/ionic/Modo/www/index.html#/app/reminders-inbox?hideMenu=true",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
+    public function qm_reminders_manage_admin_page(){
+        $attributes =
+            [
+                'url' => "/ionic/Modo/www/index.html#/app/reminders-manage?hideMenu=true",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
 
 
 }
