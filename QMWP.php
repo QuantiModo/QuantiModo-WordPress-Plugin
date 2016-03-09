@@ -115,13 +115,8 @@ Class QMWP
         'qmwp_default_outcome_variable_undesirable' => 'false',
         'qmwp_add_login_logout_nav_items' => 0,
         'qmwp_plugin_pages' => array(
-            'Predictors/Outcomes Search (List)' => '[qmwp_search_correlations]',
-            'Strongest Predictors of Mood (List)' => '[qmwp_search_correlations effect="Overall Mood"]',
             'Track Mood (Faces)' => '[qmwp_rating_faces tracked_variable_name="Overall Mood" negative="false"]',
             'Import Data' => '[qmwp_connectors]',
-            'Predictors/Outcomes Analysis Charts' => '[qmwp_bargraph_scatterplot_timeline]',
-            'Mood Over Time' => '[qmwp_timeline examined_variable_names="overall mood"]',
-            'Timeline Chart' => '[qmwp_timeline]',
             'Track Anything' => '[qmwp_add_measurement]',
             'Track Emotions' => '[qmwp_add_measurement category="Emotions"]',
             //'Track Physique' => '[qmwp_add_measurement category="Physique"]',
@@ -186,9 +181,6 @@ Class QMWP
         add_shortcode('qmwp_rating_faces', array($this, 'qmwp_rating_faces'));
         add_shortcode('qmwp_connectors', array($this, 'qmwp_connectors'));
         add_shortcode('qmwp_manage_accounts', array($this, 'qmwp_manage_accounts'));
-        add_shortcode('qmwp_bargraph_scatterplot_timeline', array($this, 'qmwp_bargraph_scatterplot_timeline'));
-        add_shortcode('qmwp_timeline', array($this, 'qmwp_timeline'));
-        add_shortcode('qmwp_search_correlations', array($this, 'qmwp_search_correlations'));
         add_shortcode('qmwp_search_for_predictors', array($this, 'qmwp_search_for_predictors'));
         add_shortcode('qmwp_search_for_outcomes', array($this, 'qmwp_search_for_outcomes'));
         add_shortcode('qmwp_add_measurement', array($this, 'qmwp_add_measurement'));
@@ -1443,185 +1435,6 @@ Class QMWP
     }
 
     /**
-     * Renders QuantiModo bargraph_scatterplot_timeline shortcode content
-     * @param $attributes
-     * @return string
-     */
-    public function qmwp_bargraph_scatterplot_timeline($attributes)
-    {
-        $attributes = shortcode_atts(array(
-            'version' => 1,
-            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
-            'show_predictors_or_outcomes' => 'predictors',
-            'allow_user_change_variable' => 'false',
-        ), $attributes, 'qmwp_bargraph_scatterplot_timeline');
-
-        $version = $attributes['version'];
-
-        $pluginContentHTML = $this->get_plugin_template_html('qmwp-bargraph-scatterplot-timeline', $version);
-
-        $variable = $attributes['examined_variable_name'];
-
-        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
-            $showPredictorsOrOutcomes = 'cause';
-        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
-            $showPredictorsOrOutcomes = 'effect';
-        }
-
-        if (!is_null($variable)) {
-            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
-                array(
-                    'qmwpShortCodeDefinedVariable' => $variable,
-                    'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
-                    'qmwpShowVariableSelectors' => $attributes['allow_user_change_variable']
-                ));
-        }
-
-        $template_content = $this->process_template($pluginContentHTML);
-
-        return $template_content;
-
-    }
-
-    /**
-     * Renders QuantiModo analyze plugin content
-     * @param $attributes
-     * @return string
-     */
-    public function qmwp_timeline($attributes)
-    {
-        $attributes = shortcode_atts(array(
-            'version' => 1,
-            'examined_variable_names' => get_option('qmwp_default_outcome_variable')
-        ), $attributes, 'qmwp_timeline');
-
-        $version = $attributes['version'];
-
-        $pluginContentHTML = $this->get_plugin_template_html('qmwp-timeline', $version);
-
-        $variables = $attributes['examined_variable_names'];
-
-        if (!is_null($variables)) {
-            $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
-                array('qmwpShortCodeDefinedVariables' => $variables));
-        }
-
-        $template_content = $this->process_template($pluginContentHTML);
-
-        return $template_content;
-
-    }
-
-    /**
-     * Return rendered html string with plugin content
-     * @param $attributes
-     * @return string
-     */
-    public function qmwp_search_correlations($attributes)
-    {
-        $attributes = shortcode_atts(array(
-            'version' => 1,
-            'outcome' => get_option('qmwp_default_outcome_variable'),
-            'predictor' => null,
-            'common_or_user' => 'common'
-        ), $attributes, 'qmwp_search_correlations');
-
-        $version = $attributes['version'];
-
-        $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
-
-        $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
-            array(
-                'qmwpPredictor' => $attributes['predictor'],
-                'qmwpOutcome' => $attributes['outcome'],
-                'qmwpPluginUrl' => plugins_url('/', __FILE__),
-                'qmwpCommonOrUser' => $attributes['common_or_user']
-            ));
-
-        return $this->process_template($pluginContentHTML);
-    }
-
-    /**
-     * Return rendered html string with plugin content
-     * @param $attributes
-     * @return string
-     */
-    public function qmwp_search_for_predictors($attributes)
-    {
-        $attributes = shortcode_atts(array(
-            'version' => 1,
-            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
-            'show_predictors_or_outcomes' => 'predictors',
-            'common_or_user' => 'common'
-        ), $attributes, 'qmwp_search_for_predictors');
-
-        $version = $attributes['version'];
-
-        $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
-
-        $variable = $attributes['examined_variable_name'];
-
-        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
-            $showPredictorsOrOutcomes = 'cause';
-        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
-            $showPredictorsOrOutcomes = 'effect';
-        }
-
-        $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
-            array(
-                'qmwpShortCodeDefinedVariable' => $variable,
-                'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
-                'qmwpPluginUrl' => plugins_url('/', __FILE__),
-                'qmwpCommonOrUser' => $attributes['common_or_user']
-            ));
-
-        $template_content = $this->process_template($pluginContentHTML);
-
-        return $template_content;
-    }
-
-    /**
-     * Return rendered html string with plugin content
-     * @param $attributes
-     * @return string
-     */
-    public function qmwp_search_for_outcomes($attributes)
-    {
-        $attributes = shortcode_atts(array(
-            'version' => 1,
-            'examined_variable_name' => get_option('qmwp_default_outcome_variable'),
-            'show_predictors_or_outcomes' => 'outcomes',
-            'common_or_user' => 'common'
-        ), $attributes, 'qmwp_search_for_outcomes');
-
-        $version = $attributes['version'];
-
-        $pluginContentHTML = $this->get_plugin_template_html('qmwp-search-correlations', $version);
-
-        $variable = $attributes['examined_variable_name'];
-
-        if ($attributes['show_predictors_or_outcomes'] == 'outcomes') {
-            $showPredictorsOrOutcomes = 'cause';
-        } else if ($attributes['show_predictors_or_outcomes'] == 'predictors') {
-            $showPredictorsOrOutcomes = 'effect';
-        }
-
-
-        $pluginContentHTML = $this->set_js_variables($pluginContentHTML,
-            array(
-                'qmwpShortCodeDefinedVariable' => $variable,
-                'qmwpShortCodeDefinedVariableAs' => $showPredictorsOrOutcomes,
-                'qmwpPluginUrl' => plugins_url('/', __FILE__),
-                'qmwpCommonOrUser' => $attributes['common_or_user']
-            ));
-
-
-        $template_content = $this->process_template($pluginContentHTML);
-
-        return $template_content;
-    }
-
-    /**
      * Return rendered html string with plugin content!
      * @param $attributes
      * @return string
@@ -1762,9 +1575,6 @@ Class QMWP
         if (function_exists('shortcode_ui_register_for_shortcode')) {
 
             $this->qm_add_shortcake_to_faces_tracker();
-            $this->qm_add_shortcake_to_bargraph_scatterplot();
-            $this->qm_add_shortcake_to_timeline();
-            $this->qm_add_shortcake_to_search_correlations();
             $this->qm_add_shortcake_to_search_predictors();
             $this->qm_add_shortcake_to_search_outcomes();
             $this->qm_add_shortcake_to_add_measurement();
@@ -1800,107 +1610,6 @@ Class QMWP
                         ),
                     ),
 
-                ),
-            )
-        );
-    }
-
-    public function qm_add_shortcake_to_bargraph_scatterplot()
-    {
-        shortcode_ui_register_for_shortcode(
-            'qmwp_bargraph_scatterplot_timeline', array(
-                'label' => 'QuantiModo Predictor Analysis',
-                'attrs' => array(
-
-                    array(
-                        'label' => 'Variable',
-                        'attr' => 'examined_variable_name',
-                        'type' => 'text',
-                        'meta' => array(
-                            'placeholder' => 'Type variable name',
-                        ),
-                    ),
-
-                    array(
-                        'label' => 'Show predictors or outcomes',
-                        'attr' => 'show_predictors_or_outcomes',
-                        'type' => 'select',
-                        'options' => array(
-                            'predictors' => 'Predictors',
-                            'outcomes' => 'Outcomes',
-                        ),
-                    ),
-
-                    array(
-                        'label' => 'Allow user to select variable',
-                        'attr' => 'allow_user_change_variable',
-                        'type' => 'select',
-                        'options' => array(
-                            'true' => 'True',
-                            'false' => 'False',
-                        ),
-                    ),
-
-                ),
-            )
-        );
-    }
-
-    public function qm_add_shortcake_to_timeline()
-    {
-        shortcode_ui_register_for_shortcode(
-            'qmwp_timeline', array(
-                'label' => 'QuantiModo Timeline',
-                'attrs' => array(
-
-                    array(
-                        'label' => 'Variables',
-                        'attr' => 'examined_variable_names',
-                        'type' => 'text',
-                        'meta' => array(
-                            'placeholder' => 'Type variable name',
-                        ),
-                    ),
-                ),
-            )
-        );
-    }
-
-    public function qm_add_shortcake_to_search_correlations()
-    {
-        shortcode_ui_register_for_shortcode(
-            'qmwp_search_correlations', array(
-                'label' => 'QuantiModo Predictors Search',
-                'attrs' => array(
-
-                    array(
-                        'label' => 'Predictor',
-                        'attr' => 'predictor',
-                        'type' => 'text',
-                        'meta' => array(
-                            'placeholder' => 'Type default predictor',
-                        ),
-                    ),
-
-                    array(
-                        'label' => 'Outcome',
-                        'attr' => 'outcome',
-                        'type' => 'text',
-                        'meta' => array(
-                            'placeholder' => 'Type default outcome',
-                        ),
-                    ),
-
-
-                    array(
-                        'label' => 'Common or user measurements',
-                        'attr' => 'common_or_user',
-                        'type' => 'select',
-                        'options' => array(
-                            'common' => 'Common',
-                            'user' => 'User',
-                        ),
-                    ),
                 ),
             )
         );
@@ -2046,13 +1755,6 @@ Class QMWP
             'qm_track_vital_signs_admin_page_slug', array($this, 'qm_track_vital_signs_admin_page'));
         add_submenu_page('qm_track_parent_slug', 'Track Nutrients', 'Nutrients', 'read',
             'qm_track_nutrients_admin_page_slug', array($this, 'qm_track_nutrients_admin_page'));
-
-        add_menu_page( 'Graph Variables Over Time', 'Timeline', 'read',
-            'quantimodo/includes/qmwp-timeline/qmwp-timeline-v1.php', array($this, 'qm_timeline_admin_page'),
-            'dashicons-chart-line', 3 );
-        add_menu_page( 'Visually Explore Relationships Between Variables', 'Analyze', 'read',
-            'quantimodo/includes/qmwp-bargraph-scatterplot-timeline/qmwp-bargraph-scatterplot-timeline-v1.php',
-            array($this, 'qm_analyze_admin_page'), 'dashicons-chart-bar', 3  );
         
         
         // Relationship Admin Pages
@@ -2175,20 +1877,8 @@ Class QMWP
         echo $htmlForPage;
     }
 
-
-
-    public function qm_timeline_admin_page(){
-        $htmlForPage = self::qmwp_timeline(null);
-        echo $htmlForPage;
-    }
-
     public function qm_connectors_admin_page(){
         $htmlForPage = self::qmwp_connectors(null);
-        echo $htmlForPage;
-    }
-
-    public function qm_analyze_admin_page(){
-        $htmlForPage = self::qmwp_bargraph_scatterplot_timeline(null);
         echo $htmlForPage;
     }
 

@@ -69,11 +69,11 @@ This shortcode would allow one to create a widget or shortcode for embedding a H
 To see how it works:
 - Create an account at https://quantimo.do
 - Connect the Weather connector at https://quantimo.do/connect/ (using "62034" as your zip code if you're not on Earth and you don't have a location to enter.)
-- Go to https://quantimo.do/correlate and select a variable to chart on the left. 
+- Go to https://quantimo.do/correlate and select a variable to chart on the left.
 
-If you have any problems with this process, please submit a help request by clicking the "Feedback" tab on the right. 
+If you have any problems with this process, please submit a help request by clicking the "Feedback" tab on the right.
 
-The code to be used for this shortcode is here: 
+The code to be used for this shortcode is here:
 https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/correlation_charts
 
 ![correlations-page-demo-sleep-mood-1024x648](https://cloud.githubusercontent.com/assets/2808553/10770971/25b5c1d4-7cbc-11e5-90d5-5c046cb70d89.png)

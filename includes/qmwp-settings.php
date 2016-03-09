@@ -325,28 +325,6 @@ $cc_ux = qmwp_cc_ux();
                                 </td>
                             </tr>
                             <tr>
-                                <td class="shortcode">[qmwp_timeline]</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            variables
-                                        </li>
-                                    </ul>
-                                    <p>
-                                        Specify variable(s) to be displayed. Separate variable names by a semicolon
-                                    </p>
-
-                                    <p>
-                                        Example: <br>
-                                        [qmwp_timeline examined_variable_names="Overall Mood;Sleep Quality"]
-                                    </p>
-                                </td>
-                                <td>
-                                    Graph any variable over time
-                                    <a href="/qmwp-timeline" target="_blank">Take a look</a>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td class="shortcode">[qmwp_connectors]</td>
                                 <td>
 
@@ -354,65 +332,6 @@ $cc_ux = qmwp_cc_ux();
                                 <td>
                                     Allow users to import their data from 3rd party sources
                                     <a href="/qmwp-connectors" target="_blank">Take a look</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shortcode">[qmwp_bargraph_scatterplot_timeline]</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            examined_variable_name
-                                        </li>
-                                        <li>
-                                            show_predictors_or_outcomes
-                                        </li>
-                                        <li>
-                                            allow_user_change_variable
-                                        </li>
-                                    </ul>
-                                    <p>
-                                        Specify variable and how it should be considered (cause or effect)
-                                    </p>
-                                    <p>
-                                        Example: <br>
-                                        [qmwp_bargraph_scatterplot_timeline examined_variable_name="Sleep Quality"
-                                        show_predictors_or_outcomes="predictors"]
-                                    </p>
-                                </td>
-                                <td>
-                                    Search for predictors or likely effects of a given variable
-                                    <a target="_blank" href="/qmwp-bargraph-scatterplot-timeline">Take a look</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shortcode">[qmwp_search_correlations]</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            examined_variable_name
-                                        </li>
-                                        <li>
-                                            show_predictors_or_outcomes
-                                        </li>
-                                    </ul>
-                                    <p>
-                                        The optional "examined_variable_name" parameter is used to pre-specify the
-                                        variable name. If absent, the user may select it from a menu.
-                                        The optional "show_predictors_or_outcomes" parameter whether the chart should
-                                        display predictors or outcomes of the examined variable.
-                                    </p>
-
-                                    <p>
-                                        Example: <br>
-                                        This shortcode would display a graph exploring all possible predictors of the
-                                        user's Attention ratings.
-                                        [qmwp_search_correlations examined_variable_name="Attention"
-                                        show_predictors_or_outcomes="predictors"]
-                                    </p>
-                                </td>
-                                <td>
-                                    Search for predictors or likely effects of a given variable
-                                    <a href="/qmwp-search-correlations">Take a look</a>
                                 </td>
                             </tr>
                             <tr>
