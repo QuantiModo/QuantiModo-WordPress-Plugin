@@ -1780,11 +1780,15 @@ Class QMWP
         add_submenu_page('qm_reminders_parent_slug', 'Manage', 'Manage', 'read', 'qm_reminders_manage_slug',
             array($this, 'qm_reminders_manage_admin_page'));
 
-        // Measurements history
-        add_menu_page( 'Measurements History', 'Measurements History', 'read',
+        // History
+        add_menu_page( 'History', 'History', 'read',
             'qm_history_parent_slug',
-            array($this, 'qm_user_measurement_history_admin_page'), 'dashicons-backup', 7  );
-
+            array($this, 'qm_user_mood_history_admin_page'), 'dashicons-backup', 7  );
+        add_submenu_page('qm_history_parent_slug', 'Moods', 'Moods', 'read', 'qm_history_parent_slug',
+            array($this, 'qm_user_mood_history_admin_page'));
+        add_submenu_page('qm_history_parent_slug', 'All Measurements', 'All Measurements', 'read',
+            'qm_all_history_slug',
+            array($this, 'qm_user_measurement_history_admin_page'));
     }
 
 
@@ -1966,6 +1970,18 @@ Class QMWP
         $attributes =
             [
                 'url' => "/ionic/Modo/www/index.html#/app/history-all?hideMenu=true",
+                'width' => "100%",
+                'height' => "777",
+                'frame_class' => "qm-relationships",
+            ];
+        $htmlForPage = self::qm_embed($attributes);
+        echo $htmlForPage;
+    }
+
+    public function qm_user_mood_history_admin_page(){
+        $attributes =
+            [
+                'url' => "/ionic/Modo/www/index.html#/app/history?hideMenu=true",
                 'width' => "100%",
                 'height' => "777",
                 'frame_class' => "qm-relationships",
