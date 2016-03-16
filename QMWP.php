@@ -1357,11 +1357,15 @@ Class QMWP
      */
     function do_qmwp_account_linked()
     {
-
         global $current_user;
         get_currentuserinfo();
         $user_id = $current_user->ID;
-        return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
+        $linked = false;
+        $identity = get_user_meta($user_id, 'qmwp_identity', true);
+        if (!empty($identity)) {
+            $linked = true;
+        }
+        return $linked;
     }
 
     // ====================
