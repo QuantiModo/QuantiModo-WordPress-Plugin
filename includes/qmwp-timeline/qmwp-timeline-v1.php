@@ -24,7 +24,7 @@ wp_enqueue_script("qm-math", plugins_url('../../', __FILE__) . "js/math.js", "jq
 wp_enqueue_script("timezone", plugins_url('../../', __FILE__) . "js/jstz.min.js", "jquery", false, true);
 wp_enqueue_script("moment", plugins_url('../../', __FILE__) . "js/libs/moment.min.js", "jquery", false, true);
 
-wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/QuantiModo-SDK-JavaScript/quantimodo-api.js", "jquery", false, true);
+wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-sdk-javascript/quantimodo-api.js", "jquery", false, true);
 
 wp_enqueue_script("highcharts", plugins_url('../../', __FILE__) . "js/libs/highstock.js", "jquery", false, true);
 wp_enqueue_script("highcharts-more", plugins_url('../../', __FILE__) . "js/libs/highcharts-more.js", "highcharts", false, true);

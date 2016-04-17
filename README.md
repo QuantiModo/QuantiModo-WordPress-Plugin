@@ -10,7 +10,7 @@ Help ignite a revolution of citizen science to find new solutions to chronic ill
 
 This is a mobile-friendly WordPress plugin that enables users of any WordPress to authenticate and share their data from QuantiModo.com. It also allows you to embed dynamic graphs containing your users' Quantified Self data agggregated at QuantiModo.com. These graphs may be included in any page or post using shortcode.
 
-Note: This JavaScript library (https://github.com/quantimodo/QuantiModo-SDK-JavaScript/blob/master/quantimodo-api.js) is required for this plugin's functionality.
+Note: This JavaScript library (https://github.com/quantimodo/quantimodo-sdk-javascript/blob/master/quantimodo-api.js) is required for this plugin's functionality.
 
 ## Add QuantiModo Login Button
 

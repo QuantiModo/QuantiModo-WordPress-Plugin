@@ -40,7 +40,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/quantimodo/QuantiModo-SDK-JavaScript.git"
+      "url": "https://github.com/quantimodo/quantimodo-sdk-javascript.git"
     }
   ],
   "scripts": {
