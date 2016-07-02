@@ -13,9 +13,21 @@ jQuery(document).ready(function () {
         appHolder.toggle();
 
         if (appHolder.is(':visible')) {
-            showHideButton.css('right', '396px');
+            showHideButton.css('right', '450px');
+            showHideButton.css('bottom', '90%');
+            showHideButton.css('transform',          'rotate(125deg)');
+            showHideButton.css('-ms-transform',      'rotate(125deg)');
+            showHideButton.css('-moz-transform',     'rotate(125deg)');
+            showHideButton.css('-webkit-transform',  'rotate(125deg)');
+            showHideButton.css('-o-transform',       'rotate(125deg)');
         } else {
-            showHideButton.css('right', '96px');
+            showHideButton.css('bottom', '15px');
+            showHideButton.css('transform',          'rotate(0deg)');
+            showHideButton.css('-ms-transform',      'rotate(0deg)');
+            showHideButton.css('-moz-transform',     'rotate(0deg)');
+            showHideButton.css('-webkit-transform',  'rotate(0deg)');
+            showHideButton.css('-o-transform',       'rotate(0deg)');
+            showHideButton.css('right', '80px');
         }
 
     });
