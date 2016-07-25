@@ -41,6 +41,8 @@ jQuery(document).ready(function () {
         setTimeout(fixHeight, 5000);
     });
 
+    showHideButton.click();
+
 });
 
 function fixHeight() {
