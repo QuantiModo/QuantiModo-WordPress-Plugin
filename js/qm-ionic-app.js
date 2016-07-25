@@ -41,7 +41,8 @@ jQuery(document).ready(function () {
         setTimeout(fixHeight, 5000);
     });
 
-    showHideButton.click();
+    // Uncomment to open Ionic tab by default
+    //showHideButton.click();
 
 });
 
