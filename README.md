@@ -10,7 +10,7 @@ Help ignite a revolution of citizen science to find new solutions to chronic ill
 
 This is a mobile-friendly WordPress plugin that enables users of any WordPress to authenticate and share their data from QuantiModo.com. It also allows you to embed dynamic graphs containing your users' Quantified Self data agggregated at QuantiModo.com. These graphs may be included in any page or post using shortcode.
 
-Note: This JavaScript library (https://github.com/QuantiModo/QuantiModo-SDK-JavaScript/blob/master/quantimodo-api.js) is required for this plugin's functionality.
+Note: This JavaScript library (https://github.com/quantimodo/quantimodo-sdk-javascript/blob/master/quantimodo-api.js) is required for this plugin's functionality.
 
 ## Add QuantiModo Login Button
 
@@ -23,7 +23,7 @@ Once a user has authorized QuantiModo to obtain their data, the WordPress site c
 
 SETUP:
 - Download and install the QuantiModo-WordPress-Plugin.
-- Create a new app in the [QuantiModo Developer Portal](https://admin.quantimo.do/register) to get an API client id and secret.
+- Create a new app in the [QuantiModo Developer Portal](https://app.quantimo.do/api/v2/apps) to get an API client id and secret.
 - Add your QM API key/secret in the WordPress backend under Settings > QuantiModo.
 - Add the QM Login button anywhere to your site with the [qmoa_login_form] shortcode.
 
@@ -57,7 +57,7 @@ To see how it works:
 If you have any problems with this process, please submit a help request by clicking the "Feedback" tab on the right. 
 
 The code to be used for this shortcode is here: 
-https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/timeline-page
+https://github.com/quantimodo/QuantiModo-WordPress-Plugin/tree/develop/reference/timeline-page
 
 ![](https://i.imgur.com/AwhxdGP.png)
 
@@ -74,7 +74,7 @@ To see how it works:
 If you have any problems with this process, please submit a help request by clicking the "Feedback" tab on the right. 
 
 The code to be used for this shortcode is here: 
-https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/correlation_charts
+https://github.com/quantimodo/QuantiModo-WordPress-Plugin/tree/develop/reference/correlation_charts
 
 ![correlations-page-demo-sleep-mood-1024x648](https://cloud.githubusercontent.com/assets/2808553/10770971/25b5c1d4-7cbc-11e5-90d5-5c046cb70d89.png)
 
@@ -94,7 +94,7 @@ To see how it works:
 ![quantimodo manage connected accounts - google chrome 10152014 63216 pm](https://cloud.githubusercontent.com/assets/2808553/8172734/39b6f640-1389-11e5-9d1c-332d4e5a7c54.jpg)
 
 The code for this page is located here:
-https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/connect-page
+https://github.com/quantimodo/QuantiModo-WordPress-Plugin/tree/develop/reference/connect-page
 
 ## Add a Measurement Button
 Shortcode - [qm_add_measurement]
@@ -110,7 +110,7 @@ How to Record a Measurement
 
 Demo: Try https://chrome.google.com/webstore/detail/quantimodo-universal-trac/jioloifallegdkgjklafkkbniianjbgi?hl=en-US
 
-The relevant code and more information on the functionality can be found at https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/QM-Search-Plugin
+The relevant code and more information on the functionality can be found at https://github.com/quantimodo/QuantiModo-WordPress-Plugin/tree/develop/reference/QM-Search-Plugin
 
 ## Correlation Search Box
 Shortcode - [qm_correlation_search]
@@ -146,7 +146,7 @@ Try more general keywords.
 
 ![search-results-page-mockup png](https://cloud.githubusercontent.com/assets/2808553/8192587/d66be102-1434-11e5-9082-fa47a69a108b.jpg)
 
-The code and more information can be found at https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/QM-Search-Plugin
+The code and more information can be found at https://github.com/quantimodo/QuantiModo-WordPress-Plugin/tree/develop/reference/QM-Search-Plugin
 
 ### What still needs to be done for the Correlation Search shortcode to be complete
 - API requests should include Bearer access tokens from `wp_usermeta` table in the Authorization header of all API requests. - If user receives a "Not Authenticated" response from the API, the QuantiModo OAuth login dialog should popup or user should be redirected there and redirect back after logging in and authorizing access. 
@@ -162,7 +162,7 @@ Demo: https://chrome.google.com/webstore/detail/moodimodo-beta/lncgjbhijecjdbdge
 
 We want to be able to embed those faces in any WP page or post.
 
-Here's the code for the Chrome extension to use as a resource: https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/MoodiModo-Chrome
+Here's the code for the Chrome extension to use as a resource: https://github.com/quantimodo/QuantiModo-WordPress-Plugin/tree/develop/reference/MoodiModo-Chrome
 
 ![mood-rating-wordpress-shortcode](https://cloud.githubusercontent.com/assets/2808553/8238887/10787330-15be-11e5-853c-93f00d8e45cd.png)
 
@@ -213,7 +213,7 @@ Walkthrough of User Actions:
 - Bar graph containing "Secondary Variable" correlations with the Examined Variable is below the post body content text.
 - If user clicks on a Secondary Variable in the bar graph, a scatterplot and timeline chart pop up
 
-Here's the initial code for this feature: https://github.com/QuantiModo/QuantiModo-WordPress-Plugin/tree/develop/reference/QuantiModo-Personal-Studies-Plugin
+Here's the initial code for this feature: https://github.com/quantimodo/QuantiModo-WordPress-Plugin/tree/develop/reference/QuantiModo-Personal-Studies-Plugin
 
 Preliminary Mockup for Back End of Study custom post type:
 ![heroku_wplms_create_studies](https://cloud.githubusercontent.com/assets/2808553/8193448/81f8b202-143a-11e5-9137-d47c5b2ae1ce.png)

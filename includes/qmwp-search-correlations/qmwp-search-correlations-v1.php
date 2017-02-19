@@ -20,7 +20,7 @@ wp_enqueue_script("underscore", "https://cdnjs.cloudflare.com/ajax/libs/undersco
 
 wp_enqueue_script("qmwp-search-correlations", plugins_url('../../', __FILE__) . "js/qmwp-search-correlations.js", array('angular'));
 
-wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-api.js", "jquery", false, true);
+wp_enqueue_script("qm-sdk", plugins_url('../../', __FILE__) . "js/libs/quantimodo-sdk-javascript/quantimodo-api.js", "jquery", false, true);
 wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/intercom.js", array('jquery', 'qm-sdk'));
 
 ?>
@@ -33,7 +33,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                class="form-control"
                ng-model="outcomeVariableName"
                type="text"
-               placeholder="Enter a medication, food supplement or anything else...">
+               placeholder="Enter a medication, food, supplement or anything else...">
     </div>
 
     <div class="form-group">
@@ -42,7 +42,7 @@ wp_enqueue_script("quantimodo-intercom", plugins_url('../../', __FILE__) . "js/i
                class="form-control"
                ng-model="predictorVariableName"
                type="text"
-               placeholder="Enter a medication, food supplement or anything else...">
+               placeholder="Enter a medication, food, supplement or anything else...">
     </div>
 
     <div id="searchResultRegion" ng-cloak ng-show="showResults">

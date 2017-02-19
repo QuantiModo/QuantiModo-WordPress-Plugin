@@ -59,19 +59,9 @@ $cc_ux = qmwp_cc_ux();
 
 
 <div class='wrap qmwp-settings'>
-    <div id="qmwp-settings-meta">Toggle tips:
-        <ul>
-            <li><a id="qmwp-settings-tips-on" href="#">On</a></li>
-            <li><a id="qmwp-settings-tips-off" href="#">Off</a></li>
-        </ul>
-        <div class="nav-splitter"></div>
-        Toggle sections:
-        <ul>
-            <li><a id="qmwp-settings-sections-on" href="#">On</a></li>
-            <li><a id="qmwp-settings-sections-off" href="#">Off</a></li>
-        </ul>
-    </div>
+
     <h2>QuantiModo for WordPress Settings</h2>
+    <!-- START Settings Header -->
     <!-- START Settings Header -->
     <div id="qmwp-settings-header"></div>
     <!-- END Settings Header -->
@@ -79,6 +69,18 @@ $cc_ux = qmwp_cc_ux();
     <div id="qmwp-settings-body">
         <!-- START Settings Column 2 -->
         <div id="qmwp-settings-col2" class="qmwp-settings-column">
+            <div id="qmwp-settings-meta">Toggle tips:
+                <ul>
+                    <li><a id="qmwp-settings-tips-on" href="#">On</a></li>
+                    <li><a id="qmwp-settings-tips-off" href="#">Off</a></li>
+                </ul>
+                <div class="nav-splitter"></div>
+                Toggle sections:
+                <ul>
+                    <li><a id="qmwp-settings-sections-on" href="#">On</a></li>
+                    <li><a id="qmwp-settings-sections-off" href="#">Off</a></li>
+                </ul>
+            </div>
             <div id="qmwp-settings-section-about" class="qmwp-settings-section">
                 <h3>About</h3>
 
@@ -184,11 +186,12 @@ $cc_ux = qmwp_cc_ux();
                     </div>
 
                     <p>
-                        Current API Host: <?php echo QMWPAuth::API_HOST; ?>
+                        Current API Host: <?php echo getenv('QM_API_HOST') ?: QMWPAuth::QM_API_HOST; ?>
                     </p>
                 </div>
             </div>
-            <div id="qmwp-settings-section-donate" class="qmwp-settings-section">
+
+            <!--<div id="qmwp-settings-section-donate" class="qmwp-settings-section">
                 <h3>Donate</h3>
 
                 <div class='form-padding'>
@@ -212,7 +215,8 @@ $cc_ux = qmwp_cc_ux();
                         <input type="submit" id="qmwp-paypal-button" class="button" value="Donate">
                     </form>
                 </div>
-            </div>
+            </div>-->
+
             <div id="qmwp-settings-section-live-demo" class="qmwp-settings-section">
                 <h3 id="bookmark-live-demo">Live Demo</h3>
 
@@ -236,6 +240,71 @@ $cc_ux = qmwp_cc_ux();
             <form method='post' action='options.php'>
                 <?php settings_fields('qmwp_settings'); ?>
                 <?php do_settings_sections('qmwp_settings'); ?>
+
+
+                <!-- START Login with QuantiModo section -->
+                <div id="qmwp-settings-section-login-with-quantimodo" class="qmwp-settings-section">
+                    <h3>Credentials</h3>
+
+                    <div class='form-padding'>
+                        <table class='form-table'>
+                            <tr valign='top'>
+                                <th scope='row'>Enabled:</th>
+                                <td>
+                                    <input type='checkbox' name='qmwp_quantimodo_api_enabled'
+                                           value='1' <?php checked(get_option('qmwp_quantimodo_api_enabled') == 1); ?> />
+                                </td>
+                            </tr>
+
+                            <tr valign='top'>
+                                <th scope='row'>Client ID:</th>
+                                <td>
+                                    <input type='text' name='qmwp_quantimodo_api_id'
+                                           value='<?php echo get_option('qmwp_quantimodo_api_id'); ?>'/>
+                                </td>
+                            </tr>
+
+                            <tr valign='top'>
+                                <th scope='row'>Client Secret:</th>
+                                <td>
+                                    <input type='text' name='qmwp_quantimodo_api_secret'
+                                           value='<?php echo get_option('qmwp_quantimodo_api_secret'); ?>'/>
+                                </td>
+                            </tr>
+
+                            <!--                            <tr valign='top'>
+                                <th scope='row'>X-Mashape-Key:</th>
+                                <td>
+                                    <input type='text' name='qmwp_x_mashape_key'
+                                           value='<?php /*echo get_option('qmwp_x_mashape_key'); */ ?>'/>
+                                </td>
+                            </tr>-->
+
+                        </table>
+                        <!-- .form-table -->
+                        <p>
+                            <strong>Instructions:</strong>
+                        <ol>
+                            <li>Visit the QuantiModo developer dashboard at <a
+                                        href='https://app.quantimo.do/api/v2/apps' target="_blank">app.quantimo.do/api/v2/apps</a>.
+                            </li>
+                            <li>Create a new app your site to access the QuantiModo API.
+                            </li>
+                            <li>At QuantiModo, provide your site's homepage URL (<?php echo $blog_url; ?>) for the new
+                                app's Redirect URI field. Don't forget the trailing slash!
+                            </li>
+                            <li>Paste your Client ID/Secret provided by QuantiModo into the fields above, then click the
+                                Save all settings button.
+                            </li>
+                        </ol>
+                        </p>
+                        <?php submit_button('Save all settings'); ?>
+                    </div>
+                    <!-- .form-padding -->
+                </div>
+                <!-- .qmwp-settings-section -->
+                <!-- END Login with QuantiModo section -->
+
 
                 <!--  START Shortcodes section-->
                 <div id="qmwp-settings-section-shortcodes" class="qmwp-settings-section">
@@ -1048,69 +1117,6 @@ $cc_ux = qmwp_cc_ux();
                 </div>
                 <!-- .qmwp-settings-section -->
                 <!-- END User Registration section -->
-
-                <!-- START Login with QuantiModo section -->
-                <div id="qmwp-settings-section-login-with-quantimodo" class="qmwp-settings-section">
-                    <h3>Credentials</h3>
-
-                    <div class='form-padding'>
-                        <table class='form-table'>
-                            <tr valign='top'>
-                                <th scope='row'>Enabled:</th>
-                                <td>
-                                    <input type='checkbox' name='qmwp_quantimodo_api_enabled'
-                                           value='1' <?php checked(get_option('qmwp_quantimodo_api_enabled') == 1); ?> />
-                                </td>
-                            </tr>
-
-                            <tr valign='top'>
-                                <th scope='row'>Client ID:</th>
-                                <td>
-                                    <input type='text' name='qmwp_quantimodo_api_id'
-                                           value='<?php echo get_option('qmwp_quantimodo_api_id'); ?>'/>
-                                </td>
-                            </tr>
-
-                            <tr valign='top'>
-                                <th scope='row'>Client Secret:</th>
-                                <td>
-                                    <input type='text' name='qmwp_quantimodo_api_secret'
-                                           value='<?php echo get_option('qmwp_quantimodo_api_secret'); ?>'/>
-                                </td>
-                            </tr>
-
-                            <!--                            <tr valign='top'>
-                                <th scope='row'>X-Mashape-Key:</th>
-                                <td>
-                                    <input type='text' name='qmwp_x_mashape_key'
-                                           value='<?php /*echo get_option('qmwp_x_mashape_key'); */ ?>'/>
-                                </td>
-                            </tr>-->
-
-                        </table>
-                        <!-- .form-table -->
-                        <p>
-                            <strong>Instructions:</strong>
-                        <ol>
-                            <li>Visit the QuantiModo developer dashboard at <a
-                                    href='https://admin.quantimo.do' target="_blank">admin.quantimo.do</a>.
-                            </li>
-                            <li>Create a new app your site to access the QuantiModo API.
-                            </li>
-                            <li>At QuantiModo, provide your site's homepage URL (<?php echo $blog_url; ?>) for the new
-                                app's Redirect URI field. Don't forget the trailing slash!
-                            </li>
-                            <li>Paste your Client ID/Secret provided by QuantiModo into the fields above, then click the
-                                Save all settings button.
-                            </li>
-                        </ol>
-                        </p>
-                        <?php submit_button('Save all settings'); ?>
-                    </div>
-                    <!-- .form-padding -->
-                </div>
-                <!-- .qmwp-settings-section -->
-                <!-- END Login with QuantiModo section -->
 
 
                 <!-- START Back Channel Configuration section -->

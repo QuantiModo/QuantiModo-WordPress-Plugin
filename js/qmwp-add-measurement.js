@@ -71,11 +71,8 @@ var setBlockHideShow = function () {
     jQuery("#add_record_a_measurement_block").hide();
 
 
-    if (accessToken) {
-        jQuery("#record_a_measurement_block").show();
-    } else {
-        jQuery("#signup_block").show();
-    }
+    jQuery("#record_a_measurement_block").show();
+
 
     jQuery('#addmeasurement-dialog-content').show();
 
@@ -127,14 +124,7 @@ var onQmRcdMstButtonClicked = function () {
 
 }
 
-// Simple Sign In button clicked
-var onQmSignButtonClicked = function () {
-    window.location.href = '?connect=quantimodo';
-};
 
-var onCloseButtonClicked = function () {
-    window.close();
-};
 
 
 /**
@@ -536,7 +526,7 @@ jQuery(document).ready(function () {
                 }
 
 
-            });
+            }, {"includePublic": true});
         },
         minLength: 2,
         select: function (event, ui) {
