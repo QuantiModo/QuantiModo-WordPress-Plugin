@@ -79,6 +79,11 @@ class QMWPAuth
                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, (get_option('qmwp_http_util_verify_ssl') == 1 ? 2 : 0));
 
                 $result = curl_exec($curl);
+                if(curl_errno($curl)){
+                    $qmwp->qmwp_end_login('Sorry, we could not log you in. Please contact mike@quantimo.do with 
+                        this message: get_oauth_token curl error: '.curl_error($curl), true);
+                }
+
                 break;
             case 'stream-context':
                 $url = rtrim($this->urlToken, "?");
@@ -92,13 +97,16 @@ class QMWPAuth
                 $context = $context = stream_context_create($opts);
                 $result = @file_get_contents($url, false, $context);
                 if ($result === false) {
-                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream context. Please notify the admin or try again later.", true);
+
+                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream 
+                        context. Please contact mike@quantimo.do.", true);
                 }
                 break;
         }
 
         if (!$this->populate_session_vars($result)) {
-            $message = "Sorry, we couldn't log you in. Malformed access token result detected. Please notify the admin or try again later.";
+            $message = "Sorry, we couldn't log you in. Malformed access token result detected. Please contact
+              mike@quantimo.do and provide this error message: get_oauth_token result is " . $result . '.  ';
             $serverErrorMessage = $this->get_error_message_from_response($result);
             if ($serverErrorMessage) {
                 $message .= $serverErrorMessage;
@@ -134,6 +142,11 @@ class QMWPAuth
                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, (get_option('qmwp_http_util_verify_ssl') == 1 ? 2 : 0));
 
                 $result = curl_exec($curl);
+                if(curl_errno($curl)){
+                    $qmwp->qmwp_end_login('Sorry, we could not log you in. Please contact mike@quantimo.do with 
+                        this message: refresh_oauth_token curl error: '.curl_error($curl), true);
+                }
+
                 break;
             case 'stream-context':
                 $url = rtrim($this->urlToken, "?");
@@ -147,13 +160,15 @@ class QMWPAuth
                 $context = $context = stream_context_create($opts);
                 $result = @file_get_contents($url, false, $context);
                 if ($result === false) {
-                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream context. Please notify the admin or try again later.", true);
+                    $qmwp->qmwp_end_login("Sorry, we couldn't log you in. Could not retrieve access token via stream 
+                        context. Please contact mike@quantimo.do.", true);
                 }
                 break;
         }
 
         if (!$this->populate_session_vars($result)) {
-            $message = "Sorry, we couldn't log you in. Malformed access token result detected. Please notify the admin or try again later.";
+            $message = "Sorry, we couldn't log you in. Malformed access token result detected. Please contact 
+                mike@quantimo.do and provide this error message: refresh_oauth_token2 result is " . $result . '.  ';
             $serverErrorMessage = $this->get_error_message_from_response($result);
             if ($serverErrorMessage) {
                 $message .= $serverErrorMessage;
