@@ -287,9 +287,18 @@ Class QMWP
         $messages = array();
 
         if (!get_option("users_can_register")) {
+            $siteUrl = site_url();
             $settingPageUrl = site_url() . '/wp-admin/options-general.php';
-            $message = "In order to user the QuantiModo plugin, the site administrator must check " .
-                "'Anyone can register' at: <a href='$settingPageUrl#users_can_register'>$settingPageUrl</a>";
+            $pluginsPageUrl = site_url() . '/wp-admin/plugins.php';
+            $message = "In order to user the QuantiModo plugin, <br>
+           
+            <ol>
+                <li>Create your app at <a href=\"https://app.quantimo.do/api/v2/apps\" target=\"_blank\">https://app.quantimo.do/api/v2/apps</a></li>
+                <li>Use '$siteUrl/' as the Redirect URI (A.K.A Callback URL). Don't forget the trailing slash!</li>
+                <li>Get your client id and client secret.</li>
+                <li>Check 'Anyone can register' at: <a href='$settingPageUrl#users_can_register'  target=\"_blank\">$settingPageUrl</a></li>
+                <li>Activate the QuantiModo Plugin at: <a href='$pluginsPageUrl'  target=\"_blank\">$pluginsPageUrl</a></li>
+            </ol>";
             array_push($messages, $message);
         }
 
@@ -603,7 +612,7 @@ Class QMWP
         if (is_user_logged_in()) {
             // there was a wordpress user logged in, but it is not associated with the now-authenticated user's email address, so associate it now:
             global $current_user;
-            get_currentuserinfo();
+            wp_get_current_user();
             $user_id = $current_user->ID;
             $this->qmwp_link_account($user_id);
             // after linking the account, redirect user to their last url
@@ -751,7 +760,7 @@ Class QMWP
         $qmwp_identity_row = $_POST['qmwp_identity_row']; // SANITIZED via $wpdb->prepare()
         // get the current user:
         global $current_user;
-        get_currentuserinfo();
+        wp_get_current_user();
         $user_id = $current_user->ID;
         // delete the qmwp_identity record from the wp_usermeta table:
         global $wpdb;
@@ -1367,7 +1376,7 @@ Class QMWP
     {
 
         global $current_user;
-        get_currentuserinfo();
+        wp_get_current_user();
         $user_id = $current_user->ID;
         return empty(get_user_meta($user_id, 'qmwp_identity', true)) ? false : true;
     }

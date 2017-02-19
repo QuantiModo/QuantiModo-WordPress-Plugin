@@ -1,7 +1,7 @@
 <?php
 // get the current user:
 global $current_user;
-get_currentuserinfo();
+wp_get_current_user();
 $user_id = $current_user->ID;
 // get the qm_identity records:
 global $wpdb;
