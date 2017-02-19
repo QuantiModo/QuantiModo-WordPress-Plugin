@@ -23,7 +23,7 @@ Once a user has authorized QuantiModo to obtain their data, the WordPress site c
 
 SETUP:
 - Download and install the QuantiModo-WordPress-Plugin.
-- Create a new app in the [QuantiModo Developer Portal](https://admin.quantimo.do/register) to get an API client id and secret.
+- Create a new app in the [QuantiModo Developer Portal](https://app.quantimo.do/api/v2/apps) to get an API client id and secret.
 - Add your QM API key/secret in the WordPress backend under Settings > QuantiModo.
 - Add the QM Login button anywhere to your site with the [qmoa_login_form] shortcode.
 
