@@ -64,7 +64,7 @@ function quantimodo_options_page()
                     </th>
                     <td>
                       <textarea rows="15" cols="100" placeholder="<!-- Insert the QuantiModo tag here -->" name="QuantiModo_settings[quantimodo_widget_code]"><?php echo esc_attr( $options['quantimodo_widget_code'] ); ?></textarea>
-                        <p style="margin: 5px 10px;">Enter your QuantiModo JS code snippet.  You can find your <a href="https://app.quantimodo.com/customize" target="_blank" title="Open QuantiModo Settings">QuantiModo JS code snippet here</a>. A Free QuantiModo account is required to use this plugin.</p>
+                        <p style="margin: 5px 10px;">Enter your QuantiModo JS code snippet.  You can find your <a href="https://app.quantimo.do/api/v2/apps" target="_blank" title="Open QuantiModo Settings">QuantiModo JS code snippet by clicking Integrate here</a>. A Free QuantiModo account is required to use this plugin.</p>
                     </td>
                 </tr>
                 </table>

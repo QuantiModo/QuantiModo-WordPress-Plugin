@@ -3,7 +3,7 @@
 // Add the QuantiModo Javascript
 add_action('wp_head', 'add_quantimodo');
 
-// If we can indentify the current user output
+// If we can identify the current user output
 function get_quantimodo_identify()
 {
   $current_user = wp_get_current_user();
