@@ -1,145 +1,181 @@
 === QuantiModo ===
-Contributors: mikepsinn
-Tags: social, science, quantified self, mood tracking, digital health, healthcare, mental health
-Requires at least: 4.3
-Stable tag: 0.4.1
+Contributors: QuantiModo
+
+Tags: quantimodo, live chat, chat, communication, sales, marketing, announcements, talk to customers, customer feedback, feedback, chat plugin, free, free chat, chatra, livechat, slack, intercom, hubspot, salesforce, zapier, hellobar, hello bar, popup, ontraport, pardot, klaviyo, popup, exit intent, growth, subscribers, subscription, email form,  analytics,  widget, lightbox, inbound marketing, welcome mat, landing pagelivechat, olark, boldchat, online chat, online support, in-app chat, instant message, helpdesk, php live chat, snapengage, support software, website chat, wordpress chat, wordpress live chat, wordpress live chat plugin, zendesk, zopim, zopim live chat, tawk, tawk.to, tawkto, jivosite, snapengage,chat widget
+
+QuantiModo enables you to chat with your website visitors, increase sales and collect feedback for Free.
+
+Requires at least: 3.4
+Tested up to: 4.6.1
+Stable tag: 1.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Allows you to quickly create your own mood, medication, diet tracking, or digital health website.
+QuantiModo is the 100% free way used by over 10,000 businesses to talk to their leads and customers in real-time, from anywhere. Try it now!
 
 == Description ==
 
-Help ignite a revolution of citizen science to find new solutions to chronic illnesses.  Install the Quantimodo WordPress plugin!
+[QuantiModo](https://app.quantimo.do/) is the easiest way to add free live chat to your site.
 
-This plugin allows your users to record, aggregate, analyze and visualize their health and life-tracking data.
-The data collection, analysis and visualization functionality may be included in any page or post using shortcode.
+[youtube http://www.youtube.com/watch?v=lWxyM6Ko2-Y]
 
-### SECURITY REQUIREMENTS
+98% of website visitors leave without doing anything! It's time to change that.
+Live chat is the single fastest path to more conversions, customer insights, and sales.
+We [increased inbound leads by 200%](http://blog.quantimodo.com/get-more-inbound-leads-with-live-chat) just putting live chat on our own site. 💥
 
-- An SSL-secured WordPress site
-- A server with cURL version > 7.50.2
-- A server with OpenSSL version > 1.0
+Often, you don't need more traffic to close more sales.  You just need to talk to visitors when they're live on your site.  Help customers who get stuck, encourage them to use your product, and get critical feedback - all inside your app, in real-time.
 
-If you'd like, I can create and host a WordPress site for you.  If interested, please email mike@quantimo.do.
+= Live Chat With Your Customers =
+Half of your web visitors leave after just 15 seconds. Live chat helps you keep & convert more visitors -- in seconds.
 
-If you have any problems with the setup process, please submit a help request at https://help.quantimo.do.
+= Send Customers In-App Messages =
+Your emails are great, but what about the 80% of people who never open them? Reach them with in-app messages.
 
-## Add QuantiModo Login Button
+= Improve Your Net Promoter Score =
+Get actionable feedback that will help your business create products your customers love.
 
-PURPOSE:
-Allows users to log in via QuantiModo so that your WordPress site can store and access data on their behalf.
+= Features =
 
-Allow your users to import their data from various digital health devices and website including:
-- MyFitnessPal
-- RunKeeper
-- WhatPulse
-- GitHub
-- Moodscope
-- Up by Jawbone
-- Fitbit
-- Facebook
-- Withings
-- MoodPanda
-- RescueTime
-- MyNetDiary
-- Weather
-- Sleep as Android
+**Real-time notifications.**
+Real-time Slack integration to alert your team so they can respond within a minute (best practice)!
 
-Additionally, you can allow store new user supplied data or visualize their data on various graphs produced by the Timeline and Predictors shortcode.
+**Offline mode.**
+Small team? Not able to support chat 24x7? No problem. Set the right expectation with offline mode.
 
-## SETUP
-- Download and install the QuantiModo-WordPress-Plugin.
-- Create a new app in the [QuantiModo Developer Portal](https://app.quantimo.do/api/v2/apps) to get an API client id and secret.
-- Add your QM API key/secret in the WordPress backend under Settings > QuantiModo.
-- Add the QM Login button anywhere to your site with the [qmoa_login_form] shortcode.
+**Capture email addresses.**
+Get email addresses right inside of QuantiModo's live chat so you can follow up later.
 
-Once a user authorizes you to access their measurements, their OAuth access tokens will be stored and refreshed automatically.
-They will be able to continue to access their data through your site until they revoke access.
+**Browser targeting.**
+Reach out when visitors do meaningful things - like visit your pricing page repeatedly. Set up rules to target these people and engage them with an offer to help.
 
-## Timeline Graph
-Shortcode - [qmwp_timeline]
+= Real Testimonials =
 
-![](https://i.imgur.com/AwhxdGP.png)
+“QuantiModo has helped my team to be proactive and efficient when communicating with customers. Emails, Surveys, NPS and more all in one place? You cannot beat that!”
 
-## Correlation Charts
-Shortcode - [qm_correlation_charts]
+— Paul Miller, Co-Founder, SIKA
 
-This shortcode allow one to create a widget or shortcode for embedding a longitudinal timeline, correlation scatterplot,
-or correlation listing bar graph in posts, pages, custom post types, and sidebars.
+“The product is extremely intuitive to use and has allowed every member of our company to interact with users with ease.”
 
-Variables, settings, and filters are supplied when creating a the widget or shortcode.
+— Justin Mulvaney, Customer Experience Lead, Crystal
 
-The charts also include a the ability to add or remove variables.
+Every time you get a new message, we give you as much information as we can about the person writing in, including their name, which page they are on or where they are inside of your app, their location, job, company information, links to their social profiles and more.
 
-![correlations-page-demo-sleep-mood-1024x648](https://cloud.githubusercontent.com/assets/2808553/10770971/25b5c1d4-7cbc-11e5-90d5-5c046cb70d89.png)
+Start closing more sales and getting better customer feedback today. Get started with QuantiModo's 100% free live chat. 🚀
 
-*Possible shortcode attributes for correlation charts:*
 
-- examined_variable - Sets the default examined variable. Possible values: any variable name
-- secondary_variable - Sets the default secondary variable to be selected on the bar graph. Possible values: any variable name
-- examined_is_cause - Sets the examined variable to be considered the cause in the relationship.  Possible values: true or false. Default: false
+**Key Features**
 
-## Import Data
-Shortcode - [qmwp_manage_accounts]
+* Talk to your website visitors and customers in real-time, right from Slack.
+* Integrates seamlessly with HubSpot, Marketo, Mailchimp, Zapier, Intercom, Salesforce, Segment and 100s more.
+* If a `$current_user` is present, we use their email as an identifier in the widget.
+Otherwise the widget operates in [aquisition mode](https://app.quantimo.do/live-chat) and prompts anonymous users for their email address. This allows you to talk with anonymous visitors on your WordPress site.
 
-![quantimodo manage connected accounts - google chrome 10152014 63216 pm](https://cloud.githubusercontent.com/assets/2808553/8172734/39b6f640-1389-11e5-9d1c-332d4e5a7c54.jpg)
 
-## Add a Measurement Button
-Shortcode - [qm_add_measurement]
+== Screenshots ==
 
-This creates an "Add a Measurement" button that allows a user to submit a measurement.
+1. Chat window - minimized
+2. Chat widget - maximized
+3. Wordpress settings
+4. Announcement messages
+5. Overlay messages
 
-How to Record a Measurement
+== Frequently Asked Questions ==
 
-1. CLICK THE EXTENSION - Click the QuantiModo icon in the upper right hand side of your browser. It might be hidden. In that case you'll have to drag the divider line to the right of the URL field to see it.
-2. SELECT A VARIABLE - Type the name of the variable that you want to track. If it's an existing variable, the settings should be populated automatically and you can move to step 3. If you've never entered data for that variable before you'll need to adjust the settings for that variable first
-3. ADD YOUR MEASUREMENT - Then enter the value for the measurement and select the correct units.
-4. SEND YOUR MEASUREMENT - After pressing the "ADD" button data is then sent to https://app.quantimo.do/.
+= Is QuantiModo free? =
 
-## Correlation Search Box
-Shortcode - [qm_correlation_search]
+The QuantiModo Live Chat is 100% free. Some QuantiModo users may chose to purchase additional superpowers, but the Live Chat is heroically powerful and always free.
 
-This plugin creates a new WordPress page that allows one to search for:
-- The strongest predictors of the severity of any given condition
-- The most strongly predicted effects of any given stimulus
+= What does QuantiModo let me do? =
 
-The results are based on the average predictive correlations for all QuantiModo users.
-- The user should indicate if they want to search for the effects of
-- The user should type in characters
-- and have an auto-complete drop down with the top 5 variables with the highest correlations
+QuantiModo adds a chat tool to your site which visitors can use to engage with you. You can use it to collect feedback, learn about your visitors, and even close deals.
 
-If the entered variable "Crazy Ass Variable No One Ever Heard Of" doesn't exist:
-```
-Your search - Crazy Ass Variable No One Ever Heard Of - did not match any documents.
+= Do I have to install any software on my server to get this working? =
 
-Suggestions:
+Not at all! QuantiModo is a hosted live chat service. Simply configure the plugin and you're done!
 
-Make sure all words are spelled correctly.
-Try different keywords.
-Try more general keywords.
-```
+= Which web browsers work best with this plugin =
 
-*Possible shortcode attributes for correlation search:*
-- searched-cause-variable - Instead of a search box, only a list of the effects of this variable are displayed
-- searched-effect-variable - Instead of a search box, only a list of the causes of this variable are displayed
+Though designed to work on most browsers, QuantiModo works best in the following environment: IE 6 or later (PC), Firefox 2 or later (Mac, PC, or Linux), Safari 2 or later (Mac), Google Chrome (PC, Mac).
 
-![what-affects-qm-search-box-screenshot-2014-06-29-20 14_picmonkeyed](https://cloud.githubusercontent.com/assets/2808553/8192570/adcca18c-1434-11e5-8ba4-1c415f363394.png)
+= Is it free to use? =
 
-![search-results-page-mockup png](https://cloud.githubusercontent.com/assets/2808553/8192587/d66be102-1434-11e5-9082-fa47a69a108b.jpg)
+The plugin comes with a free plan for Wordpress users. Larger businesses can purchase upgrade options anytime.
 
-## Mood Tracker
-Shortcode - [qmwp_rating_faces]
 
-This creates a widget/shortcode with the mood-rating faces that you can put in a page/post or sidebar.
-If clicked on, it submits an overall mood measurement.
+== Usage ==
 
-![mood-rating-wordpress-shortcode](https://cloud.githubusercontent.com/assets/2808553/8238887/10787330-15be-11e5-853c-93f00d8e45cd.png)
+After enabling the plug in, head on to the widget customization page to change settings and integrate its look and feel to match your site. When done, enable it by visiting the account configuration page and completing the instant signup process.
 
-## Development
+== Installation ==
 
-See the docs folder for more info.
+*Server Requirements:* PHP4 or PHP5.
 
-Note: This [JavaScript library submodule](https://github.com/QuantiModo/QuantiModo-SDK-JavaScript/blob/master/quantimodo-api.js) is required for this plugin's functionality.
+*Wordpress versions:* Wordpress 2.7 and up.
 
-Additional API documentation can be found at [https://app.quantimo.do/api/v2/account/api-explorer](https://app.quantimo.do/api/v2/account/api-explorer)
+Note: You will need a free QuantiModo account : <a href="https://app.quantimo.do/?utm_source=wpdirectory&utm_medium=link&utm_campaign=signup">Create one for free here!</a>.
+
+Step-by-step Guide:
+
+* Install plugin from WordPress directory and activate it.
+* Under settings section, click on QuantiModo to add your QuantiModo embed code
+* Customize the chat widget to your preference.
+* Finally, make full use of our Dashboard to manage your chat widget.
+
+== Changelog ==
+
+= 1.8.3 =
+* Cleanup
+* Added support back for QuantiModo Identify
+
+= 1.8.2 =
+* Cleanup
+* Rolled back QuantiModo identify feature after it introduced a bug
+
+= 1.8.1 =
+* Cleanup
+* Added support for QuantiModo Identify
+
+= 1.7.1 =
+* Cleanup
+* Added support for targeting Wordpress User Role
+
+= 1.7 =
+* Cleanup
+* Added support for targeting Wordpress User Role
+
+= 1.5 =
+* Cleanup
+* New page targeting options
+* Flush Cache on setup
+* Localization
+
+= 1.4 =
+* Clean up code.
+* Better checking of user capabilities.
+
+= 1.3 =
+* Update naming, readme, and added a 256x256 icon file.
+
+= 1.2 =
+* Update Readme file
+
+= 1.1 =
+* Add better sanitizing, escape and validation.
+
+= 0.1.4 =
+* First release candidate.
+
+= 0.1.3 =
+* Optimizations and general cleanup.
+
+= 0.1.2 =
+* Further cleanup before release.
+
+= 0.1.1 =
+* Removed unneeded options and general clean up.
+
+= 0.1.0 =
+
+* Feature: Add the QuantiModo live chat widget to your site!
+* Feature: Customize look and feel of the widget, including themes and color!
+* Feature: Use Wordpress user information to populate visitor data in the plugin.
