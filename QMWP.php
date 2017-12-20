@@ -290,14 +290,16 @@ Class QMWP
             $siteUrl = site_url();
             $settingPageUrl = site_url() . '/wp-admin/options-general.php';
             $pluginsPageUrl = site_url() . '/wp-admin/plugins.php';
-            $message = "In order to user the QuantiModo plugin, <br>
+            $qmSettingsUrl = site_url() . '/wp-admin/options-general.php?page=QuantiModo';
+            $message = "In order to use the QuantiModo plugin, <br>
            
             <ol>
                 <li>Create your app at <a href=\"https://app.quantimo.do/api/v2/apps\" target=\"_blank\">https://app.quantimo.do/api/v2/apps</a></li>
                 <li>Use '$siteUrl/' as the Redirect URI (A.K.A Callback URL). Don't forget the trailing slash!</li>
-                <li>Get your client id and client secret.</li>
+                <li>Get your client id and client secret by clicking Edit->Settings for your app</li>
                 <li>Check 'Anyone can register' at: <a href='$settingPageUrl#users_can_register'  target=\"_blank\">$settingPageUrl</a></li>
                 <li>Activate the QuantiModo Plugin at: <a href='$pluginsPageUrl'  target=\"_blank\">$pluginsPageUrl</a></li>
+                <li>Enter your client id and client secret at: <a href='$qmSettingsUrl'  target=\"_blank\">$qmSettingsUrl</a></li>
             </ol>";
             array_push($messages, $message);
         }
