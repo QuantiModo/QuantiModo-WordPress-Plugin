@@ -28,10 +28,10 @@ function quantimodo_options_page()
             <h1>QuantiModo</h1>
             <?php if ( esc_attr( $options['quantimodo_widget_code'] ) ) { ?>
                 <h3>You can modify and design your app in the
-                    <a href="https://app.quantimo.do/api/v2/apps" target="_blank" title="Open QuantiModo Settings">QuantiModo app builder</a>.
+                    <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>.
                 </h3>
                 <h3>Click the icon in the lower right hand corner of
-                    <a href="<?php echo get_bloginfo('wpurl');  ?>" target="_blank" title="Open QuantiModo Settings">your homepage</a>
+                    <a href="<?php echo get_bloginfo('wpurl');  ?>" target="_blank" title="Open WP Homepage">your homepage</a>
                     to see your app in action!
                 </h3>
             <?php } ?>
