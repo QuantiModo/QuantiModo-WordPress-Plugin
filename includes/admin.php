@@ -72,7 +72,7 @@ function quantimodo_options_page()
                     <label for="QuantiModo_widget_code">QuantiModo Client Id</label>
                 </th>
                 <td>
-                  <input type='text' placeholder="Enter QuantiModo client id" name="QuantiModo_settings[quantimodo_widget_code]"
+                  <input type='text' placeholder="Enter client id" name="QuantiModo_settings[quantimodo_widget_code]"
                          value='<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>'/>
                 </td>
             </tr>
