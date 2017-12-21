@@ -50,13 +50,35 @@ function add_quantimodo()
   // Check to see if QuantiModo is enabled
   if ( esc_attr( $options['quantimodo_enabled'] ) == "on" )
   {
-    $quantimodo_tag = $options['quantimodo_widget_code'];
+    $qmClientId = $options['quantimodo_widget_code'];
+
+    $jsText = '<script src="https://app.quantimo.do/api/v1/integration.js?clientId=quantimodo"></script> <script> window.QuantiModoIntegration.options = {';
+    if(get_current_user_id()){$jsText .= "clientUserId: encodeURIComponent('".get_current_user_id()."'),";}
+    $jsText .= "
+                clientId: '".$qmClientId."',
+                //publicToken: '',
+                finish: function( sessionTokenObject) {
+                /* Called after user finishes connecting */
+                //POST sessionTokenObject to your server
+                // Include code here to refresh the page.
+                },
+                close: function() {
+                /* (optional) Called when a user closes the popup without connecting any data sources */
+                },
+                error: function(err) {
+                /* (optional) Called if an error occurs when loading the popup. */
+                }
+            }
+            window.QuantiModoIntegration.createSingleFloatingActionButton();
+        </script>
+      ";
     
     // Insert tracker code
-    if ( '' != $quantimodo_tag )
+    if ( '' != $qmClientId )
     {
       echo "<!-- Start QuantiModo By WP-Plugin: QuantiModo -->\n";
-      echo $quantimodo_tag;
+      echo $jsText;
+      //echo $quantimodo_tag;
       echo"<!-- end: QuantiModo Code. -->\n";
 
       // Optional

@@ -22,18 +22,18 @@ If you have any problems with the setup process, please submit a help request at
 
 # Users
 
-If a `$current_user` is present, we use their email as an identifier in the widget.
-Otherwise the widget operates in anonymous mode and you can require that a user submit their email address. This allows you to talk with anonymous visitors on your WordPress site.
+If the user is logged in on your WordPress site, we use their WordPress id as an identifier in the widget.
+Otherwise the widget operates in anonymous mode and the user must log in with a social provider or QuantiModo account.
 
 # Screenshots
 ## Charts
-![QuantiModo chat minimized](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/bar-chart-screenshot.jpg)
+![QuantiModo chart](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/bar-chart-screenshot.jpg)
 
 ## History
-![QuantiModo chat maximized](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/history-screenshot.jpg)
+![QuantiModo history](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/history-screenshot.jpg)
 
 ## Import Data
-![QuantiModo WordPress Settings](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/import-data-screenshot.jpg)
+![QuantiModo import](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/import-data-screenshot.jpg)
 
 Allow your users to import their data from various digital health devices and website including:
 - MyFitnessPal
@@ -52,14 +52,14 @@ Allow your users to import their data from various digital health devices and we
 - Sleep as Android
 
 ## Predictors
-![QuantiModo targeted messages](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/predictors-screenshot.jpg)
+![QuantiModo predictors](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/predictors-screenshot.jpg)
 
 Allow your users to search for:
 - The strongest predictors of the severity of any given condition
 - The most strongly predicted effects of any given stimulus
 
 ## Reminder Inbox
-![QuantiModo targeted messages](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/reminder-inbox-screenshot.jpg)
+![QuantiModo inbox](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/reminder-inbox-screenshot.jpg)
 
 ## Development
 

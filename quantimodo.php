@@ -2,10 +2,10 @@
 /*
  * Plugin Name: QuantiModo
  * Version: 1.8.3
- * Description: Adds 100% free live chat & targeted messages to your website. Designed for internet businesses like yours to increase sales, conversions and better support your customers.
+ * Description: Allow your users to record, aggregate, analyze and visualize their health and life-tracking data.
  * Author: QuantiModo
- * Author URI: https://app.quantimo.do/?ref=wordpress
- * Plugin URI: https://app.quantimo.do/?ref=wordpress
+ * Author URI: https://quantimo.do
+ * Plugin URI: https://quantimo.do
  */
 
 // Prevent Direct Access

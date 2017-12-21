@@ -26,10 +26,18 @@ function quantimodo_options_page()
           <?php settings_fields( 'QuantiModo_settings_group' ); ?>
 
             <h1>QuantiModo</h1>
-            <h3>Basic Options</h3>
+            <?php if ( esc_attr( $options['quantimodo_widget_code'] ) ) { ?>
+                <h3>You can modify and design your app in the
+                    <a href="https://app.quantimo.do/api/v2/apps" target="_blank" title="Open QuantiModo Settings">QuantiModo app builder</a>.
+                </h3>
+                <h3>Click the icon in the lower right hand corner of
+                    <a href="<?php echo get_bloginfo('wpurl');  ?>" target="_blank" title="Open QuantiModo Settings">your homepage</a>
+                    to see your app in action!
+                </h3>
+            <?php } ?>
             <?php if ( ! $quantimodo_activated ) { ?>
                 <div style="margin:10px auto; border:3px #f00 solid; background-color:#fdd; color:#000; padding:10px; text-align:center;">
-                QuantiModo Live Chat is currently <strong>DISABLED</strong>.
+                QuantiModo is currently <strong>DISABLED</strong>.
                 </div>
             <?php } ?>
             <?php do_settings_sections( 'QuantiModo_settings_group' ); ?>
@@ -37,7 +45,7 @@ function quantimodo_options_page()
             <table class="form-table" cellspacing="2" cellpadding="5" width="100%">
                 <tr>
                     <th width="30%" valign="top" style="padding-top: 10px;">
-                        <label for="quantimodo_enabled">QuantiModo (Live Chat) is:</label>
+                        <label for="quantimodo_enabled">QuantiModo is:</label>
                     </th>
                     <td>
                       <?php
@@ -55,19 +63,25 @@ function quantimodo_options_page()
                     </td>
                 </tr>
             </table>
-            <label for="quantimodo_identify">QuantiModo Identify: &nbsp;</label>
-            <input type="checkbox" name="QuantiModo_settings[quantimodo_identify]" <?php if($quantimodo_identify) { echo " checked='checked'"; } ?> />
-                <table class="form-table" cellspacing="2" cellpadding="5" width="100%">
-                <tr>
-                    <th valign="top" style="padding-top: 10px;">
-                        <label for="QuantiModo_widget_code">QuantiModo JS code snippet:</label>
-                    </th>
-                    <td>
-                      <textarea rows="15" cols="100" placeholder="<!-- Insert the QuantiModo tag here -->" name="QuantiModo_settings[quantimodo_widget_code]"><?php echo esc_attr( $options['quantimodo_widget_code'] ); ?></textarea>
-                        <p style="margin: 5px 10px;">Enter your QuantiModo JS code snippet.  You can find your <a href="https://app.quantimo.do/api/v2/apps" target="_blank" title="Open QuantiModo Settings">QuantiModo JS code snippet by clicking Integrate here</a>. A Free QuantiModo account is required to use this plugin.</p>
-                    </td>
-                </tr>
-                </table>
+<!--            <label for="quantimodo_identify">QuantiModo Identify: &nbsp;</label>-->
+<!--            <input type="checkbox" name="QuantiModo_settings[quantimodo_identify]" --><?php //if($quantimodo_identify) { echo " checked='checked'"; } ?><!-- />-->
+
+            <table class="form-table" cellspacing="2" cellpadding="5" width="100%">
+            <tr>
+                <th valign="top" style="padding-top: 10px;">
+                    <label for="QuantiModo_widget_code">QuantiModo Client Id</label>
+                </th>
+                <td>
+                  <input type='text' placeholder="Enter QuantiModo client id" name="QuantiModo_settings[quantimodo_widget_code]"
+                         value='<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>'/>
+                </td>
+            </tr>
+            </table>
+            <?php if ( ! esc_attr( $options['quantimodo_widget_code'] ) ) { ?>
+                <h3>You can find your QuantiModo client id after
+                    <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo Settings">creating your free app in the App Builder</a>.
+                </h3>
+            <?php } ?>
             <p class="submit">
                 <?php echo submit_button('Save Changes'); ?>
             </p>
