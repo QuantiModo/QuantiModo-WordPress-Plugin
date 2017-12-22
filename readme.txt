@@ -2,7 +2,7 @@
 Contributors: mikepsinn
 Tags: social, science, quantified self, mood tracking, digital health, healthcare, mental health
 Requires at least: 4.3
-Stable tag: 0.4.6
+Stable tag: 0.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,9 +14,9 @@ QuantiModo allows your users to record, aggregate, analyze and visualize their h
 
 The data collection, analysis and visualization functionality may be included in any page or post.
 
-See a [LIVE DEMO](https://quantimo.do)  by clicking the icon in the lower right hand corner at [https://quantimo.do](https://quantimo.do)!
+See a [LIVE DEMO](https://quantimo.do)  by clicking the icon in the lower right-hand corner at [https://quantimo.do](https://quantimo.do)!
 
-Help ignite a revolution of citizen science!  Install the Quantimodo WordPress plugin!
+Help ignite a revolution of citizen science!  Install the QuantiModo WordPress plugin!
 
 ## Import Data
 
@@ -39,7 +39,7 @@ Allow your users to import their data from various digital health devices and we
 - Mint.com
 - MedHelper
 - Google Fit (imports from dozens of other data sources)
-- Google Calender
+- Google Calendar
 
 ## Predictors
 
@@ -65,7 +65,7 @@ If you have any problems with the setup process, please submit a help request at
 # Users
 
 If the user is logged in on your WordPress site, we use their WordPress id as an identifier in the widget.
-Otherwise the widget operates in anonymous mode and the user must log in with a social provider or QuantiModo account.
+Otherwise, the widget operates in anonymous mode and the user must log in with a social provider or QuantiModo account.
 
 == Screenshots ==
 
@@ -74,6 +74,7 @@ Otherwise the widget operates in anonymous mode and the user must log in with a 
 3. Import Data
 4. Predictors
 5. Reminder Inbox
+6. Manage Reminders
 
 ## Development
 

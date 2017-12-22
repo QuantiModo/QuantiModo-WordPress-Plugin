@@ -27,13 +27,13 @@ Otherwise the widget operates in anonymous mode and the user must log in with a 
 
 # Screenshots
 ## Charts
-![QuantiModo chart](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/bar-chart-screenshot.jpg)
+![QuantiModo chart](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/develop/assets/screenshot-1.png)
 
 ## History
-![QuantiModo history](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/history-screenshot.jpg)
+![QuantiModo history](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/develop/assets/screenshot-2.png)
 
 ## Import Data
-![QuantiModo import](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/import-data-screenshot.jpg)
+![QuantiModo import](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/develop/assets/screenshot-3.png)
 
 Allow your users to import their data from various digital health devices and website including:
 - MyFitnessPal
@@ -52,14 +52,14 @@ Allow your users to import their data from various digital health devices and we
 - Sleep as Android
 
 ## Predictors
-![QuantiModo predictors](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/predictors-screenshot.jpg)
+![QuantiModo predictors](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/develop/assets/screenshot-4.png)
 
 Allow your users to search for:
 - The strongest predictors of the severity of any given condition
 - The most strongly predicted effects of any given stimulus
 
 ## Reminder Inbox
-![QuantiModo inbox](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/master/reminder-inbox-screenshot.jpg)
+![QuantiModo inbox](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/develop/assets/screenshot-5.png)
 
 ## Development
 
