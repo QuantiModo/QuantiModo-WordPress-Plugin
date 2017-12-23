@@ -6,7 +6,7 @@ Stable tag: 0.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Allows you to quickly create your own mood, medication, diet-tracking, or digital health website.
+Allows you to instantly create and embed your own mood, medication, diet-tracking, or digital health app in your WordPress site.
 
 == Description ==
 
@@ -14,7 +14,7 @@ QuantiModo allows your users to record, aggregate, analyze and visualize their h
 
 The data collection, analysis and visualization functionality may be included in any page or post.
 
-See a [LIVE DEMO](https://quantimo.do)  by clicking the icon in the lower right-hand corner at [https://quantimo.do](https://quantimo.do)!
+See a [LIVE DEMO](https://quantimo.do) by clicking the icon in the lower right-hand corner at [https://quantimo.do](https://quantimo.do)!
 
 Help ignite a revolution of citizen science!  Install the QuantiModo WordPress plugin!
 
@@ -47,14 +47,6 @@ Allow your users to search for:
 - The strongest predictors of the severity of any given condition
 - The most strongly predicted effects of any given stimulus
 
-### SECURITY REQUIREMENTS
-
-- An SSL-secured WordPress site
-
-If you'd like, I can create and host a WordPress site for you.  If interested, please email mike@quantimo.do.
-
-If you have any problems with the setup process, please submit a help request at https://help.quantimo.do.
-
 # Installation
 
 1. Create and configure an account at [QuantiModo](https://app.quantimodo.com/builder)
@@ -66,6 +58,16 @@ If you have any problems with the setup process, please submit a help request at
 
 If the user is logged in on your WordPress site, we use their WordPress id as an identifier in the widget.
 Otherwise, the widget operates in anonymous mode and the user must log in with a social provider or QuantiModo account.
+
+### SECURITY REQUIREMENTS
+
+- An SSL-secured WordPress site
+
+If you'd like, I can create and host a WordPress site for you.  If interested, please email mike@quantimo.do.
+
+### SUPPORT
+
+If you have any problems with the setup process, please submit a help request at https://help.quantimo.do.
 
 == Screenshots ==
 
