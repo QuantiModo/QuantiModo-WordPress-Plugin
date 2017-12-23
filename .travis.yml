@@ -1,0 +1,9 @@
+ deploy:
+   - provider: script
+     script: npm run wpsh $TRAVIS_TAG
+     on:
+       tags: true
+   - provider: script
+     script: npm run wpsh trunk
+     on:
+       branch: master
