@@ -1,12 +1,36 @@
- language: php
- os:
-   - linux
- deploy:
-   - provider: script
-     script: npm run wpsh $TRAVIS_TAG
-     on:
-       tags: true
-   - provider: script
-     script: npm run wpsh trunk
-     on:
-       branch: master
+sudo: false
+
+language: php
+
+notifications:
+  on_success: never
+  on_failure: change
+
+php:
+    - 5.6
+    - 7.0
+
+before_script:
+    - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+    - bash bin/build.sh
+    - composer install
+
+script:
+    - vendor/bin/phpunit
+    - npm test
+
+after_success: curl -L https://raw.githubusercontent.com/miya0001/travis2wpplugin/master/deploy.sh | bash
+
+env:
+  matrix:
+    - WP_VERSION=latest WP_MULTISITE=0
+    - WP_VERSION=nightly WP_MULTISITE=0
+
+  global:
+    - SVN_REPO: https://plugins.svn.wordpress.org/quantimodo/
+    - GH_REF: https://github.com/quantimodo/quantimodo.git
+
+matrix:
+  include:
+    - php: 5.6
+      env: WP_VERSION=latest WP_MULTISITE=0 WP_PULUGIN_DEPLOY=1
