@@ -36,20 +36,25 @@ Otherwise the widget operates in anonymous mode and the user must log in with a 
 ![QuantiModo import](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/develop/assets/screenshot-3.png)
 
 Allow your users to import their data from various digital health devices and website including:
-- MyFitnessPal
-- RunKeeper
-- WhatPulse
-- GitHub
-- Moodscope
-- Up by Jawbone
-- Fitbit
 - Facebook
-- Withings
+- Fitbit
+- GitHub
+- Google Calendar
+- Google Fit (imports from dozens of other data sources)
+- MedHelper
+- Mint
 - MoodPanda
-- RescueTime
+- Moodscope
+- MyFitnessPal
 - MyNetDiary
-- Weather
+- RescueTime
+- RunKeeper
 - Sleep as Android
+- Strava
+- Up by Jawbone
+- Weather
+- WhatPulse
+- Withings
 
 ## Predictors
 ![QuantiModo predictors](https://raw.githubusercontent.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/develop/assets/screenshot-4.png)

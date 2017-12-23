@@ -21,25 +21,25 @@ Help ignite a revolution of citizen science!  Install the QuantiModo WordPress p
 ## Import Data
 
 Allow your users to import their data from various digital health devices and website including:
-- MyFitnessPal
-- RunKeeper
-- WhatPulse
-- GitHub
-- Moodscope
-- Up by Jawbone
-- Fitbit
 - Facebook
-- Withings
+- Fitbit
+- GitHub
+- Google Calendar
+- Google Fit (imports from dozens of other data sources)
+- MedHelper
+- Mint
 - MoodPanda
-- RescueTime
+- Moodscope
+- MyFitnessPal
 - MyNetDiary
-- Weather
+- RescueTime
+- RunKeeper
 - Sleep as Android
 - Strava
-- Mint.com
-- MedHelper
-- Google Fit (imports from dozens of other data sources)
-- Google Calendar
+- Up by Jawbone
+- Weather
+- WhatPulse
+- Withings
 
 ## Predictors
 
