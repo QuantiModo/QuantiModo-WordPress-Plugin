@@ -25,7 +25,7 @@ echo ".........................................."
 echo
 
 # Check version in readme.txt is the same as plugin file
-NEWVERSION1=`grep "^Stable tag" ${GITPATH}/readme.txt | awk -F':' '{print $2}' | tr -d ' '`
+NEWVERSION1=`grep "^Stable tag" ${GITPATH}/README.md | awk -F':' '{print $2}' | tr -d ' '`
 echo "readme version: $NEWVERSION1"
 NEWVERSION2=`grep "Version:" ${GITPATH}/${MAINFILE} | awk -F':' '{print $2}' | tr -d ' '`
 echo "$MAINFILE version: $NEWVERSION2"
