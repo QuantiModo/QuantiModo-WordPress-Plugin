@@ -66,13 +66,17 @@ echo "Updating WP plugin repo assets & committing"
 cd ${SVNPATH}/assets/
 svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Updating wp-repo-assets" --no-auth-cache
 
-echo "Check if tagged version exists"
+echo "Check if tagged version $NEWVERSION1 exists"
 cd ${SVNPATH}
-if [ ! -d "$SVNPATH/tags/$NEWVERSION1/" ]; then
-	echo "Creating new SVN tag & committing it"
-	svn copy trunk/ tags/${NEWVERSION1}/
-	cd ${SVNPATH}/tags/${NEWVERSION1}
-	svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Tagging version $NEWVERSION1" --no-auth-cache
+if [ ! -d "$SVNPATH/tags/$NEWVERSION1/" ];
+    then
+        echo "Creating new SVN tag & committing it"
+        svn copy trunk/ tags/${NEWVERSION1}/
+        cd ${SVNPATH}/tags/${NEWVERSION1}
+        svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Tagging version $NEWVERSION1" --no-auth-cache
+    else
+        echo "tagged version $NEWVERSION1 already exists!"
+        exit 1
 fi
 
 echo "Removing temporary directory $SVNPATH"
