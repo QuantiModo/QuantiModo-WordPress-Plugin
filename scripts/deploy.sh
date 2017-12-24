@@ -60,11 +60,11 @@ echo "Changing directory to SVN"
 cd ${SVNPATH}/trunk/
 # Add all new files that are not set to be ignored
 echo "committing to trunk"
-svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "$COMMITMSG"
+svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "$COMMITMSG" --no-auth-cache
 
 echo "Updating WP plugin repo assets & committing"
 cd ${SVNPATH}/assets/
-svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Updating wp-repo-assets"
+svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Updating wp-repo-assets" --no-auth-cache
 
 echo "Check if tagged version exists"
 cd ${SVNPATH}
@@ -72,7 +72,7 @@ if [ ! -d "$SVNPATH/tags/$NEWVERSION1/" ]; then
 	echo "Creating new SVN tag & committing it"
 	svn copy trunk/ tags/${NEWVERSION1}/
 	cd ${SVNPATH}/tags/${NEWVERSION1}
-	svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Tagging version $NEWVERSION1"
+	svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Tagging version $NEWVERSION1" --no-auth-cache
 fi
 
 echo "Removing temporary directory $SVNPATH"
