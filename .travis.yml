@@ -21,7 +21,7 @@ script:
     #- npm run wpsh $TRAVIS_TAG
     #- npm run wpsh trunk
 
-after_success: sh ./deploy.sh
+after_success: sh ./scripts/deploy.sh
 #after_success: curl -L https://raw.githubusercontent.com/miya0001/travis2wpplugin/master/deploy.sh | bash
 
 env:
