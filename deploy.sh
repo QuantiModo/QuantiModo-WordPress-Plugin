@@ -71,17 +71,17 @@ cd $SVNPATH/trunk/
 # Add all new files that are not set to be ignored
 svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2}' | xargs svn add
 echo "committing to trunk"
-svn commit --username=$SVNUSER -m "$COMMITMSG"
+svn commit --username=$WP_ORG_USER --password=$WP_ORG_PASS -m "$COMMITMSG"
 
 echo "Updating WP plugin repo assets & committing"
 cd $SVNPATH/assets/
-svn commit --username=$SVNUSER -m "Updating wp-repo-assets"
+svn commit --username=$WP_ORG_USER --password=$WP_ORG_PASS -m "Updating wp-repo-assets"
 
 echo "Creating new SVN tag & committing it"
 cd $SVNPATH
 svn copy trunk/ tags/$NEWVERSION1/
 cd $SVNPATH/tags/$NEWVERSION1
-svn commit --username=$SVNUSER -m "Tagging version $NEWVERSION1"
+svn commit --username=$WP_ORG_USER --password=$WP_ORG_PASS -m "Tagging version $NEWVERSION1"
 
 echo "Removing temporary directory $SVNPATH"
 rm -fr $SVNPATH/
