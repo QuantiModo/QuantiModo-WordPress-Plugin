@@ -43,7 +43,6 @@ git checkout-index -a -f --prefix=${SVNPATH}/trunk/
 
 echo "Ignoring github specific & deployment script"
 svn propset svn:ignore "deploy.sh
-README.md
 .git
 .gitignore" "$SVNPATH/trunk/"
 
@@ -53,6 +52,21 @@ if [ ! -d "$SVNPATH/assets/" ]; then
 	mv ${SVNPATH}/trunk/assets-wp-repo/* ${SVNPATH}/assets/
 	svn add ${SVNPATH}/assets/
 	svn delete ${SVNPATH}/trunk/assets-wp-repo
+fi
+
+# Create WP.org readme.txt
+if [ -f "${SVNPATH}/trunk/README.md" ]; then
+	mv "${SVNPATH}/trunk/README.md" "${SVNPATH}/trunk/readme.txt"
+	sed -i.bak \
+		-e 's/^# \(.*\)$/=== \1 ===/' \
+		-e 's/ #* ===$/ ===/' \
+		-e 's/^## \(.*\)$/== \1 ==/' \
+		-e 's/ #* ==$/ ==/' \
+		-e 's/^### \(.*\)$/= \1 =/' \
+		-e 's/ #* =$/ =/' \
+		"${SVNPATH}/trunk/readme.txt"
+	# Remove the sed backup file
+	rm "${SVNPATH}/trunk/readme.txt.bak"
 fi
 
 echo "Changing directory to SVN"
