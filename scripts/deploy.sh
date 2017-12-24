@@ -2,7 +2,6 @@
 # In your Jenkins job configuration, select "Add build step > Execute shell", and paste this script contents.
 # Replace `______your-plugin-name______`, `______your-wp-username______` and `______your-wp-password______` as needed.
 
-
 # main config
 PLUGINSLUG="quantimodo"
 CURRENTDIR=`pwd`
