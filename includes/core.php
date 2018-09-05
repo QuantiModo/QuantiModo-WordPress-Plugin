@@ -41,4 +41,14 @@ function fx_admin_notice_example_notice(){
         echo $html;
     }
 }
-?>
+if(stripos(WP_SITEURL, '.quantimo.do') !== false){
+    function send_push_notification( $message ) {
+        $apiUrl = "https://app.quantimo.do/api/v1/feed";
+        if(stripos(WP_SITEURL, 'local.quantimo.do') !== false){
+            $apiUrl = "https://local.quantimo.do/api/v1/feed";
+        }
+        $response = wp_remote_post($apiUrl, ['body' => json_encode(['message' => $message])]);
+        return $response;
+    }
+    add_action('messages_message_before_save', 'send_push_notification', 1, 1);
+}
