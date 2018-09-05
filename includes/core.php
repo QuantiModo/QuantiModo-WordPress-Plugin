@@ -43,12 +43,24 @@ function fx_admin_notice_example_notice(){
 }
 if(stripos(WP_SITEURL, '.quantimo.do') !== false){
     function send_push_notification( $message ) {
-        $apiUrl = "https://app.quantimo.do/api/v1/feed";
+        $apiUrl = "https://app.quantimo.do/api/v1/messages";
         if(stripos(WP_SITEURL, 'local.quantimo.do') !== false){
-            $apiUrl = "https://local.quantimo.do/api/v1/feed";
+            $apiUrl = "https://local.quantimo.do/api/v1/messages";
         }
         $response = wp_remote_post($apiUrl, ['body' => json_encode(['message' => $message])]);
         return $response;
     }
     add_action('messages_message_before_save', 'send_push_notification', 1, 1);
+
+    function annointed_admin_bar_remove() {
+        global $wp_admin_bar;
+        $wp_admin_bar->remove_menu('wp-logo');
+    }
+    add_action('wp_before_admin_bar_render', 'annointed_admin_bar_remove', 0);
+
+    //Hide admin footer from admin
+    function change_footer_admin () {return ' ';}
+    add_filter('admin_footer_text', 'change_footer_admin', 9999);
+    function change_footer_version() {return ' ';}
+    add_filter( 'update_footer', 'change_footer_version', 9999);
 }
