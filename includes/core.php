@@ -50,7 +50,7 @@ if(stripos(WP_SITEURL, '.quantimo.do') !== false){
         $response = wp_remote_post($apiUrl, ['body' => json_encode(['message' => $message])]);
         return $response;
     }
-    add_action('messages_message_before_save', 'send_push_notification', 1, 1);
+    add_action('messages_message_after_save', 'send_push_notification', 1, 1);
 
     function annointed_admin_bar_remove() {
         global $wp_admin_bar;
