@@ -51,8 +51,15 @@ function add_quantimodo()
   if ( esc_attr( $options['quantimodo_enabled'] ) == "on" )
   {
     $qmClientId = $options['quantimodo_widget_code'];
-
-    $jsText = '<script src="https://app.quantimo.do/api/v1/integration.js?clientId=quantimodo"></script> <script> window.QuantiModoIntegration.options = {';
+    $appHostName = "https://app.quantimo.do";
+    if(
+        stripos(getenv('APP_HOST_NAME'), "https://staging.quantimo.do") === 0 ||
+        stripos(getenv('APP_HOST_NAME'), "https://utopia.quantimo.do") === 0 ||
+        stripos(getenv('APP_HOST_NAME'), "https://local.quantimo.do") === 0
+    ){
+        $appHostName = getenv('APP_HOST_NAME');
+    }
+    $jsText = '<script src="'.$appHostName.'/api/v1/integration.js?clientId=quantimodo"></script> <script> window.QuantiModoIntegration.options = {';
     if(get_current_user_id()){$jsText .= "clientUserId: encodeURIComponent('".get_current_user_id()."'),";}
     $jsText .= "
                 clientId: '".$qmClientId."',
