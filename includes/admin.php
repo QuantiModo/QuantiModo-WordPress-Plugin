@@ -45,7 +45,7 @@ function quantimodo_options_page()
             <table class="form-table" cellspacing="2" cellpadding="5" width="100%">
                 <tr>
                     <th width="30%" valign="top" style="padding-top: 10px;">
-                        <label for="quantimodo_enabled">QuantiModo is:</label>
+                        <label for="quantimodo_enabled">Floating button is:</label>
                     </th>
                     <td>
                       <?php
