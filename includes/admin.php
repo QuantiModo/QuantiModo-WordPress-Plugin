@@ -30,14 +30,16 @@ function quantimodo_options_page()
                 <h3>You can modify and design your app in the
                     <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>.
                 </h3>
-                <h3>Click the icon in the lower right hand corner of
-                    <a href="<?php echo get_bloginfo('wpurl');  ?>" target="_blank" title="Open WP Homepage">your homepage</a>
-                    to see your app in action!
-                </h3>
+                <?php if ( $quantimodo_activated ) { ?>
+                    <h3>Click the icon in the lower right hand corner of
+                        <a href="<?php echo get_bloginfo('wpurl');  ?>" target="_blank" title="Open WP Homepage">your homepage</a>
+                        to see your app in action!
+                    </h3>
+                <?php } ?>
             <?php } ?>
             <?php if ( ! $quantimodo_activated ) { ?>
                 <div style="margin:10px auto; border:3px #f00 solid; background-color:#fdd; color:#000; padding:10px; text-align:center;">
-                QuantiModo is currently <strong>DISABLED</strong>.
+                Floating button is currently <strong>DISABLED</strong>.
                 </div>
             <?php } ?>
             <?php do_settings_sections( 'QuantiModo_settings_group' ); ?>
@@ -85,6 +87,25 @@ function quantimodo_options_page()
             <p class="submit">
                 <?php echo submit_button('Save Changes'); ?>
             </p>
+            <h3>To embed a specific page of your QuantiModo app in a WordPress page or post:</h3>
+            <ol>
+                <li>Go to your QuantiModo web app at
+                    <a href="https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do" target="_blank" title="Open Web App">
+                        https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do
+                    </a>.
+                </li>
+                <li>Go to the page you want to embed and copy the url.</li>
+                <li>Go to the WordPress page or post editor "text" section.</li>
+                <li>Paste
+                    <xmp>
+                        <iframe src="https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED" width="100%" height="650px" frameborder="1" scrolling="yes" align="left"></iframe>
+                    </xmp>
+                </li>
+                <li>
+                    Replace src="https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED" with your actual link you want to embed.
+                </li>
+                <li>Adjust or remove the iFrame settings as needed.</li>
+            </ol>
         </div>
         </form>
 
