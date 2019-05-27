@@ -30,5 +30,3 @@ function add_quantimodo_option_page()
 {
   add_options_page('QuantiModo Options', 'QuantiModo', 'activate_plugins', basename(__FILE__), 'quantimodo_options_page');
 }
-
-?>

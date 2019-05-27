@@ -2,7 +2,7 @@
 Contributors: mikepsinn
 Tags: social, science, quantified self, mood tracking, digital health, healthcare, mental health
 Requires at least: 4.3
-Stable tag: 0.5.6
+Stable tag: 0.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,7 +19,7 @@ See a [LIVE DEMO](https://quantimo.do) by clicking the icon in the lower right-h
 
 1. Create, configure, and optionally add your branding to your new app at [QuantiModo](https://app.quantimodo.com/builder).  It's free!
 2. Add this plugin to WordPress and enable it. See [Managing Plugins](https://codex.wordpress.org/Managing_Plugins)
-3. Get your [QuantiModo Client ID here](https://app.quantimodo.com/builder)
+3. Get your [QuantiModo Client ID here](https://builder.quantimo.do)
 4. Visit QuantiModo Settings on your WordPress site (yoursite.com/wp-admin/admin.php?page=menus.php), enter your app's QuantiModo client id and save.
 
 Go to your user-facing site, refresh the page and click the icon in the lower right corner to try out your new app!
@@ -28,6 +28,27 @@ Go to your user-facing site, refresh the page and click the icon in the lower ri
 
 If the user is logged in on your WordPress site, we use their WordPress id as an identifier in the widget.
 Otherwise the widget operates in anonymous mode and the user must log in with a social provider or QuantiModo account.
+
+# Embedding in Pages or Posts
+
+To embed a specific page of your QuantiModo app in a WordPress page or post:
+- Go to your QuantiModo web app at https://quantimodo.quantimo.do .
+- Go to the page you want to embed and copy the url.
+- Go to the WordPress page or post editor "text" or "code" section.
+- Paste this in the post or page:
+```
+<iframe 
+  src="https://web.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED?clientId=your_client_id" 
+  width="100%" 
+  height="650px" 
+  frameborder="1" 
+  scrolling="yes" 
+  align="left">
+</iframe>
+```
+- Replace `https://web.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED` with your actual link to the page you want to embed
+- Replace `your_client_id` with your client id.
+- Adjust or remove the iFrame settings as needed.
 
 # Screenshots
 ## Charts
@@ -55,7 +76,6 @@ Allow your users to import their data from various digital health devices and we
 - RunKeeper
 - Sleep as Android
 - Strava
-- Up by Jawbone
 - Weather
 - WhatPulse
 - Withings

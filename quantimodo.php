@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: QuantiModo
- * Version: 0.5.6
+ * Version: 0.5.7
  * Description: Allow your users to record, aggregate, analyze and visualize their health and life-tracking data.
  * Author: QuantiModo
  * Author URI: https://quantimo.do

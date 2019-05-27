@@ -33,7 +33,7 @@ function fx_admin_notice_example_notice(){
         $quantimodo_activated = true;
     }
     $settingsUrl = get_bloginfo('wpurl') . '/wp-admin/admin.php?page=menus.php';
-    $builderUrl = 'https://app.quantimo.do/builder';
+    $builderUrl = 'https://builder.quantimo.do';
     $html = '<div class="updated">';
     $html .= "<p>Get your <a href='".$builderUrl."' target=\"_blank\">QuantiModo client id</a> and add it to <a href='".$settingsUrl."'  target=\"_blank\">Settings -> QuantiModo</a></p>";
     $html .= '</div><!-- /.updated -->';

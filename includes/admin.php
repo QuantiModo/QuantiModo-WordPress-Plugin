@@ -5,19 +5,15 @@ function quantimodo_options_page()
 {
   // Get options
   $options = get_option('QuantiModo_settings');
+  if(!isset($options['quantimodo_client_secret'])){
+      $options['quantimodo_client_secret'] = null;
+  }
 
   // Check to see if QuantiModo is enabled
   $quantimodo_activated = false;
   if ( esc_attr( $options['quantimodo_enabled'] ) == "on" ) {
     $quantimodo_activated = true;
-    wp_cache_flush();
-  }
-
-  // Check to see if QuantiModo identify is checked
-  $quantimodo_identify = false;
-  if ( isset($options['quantimodo_identify']) && esc_attr( $options['quantimodo_identify'] ) == "on" ) {
-    $quantimodo_identify = true;
-    wp_cache_flush();
+    //wp_cache_flush();  // What is this for?
   }
 
 ?>
@@ -25,7 +21,7 @@ function quantimodo_options_page()
         <form name="QuantiModo-form" action="options.php" method="post" enctype="multipart/form-data">
           <?php settings_fields( 'QuantiModo_settings_group' ); ?>
 
-            <h1>QuantiModo</h1>
+            <h1>QuantiModo Settings</h1>
             <?php if ( esc_attr( $options['quantimodo_widget_code'] ) ) { ?>
                 <h3>You can modify and design your app in the
                     <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>.
@@ -78,7 +74,19 @@ function quantimodo_options_page()
                          value='<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>'/>
                 </td>
             </tr>
+            <tr>
+                <th valign="top" style="padding-top: 10px;">
+                    <label for="quantimodo_client_secret">QuantiModo Client Secret</label>
+                </th>
+                <td>
+                    <input type='text' placeholder="Enter client secret" name="QuantiModo_settings[quantimodo_client_secret]"
+                           value='<?php echo esc_attr( $options['quantimodo_client_secret'] );  ?>'/>
+                </td>
+            </tr>
             </table>
+            Get your client secret from the
+            <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>
+            by clicking SETTINGS -> OAUTH.
             <?php if ( ! esc_attr( $options['quantimodo_widget_code'] ) ) { ?>
                 <h3>You can find your QuantiModo client id after
                     <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo Settings">creating your free app in the App Builder</a>.
