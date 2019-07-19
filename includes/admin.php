@@ -24,7 +24,7 @@ function quantimodo_options_page()
             <h1>QuantiModo Settings</h1>
             <?php if ( esc_attr( $options['quantimodo_widget_code'] ) ) { ?>
                 <h3>You can modify and design your app in the
-                    <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>.
+                    <a href="https://builder.quantimo.do" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>.
                 </h3>
                 <?php if ( $quantimodo_activated ) { ?>
                     <h3>Click the icon in the lower right hand corner of
@@ -85,11 +85,11 @@ function quantimodo_options_page()
             </tr>
             </table>
             Get your client secret from the
-            <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>
+            <a href="https://builder.quantimo.do" target="_blank" title="Open QuantiModo app builder">QuantiModo app builder</a>
             by clicking SETTINGS -> OAUTH.
             <?php if ( ! esc_attr( $options['quantimodo_widget_code'] ) ) { ?>
                 <h3>You can find your QuantiModo client id after
-                    <a href="https://app.quantimo.do/builder" target="_blank" title="Open QuantiModo Settings">creating your free app in the App Builder</a>.
+                    <a href="https://builder.quantimo.do" target="_blank" title="Open QuantiModo Settings">creating your free app in the App Builder</a>.
                 </h3>
             <?php } ?>
             <p class="submit">
