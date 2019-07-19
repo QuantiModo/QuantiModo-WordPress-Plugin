@@ -18,7 +18,7 @@ define('QUANTIMODO_4f050d29b8BB9_VERSION', '1.5');
 define('QUANTIMODO_4f050d29b8BB9_DIR', plugin_dir_path(__FILE__));
 define('QUANTIMODO_4f050d29b8BB9_URL', plugin_dir_url(__FILE__));
 defined('QUANTIMODO_4f050d29b8BB9_PATH') or define('QUANTIMODO_4f050d29b8BB9_PATH', untrailingslashit(plugins_url('', __FILE__)));
-define('APP_BUILDER_URL', 'https://app.quantimo.do/builder');
+define('APP_BUILDER_URL', 'https://builder.quantimo.do');
 
 require_once(QUANTIMODO_4f050d29b8BB9_DIR . 'includes/core.php');
 require_once(QUANTIMODO_4f050d29b8BB9_DIR . 'includes/menus.php');
