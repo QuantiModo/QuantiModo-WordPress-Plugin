@@ -19,7 +19,9 @@ script:
     #- vendor/bin/phpunit
     - npm test
 
-after_success: sh ./scripts/deploy.sh
+after_success:
+    #- sh ./scripts/deploy.sh
+  - echo "See http://quantimodo2.asuscomm.com:8082/view/all/job/wordpress-plugin-release for deployment"
 
 env:
 #  matrix:
