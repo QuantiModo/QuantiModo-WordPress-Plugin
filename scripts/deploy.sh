@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-if [[ -z ${WP_ORG_PASSWORD} ]]; then echo "Please set WP_ORG_PASSWORD env" && exit 1; fi
-if [[ -z ${WP_ORG_USERNAME} ]]; then echo "Please set WP_ORG_USERNAME env" && exit 1; fi
+if [[ -z ${WP_ORG_PASS} ]]; then echo "Please set WP_ORG_PASS env" && exit 1; fi
+if [[ -z ${WP_ORG_USER} ]]; then echo "Please set WP_ORG_USER env" && exit 1; fi
+set -x
 PLUGIN_SLUG="quantimodo"
 CURRENT_DIR=`pwd`
 MAIN_FILE="$PLUGIN_SLUG.php" # this should be the name of your main php file in the wordpress plugin
 GIT_PATH="$CURRENT_DIR" # this file should be in the base of your git repository
-SVN_PATH="/tmp/$PLUGIN_SLUG" # path to a temp SVN repo. No trailing slash required and don't add trunk.
+SVN_PATH="$CURRENT_DIR/tmp/$PLUGIN_SLUG" # path to a temp SVN repo. No trailing slash required and don't add trunk.
 SVN_URL="http://plugins.svn.wordpress.org/$PLUGIN_SLUG/" # Remote SVN repo on wordpress.org, with no trailing slash
 COMMIT_MSG="Deploy to WordPress.org via Jenkins"
 echo ".........................................."
@@ -52,10 +53,16 @@ echo "Changing directory to SVN"
 cd ${SVN_PATH}/trunk/
 # Add all new files that are not set to be ignored
 echo "committing to trunk"
-svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "$COMMIT_MSG" --no-auth-cache
+svn add * --force
+set +x
+svn commit --username=${WP_ORG_USER} --password=${WP_ORG_PASS} -m "$COMMIT_MSG" --no-auth-cache
+set -x
 echo "Updating WP plugin repo assets & committing"
 cd ${SVN_PATH}/assets/
-svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Updating wp-repo-assets" --no-auth-cache
+svn add * --force
+set +x
+svn commit --username=${WP_ORG_USER} --password=${WP_ORG_PASS} -m "Updating wp-repo-assets" --no-auth-cache
+set -x
 echo "Check if tagged version $NEW_VERSION1 exists"
 cd ${SVN_PATH}
 if [[ ! -d "$SVN_PATH/tags/$NEW_VERSION1/" ]];
@@ -66,7 +73,10 @@ if [[ ! -d "$SVN_PATH/tags/$NEW_VERSION1/" ]];
         if [[ ! -f includes/integration.js ]]; then
             echo "integration.js not found!" && exit 1;
         fi
-        svn commit --username=${WP_ORG_USERNAME} --password=${WP_ORG_PASSWORD} -m "Tagging version $NEW_VERSION1" --no-auth-cache
+        svn add * --force
+        set +x
+        svn commit --username=${WP_ORG_USER} --password=${WP_ORG_PASS} -m "Tagging version $NEW_VERSION1" --no-auth-cache
+        set -x
     else
         echo "tagged version $NEW_VERSION1 already exists!"
         exit 1
