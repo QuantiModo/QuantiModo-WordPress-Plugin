@@ -71,6 +71,6 @@ if [[ ! -d "$SVN_PATH/tags/$NEW_VERSION1/" ]];
         echo "tagged version $NEW_VERSION1 already exists!"
         exit 1
 fi
-echo "Removing temporary directory $SVN_PATH"
-rm -fr ${SVN_PATH}/
+#echo "Removing temporary directory $SVN_PATH"
+#rm -fr ${SVN_PATH}/
 echo "*** FIN ***"
