@@ -1,4 +1,11 @@
 <?php
+/**
+ * @param $message
+ */
+function qm_error($message){
+    $pluginLog = plugin_dir_path(__FILE__).'debug.log';
+    error_log($message.PHP_EOL, 3, $pluginLog);
+}
 // Add the QuantiModo Javascript
 add_action('wp_head', 'add_quantimodo');
 // The guts of the QuantiModo script
@@ -12,9 +19,9 @@ function add_quantimodo()
   // Check to see if QuantiModo is enabled
   if ( esc_attr( $options['quantimodo_enabled'] ) == "on" ){
     $qmClientId = $options['quantimodo_widget_code'];
-    $qmClientSecret = $options['quantimodo_client_secret'] ?? null;
+    $qmClientSecret = isset($options['quantimodo_client_secret']) ? $options['quantimodo_client_secret'] : null;
     $apiHostName = "https://app.quantimo.do";
-    $env = $_SERVER["HTTP_REFERER"] ?? getenv('APP_HOST_NAME');
+    $env = (isset($_SERVER["HTTP_REFERER"])) ? $_SERVER["HTTP_REFERER"] : getenv('APP_HOST_NAME');
     if(!$env){$env = "https://".$_SERVER["HTTP_HOST"];}
     if(stripos($env, "https://utopia.quantimo.do") === 0 || stripos($env, "https://local.quantimo.do") === 0){
         $apiHostName = "https://utopia.quantimo.do";
@@ -35,8 +42,19 @@ function add_quantimodo()
             $url = $apiHostName.'/api/v1/user?qmClientId='.$qmClientId.'&clientUserId='.$wpUserId;
             if($qmClientSecret){
                 $url .= '&clientSecret='.$qmClientSecret;
+            }else {
+//                add_settings_error('no_quantimodo_client_secret', 'no_quantimodo_client_secret',
+//                    quantimodo_get_client_secret_instructions(), 'error');
+                qm_error('Cannot get quantimodo user because no_quantimodo_client_secret! '.quantimodo_get_client_secret_instructions());
+                return;
             }
             $response = wp_remote_post( $url, $args );
+            if(!$response instanceof WP_Error){
+//                add_settings_error('get_quantimodo_user_failed', 'get_quantimodo_user_failed',
+//                    $response->get_error_message(), 'error');
+                qm_error($response->get_error_message());
+                return;
+            }
             $body = json_decode($response['body'], false);
             if(isset($body->user)){
                 $qmUser = $body->user;
