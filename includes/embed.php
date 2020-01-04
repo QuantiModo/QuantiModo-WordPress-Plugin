@@ -12,7 +12,7 @@ function add_quantimodo()
   // Check to see if QuantiModo is enabled
   if ( esc_attr( $options['quantimodo_enabled'] ) == "on" ){
     $qmClientId = $options['quantimodo_widget_code'];
-    $qmClientSecret = $options['quantimodo_client_secret'];
+    $qmClientSecret = $options['quantimodo_client_secret'] ?? null;
     $apiHostName = "https://app.quantimo.do";
     $env = $_SERVER["HTTP_REFERER"] ?? getenv('APP_HOST_NAME');
     if(!$env){$env = "https://".$_SERVER["HTTP_HOST"];}
@@ -32,8 +32,10 @@ function add_quantimodo()
                 'timeout' => 10,
                 'body' => ['clientUser' => $wpUser->data]
             ];
-            $url = $apiHostName.'/api/v1/user?qmClientId='.$qmClientId.
-                '&clientSecret='.$qmClientSecret.'&clientUserId='.$wpUserId;
+            $url = $apiHostName.'/api/v1/user?qmClientId='.$qmClientId.'&clientUserId='.$wpUserId;
+            if($qmClientSecret){
+                $url .= '&clientSecret='.$qmClientSecret;
+            }
             $response = wp_remote_post( $url, $args );
             $body = json_decode($response['body'], false);
             if(isset($body->user)){
