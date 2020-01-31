@@ -10,7 +10,8 @@ add_action('admin_bar_menu', 'add_quantimodo_link_to_admin_bar', 999);
 function add_quantimodo_link_to_admin_bar()
 {
   global $wp_version;
-  global $wp_admin_bar;
+    global /** @var WP_Admin_Bar $wp_admin_bar */
+    $wp_admin_bar;
 
   $quantimodo_icon = '<img src="' . QUANTIMODO_4f050d29b8BB9_PATH . '/assets-wp-repo/quantimodo-icon-16x16-white.png' . '">';
 
@@ -25,7 +26,7 @@ function add_quantimodo_link_to_admin_bar()
   $wp_admin_bar->add_node($args);
 }
 
-// Hook in the options page functionå
+// Hook in the options page
 function add_quantimodo_option_page()
 {
   add_options_page('QuantiModo Options', 'QuantiModo', 'activate_plugins', basename(__FILE__), 'quantimodo_options_page');
