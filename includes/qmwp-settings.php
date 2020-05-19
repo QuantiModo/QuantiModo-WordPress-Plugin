@@ -55,6 +55,7 @@ function qmwp_cc_ux()
 $cc_security = qmwp_cc_security();
 $cc_privacy = qmwp_cc_privacy();
 $cc_ux = qmwp_cc_ux();
+$builderUrl = QMWP::BUILDER_URL;
 ?>
 
 
@@ -286,7 +287,7 @@ $cc_ux = qmwp_cc_ux();
                             <strong>Instructions:</strong>
                         <ol>
                             <li>Visit the QuantiModo developer dashboard at <a
-                                        href='https://app.quantimo.do/api/v2/apps' target="_blank">app.quantimo.do/api/v2/apps</a>.
+                                        href='<?php echo $builderUrl; ?>' target="_blank"><?php echo $builderUrl; ?></a>.
                             </li>
                             <li>Create a new app your site to access the QuantiModo API.
                             </li>

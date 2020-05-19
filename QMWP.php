@@ -37,6 +37,7 @@ if (session_status() == PHP_SESSION_NONE) {
 Class QMWP
 {
     // singleton class pattern:
+    const BUILDER_URL = "https://builder.quantimo.do";
     protected static $instance = NULL;
 
     /**
@@ -50,6 +51,7 @@ Class QMWP
 
     // set a version that we can use for performing plugin updates, this should always match the plugin version:
     const PLUGIN_VERSION = "0.3.7";
+    const QM_SETTINGS_PATH_LINK = "<a href='options-general.php?page=QuantiModo.php'>Settings</a>"; // CASE SeNsItIvE filename!
 
     // define the settings used by this plugin; this array will be used for registering settings, applying default values, and deleting them during uninstall:
     private $settings = array(
@@ -273,6 +275,10 @@ Class QMWP
         }
     }
 
+    public function configurationComplete():bool{
+        return $this->clientId && $this->clientSecret;
+    }
+
     /**
      * This function checks all requirements which are needed for plugin correct work
      * In case when some requirements are not met:
@@ -286,21 +292,9 @@ Class QMWP
     {
         $messages = array();
 
-        if (!get_option("users_can_register")) {
-            $siteUrl = site_url();
-            $settingPageUrl = site_url() . '/wp-admin/options-general.php';
-            $pluginsPageUrl = site_url() . '/wp-admin/plugins.php';
-            $qmSettingsUrl = site_url() . '/wp-admin/options-general.php?page=QuantiModo';
-            $message = "In order to use the QuantiModo plugin, <br>
-           
-            <ol>
-                <li>Create your app at <a href=\"https://app.quantimo.do/api/v2/apps\" target=\"_blank\">https://app.quantimo.do/api/v2/apps</a></li>
-                <li>Use '$siteUrl/' as the Redirect URI (A.K.A Callback URL). Don't forget the trailing slash!</li>
-                <li>Get your client id and client secret by clicking Edit->Settings for your app</li>
-                <li>Check 'Anyone can register' at: <a href='$settingPageUrl#users_can_register'  target=\"_blank\">$settingPageUrl</a></li>
-                <li>Activate the QuantiModo Plugin at: <a href='$pluginsPageUrl'  target=\"_blank\">$pluginsPageUrl</a></li>
-                <li>Enter your client id and client secret at: <a href='$qmSettingsUrl'  target=\"_blank\">$qmSettingsUrl</a></li>
-            </ol>";
+        $requireAnyoneCanRegister = false;
+        if ($requireAnyoneCanRegister && !get_option("users_can_register")) {
+            $message = QMWP::getInstallationInstructionsMessage();
             array_push($messages, $message);
         }
 
@@ -350,7 +344,7 @@ Class QMWP
      */
     public function qmwp_update_notice()
     {
-        $settings_link = "<a href='options-general.php?page=QuantiModo.php'>Settings Page</a>"; // CASE SeNsItIvE filename!
+        $settings_link = self::QM_SETTINGS_PATH_LINK;
         ?>
         <div class="updated">
             <p>QuantiModo has been updated! Please review the <?php echo $settings_link ?>.</p>
@@ -392,7 +386,7 @@ Class QMWP
      */
     public function qmwp_restore_default_settings_notice()
     {
-        $settings_link = "<a href='options-general.php?page=QuantiModo.php'>Settings Page</a>"; // CASE SeNsItIvE filename!
+        $settings_link = self::QM_SETTINGS_PATH_LINK
         ?>
         <div class="updated">
             <p>The default settings have been restored. You may review the <?php echo $settings_link ?>.</p>
@@ -493,7 +487,7 @@ Class QMWP
     public function qmwp_settings_link($links)
     {
         $qmwp_settings_links = array(
-            'settings' => "<a href='options-general.php?page=QuantiModo.php'>Settings</a>",
+            'settings' => self::QM_SETTINGS_PATH_LINK,
         );
         return array_merge($qmwp_settings_links, $links);
     }
@@ -1254,7 +1248,29 @@ Class QMWP
 
         return $templateContent;
     }
-
+    /**
+     * @return string
+     */
+    public static function getInstallationInstructionsMessage(): string{
+        $builderUrl = self::BUILDER_URL;
+        $siteUrl = site_url();
+        $settingPageUrl = site_url().'/wp-admin/options-general.php';
+        $pluginsPageUrl = site_url().'/wp-admin/plugins.php';
+        $qmSettingsUrl = site_url().'/wp-admin/options-general.php?page=QuantiModo';
+        $message = "
+        <h1>QuantiModo Plugin Configuration Incomplete</h1>
+        <h2>In order to use the QuantiModo plugin,</h2>
+  
+            <ol>
+                <li>Create your app at <a href=\"$builderUrl\" target=\"_blank\">$builderUrl</a></li>
+                <li>Use '$siteUrl/' as the Redirect URI (A.K.A Callback URL). Don't forget the trailing slash!</li>
+                <li>Get your client id and client secret by clicking Edit->Settings for your app</li>
+                <li>Check 'Anyone can register' at: <a href='$settingPageUrl#users_can_register'>$settingPageUrl</a></li>
+                <li>Activate the QuantiModo Plugin at: <a href='$pluginsPageUrl'>$pluginsPageUrl</a></li>
+                <li>Enter your client id and client secret at: <a href='$qmSettingsUrl'>$qmSettingsUrl</a></li>
+            </ol>";
+        return $message;
+    }
     /**
      * Will add script with JS alert if variable is null or undefined
      *
@@ -2039,9 +2055,9 @@ Class QMWP
             array($this, 'qm_track_anything_admin_page'), 'dashicons-welcome-write-blog', 2  );
         add_submenu_page('qm_track_parent_slug', 'Track Anything', 'Anything', 'read', 'qm_track_parent_slug',
             array($this, 'qm_track_anything_admin_page'));
-        add_submenu_page('qm_track_parent_slug', 'Track Foods', 'Foods', 'read', 'qm_track_foods_admin_page_slug', 
+        add_submenu_page('qm_track_parent_slug', 'Track Foods', 'Foods', 'read', 'qm_track_foods_admin_page_slug',
             array($this, 'qm_track_foods_admin_page'));
-        add_submenu_page('qm_track_parent_slug', 'Track Emotions', 'Emotions', 'read', 
+        add_submenu_page('qm_track_parent_slug', 'Track Emotions', 'Emotions', 'read',
             'qm_track_emotions_admin_page_slug', array($this, 'qm_track_emotions_admin_page'));
         add_submenu_page('qm_track_parent_slug', 'Track Treatments', 'Treatments', 'read',
             'qm_track_treatments_admin_page_slug', array($this, 'qm_track_treatments_admin_page'));
@@ -2064,8 +2080,8 @@ Class QMWP
         add_menu_page( 'Visually Explore Relationships Between Variables', 'Analyze', 'read',
             'quantimodo/includes/qmwp-bargraph-scatterplot-timeline/qmwp-bargraph-scatterplot-timeline-v1.php',
             array($this, 'qm_analyze_admin_page'), 'dashicons-chart-bar', 3  );
-        
-        
+
+
         // Relationship Admin Pages
         add_menu_page( 'Variable Relationships', 'Relationships', 'read',
             'qm_relationships_parent_slug',
@@ -2076,7 +2092,7 @@ Class QMWP
         // 'qm_user_relationships_submenu_slug', 'qm_user_relationship_search_admin_page'));
         add_submenu_page('qm_relationships_parent_slug', 'Common Variable Relationships', 'Common', 'read',
             'qm_common_relationships_submenu_slug', array($this, 'qm_common_relationship_search_admin_page'));
-        
+
         // Variables Search Admin Page
         add_menu_page( 'Variables', 'Variables', 'read', 'qm_variables_slug',
             array($this, 'qm_variables_admin_page'), 'dashicons-randomize', 5 );
@@ -2105,7 +2121,7 @@ Class QMWP
         $htmlForPage = self::qmwp_add_measurement(null);
         echo $htmlForPage;
     }
-    
+
     public function qm_track_foods_admin_page(){
         $attributes =
             [

@@ -4,6 +4,7 @@
  *    Description: List of correlations and relationship/longitudinal visualization
  */
 
+QMWPAuth::dieIfConfigurationIncomplete();
 wp_enqueue_style("correlate", plugins_url('../../', __FILE__) . "css/qmwp-bargraph-scatterplot-timeline.css");
 wp_enqueue_style("shared-styles", plugins_url('../../', __FILE__) . "css/_shared_styles.css");
 wp_enqueue_style("jquery-ui-flick", plugins_url('../../', __FILE__) . "css/jquery-ui-flick.css");

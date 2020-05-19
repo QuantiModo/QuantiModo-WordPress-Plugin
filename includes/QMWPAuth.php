@@ -41,7 +41,7 @@ class QMWPAuth
     {
         $params = array(
             'response_type' => 'code',
-            'client_id' => $this->clientId,
+            'client_id' => $this->getClientId(),
             'scope' => $this->scope,
             'state' => uniqid('', true),
             'redirect_uri' => $this->redirectUri,
@@ -61,8 +61,8 @@ class QMWPAuth
     {
         $params = array(
             'grant_type' => 'authorization_code',
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
+            'client_id' => $this->getClientId(),
+            'client_secret' => $this->getClientSecret(),
             'code' => $code,
             'redirect_uri' => $this->redirectUri,
         );
@@ -122,10 +122,11 @@ class QMWPAuth
      */
     public function refresh_oauth_token($qmwp, $refresh_token)
     {
+
         $params = array(
             'grant_type' => 'refresh_token',
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
+            'client_id' => $this->getClientId(),
+            'client_secret' => $this->getClientSecret(),
             'refresh_token' => $refresh_token,
         );
         $url_params = http_build_query($params);
@@ -301,5 +302,37 @@ class QMWPAuth
         $parsedResponse = json_decode($response, true);
         return isset($parsedResponse['error_description']) ? " Error description: '" . $parsedResponse['error_description'] . "'" : null;
     }
-
+    /**
+     * @return mixed|void
+     */
+    public function getClientSecret(){
+        if(empty($this->clientSecret)){
+            throw new LogicException("Please add client secret to QuantiModo settings page!");
+        }
+        return $this->clientSecret;
+    }
+    /**
+     * @return mixed|void
+     */
+    public function getClientId(){
+        if(empty($this->clientId)){
+            throw new LogicException("Please add client ID to QuantiModo settings page!");
+        }
+        return $this->clientId;
+    }
+    /**
+     * @param mixed|void $clientId
+     */
+    public function setClientId($clientId){
+        $this->clientId = $clientId;
+    }
+    public static function configurationComplete():bool{
+        $authenticator = new QMWPAuth();
+        return $authenticator->clientSecret && $authenticator->clientId;
+    }
+    public static function dieIfConfigurationIncomplete(){
+        if(!QMWPAuth::configurationComplete()){
+            die(QMWP::getInstallationInstructionsMessage());
+        }
+    }
 }

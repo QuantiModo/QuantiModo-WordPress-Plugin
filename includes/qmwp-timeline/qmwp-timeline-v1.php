@@ -3,6 +3,9 @@
  *    Template Name: Analyze Page (v2, no correlations)
  *    Description: Page based on original PHP website
  */
+
+QMWPAuth::dieIfConfigurationIncomplete();
+
 wp_enqueue_style("timeline", plugins_url('../../', __FILE__) . "css/qmwp-timeline.css");
 wp_enqueue_style("shared-styles", plugins_url('../../', __FILE__) . "/css/_shared_styles.css");
 wp_enqueue_style("jquery-ui-flick", plugins_url('../../', __FILE__) . "/css/jquery-ui-flick.css");

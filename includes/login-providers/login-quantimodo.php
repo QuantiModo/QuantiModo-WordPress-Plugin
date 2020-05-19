@@ -28,7 +28,7 @@ if (!isset($_SESSION['QMWP']['LAST_URL']) || !$_SESSION['QMWP']['LAST_URL']) {
 // the oauth 2.0 authentication flow will start in this script and make several calls to the third-party authentication provider which in turn will make callbacks to this script that we continue to handle until the login completes with a success or failure:
 if (!$authenticator->clientEnabled) {
     $this->qmwp_end_login("QuantiModo login has not been enabled. Please notify the admin or mike@quantimo.do.", true);
-} elseif (!$authenticator->clientId || !$authenticator->clientSecret) {
+} elseif (!$authenticator->configurationComplete()) {
     // do not proceed if id or secret is null:
     $this->qmwp_end_login("The QuantiModo plugin has not been configured with an API key/secret. Please notify the admin or try again later.", true);
 } elseif (isset($_GET['error_description'])) {
