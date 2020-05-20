@@ -94,7 +94,7 @@ AnalyzeChart = function () {
     };
 
     var addGraph = function (variable, timeSeries) {
-        var title = variable.name + ' (' + variable.abbreviatedUnitName + ')';
+        var title = variable.name + ' (' + variable.unitAbbreviatedName + ')';
         if (variable.source != null && variable.source.length > 0) {
             title += ' from ' + variable.source;
         }
@@ -217,7 +217,7 @@ AnalyzeChart = function () {
 
         var dataLength = data.length;
         for (var i = 0; i < dataLength; i++) {
-            var date = moment(data[i].startTime).format("X") * 1000;
+            var date = data[i].startTime * 1000;
             var value = data[i].value;
 
             timeSeries.push([date, value]);
@@ -351,8 +351,10 @@ AnalyzeChart = function () {
             },
             tooltip: {
                 formatter: function () {
-                    var color = (this.points.length === 1 ? this.points[0].series.options.color : '#31B639');
-                    var date = Highcharts.dateFormat('%Y %b %d', this.points[0].x);
+                    var point = this.points[0];
+                    var color = (this.points.length === 1 ? point.series.options.color : '#31B639');
+                    var millis = point.x;
+                    var date = Highcharts.dateFormat('%Y %b %d', millis);
                     var result = '<span style="color: ' + color + ';"><i>' + date + '</i></span><br>';
                     for (var i = 0; i < this.points.length; i++) {
                         var point = this.points[i];
