@@ -73,13 +73,8 @@ var refreshInputData = function () {
         Quantimodo.getVariableByName(AnalyzePage.selectedInputVariableName, function (variable) {
 
             jQuery('#please-wait').show();
-            Quantimodo.getDailyMeasurements({
-                'variableName': variable.originalName,
-                'startTime': AnalyzePage.getStartTime(),
-                'endTime': AnalyzePage.getEndTime(),
-                //'groupingWidth': AnalyzePage.getPeriod(),
-                'groupingTimezone': AnalyzePage.getTimezone()
-            }, function (measurements) {
+
+            Quantimodo.getDailyMeasurements(AnalyzePage.getMeasurementParams(variable), function (measurements) {
                 jQuery('#please-wait').hide();
                 AnalyzePage.inputMeasurements = measurements;
                 AnalyzeChart.setInputData(variable, measurements);
@@ -92,13 +87,8 @@ var refreshInputData = function () {
 var refreshOutputData = function () {
     AnalyzePage.getOutputVariable(function (variable) {
         jQuery('#please-wait').show();
-        Quantimodo.getDailyMeasurements({
-            'variableName': variable.originalName,
-            'startTime': AnalyzePage.getStartTime(),
-            'endTime': AnalyzePage.getEndTime(),
-            //'groupingWidth': AnalyzePage.getPeriod(),
-            'groupingTimezone': AnalyzePage.getTimezone()
-        }, function (measurements) {
+
+        Quantimodo.getDailyMeasurements(AnalyzePage.getMeasurementParams(variable), function (measurements) {
             jQuery('#please-wait').hide();
             AnalyzePage.outputMeasurements = measurements;
             AnalyzeChart.setOutputData(variable, measurements);

@@ -14,11 +14,9 @@ var AnalyzePage = function () {
     var initLoginDialog = function () {
         jQuery(document).on('lwa_login', function (event, data, form) {
             if (data.result === true) {
-                refreshMeasurementsRange(function () {
-                    refreshVariables([], function () {
-                        categoryListUpdated();
-                        restoreChart();
-                    });
+                refreshVariables([], function () {
+                    categoryListUpdated();
+                    restoreChart();
                 });
                 refreshUnits(function () {
                     unitListUpdated();
@@ -255,7 +253,7 @@ var AnalyzePage = function () {
             }
 
             try {
-                var storedVariables = JSON.parse(localStorage["selectedVariables"]);
+                var storedVariables = JSON.parse(localStorage["selectedVariables"]) || [];
 
                 var contains = false;
                 for (i = 0; i < storedVariables.length; i++) {
@@ -488,71 +486,68 @@ var AnalyzePage = function () {
         },
         init: function () {
 
-            refreshMeasurementsRange(function () {
+            //get variable input
+            var variableInput = jQuery('#variable-selector');
+            //set it disabled while variables are not loaded
+            variableInput.prop('disabled', true);
+            variableInput.val('Loading. Please wait...');
 
-                //get variable input
-                var variableInput = jQuery('#variable-selector');
-                //set it disabled while variables are not loaded
-                variableInput.prop('disabled', true);
-                variableInput.val('Loading. Please wait...');
+            refreshVariables([], function () {
 
-                refreshVariables([], function () {
+                //once variables are ready - enable variable searcher
+                variableInput.val('');
+                variableInput.prop('disabled', false);
+                //setup autocomplete functionality
+                variableInput.autocomplete({
 
-                    //once variables are ready - enable variable searcher
-                    variableInput.val('');
-                    variableInput.prop('disabled', false);
-                    //setup autocomplete functionality
-                    variableInput.autocomplete({
+                    source: function (request, response) {
+                        //fetch variables using quantimodo-api
+                        Quantimodo.searchVariables(jQuery("#variable-selector").val(), function (data) {
 
-                        source: function (request, response) {
-                            //fetch variables using quantimodo-api
-                            Quantimodo.searchVariables(jQuery("#variable-selector").val(), function (data) {
+                            var results = [];
 
-                                var results = [];
-
-                                filterFoundVariables:
-                                    for (var i = 0; i < data.length; i++) {
-                                        for (var j = 0; j < AnalyzePage.selectedVariables.length; j++) {
-                                            if (data[i].id == AnalyzePage.selectedVariables[j].id) {
-                                                //if variable with such ID is already selected
-                                                //we are skipping it
-                                                continue filterFoundVariables;
-                                            }
+                            filterFoundVariables:
+                                for (var i = 0; i < data.length; i++) {
+                                    for (var j = 0; j < AnalyzePage.selectedVariables.length; j++) {
+                                        if (data[i].id == AnalyzePage.selectedVariables[j].id) {
+                                            //if variable with such ID is already selected
+                                            //we are skipping it
+                                            continue filterFoundVariables;
                                         }
-                                        results.push({
-                                            label: data[i].name,
-                                            value: data[i].name,
-                                            variable: data[i]
-                                        })
                                     }
-                                //passing filtered variables to the autocomplete for displaying
-                                response(results);
+                                    results.push({
+                                        label: data[i].name,
+                                        value: data[i].name,
+                                        variable: data[i]
+                                    })
+                                }
+                            //passing filtered variables to the autocomplete for displaying
+                            response(results);
 
-                            });
-                        },
-                        minLength: 2,
-                        select: function (event, ui) {
-                            //get selected item
-                            var selectedVariable = ui.item.variable;
-                            console.debug('Variable Selected:');
-                            console.debug(selectedVariable);
-                            //pass it for processing
-                            newVariableSelected(
-                                selectedVariable.originalName,
-                                selectedVariable.category,
-                                null,   //TODO source
-                                null, false
-                            );
-                            //blank variable searcher
-                            jQuery("#variable-selector").val('');
-                            return false;
-                        }
-                    });
-
-                    categoryListUpdated();
-                    restoreChart();
-
+                        });
+                    },
+                    minLength: 2,
+                    select: function (event, ui) {
+                        //get selected item
+                        var selectedVariable = ui.item.variable;
+                        console.debug('Variable Selected:');
+                        console.debug(selectedVariable);
+                        //pass it for processing
+                        newVariableSelected(
+                            selectedVariable.originalName,
+                            selectedVariable.category,
+                            null,   //TODO source
+                            null, false
+                        );
+                        //blank variable searcher
+                        jQuery("#variable-selector").val('');
+                        return false;
+                    }
                 });
+
+                categoryListUpdated();
+                restoreChart();
+
             });
             refreshUnits(function () {
                 unitListUpdated();

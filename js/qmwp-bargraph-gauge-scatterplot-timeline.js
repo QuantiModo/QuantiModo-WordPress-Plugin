@@ -19,13 +19,11 @@ var AnalyzePage = function () {
     var initLoginDialog = function () {
         jQuery(document).on('lwa_login', function (event, data, form) {
             if (data.result === true) {
-                refreshMeasurementsRange(function () {
-                    refreshVariables([], function () {
-                        categoryListUpdated();
-                        outputCategoryUpdated();
-                        getBargraph();
-                        refreshInputData();
-                    });
+                refreshVariables([], function () {
+                    categoryListUpdated();
+                    outputCategoryUpdated();
+                    getBargraph();
+                    refreshInputData();
                 });
                 refreshUnits(function () {
                     unitListUpdated();
@@ -286,14 +284,9 @@ var AnalyzePage = function () {
             if (variable)
                 jQuery("#module-addmeasurementvariable-original-name").val(variable.originalName);
         }
+        var params = AnalyzePage.getMeasurementParams();
         Quantimodo.getDailyMeasurements(
-            {
-                'variableName': variableName,
-                'startTime': AnalyzePage.getStartTime(),
-                'endTime': AnalyzePage.getEndTime(),
-                'groupingWidth': AnalyzePage.getPeriod(),
-                'groupingTimezone': AnalyzePage.getTimezone()
-            }, function (measurements) {
+            params, function (measurements) {
                 var meanValue = 0;
                 var meanCount = 0;
 
@@ -602,23 +595,19 @@ var AnalyzePage = function () {
         init: function () {
             retrieveSettings();
 
-            refreshMeasurementsRange(function () {
+            /*                    refreshVariables([], function () {
+             categoryListUpdated();
+             outputCategoryUpdated();
+             getBargraph();
+             refreshInputData();
+             });*/
 
-                /*                    refreshVariables([], function () {
-                 categoryListUpdated();
-                 outputCategoryUpdated();
-                 getBargraph();
-                 refreshInputData();
-                 });*/
+            fetchAndSetVariables(AnalyzePage.getInputVariableName(), AnalyzePage.getOutputVariableName(), function () {
 
-                fetchAndSetVariables(AnalyzePage.getInputVariableName(), AnalyzePage.getOutputVariableName(), function () {
-
-                    categoryListUpdated();
-                    outputCategoryUpdated();
-                    getBargraph();
-                    refreshInputData();
-
-                });
+                categoryListUpdated();
+                outputCategoryUpdated();
+                getBargraph();
+                refreshInputData();
 
             });
             refreshUnits(function () {
