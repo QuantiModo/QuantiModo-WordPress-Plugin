@@ -450,7 +450,7 @@ var AnalyzePage = function () {
                     //pass it for processing
                     newVariableSelected(ui.item.variable);
                     //blank variable searcher
-                    jQuery('#variable-selector').val('');
+                    //jQuery('#variable-selector').val('');
                     return false;
                 }
             });
