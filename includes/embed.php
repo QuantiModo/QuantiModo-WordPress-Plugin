@@ -14,7 +14,7 @@ function add_quantimodo()
   // Ignore admin, feed, robots or trackbacks
   if ( is_feed() || is_robots() || is_trackback() ){return;}
   $options = get_option('QuantiModo_settings');
-  // If options is empty then exit
+  // If options are empty, then exit
   if( empty( $options ) ){return;}
   // Check to see if QuantiModo is enabled
   if ( esc_attr( $options['quantimodo_enabled'] ) == "on" ){
@@ -30,14 +30,16 @@ function add_quantimodo()
     $jsText = '<script src="'.$jsUrl.'"></script> <script> window.QuantiModoIntegration.options = {';
     $wpUserId = get_current_user_id();
     if($wpUserId){
-        $jsText .= "clientUserId: encodeURIComponent('".$wpUserId."'),";
-        $wpUser = wp_get_current_user();
-        $jsText .= "clientUser: encodeURIComponent('".json_encode($wpUser->data)."'),";
+        $jsText      .= "clientUserId: encodeURIComponent('".$wpUserId."'),";
+        $wpUser      = wp_get_current_user();
+	    $userData   = clone $wpUser->data;
+		$userData->username = $userData->user_login = $qmClientId.'-'.$userData->ID;
+	    $jsText      .= "clientUser: encodeURIComponent('" . json_encode( $userData ) . "'),";
         $accessToken = get_user_meta($wpUserId, 'qm_access_token', true);
         if(!$accessToken){
             $args = [
                 'timeout' => 10,
-                'body' => ['clientUser' => $wpUser->data]
+                'body' => ['clientUser' => $userData ]
             ];
             $url = $apiHostName.'/api/v1/user?qmClientId='.$qmClientId.'&clientUserId='.$wpUserId;
             if($qmClientSecret){
@@ -49,7 +51,7 @@ function add_quantimodo()
                 return;
             }
             $response = wp_remote_post( $url, $args );
-            if(!$response instanceof WP_Error){
+            if($response instanceof WP_Error){
 //                add_settings_error('get_quantimodo_user_failed', 'get_quantimodo_user_failed',
 //                    $response->get_error_message(), 'error');
                 qm_error($response->get_error_message());
@@ -104,7 +106,7 @@ function quantimodo_logout() {
     // Ignore admin, feed, robots or trackbacks
     if ( is_feed() || is_robots() || is_trackback() ){return;}
     $options = get_option('QuantiModo_settings');
-    // If options is empty then exit
+    // If options are empty, then exit
     if( empty( $options ) ){return;}
     // Check to see if QuantiModo is enabled
     if ( esc_attr( $options['quantimodo_enabled'] ) == "on" ){

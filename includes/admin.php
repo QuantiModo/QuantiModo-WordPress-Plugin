@@ -78,7 +78,7 @@ function quantimodo_options_page()
                 </th>
                 <td>
                   <input type='text' placeholder="Enter client id" name="QuantiModo_settings[quantimodo_widget_code]"
-                         value='<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>'/>
+                         value='<?php echo esc_attr( $options['quantimodo_widget_code'] ?? '' );  ?>'/>
                 </td>
             </tr>
             <tr>
@@ -87,7 +87,7 @@ function quantimodo_options_page()
                 </th>
                 <td>
                     <input type='text' placeholder="Enter client secret" name="QuantiModo_settings[quantimodo_client_secret]"
-                           value='<?php echo esc_attr( $options['quantimodo_client_secret'] );  ?>'/>
+                           value='<?php echo esc_attr( $options['quantimodo_client_secret'] ?? ''  );  ?>'/>
                 </td>
             </tr>
             </table>
@@ -103,19 +103,32 @@ function quantimodo_options_page()
             <h3>To embed a specific page of your QuantiModo app in a WordPress page or post:</h3>
             <ol>
                 <li>Go to your QuantiModo web app at
-                    <a href="https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do" target="_blank" title="Open Web App">
-                        https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do
+<!--                    <a href="https://--><?php //echo esc_attr( $options['quantimodo_widget_code'] );  ?><!--.quantimo.do" target="_blank" title="Open Web App">-->
+<!--                        https://--><?php //echo esc_attr( $options['quantimodo_widget_code'] );  ?><!--.quantimo.do-->
+<!--                    </a>.-->
+                    <a href="https://app.quantimo.do/app/public/#/app/intro?clientId=<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>" target="_blank" title="Open Web App">
+                        https://app.quantimo.do/app/public/#/app/intro?clientId=<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>
                     </a>.
                 </li>
-                <li>Go to the page you want to embed and copy the url.</li>
-                <li>Go to the WordPress page or post editor "text" section.</li>
+                <li>Go to the QuantiModo page you want to embed and copy the url.</li>
+                <li>Go to the WordPress page or post-editor "text" section where you want the embed.</li>
                 <li>Paste
+<!--                    <xmp>-->
+<!--                        <iframe src="https://--><?php //echo esc_attr( $options['quantimodo_widget_code'] );  ?><!--.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED" width="100%" height="650px" frameborder="1" scrolling="yes" align="left"></iframe>-->
+<!--                    </xmp>-->
                     <xmp>
-                        <iframe src="https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED" width="100%" height="650px" frameborder="1" scrolling="yes" align="left"></iframe>
+                        <iframe src="THE_URL_YOU_COPIED_WITH_HTTPS_AND_WITHOUT_ANY_TRAILING_URL_PARAMS?clientId=<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>"
+                                width="100%" height="650px" frameborder="1" scrolling="yes" align="left">
+                        </iframe>
                     </xmp>
                 </li>
+<!--                <li>
+                    Replace src="https://<?php /*echo esc_attr( $options['quantimodo_widget_code'] );  */?>.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED" with your actual link you want to embed.
+                </li>-->
                 <li>
-                    Replace src="https://<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED" with your actual link you want to embed.
+                    Replace src="THE_URL_YOU_COPIED_WITH_HTTPS_AND_WITHOUT_ANY_TRAILING_URL_PARAMS" with your actual link you want to embed.
+                    Make sure to delete anything after a question mark in the url if there is one.
+                    Then add "?clientId=<?php echo esc_attr( $options['quantimodo_widget_code'] );  ?>" to the end of the url.
                 </li>
                 <li>Adjust or remove the iFrame settings as needed.</li>
             </ol>

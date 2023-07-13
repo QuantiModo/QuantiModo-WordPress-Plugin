@@ -26,9 +26,10 @@ add_action( 'admin_notices', 'fx_admin_notice_example_notice' );  /* Add admin n
 function fx_admin_notice_example_notice(){
     // Get options
     $options = get_option('QuantiModo_settings');
+	if(!$options){$options = array();}
     // Check to see if QuantiModo is enabled
     $quantimodo_activated = false;
-    if ( esc_attr( $options['quantimodo_widget_code'] ) ) {
+    if ( esc_attr( $options['quantimodo_widget_code'] ?? false ) ) {
         $quantimodo_activated = true;
     }
     $settingsUrl = get_bloginfo('wpurl') . '/wp-admin/admin.php?page=menus.php';

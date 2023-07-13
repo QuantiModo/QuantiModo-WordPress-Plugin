@@ -38,7 +38,7 @@ To embed a specific page of your QuantiModo app in a WordPress page or post:
 - Paste this in the post or page:
 ```
 <iframe 
-  src="https://web.quantimo.do/WHATEVER_YOU_WANT_TO_EMBED?clientId=your_client_id" 
+  src="THE_URL_YOU_COPIED_WITH_HTTPS_AND_WITHOUT_ANY_TRAILING_URL_PARAMS?clientId=your_client_id" 
   width="100%" 
   height="650px" 
   frameborder="1" 
