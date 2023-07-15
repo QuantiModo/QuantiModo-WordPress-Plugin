@@ -14,42 +14,51 @@ function add_quantimodo()
   // Ignore admin, feed, robots or trackbacks
   if ( is_feed() || is_robots() || is_trackback() ){return;}
   $options = get_option('QuantiModo_settings');
-  // If options is empty then exit
+  // If options are empty, then exit
   if( empty( $options ) ){return;}
   // Check to see if QuantiModo is enabled
-  if ( esc_attr( $options['quantimodo_enabled'] ) == "on" ){
-    $qmClientId = $options['quantimodo_widget_code'];
+  if ( esc_attr( $options['floating_button_enabled'] ) == "on" ){
+    $qmClientId = $options['quantimodo_client_id'];
     $qmClientSecret = isset($options['quantimodo_client_secret']) ? $options['quantimodo_client_secret'] : null;
     $apiHostName = "https://app.quantimo.do";
     $env = (isset($_SERVER["HTTP_REFERER"])) ? $_SERVER["HTTP_REFERER"] : getenv('APP_HOST_NAME');
     if(!$env){$env = "https://".$_SERVER["HTTP_HOST"];}
-    if(stripos($env, "https://utopia.quantimo.do") === 0 || stripos($env, "https://local.quantimo.do") === 0){
+    if(stripos($env, "https://utopia.quantimo.do") === 0 || stripos($env, "https://app.quantimo.do") === 0){
         $apiHostName = "https://utopia.quantimo.do";
     }
     $jsUrl = plugins_url( '/integration.js', __FILE__ );
     $jsText = '<script src="'.$jsUrl.'"></script> <script> window.QuantiModoIntegration.options = {';
     $wpUserId = get_current_user_id();
     if($wpUserId){
-        $jsText .= "clientUserId: encodeURIComponent('".$wpUserId."'),";
-        $wpUser = wp_get_current_user();
-        $jsText .= "clientUser: encodeURIComponent('".json_encode($wpUser->data)."'),";
+        $jsText      .= "clientUserId: encodeURIComponent('".$wpUserId."'),";
+        $wpUser      = wp_get_current_user();
+	    $userData   = clone $wpUser->data;
+		$userData->username = $userData->user_login = $qmClientId.'-'.$userData->ID;
+        $userData->client_id = $qmClientId;
+        $userData->client_secret = $qmClientSecret;
+        $userData->client_user_id = $wpUserId;
+        unset($userData->ID);
+	    $jsText      .= "clientUser: encodeURIComponent('" . json_encode( $userData ) . "'),";
         $accessToken = get_user_meta($wpUserId, 'qm_access_token', true);
         if(!$accessToken){
             $args = [
                 'timeout' => 10,
-                'body' => ['clientUser' => $wpUser->data]
+                'body' => [
+                    'clientUserId' => $wpUserId,
+                    'clientUser' => $userData,
+                    'client_id' => $qmClientId,
+                    'client_secret' => $qmClientSecret
+                ]
             ];
-            $url = $apiHostName.'/api/v1/user?qmClientId='.$qmClientId.'&clientUserId='.$wpUserId;
-            if($qmClientSecret){
-                $url .= '&clientSecret='.$qmClientSecret;
-            }else {
+            $url = $apiHostName.'/api/v1/user';
+            if(!$qmClientSecret){
 //                add_settings_error('no_quantimodo_client_secret', 'no_quantimodo_client_secret',
 //                    quantimodo_get_client_secret_instructions(), 'error');
                 qm_error('Cannot get quantimodo user because no_quantimodo_client_secret! '.quantimodo_get_client_secret_instructions());
                 return;
             }
             $response = wp_remote_post( $url, $args );
-            if(!$response instanceof WP_Error){
+            if($response instanceof WP_Error){
 //                add_settings_error('get_quantimodo_user_failed', 'get_quantimodo_user_failed',
 //                    $response->get_error_message(), 'error');
                 qm_error($response->get_error_message());
@@ -104,11 +113,11 @@ function quantimodo_logout() {
     // Ignore admin, feed, robots or trackbacks
     if ( is_feed() || is_robots() || is_trackback() ){return;}
     $options = get_option('QuantiModo_settings');
-    // If options is empty then exit
+    // If options are empty, then exit
     if( empty( $options ) ){return;}
     // Check to see if QuantiModo is enabled
-    if ( esc_attr( $options['quantimodo_enabled'] ) == "on" ){
-        $qmClientId = $options['quantimodo_widget_code'];
+    if ( esc_attr( $options['floating_button_enabled'] ) == "on" ){
+        $qmClientId = $options['quantimodo_client_id'];
         $jsUrl = plugins_url( '/integration.js', __FILE__ );
         $jsText = '<script src="'.$jsUrl.'"></script> <script> window.QuantiModoIntegration.options = {';
         $jsText .= "

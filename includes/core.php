@@ -26,17 +26,18 @@ add_action( 'admin_notices', 'fx_admin_notice_example_notice' );  /* Add admin n
 function fx_admin_notice_example_notice(){
     // Get options
     $options = get_option('QuantiModo_settings');
+	if(!$options){$options = array();}
     // Check to see if QuantiModo is enabled
-    $quantimodo_activated = false;
-    if ( esc_attr( $options['quantimodo_widget_code'] ) ) {
-        $quantimodo_activated = true;
+    $has_client_id = false;
+    if ( esc_attr( $options['quantimodo_client_id'] ?? false ) ) {
+        $has_client_id = true;
     }
     $settingsUrl = get_bloginfo('wpurl') . '/wp-admin/admin.php?page=menus.php';
     $builderUrl = 'https://builder.quantimo.do';
     $html = '<div class="updated">';
     $html .= "<p>Get your <a href='".$builderUrl."' target=\"_blank\">QuantiModo client id</a> and add it to <a href='".$settingsUrl."'  target=\"_blank\">Settings -> QuantiModo</a></p>";
     $html .= '</div><!-- /.updated -->';
-    if(!$quantimodo_activated){
+    if(!$has_client_id){
         echo $html;
     }
 }

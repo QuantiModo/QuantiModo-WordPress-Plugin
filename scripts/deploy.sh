@@ -13,18 +13,18 @@ echo ".........................................."
 echo "Preparing to deploy wordpress plugin"
 echo ".........................................."
 # Check version in readme.txt is the same as plugin file
-NEW_VERSION1=`grep "^Stable tag" ${GIT_PATH}/README.md | awk -F':' '{print $2}' | tr -d ' '`
+NEW_VERSION1=$(grep "^Stable tag" ${GIT_PATH}/README.md | awk -F':' '{print $2}' | tr -d ' ')
 echo "readme version: $NEW_VERSION1"
-NEW_VERSION2=`grep "Version:" ${GIT_PATH}/${MAIN_FILE} | awk -F':' '{print $2}' | tr -d ' '`
+NEW_VERSION2=$(grep "Version:" ${GIT_PATH}/${MAIN_FILE} | awk -F':' '{print $2}' | tr -d ' ')
 echo "$MAIN_FILE version: $NEW_VERSION2"
 if [[ "$NEW_VERSION1" != "$NEW_VERSION2" ]]; then echo "Versions don't match. Exiting...."; exit 1; fi
 echo "Versions match in readme.txt and PHP file. Let's proceed..."
 echo
 echo "Creating local copy of SVN repo ..."
-svn co ${SVN_URL} ${SVN_PATH}
+svn co ${SVN_URL} "${SVN_PATH}"
 echo "Exporting the HEAD of master from git to the trunk of SVN"
-git checkout-index -a -f --prefix=${SVN_PATH}/trunk/
-echo "Ignoring github specific & deployment script"
+git checkout-index -a -f --prefix="${SVN_PATH}"/trunk/
+echo "Ignoring GitHub specific & deployment script"
 svn propset svn:ignore "deploy.sh
 .git
 .gitignore" "$SVN_PATH/trunk/"

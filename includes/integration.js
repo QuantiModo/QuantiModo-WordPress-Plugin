@@ -4,6 +4,7 @@
     var defaultOptions = {
         clientUserId: encodeURIComponent('UNIQUE_ID_FOR_YOUR_USER'),
         clientUser: null,
+        baseIonicPath: 'https://app.quantimo.do/app/public/#/app/',
         clientId: 'CLIENT_ID',
         logout: false,
         publicToken: '',
@@ -20,10 +21,10 @@
             console.warn("window.QuantiModoIntegration.options.finish is called after user finishes connecting their health data.");
             console.warn("You should set this to POST sessionTokenObject as-is to your server for step 2");
             console.warn("Also, include code here to refresh the page.");
-            var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-            xmlhttp.open("POST", "https://app.quantimo.do/api/v1/quantimodo/connect/finish");
-            xmlhttp.setRequestHeader("Content-Type", "application/json");
-            xmlhttp.send(sessionTokenObject);
+            var req = new XMLHttpRequest();   // new HttpRequest instance
+            req.open("POST", "https://app.quantimo.do/api/v1/quantimodo/connect/finish");
+            req.setRequestHeader("Content-Type", "application/json");
+            req.send(sessionTokenObject);
         },
         close: function() {
             /* (optional) Called when a user closes the popup without connecting any data sources */
@@ -202,8 +203,8 @@
         }
         xhr.send(jsonObject);
     }
-    function connectorsApiCall(method, requestPath, success, error) {
-        if (!error) { error = function (err) { logError(err); }; }
+    function connectorsApiCall(method, requestPath, success, errorHandler) {
+        if (!errorHandler) { errorHandler = function (err) { logError(err); }; }
         var request = new XMLHttpRequest();
         request.open(method, 'https://' + getApiUrl() + requestPath + getAPIQueryString(), true);
         request.onload = function () {
@@ -217,7 +218,7 @@
                 logError(request.responseText);
             }
         };
-        request.onerror = logError;
+        request.onerror = errorHandler;
         request.send();
     }
     function showPopup() {
@@ -244,7 +245,8 @@
     }
     function renderConnectorList() {
         function matches(el, selector) {
-            return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector) .call(el, selector);
+            return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector ||
+                el.webkitMatchesSelector || el.oMatchesSelector) .call(el, selector);
         }
         // https://jsfiddle.net/1a6j4es1/28/
         function delegateSelector(selector, event, childSelector, handler) {
@@ -280,7 +282,7 @@
         function waitForAccount(callback) {
             // clear old intervals
             clearIntervals();
-            // set new interval to check connection
+            // set a new interval to check connection
             callbackInterval = setInterval(function () { loadConnectors(callback); }, 3000);
             // stop refreshing the API after 2 minutes
             callbackCancelTimeout = setTimeout(function () {
@@ -314,7 +316,7 @@
                     fields.appendChild(document.createElement('br'));
                     addClass(button, 'qm-account-connect-button-with-params');
                     input.addEventListener('keypress', function (event) {
-                        if (event.keyCode == 13) {
+                        if (event.keyCode === 13) {
                             var block = closest(event.target, '.qm-account-block');
                             var connectButton = block.getElementsByClassName('qm-account-connect-button')[0];
                             if (connectButton) {
@@ -350,7 +352,7 @@
                         if (ref.closed !== false) { // !== is required for compatibility with Opera
                             window.clearInterval(pollTimer);
                             showLoader(false);
-                            window.qmSetupOnIonic();
+                            window.QuantiModoIntegration.qmSetupIonicPopupIframe();
                         }
                     }, 200);
                 } else {
@@ -358,7 +360,7 @@
                     ref = window.open(targetUrl,'_blank', 'location=no,toolbar=yes');
                     ref.addEventListener('exit', function(){
                         showLoader(false);
-                        window.qmSetupOnIonic();
+                        window.QuantiModoIntegration.qmSetupIonicPopupIframe();
                     });
                 }
             } else {
@@ -374,7 +376,7 @@
             '        <div class="qm-first-two">' +
             '           <h4 class="qm-account-name"><%= displayName %></h4>' +
             '           <% if (!qmClient && connected && errorMessage) { %>' +
-            '               <img class="qm-sync-image" src="https://images.quantimo.do/public/img/sync-btn-red.png">' +
+            '               <img class="qm-sync-image" src="https://images.quantimo.do/public/img/sync-btn-red.png" alt="qm-sync-image">' +
             '           <% } else if (!qmClient && connected) { %>' +
             '               <img class="qm-sync-image" src="https://images.quantimo.do/public/img/sync-btn.png">' +
             '           <% } %>' +
@@ -558,7 +560,7 @@
             createIframePopupStyles();
             var statePath = '';
             if(state){statePath = '/app/' + state;}
-            var url = 'https://web.quantimo.do/#' + statePath + iframeQuer
+            var url = defaultOptions.baseIonicPath + statePath + window.QuantiModoIntegration.getIframeQueryString()
             qmMain.innerHTML = '<iframe style="height:100%;width:100%;" id="ionic-app-frame" src="' + url + '" frameborder="0"></iframe>';
             showPopup();
             showLoader(false);
@@ -644,7 +646,8 @@
     };
     window.QuantiModoIntegration.renderConnectorListAtProvidedSelector = function (connectOptions) {
         window.onload = function() {
-            var selector = (connectOptions.selector) ? connectOptions.selector : connectOptions; // Handles older clients that only provide selector instead of options object
+            var selector = (connectOptions.selector) ? connectOptions.selector : connectOptions;
+            // Handles older clients that only provide selector instead of the option object
             var parent = document.querySelector(selector);
             qmMain = document.createElement('div');
             qmMain.setAttribute('id', 'qm-main');
@@ -708,10 +711,11 @@
             var sharedButtonCss = "position:fixed; z-index:999998; height:60px; width:60px; cursor:pointer;";
             var rotatedCss =  'transform: rotate(125deg); -ms-transform: rotate(125deg); -moz-transform: rotate(125deg); -webkit-transform: rotate(125deg); -o-transform: rotate(125deg)';
             var notRotatedCss = 'transform: rotate(0deg); -ms-transform: rotate(0deg); -moz-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg);';
+            var statePath = window.QuantiModoIntegration.options.defaultState || 'intro';
             qmPageElements.qmIonicAppSidebar.template =
                 '<div id="' + qmPageElements.qmIonicAppSidebar.id + '" style="display: none; z-index: 999997; height: 100%; position: fixed;right: 0; top: 0; border: 1px solid #eee; background: white; ">' +
                 '<iframe style="height:100%;width:' + getOption('sideBarWidth') + ';" id="ionic-app-frame" frameborder="0" ' +
-                'src="https://web.quantimo.do/#/app/' + window.QuantiModoIntegration.options.defaultState + window.QuantiModoIntegration.getIframeQueryString() + '">' +
+                'src="' + defaultOptions.baseIonicPath + statePath + window.QuantiModoIntegration.getIframeQueryString() + '">' +
                 '</iframe>' +
                 '</div>';
             createNewDiv(qmPageElements.qmIonicAppSidebar);
@@ -726,7 +730,7 @@
                 if (window.QuantiModoIntegration.appSettings) {
                     return window.QuantiModoIntegration.appSettings.additionalSettings.appImages.appIcon
                 }
-                return 'https://quantimodo.s3.amazonaws.com/app_uploads/' + getClientId() + '/app_images_appIcon.png'
+                return 'https://static.quantimo.do/app_uploads/' + getClientId() + '/app_images_appIcon.png'
             }
             qmPageElements.singleFloatingActionButton.template =
                 '<img style="' + qmPageElements.singleFloatingActionButton.css.closed + 'display:none;" id="' +
