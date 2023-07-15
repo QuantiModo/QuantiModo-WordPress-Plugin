@@ -4,8 +4,7 @@
   "description": "Add a health, diet, fitness, or mood tracking app to your WordPerress site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No test specified\"",
-    "wpsh": "wpsh"
+    "test": "echo \"No test specified\""
   },
   "repository": {
     "type": "git",
@@ -24,6 +23,5 @@
   },
   "homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin#readme",
   "devDependencies": {
-    "wp-shuttle": "github:wpsh/wpsh"
   }
 }
