@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb41765f152cf788fac54c2092cc7e58",
+    "content-hash": "08f1ea0e8104edf499ecd2a03792f83b",
     "packages": [
         {
             "name": "quantimodo/quantimodo-sdk-php",
-            "version": "5.9.90517",
+            "version": "5.10.111411",
             "source": {
                 "type": "git",
                 "url": "https://github.com/QuantiModo/quantimodo-sdk-php.git",
-                "reference": "812d43d8c6d260730cdf575e034f0b3aed6d6a8a"
+                "reference": "48c523ce352bde2caa3d6ae24884162a5d17004b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/QuantiModo/quantimodo-sdk-php/zipball/812d43d8c6d260730cdf575e034f0b3aed6d6a8a",
-                "reference": "812d43d8c6d260730cdf575e034f0b3aed6d6a8a",
+                "url": "https://api.github.com/repos/QuantiModo/quantimodo-sdk-php/zipball/48c523ce352bde2caa3d6ae24884162a5d17004b",
+                "reference": "48c523ce352bde2caa3d6ae24884162a5d17004b",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "sdk",
                 "swagger"
             ],
-            "time": "2018-09-05T22:49:33+00:00"
+            "time": "2019-11-14T17:04:29+00:00"
         }
     ],
     "packages-dev": [
