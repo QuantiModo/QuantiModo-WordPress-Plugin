@@ -2,7 +2,7 @@
 Contributors: mikepsinn
 Tags: social, science, quantified self, mood tracking, digital health, healthcare, mental health
 Requires at least: 4.3
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
