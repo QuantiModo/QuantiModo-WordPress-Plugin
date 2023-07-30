@@ -100,7 +100,9 @@ function quantimodo_options_page()
             <?php echo quantimodo_get_client_secret_instructions(); ?>
             <?php if ( ! $quantimodo_client_id ) { ?>
                 <h3>You can find your QuantiModo client id after
-                    <a href="https://builder.quantimo.do" target="_blank" title="Open QuantiModo Settings">
+                    <a href="https://builder.quantimo.do"
+                       target="_blank"
+                       title="Open QuantiModo Settings">
                         creating your free app in the App Builder</a>.
                 </h3>
             <?php } ?>

@@ -21,9 +21,37 @@ defined('QUANTIMODO_4f050d29b8BB9_PATH') or define('QUANTIMODO_4f050d29b8BB9_PAT
 define('APP_BUILDER_URL', 'https://builder.quantimo.do');
 
 require_once(QUANTIMODO_4f050d29b8BB9_DIR . 'includes/core.php');
+require_once plugin_dir_path(__FILE__) . 'includes/access_token.php';
 require_once(QUANTIMODO_4f050d29b8BB9_DIR . 'includes/menus.php');
 require_once(QUANTIMODO_4f050d29b8BB9_DIR . 'includes/admin.php');
 require_once(QUANTIMODO_4f050d29b8BB9_DIR . 'includes/embed.php');
+require_once plugin_dir_path(__FILE__) . 'includes/shortcode.php';
 
+function enqueue_qm_block_assets() {
+    wp_enqueue_script(
+        'qm-block',
+        plugins_url('build/index.js', __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-components', 'wp-editor'),
+        true
+    );
+}
+add_action('enqueue_block_editor_assets', 'enqueue_qm_block_assets');
+
+function render_quantimodo_iframe_block($attributes, $content) {
+    // Your shortcode function here
+    return quantimodo_iframe_func($attributes);
+}
+
+function register_quantimodo_iframe_block() {
+    if (function_exists('register_block_type')) {
+        register_block_type('quantimodo/quantimodo-iframe', array(
+            'attributes' => array(
+                // Define your block's attributes here, if any
+            ),
+            'render_callback' => 'render_quantimodo_iframe_block',
+        ));
+    }
+}
+add_action('init', 'register_quantimodo_iframe_block');
 
 ?>
