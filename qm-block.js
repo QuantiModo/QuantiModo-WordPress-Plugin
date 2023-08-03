@@ -20,7 +20,7 @@ window.onload = function() {
             );
         },
         save: function() {
-            // This block is dynamic so we save nothing to the post content
+            // This block is dynamic, so we save nothing to the post content
             return null;
         },
     });

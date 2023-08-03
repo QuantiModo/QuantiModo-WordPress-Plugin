@@ -1,6 +1,6 @@
 <?php
 
-// Create a option page for settings
+// Create an option page for settings
 add_action('admin_menu', 'add_quantimodo_option_page');
 
 // Add top-level admin bar link
@@ -17,8 +17,9 @@ function add_quantimodo_link_to_admin_bar()
 
   $args = array(
     'id' => 'quantimodo-admin-menu',
-    'title' => '<span class="ab-icon" ' . ($wp_version < 3.8 && !is_plugin_active('mp6/mp6.php') ? ' style="margin-top: 3px;"' : '') . '>' . $quantimodo_icon . '</span><span class="ab-label">QuantiModo</span>', // alter the title of existing node
-    'parent' => FALSE,   // set parent to false to make it a top level (parent) node
+    'title' => '<span class="ab-icon" ' . ($wp_version < 3.8 && !is_plugin_active('mp6/mp6.php') ?
+            ' style="margin-top: 3px;"' : '') . '>' . $quantimodo_icon . '</span><span class="ab-label">QuantiModo</span>', // alter the title of existing node
+    'parent' => FALSE,   // set parent false to make it a top level (parent) node
     'href' => get_bloginfo('wpurl') . '/wp-admin/admin.php?page=menus.php',
     'meta' => array('title' => 'QuantiModo')
   );

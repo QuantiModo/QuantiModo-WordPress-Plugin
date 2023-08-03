@@ -2,20 +2,23 @@
 
 function get_qm_access_token() {
     $wpUserId = get_current_user_id();
-    if (!$wpUserId) {return null;}
-    $accessToken = get_user_meta($wpUserId, 'qm_access_token', true);
-    if($accessToken){return $accessToken;}
-    $options = get_option('QuantiModo_settings');
-    // If options are empty, then exit
-    if( empty( $options ) ){return null;}
-    $qmClientId = $options['quantimodo_client_id'];
-    $qmClientSecret = isset($options['quantimodo_client_secret']) ? $options['quantimodo_client_secret'] : null;
-    $apiHostName = "https://app.quantimo.do";
-    $env = (isset($_SERVER["HTTP_REFERER"])) ? $_SERVER["HTTP_REFERER"] : getenv('APP_HOST_NAME');
-    if(!$env){$env = "https://".$_SERVER["HTTP_HOST"];}
-    if(stripos($env, "https://utopia.quantimo.do") === 0 || stripos($env, "https://app.quantimo.do") === 0){
-        $apiHostName = "https://utopia.quantimo.do";
+    if (!$wpUserId) {
+        qm_error("No user ID found");
+        return null;
     }
+    $accessToken = get_user_meta($wpUserId, 'qm_access_token', true);
+    if($accessToken){
+        qm_error("Returning access token from user meta");
+        return $accessToken;
+    }
+    // If options are empty, then exit
+    if( empty( $options = qm_settings() ) ){
+        qm_error("No QuantiModo settings found");
+        return null;
+    }
+    $qmClientId = qm_api_client_id();
+    $qmClientSecret = $options['quantimodo_client_secret'] ?? null;
+    $apiHostName = qm_api_hostname();
     $wpUser = wp_get_current_user();
     $userData = clone $wpUser->data;
     $userData->username = $userData->user_login = $qmClientId . '-' . $userData->ID;

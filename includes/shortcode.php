@@ -10,7 +10,7 @@ function quantimodo_iframe_func($atts) {
 
     $qmAccessToken = get_qm_access_token();
     // Base URL
-    $url = "https://app.quantimo.do/app/public/#?qmAccessToken=" . $qmAccessToken;
+    $url = qm_api_hostname()."/app/public/#?qmAccessToken=" . $qmAccessToken;
 
     // Add any extra parameters from the shortcode attributes
     foreach ($atts as $key => $value) {
