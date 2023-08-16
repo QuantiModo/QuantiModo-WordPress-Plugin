@@ -8,7 +8,7 @@ function get_qm_access_token() {
     }
     $accessToken = get_user_meta($wpUserId, 'qm_access_token', true);
     if($accessToken){
-        qm_error("Returning access token from user meta");
+        //qm_error("Returning access token from user meta");
         return $accessToken;
     }
     // If options are empty, then exit
