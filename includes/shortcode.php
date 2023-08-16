@@ -1,16 +1,21 @@
 <?php
 
 function quantimodo_iframe_func($atts) {
+
+    $qmAccessToken = get_qm_access_token();
+    $defaultParams = array(
+        'qmAccessToken' => $qmAccessToken,
+        'clientId' => qm_api_client_id(),
+    );
     // Extract the attributes
     $atts = shortcode_atts(
-        array(), // Default values for attributes
+        $defaultParams, // Default values for attributes
         $atts,
         'quantimodo_iframe' // Shortcode name
     );
 
-    $qmAccessToken = get_qm_access_token();
     // Base URL
-    $url = qm_api_hostname()."/app/public/#?qmAccessToken=" . $qmAccessToken;
+    $url = qm_api_hostname()."/app/public/#?";
 
     // Add any extra parameters from the shortcode attributes
     foreach ($atts as $key => $value) {

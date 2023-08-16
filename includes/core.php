@@ -49,6 +49,7 @@ function fx_admin_notice_example_notice(){
  */
 function qm_api_hostname(): string
 {
+    //return "https://local.quantimo.do";
     $apiHostName = "https://app.quantimo.do";
     $env = (isset($_SERVER["HTTP_REFERER"])) ? $_SERVER["HTTP_REFERER"] : getenv('APP_HOST_NAME');
     if (!$env) {
