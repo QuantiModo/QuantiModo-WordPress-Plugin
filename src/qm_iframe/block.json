@@ -1,0 +1,9 @@
+{
+    "apiVersion": 2,
+    "name": "quantimodo/qm-iframe",
+    "title": "QuantiModo iFrame",
+    "icon": "format-gallery",
+    "category": "common",
+    "editorScript": "file:./index.js",
+    "attributes": {}
+}
