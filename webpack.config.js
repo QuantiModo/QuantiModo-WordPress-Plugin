@@ -3,7 +3,6 @@ const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 module.exports = {
     ...defaultConfig,
     entry: {
-        index: './src/index.jsx',
         qm_iframe: './src/qm_iframe/index.jsx',
         qm_redirect: './src/qm_redirect/index.jsx'
     },
