@@ -1,0 +1,9 @@
+{
+  "apiVersion": 2,
+  "name": "quantimodo/qm_redirect",
+  "title": "QuantiModo Redirect",
+  "icon": "external",
+  "category": "common",
+  "editorScript": "file:./index.js",
+  "attributes": {}
+}

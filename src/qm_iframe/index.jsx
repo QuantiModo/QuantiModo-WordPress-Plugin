@@ -1,4 +1,4 @@
-function qm_register_blocks() {
+function register_qm_iframe_block() {
 	console.log( 'Quantimodo iFrame block loaded' );
 	const { registerBlockType } = wp.blocks;
 	const { ServerSideRender } = wp.editor;
@@ -22,4 +22,4 @@ function qm_register_blocks() {
 	} );
 }
 
-wp.domReady( qm_register_blocks );
+wp.domReady( register_qm_iframe_block );
