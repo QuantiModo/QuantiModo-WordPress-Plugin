@@ -2,9 +2,9 @@ window.onload = function() {
     console.log('Quantimodo iFrame block loaded');
     const { registerBlockType } = wp.blocks;
     const { ServerSideRender } = wp.editor;
-    debugger
+    //debugger
 
-    registerBlockType('quantimodo/quantimodo-iframe', {
+    registerBlockType('quantimodo/qm-iframe', {
         title: 'QuantiModo iFrame',
         icon: 'format-gallery',  // Choose an icon: https://developer.wordpress.org/resource/dashicons/
         category: 'common',  // Choose a category: https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#category-optional
@@ -14,7 +14,7 @@ window.onload = function() {
         edit: function(props) {
             return (
                 <ServerSideRender
-                    block="quantimodo/quantimodo-iframe"
+                    block="quantimodo/qm-iframe"
                     attributes={props.attributes}
                 />
             );

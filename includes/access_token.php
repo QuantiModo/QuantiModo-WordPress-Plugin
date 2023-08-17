@@ -18,7 +18,7 @@ function get_qm_access_token() {
     }
     $qmClientId = qm_api_client_id();
     $qmClientSecret = $options['quantimodo_client_secret'] ?? null;
-    $apiHostName = qm_api_hostname();
+    $apiHostName = qm_api_origin();
     $wpUser = wp_get_current_user();
     $userData = clone $wpUser->data;
     $userData->username = $userData->user_login = $qmClientId . '-' . $userData->ID;

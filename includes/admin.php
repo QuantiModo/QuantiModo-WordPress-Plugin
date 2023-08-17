@@ -23,7 +23,7 @@ function quantimodo_options_page()
     }
     $quantimodo_client_id = qm_api_client_id();
     $builderUrl = get_app_builder_url();
-    $introUrl = qm_api_hostname() . '/app/public/#/app/intro?clientId=' . $quantimodo_client_id;
+    $introUrl = intro_url();
 
     ?>
     <div class="wrap">
