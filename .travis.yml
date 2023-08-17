@@ -3,8 +3,8 @@ sudo: false
 language: php
 
 notifications:
-  on_success: never
-  on_failure: change
+    on_success: never
+    on_failure: change
 
 php:
     - 5.6
@@ -21,17 +21,16 @@ script:
 
 after_success:
     #- sh ./scripts/deploy.sh
-  - echo "See http://quantimodo2.asuscomm.com:8082/view/all/job/wordpress-plugin-release for deployment"
+    - echo "See http://quantimodo2.asuscomm.com:8082/view/all/job/wordpress-plugin-release for deployment"
 
 env:
-#  matrix:
-#    - WP_VERSION=latest WP_MULTISITE=0
-#    - WP_VERSION=nightly WP_MULTISITE=0
+    #  matrix:
+    #    - WP_VERSION=latest WP_MULTISITE=0
+    #    - WP_VERSION=nightly WP_MULTISITE=0
 
-  global:
-    - SVN_REPO: https://plugins.svn.wordpress.org/quantimodo/
-    - GH_REF: https://github.com/quantimodo/quantimodo.git
-
+    global:
+        - SVN_REPO: https://plugins.svn.wordpress.org/quantimodo/
+        - GH_REF: https://github.com/quantimodo/quantimodo.git
 #matrix:
 #  include:
 #    - php: 5.6

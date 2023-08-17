@@ -1,41 +1,41 @@
 {
-  "name": "quantimodo-wordpress",
-  "version": "1.0.0",
-  "description": "Add a health, diet, fitness, or mood tracking app to your WordPress site",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"No test specified\"",
-    "build": "wp-scripts build",
-    "check-engines": "wp-scripts check-engines",
-    "check-licenses": "wp-scripts check-licenses",
-    "format": "wp-scripts format",
-    "lint:css": "wp-scripts lint-style",
-    "lint:js": "wp-scripts lint-js",
-    "lint:md:docs": "wp-scripts lint-md-docs",
-    "lint:pkg-json": "wp-scripts lint-pkg-json",
-    "packages-update": "wp-scripts packages-update",
-    "plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start",
-    "test:e2e": "wp-scripts test-e2e",
-    "test:unit": "wp-scripts test-unit-js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://mikepsinn@github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin.git"
-  },
-  "keywords": [
-    "health",
-    "diet",
-    "fitness",
-    "mood"
-  ],
-  "author": "Mike P. Sinn",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/issues"
-  },
-  "homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin#readme",
-  "devDependencies": {
-    "@wordpress/scripts": "^26.9.0"
-  }
+	"name": "quantimodo-wordpress",
+	"version": "1.0.0",
+	"description": "Add a health, diet, fitness, or mood tracking app to your WordPress site",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"No test specified\"",
+		"build": "wp-scripts build",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start",
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://mikepsinn@github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin.git"
+	},
+	"keywords": [
+		"health",
+		"diet",
+		"fitness",
+		"mood"
+	],
+	"author": "Mike P. Sinn",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/issues"
+	},
+	"homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin#readme",
+	"devDependencies": {
+		"@wordpress/scripts": "^26.9.0"
+	}
 }
