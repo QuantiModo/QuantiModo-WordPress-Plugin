@@ -6,8 +6,10 @@
  * @return string
  */
 function qm_api_host(){
-    return "local.quantimo.do";
-    // return "app.quantimo.do"; // This line is unreachable. You might want to add some logic to switch between hosts.
+	if($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'qm-wp.test'){
+		return "local.quantimo.do";
+	}
+    return "app.quantimo.do";
 }
 
 /**
