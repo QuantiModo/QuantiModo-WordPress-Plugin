@@ -1,7 +1,7 @@
 {
   "name": "quantimodo-wordpress",
   "version": "1.0.0",
-  "description": "Add a health, diet, fitness, or mood tracking app to your WordPerress site",
+  "description": "Add a health, diet, fitness, or mood tracking app to your WordPress site",
   "main": "index.js",
   "scripts": {
     "test": "echo \"No test specified\"",

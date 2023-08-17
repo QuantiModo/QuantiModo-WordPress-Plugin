@@ -13,14 +13,20 @@ function qm_register_blocks() {
         },
         edit: function (props) {
             return (
-                <ServerSideRender
-                    block="quantimodo/qm-iframe"
-                    attributes={props.attributes}
-                />
+                // <ServerSideRender
+                //     block="quantimodo/qm-iframe"
+                //     attributes={props.attributes}
+                // />
+                <div>
+                    {/* Your block content */}
+                    <p>This is my QuantiModo iFrame block.</p>
+                    {/* Insert the shortcode */}
+                    {window.wp.shortcode.string({ tag: 'qm_iframe' })}
+                </div>
             );
         },
         save: function () {
-            // This block is dynamic so we save nothing to the post content
+            // This block is dynamic, so we save nothing to the post content
             return null;
         },
     });
