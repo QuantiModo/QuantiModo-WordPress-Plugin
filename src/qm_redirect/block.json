@@ -1,6 +1,6 @@
 {
     "apiVersion": 2,
-    "name": "quantimodo/qm-redirect",
+    "name": "quantimodo/qm_redirect",
     "title": "QuantiModo Redirect",
     "icon": "external",
     "category": "common",

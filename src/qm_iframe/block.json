@@ -1,6 +1,6 @@
 {
     "apiVersion": 2,
-    "name": "quantimodo/qm-iframe",
+    "name": "quantimodo/qm_iframe",
     "title": "QuantiModo iFrame",
     "icon": "format-gallery",
     "category": "common",

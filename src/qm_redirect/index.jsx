@@ -3,7 +3,7 @@ function qm_register_blocks() {
     const {registerBlockType} = wp.blocks;
     const {ServerSideRender} = wp.editor;
 
-    registerBlockType('quantimodo/qm-redirect', {
+    registerBlockType('quantimodo/qm_redirect', {
         title: 'QuantiModo Redirect',
         icon: 'external',  
         category: 'common',  
@@ -13,7 +13,7 @@ function qm_register_blocks() {
             return (
                 <div>
                     <ServerSideRender
-                        block="quantimodo/qm-redirect"
+                        block="quantimodo/qm_redirect"
                         attributes={props.attributes}
                     />
                     <h1>Block That Redirects to Your QuantiModo App</h1>

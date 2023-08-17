@@ -58,7 +58,7 @@ function render_qm_iframe_block($attributes, $content) {
 
 function register_qm_iframe_block() {
     if (function_exists('register_block_type')) {
-        register_block_type('quantimodo/qm-iframe', array(
+        register_block_type('quantimodo/qm_iframe', array(
             'attributes' => array(
                 // Define your block's attributes here, if any
             ),
@@ -84,7 +84,7 @@ function render_qm_redirect_block($attributes, $content) {
 
 function register_qm_redirect_block() {
     if (function_exists('register_block_type')) {
-        register_block_type('quantimodo/qm-redirect', array(
+        register_block_type('quantimodo/qm_redirect', array(
             'attributes' => array(
                 // Define your block's attributes here, if any
             ),

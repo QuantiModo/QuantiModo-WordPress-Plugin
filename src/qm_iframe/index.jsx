@@ -3,7 +3,7 @@ function qm_register_blocks() {
     const {registerBlockType} = wp.blocks;
     const {ServerSideRender} = wp.editor;
 
-    registerBlockType('quantimodo/qm-iframe', {
+    registerBlockType('quantimodo/qm_iframe', {
         title: 'QuantiModo iFrame',
         icon: 'format-gallery',  
         category: 'common',  
