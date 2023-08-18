@@ -27,18 +27,18 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/qm_iframe_shortcode.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/qm_redirect_shortcode.php';
 
 function enqueue_qm_block_assets() {
-    $qm_iframe_asset = include( plugin_dir_path( __FILE__ ) . 'build/qm_iframe.asset.php');
+    $qm_iframe_asset = include( plugin_dir_path( __FILE__ ) . 'build/qm_iframe/block.json');
     wp_enqueue_script(
         'qm-iframe-block',
-        QUANTIMODO_4f050d29b8BB9_URL . 'build/qm_iframe.js',
+        QUANTIMODO_4f050d29b8BB9_URL . 'build/qm_iframe/index.js',
         $qm_iframe_asset['dependencies'],
         $qm_iframe_asset['version']
     );
 
-    $qm_redirect_asset = include( plugin_dir_path( __FILE__ ) . 'build/qm_redirect.asset.php');
+    $qm_redirect_asset = include( plugin_dir_path( __FILE__ ) . 'build/qm_redirect/block.json');
     wp_enqueue_script(
         'qm-redirect-block',
-        QUANTIMODO_4f050d29b8BB9_URL . 'build/qm_redirect.js',
+        QUANTIMODO_4f050d29b8BB9_URL . 'build/qm_redirect/index.js',
         $qm_redirect_asset['dependencies'],
         $qm_redirect_asset['version']
     );
