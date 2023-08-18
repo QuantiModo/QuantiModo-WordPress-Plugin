@@ -27,11 +27,20 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/qm_iframe_shortcode.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/qm_redirect_shortcode.php';
 
 function enqueue_qm_block_assets() {
+    $qm_iframe_asset = include( plugin_dir_path( __FILE__ ) . 'build/qm_iframe.asset.php');
     wp_enqueue_script(
-        'qm-block',
-        plugins_url('build/index.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-components', 'wp-editor'),
-        true
+        'qm-iframe-block',
+        QUANTIMODO_4f050d29b8BB9_URL . 'build/qm_iframe.js',
+        $qm_iframe_asset['dependencies'],
+        $qm_iframe_asset['version']
+    );
+
+    $qm_redirect_asset = include( plugin_dir_path( __FILE__ ) . 'build/qm_redirect.asset.php');
+    wp_enqueue_script(
+        'qm-redirect-block',
+        QUANTIMODO_4f050d29b8BB9_URL . 'build/qm_redirect.js',
+        $qm_redirect_asset['dependencies'],
+        $qm_redirect_asset['version']
     );
 }
 add_action('enqueue_block_editor_assets', 'enqueue_qm_block_assets');
@@ -68,9 +77,6 @@ function register_qm_iframe_block() {
 }
 add_action('init', 'register_qm_iframe_block');
 
-
-
-
 function render_qm_redirect_block($attributes, $content) {
 	redirect_to_login_if_necessary();
 	// Your shortcode function here
@@ -80,8 +86,6 @@ function render_qm_redirect_block($attributes, $content) {
 /**
  * @return void
  */
-
-
 function register_qm_redirect_block() {
     if (function_exists('register_block_type')) {
         register_block_type('quantimodo/qm_redirect', array(
@@ -93,4 +97,3 @@ function register_qm_redirect_block() {
     }
 }
 add_action('init', 'register_qm_redirect_block');
-
