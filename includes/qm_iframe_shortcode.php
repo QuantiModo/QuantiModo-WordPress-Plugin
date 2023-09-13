@@ -1,7 +1,7 @@
 <?php
 
 function qm_iframe_func($atts) {
-
+	redirect_to_login_if_necessary();
     // Extract the attributes
     $atts = shortcode_atts(
         [], // Default values for attributes
