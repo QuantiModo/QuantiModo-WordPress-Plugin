@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"No test specified\"",
-    "wpsh": "wpsh"
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,6 @@
   },
   "homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin#readme",
   "devDependencies": {
-    "wp-shuttle": "github:wpsh/wpsh"
+    "@wordpress/scripts": "^26.9.0"
   }
 }
