@@ -1,5 +1,7 @@
 <?php
-// notifications.php
+if(!defined('WP_SITEURL')){
+	define('WP_SITEURL', wp_guess_url());
+}
 
 /**
  * Runs only when the plugin is activated.
@@ -29,6 +31,7 @@ function fx_admin_notice_example_notice(){
     }
 }
 add_action( 'admin_notices', 'fx_admin_notice_example_notice' );  /* Add admin notice */
+
 
 if(stripos(WP_SITEURL, '.quantimo.do') !== false){
     function send_push_notification( $message ) {
