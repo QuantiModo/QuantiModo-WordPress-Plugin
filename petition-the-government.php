@@ -6,12 +6,12 @@
  */
 
 function petition_the_government_register_block() {
-    wp_register_script(
-        'petition-the-government-editor',
-        plugins_url('build/index.js', __FILE__),
-        ['wp-blocks', 'wp-element', 'wp-editor'],
-        filemtime(plugin_dir_path(__FILE__) . 'build/index.js')
-    );
+//    wp_register_script(
+//        'petition-the-government-editor',
+//        plugins_url('build/petition.js', __FILE__),
+//        ['wp-blocks', 'wp-element', 'wp-editor'],
+//        filemtime(plugin_dir_path(__FILE__) . 'build/petition.js')
+//    );
 
     register_block_type('petition-the-government/petition-form', [
         'editor_script' => 'petition-the-government-editor',
@@ -19,7 +19,8 @@ function petition_the_government_register_block() {
     ]);
 }
 
-function petition_the_government_render_block() {
+function petition_the_government_render_block(): string
+{
 
     $countryOptions = require plugin_dir_path(__FILE__) . 'countries.php';
     $countryOptionsHtml = '';

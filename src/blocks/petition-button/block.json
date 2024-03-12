@@ -1,0 +1,10 @@
+{
+	"name": "quantimodo/petition-button",
+	"title": "Petition Button",
+	"description": "A button block with custom text and callback function.",
+	"category": "design",
+	"textdomain": "quantimodo",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style.css"
+}

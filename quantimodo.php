@@ -26,6 +26,7 @@ require_once(QUANTIMODO_4f050d29b8BB9_DIR . 'includes/fab.php' );
 require_once plugin_dir_path( __FILE__ ) . 'includes/qm_iframe_shortcode.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/qm_redirect_shortcode.php';
 require_once plugin_dir_path(__FILE__) . 'petition-the-government.php';
+include_once plugin_dir_path( __FILE__ ) . 'enqueue-petition-button.php';
 
 function enqueue_qm_block_assets() {
     wp_enqueue_script(
