@@ -1,6 +1,6 @@
 {
     "require": {
-        "quantimodo/quantimodo-sdk-php": "5.9.90517"
+        "quantimodo/quantimodo-sdk-php": "5.10.111411"
     },
     "require-dev": {
         "phpunit/phpunit": "5.7.27"
