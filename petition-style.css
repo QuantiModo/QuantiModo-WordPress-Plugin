@@ -1,0 +1,57 @@
+/* petition-style.css */
+.petition-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.petition-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.petition-form input[type="text"],
+.petition-form input[type="email"],
+.petition-form input[type="tel"],
+.petition-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Added to include padding and border in the element's total width and height */
+}
+
+.petition-form button[type="submit"] {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.petition-form button[type="submit"]:hover {
+    background-color: #004494;
+}
+
+.petition-field {
+    max-height: 70px;
+}
+
+.petition-field-names {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.petition-button-container {
+    text-align: center;
+}

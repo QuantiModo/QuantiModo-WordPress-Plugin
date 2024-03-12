@@ -1,30 +1,38 @@
 {
-  "name": "quantimodo-wordpress",
-  "version": "1.0.0",
-  "description": "Add a health, diet, fitness, or mood tracking app to your WordPerress site",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"No test specified\"",
-    "build": "wp-scripts build",
-    "start": "wp-scripts start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://mikepsinn@github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin.git"
-  },
-  "keywords": [
-    "health",
-    "diet",
-    "fitness",
-    "mood"
-  ],
-  "author": "Mike P. Sinn",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/issues"
-  },
-  "homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin#readme",
-  "devDependencies": {
-    "@wordpress/scripts": "^27.0.0"
-  }
+	"name": "quantimodo-wordpress",
+	"version": "1.0.0",
+	"description": "Add a health, diet, fitness, or mood tracking app to your WordPerress site",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"No test specified\"",
+		"start": "wp-scripts start",
+		"build": "wp-scripts build",
+		"watch": "wp-scripts start",
+		"zip": "node ./scripts/zip.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://mikepsinn@github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin.git"
+	},
+	"keywords": [
+		"health",
+		"diet",
+		"fitness",
+		"mood"
+	],
+	"author": "Mike P. Sinn",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin/issues"
+	},
+	"homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin#readme",
+	"devDependencies": {
+		"@babel/eslint-parser": "^7.23.10",
+		"@wordpress/scripts": "^27.0.0",
+		"archiver": "^5.3.2",
+		"fast-glob": "^3.3.2",
+		"gitignore-parser": "^0.0.2",
+		"glob": "^10.3.10",
+		"ignore": "^5.3.1"
+	}
 }
