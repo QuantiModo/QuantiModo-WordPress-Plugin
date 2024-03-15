@@ -1,0 +1,278 @@
+@charset "utf-8";
+
+#connectorInfoTable {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.connectorBlock {
+    border-radius: 15px;
+    display: inline-block;
+    margin: 3px;
+    width: 150px;
+    height: 150px;
+    vertical-align: top;
+}
+
+.connectorBlock:HOVER {
+    border: solid;
+    border-width: 3px;
+    border-color: activeborder;
+    opacity: .6;
+    cursor: hand;
+}
+
+.connectorLogo {
+    width: 116px;
+    height: 116px;
+}
+
+.connectorSucessLogo {
+    width: 25px;
+    height: 25px;
+    margin-bottom: -6px;
+}
+
+.connectNotificationContainer {
+    overflow: hidden;
+    position: relative;
+    height: 30px;
+    font-size: 1.1em;
+    margin-top: -8px;
+    margin-left: -14px;
+    width: 598px;
+    text-align: center;
+    line-height: 30px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: height 0.3s ease-in-out;
+    -moz-transition: height 0.3s ease-in-out;
+    -o-transition: height 0.3s ease-in-out;
+}
+
+.connectNotificationNegative {
+    background-color: #CC0000;
+    color: white;
+}
+
+.connectNotificationPositive {
+    background-color: #669900;
+    color: white;
+}
+
+.grayout {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'https://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+}
+
+/***********/
+/* Dialogs */
+/***********/
+.dialog {
+    overflow: hidden;
+    padding: 20px;
+    background: #fbfbfb;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    z-index: 1000001;
+    position: absolute;
+    width: 340px;
+    top: 30%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.remove-button:HOVER {
+    cursor: hand;
+}
+
+.dialog-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    opacity: .5;
+    z-index: 1000000;
+}
+
+#login-dialog table {
+    border: none;
+    margin: 0px;
+    border-collapse: collapse;
+}
+
+#login-dialog td {
+    border: none;
+    vertical-align: middle;
+}
+
+#share-dialog-background {
+    display: none;
+    opacity: 0;
+}
+
+#share-dialog {
+    display: none;
+    opacity: 0;
+}
+
+/**************************/
+/* Loading overlay config */
+/**************************/
+.loading-overlay-content, .loading-overlay {
+    display: none;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('http://img1.wikia.nocookie.net/__cb20150415221840/clashofclans/images/3/30/NYAN_CAT.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+}
+
+/* Helper class for show/hide element transitions */
+.transitions {
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+}
+
+.connectorDialog-desc {
+    margin: 10px;
+    float: right;
+    width: 60%;
+}
+
+.noTitleStuff .ui-dialog-titlebar {
+    background-color: black;
+    color: white;
+    height: 50px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.ui-dialog {
+    left: 0;
+    outline: 0 none;
+    padding: 0em !important;
+    z-index: 1000 !important;
+}
+
+.imgClass {
+    background-color: transparent;
+    background-image: url("https://i.imgur.com/rbUDVrJ.png");
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    background-size: 38px auto;
+    height: 37px;
+    margin-right: 35px;
+    margin-top: -5px;
+    padding: 6px 21px;
+    width: 23px;
+    background-image: url("https://i.imgur.com/rbUDVrJ.png");
+}
+
+.connectorInfoTable {
+    border-bottom: 2px solid;
+    margin-top: 20px;
+    width: 90%;
+    font-size: 13px;
+}
+
+.tabletr {
+    border-top: 2px solid;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/*****************/
+/* updates table */
+/*****************/
+.updates-table tbody tr td {
+    vertical-align: middle;
+}
+
+.updates-table tbody tr td:first-child {
+    text-align: center;
+}
+
+.updates-table tbody tr td img {
+    height: 25px;
+}
+
+.updates-table tr td:last-child {
+    text-align: right;
+}
+
+.updates-table thead tr {
+    border-bottom: 2px solid #4387FD;
+    color: #4387FD;
+    font-weight: bold;
+}
+
+.updates-table tbody tr:nth-child(even) {
+    background: #f0f0f0;
+}
+
+/******************/
+/* get it here url */
+/******************/
+.getitnow-container {
+    border-top: 1px dashed black;
+    text-align: center;
+    padding-top: 5px;
+    margin-top: 10px;
+}
+
+.getitnow-container a {
+    font-weight: bold;
+}
+
+#content .my-location {
+    padding: 15px 5px;
+    /*background-color: #fff;*/
+    margin: 0 auto;
+}
+
+/* Responsive connectors shortcode*/
+
+.qm-account-block-left {
+    width: 25%;
+    max-width: 132px;
+}
+
+.qm-account-block-right {
+    width: 70%;
+    float: left;
+    margin: 0 0 0 7px;
+}
+
+.qm-account-last-updated {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+img.qm-connect-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.qm-account-block-field-text {
+    width: 100px;
+}
+
+#qm-main h4 {
+    margin: 0;
+}

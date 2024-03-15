@@ -1,0 +1,66 @@
+.shortcode-content {
+    text-align: center;
+    min-width: 320px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.rating-buttons {
+    margin: 6.25% 0; /* 20px / 320px = 6.25% */
+}
+
+.rating-button-wrap {
+    float: left;
+    width: 18.125%; /* 58px / 320px =  18.125% */
+    margin: 0 3px;
+}
+
+.rating-button {
+    border: 5px solid;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+}
+
+.rating-button:hover {
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.rating-button .rating-button-value {
+    font-size: 35px;
+    line-height: 48px;
+}
+
+.rating-button-label {
+    text-align: center;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.qm-black {
+    color: #646464;
+}
+
+.qm-blue {
+    color: #5CB3E9;
+}
+
+.qm-green {
+    color: #A2E555;
+}
+
+.qm-yellow {
+    color: #FDBC4D
+}
+
+.qm-red {
+    color: #D64F51;
+}
+
+
+
+

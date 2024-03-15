@@ -1,0 +1,44 @@
+#track-variable-content {
+    display: none;
+}
+
+.shortcode-content.rating-faces {
+    max-width: 500px;
+}
+
+.rating-buttons {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+
+    flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    max-width: 100%;
+}
+
+.rating-button {
+    max-width: 77px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 50%;
+    transition: box-shadow 177ms linear;
+}
+
+.rating-button-wrap {
+    max-width: 20%;
+}
+
+.rating-button:hover {
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
