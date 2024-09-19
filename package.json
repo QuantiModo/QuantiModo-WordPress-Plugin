@@ -28,7 +28,7 @@
 	"homepage": "https://github.com/Abolitionist-Project/QuantiModo-WordPress-Plugin#readme",
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.23.10",
-		"@wordpress/scripts": "^27.0.0",
+		"@wordpress/scripts": "^30.0.0",
 		"archiver": "^7.0.0",
 		"fast-glob": "^3.3.2",
 		"gitignore-parser": "^0.0.2",
